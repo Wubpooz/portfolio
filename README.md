@@ -1,15 +1,23 @@
 # Portfolio
 
-## Design
+## Tech Stack
+- **React 19 + Vite** with Bun and TypeScript strict mode
+- **React Router v7**
+- **Tailwind CSS v4**
+- **Shadcn/ui** for primitives
+- **MagicUI** for animated components
+- **Framer Motion** for page transitions and scroll reveals
+- **i18next + react-i18next** (the RTL support for Arabic is via `dir="rtl"` on `<html>`)
+- **Cloudflare Pages** or **Vercel** or **Netlify**
+- Shadertoy iframe embed
+- (Optional) WebGL (for shaders)
+- (Optional) React Three Fiber + Drei
 
 
 ## Projets
-add all class projects with screenshots (like Steam) and add also an embedding for the Shaders and websites?
-
-
-## Libraries
-- [Shadcn](https://ui.shadcn.com/docs/components)
-  - [MagicUI](https://magicui.design/docs/components/animated-list)
+- [ ] Shaders
+- [ ] Hackathon ?
+- [ ]
 
 
 ## Assets
