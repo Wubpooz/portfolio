@@ -18,8 +18,22 @@
 ## Projets
 - [ ] Shaders
 - [ ] Hackathon ?
-- [ ]
-
+- [ ] Visualisation APP5
+- [ ] VibeHealth
+- [ ] Escampe
+- [ ] Watchlist Service
+- [ ] Compilateur
+- [ ] MagnusCarlos
+- [ ] XTTS finetuning
+- [ ] Quizine
+- [ ] ThreeJS project
+- [ ] Reaction Planner + SciNB ?
+- [ ] IGSD pyramide momie
+- [ ] IPO - jeux
+- [ ] APP4 Méthodes Numériques - SVD
+- [ ] TP noté Recherche Opérationnelle
+- [ ] Rapport Cybersec + labs
+- [ ] TP3 Apprentissage automatisé
 
 ---
 
