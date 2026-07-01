@@ -5,9 +5,9 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [x] Add TailwindCSS
 - [x] Add Framer Motion
 - [ ] Layout
-  - [ ] Following Header
-    - [ ] Logo
-    - [ ] Navigation links
+  - [x] Following Header
+    - [x] Logo
+    - [x] Navigation links
     - [ ] Linkedin/Github links
   - [ ] Presentation section
     - [ ] Name, title, and description
@@ -27,8 +27,8 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - With icons
   - [ ] Projects section
     - cards with an image, title, description, and (view more) link
-    - preview on hover
-    - call to see all projects
+    - [ ] preview on hover
+    - [ ] call to see all projects
   - [ ] Awards section
     - with icons
   - [ ] Contact section
@@ -36,20 +36,20 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - [ ] Email link
     - [ ] Download resume link
   - [ ] Footer
-    - links
-    - sitemap
-    - copyright
-    - name
+    - [ ] links
+    - [ ] sitemap
+    - [ ] copyright
+    - [ ] name
 
 ## Phase 2 - Features
 - [ ] Light & Dark themes in the header
 - [ ] EN/FR language switcher in the header
 - [ ] Contact form
-  - Templates ?
-  - Validation
-  - Toasts
-  - Spam protection
-  - Email sending
+  - [ ] Templates ?
+  - [ ] Validation
+  - [ ] Toasts
+  - [ ] Spam protection
+  - [ ] Email sending
 
 
 ## Phase 3 - Content

@@ -1,6 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Navbar from './components/layout/Navbar'
-import Home from './pages/Home'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         </Routes>
       </main>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

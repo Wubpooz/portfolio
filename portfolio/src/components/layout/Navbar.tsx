@@ -1,8 +1,8 @@
-import { useTheme } from '../../hooks/useTheme'
-import { Sun, Moon } from 'lucide-react'
+import { useTheme } from '../../hooks/useTheme';
+import { Sun, Moon } from 'lucide-react';
 
 export default function Navbar() {
-  const { theme, toggle } = useTheme()
+  const { theme, toggle } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b"
@@ -55,5 +55,5 @@ export default function Navbar() {
 
       </div>
     </header>
-  )
+  );
 }
