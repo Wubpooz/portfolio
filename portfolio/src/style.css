@@ -1,27 +1,30 @@
 :root, [data-theme="light"] {
-  --color-bg:       #ffffff;
-  --color-surface:  #f7f7f7;
-  --color-border:   #e8e8e8;
-  --color-text:     #111111;
-  --color-muted:    #666666;
-  --color-faint:    #999999;
-  --color-primary:  #01696f;   /* teal accent — CTAs only */
+  --bg:       #ffffff;
+  --surface:  #f7f7f7;
+  --border:   #e8e8e8;
+  --text:     #111111;
+  --muted:    #666666;
+  --faint:    #999999;
+  --primary:  #01696f;
 
-  --font-display: 'Zodiak', 'Georgia', serif;
+  --font-display: 'Epoch', 'Georgia', serif;
   --font-body:    'Satoshi', 'Inter', sans-serif;
-  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
-
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --font-mono:    'Fira Code', monospace;
 }
 
 [data-theme="dark"] {
-  --color-bg:       #111111;
-  --color-surface:  #1a1a1a;
-  --color-border:   #2a2a2a;
-  --color-text:     #e8e8e8;
-  --color-muted:    #888888;
-  --color-faint:    #555555;
-  --color-primary:  #4f98a3;   /* teal adapted for dark */
+  --bg:       #111111;
+  --surface:  #1a1a1a;
+  --border:   #2a2a2a;
+  --text:     #e8e8e8;
+  --muted:    #888888;
+  --faint:    #555555;
+  --primary:  #4f98a3;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  transition: background 200ms, color 200ms;
 }

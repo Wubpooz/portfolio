@@ -21,7 +21,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [ ] Education section
   - [ ] Skills section
     - By categories
-    - With icons
+    - With icons (https://cdn.simpleicons.org/)
     - Sorting? 
   - [ ] Certifications section
     - With icons
