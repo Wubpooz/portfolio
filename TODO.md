@@ -9,12 +9,12 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - [x] Logo
     - [x] Navigation links
     - [ ] Linkedin/Github links
-  - [ ] Presentation section
-    - [ ] Name, title, and description
+  - [x] Presentation section
+    - [x] Name, title, and description
     - [ ] Quick contact links (email, LinkedIn, GitHub)
     - [ ] Profile picture
     - [ ] Background image
-    - [ ] Download resume link
+    - [x] Download resume link
     - [ ] Contact me button
     - [ ] Call to scroll
   - [ ] Experience section (possibly expandable)
@@ -36,10 +36,10 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - [ ] Email link
     - [ ] Download resume link
   - [ ] Footer
-    - [ ] links
-    - [ ] sitemap
-    - [ ] copyright
-    - [ ] name
+    - [x] links
+    - [x] sitemap
+    - [x] copyright
+    - [x] name
 
 ## Phase 2 - Features
 - [ ] Light & Dark themes in the header

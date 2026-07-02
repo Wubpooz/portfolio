@@ -1,0 +1,12 @@
+.page-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-link::after {
+  content: "";
+  height: 16px;
+  width: 1.2px;
+  background-color: #9ca3af;
+}
