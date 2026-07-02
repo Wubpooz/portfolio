@@ -1,9 +1,23 @@
 import HeroSection from "@/components/hero/Hero";
+import ExperienceSection from "@/components/experience/Experience";
+import EducationSection from "@/components/education/Education";
+import SkillsSection from "@/components/skills/Skills";
+import CertificationSection from "@/components/certification/Certification";
+import AwardsSection from "@/components/awards/Awards";
+import ContactSection from "@/components/contact/Contact";
 
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16 space-y-24 h-full">
-      <HeroSection />
-    </div>
-  );
+    <main className="w-full min-w-0">
+      <div className="mx-auto w-full min-w-0 max-w-4xl px-6 py-16 space-y-24">
+        <HeroSection />
+        <ExperienceSection />
+        <EducationSection />
+        <SkillsSection />
+        <CertificationSection />
+        <AwardsSection />
+        <ContactSection />
+      </div>
+    </main>
+  )
 }

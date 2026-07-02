@@ -1,15 +1,6 @@
 export default function HeroSection() {
   return (
     <section className="flex flex-col gap-4">
-      {/* Availability badge */}
-      <div className="flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-primary" />
-        <span className="text-xs font-mono" style={{ color: 'var(--primary)' }}>
-          Available for opportunities
-        </span>
-      </div>
-
-      {/* Name */}
       <h1 className="text-4xl font-bold tracking-tight"
           style={{ fontFamily: 'var(--font-display)', color: 'var(--text)' }}>
         Mathieu Waharte
@@ -19,7 +10,7 @@ export default function HeroSection() {
       <p className="text-lg" style={{ color: 'var(--muted)' }}>
         Fullstack Engineer & AI — Apprenti @ Dassault Systèmes
         <br />
-        <span className="text-sm font-mono">Polytech Paris-Saclay · Paris, France</span>
+        <span className="text-sm font-mono">Polytech Paris-Saclay - Paris, France</span>
       </p>
 
       {/* Description */}
@@ -30,11 +21,11 @@ export default function HeroSection() {
 
       {/* CTAs */}
       <div className="flex gap-3 mt-2">
-        <a href="#projects"
+        <button onClick={() => console.log('clicked')}
            className="px-4 py-2 rounded-md text-sm font-medium text-white transition-opacity hover:opacity-80"
            style={{ background: 'var(--primary)' }}>
-          View Projects
-        </a>
+          Contact Me
+        </button>
         <a href="/resume.pdf"
            className="px-4 py-2 rounded-md text-sm font-medium border transition-colors hover:bg-(--surface)"
            style={{ borderColor: 'var(--border)', color: 'var(--text)' }}>

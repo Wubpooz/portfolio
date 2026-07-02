@@ -35,7 +35,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - [ ] Social links
     - [ ] Email link
     - [ ] Download resume link
-  - [ ] Footer
+  - [x] Footer
     - [x] links
     - [x] sitemap
     - [x] copyright
