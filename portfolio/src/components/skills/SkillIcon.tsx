@@ -44,7 +44,7 @@ export default function SkillIcon({ name, icon, iconUrl }: SkillIconProps) {
     return (
       <img
         src={iconUrl}
-        alt=""
+        alt={name}
         width={36}
         height={36}
         loading="lazy"
@@ -63,7 +63,7 @@ export default function SkillIcon({ name, icon, iconUrl }: SkillIconProps) {
     return (
       <img
         src={`https://cdn.simpleicons.org/${icon}`}
-        alt=""
+        alt={name}
         width={36}
         height={36}
         loading="lazy"
