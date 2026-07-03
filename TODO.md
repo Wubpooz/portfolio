@@ -32,9 +32,9 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [ ] Awards section
     - with icons
   - [ ] Contact section
-    - [ ] Social links
-    - [ ] Email link
-    - [ ] Download resume link
+    - [x] Social links
+    - [x] Email link
+    - [x] Download resume link
   - [x] Footer
     - [x] links
     - [x] sitemap
