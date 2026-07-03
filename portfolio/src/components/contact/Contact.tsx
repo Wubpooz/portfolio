@@ -1,7 +1,7 @@
 import { ArrowUpRight, Download, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getUiContent, useLocale } from "@/i18n"
+import { getResumeAsset, getUiContent, useLocale } from "@/i18n"
 
 const contacts = [
   {
@@ -51,6 +51,7 @@ function ContactIcon({
 export default function ContactSection() {
   const { locale } = useLocale()
   const content = getUiContent(locale)
+  const resumeAsset = getResumeAsset(locale)
 
   return (
     <section id="contact" className="w-full py-20 md:py-28">
@@ -113,7 +114,7 @@ export default function ContactSection() {
             </Button>
 
             <Button asChild variant="outline" className="rounded-md">
-              <a href="/resume-fr.pdf" target="_blank" rel="noopener noreferrer">
+              <a href={resumeAsset} download>
                 <Download className="size-4" />
                 {content.contact.resumeCta}
               </a>

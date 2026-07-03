@@ -47,10 +47,10 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 
 
 ## Phase 3 - Content
-- [ ] Resume serving 
-  - [ ] EN/FR auto (based on language detection)
-  - [ ] PDF download
-  - [ ] PDF open
+- [x] Resume serving 
+  - [x] EN/FR auto (based on language detection)
+  - [x] PDF download
+  - [x] PDF open
 - [ ] Projects page
   - Mockup
   - Details

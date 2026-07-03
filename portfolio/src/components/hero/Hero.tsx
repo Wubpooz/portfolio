@@ -1,4 +1,4 @@
-import { ArrowDown, Download, Mail } from "lucide-react"
+import { ArrowDown, ExternalLink, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { getUiContent, useLocale } from "@/i18n"
@@ -107,9 +107,9 @@ export default function HeroSection() {
                 </Button>
 
                 <Button asChild variant="outline" className="rounded-md">
-                  <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                    <Download className="size-4" />
-                    {content.hero.downloadCta}
+                  <a href="/resume" target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="size-4" />
+                    {content.contact.openResumeCta}
                   </a>
                 </Button>
               </div>

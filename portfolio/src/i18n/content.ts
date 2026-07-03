@@ -43,6 +43,14 @@ export type UiContent = {
   contact: {
     emailCta: string
     resumeCta: string
+    openResumeCta: string
+  }
+  resume: {
+    title: string
+    description: string
+    backHome: string
+    download: string
+    openInNewTab: string
   }
   footer: {
     sourceCode: string
@@ -105,6 +113,15 @@ export const uiContent: Record<Locale, UiContent> = {
     contact: {
       emailCta: "Email me",
       resumeCta: "Download resume",
+      openResumeCta: "Open resume",
+    },
+    resume: {
+      title: "Resume",
+      description:
+        "The resume is automatically shown in the language best matched to your browser or location preference.",
+      backHome: "Back to home",
+      download: "Download PDF",
+      openInNewTab: "Open in new tab",
     },
     footer: {
       sourceCode: "Source code",
@@ -165,6 +182,15 @@ export const uiContent: Record<Locale, UiContent> = {
     contact: {
       emailCta: "M’écrire",
       resumeCta: "Télécharger le CV",
+      openResumeCta: "Ouvrir le CV",
+    },
+    resume: {
+      title: "CV",
+      description:
+        "Le CV s’affiche automatiquement dans la langue correspondant le mieux à la langue ou à la localisation de votre navigateur.",
+      backHome: "Retour à l’accueil",
+      download: "Télécharger le PDF",
+      openInNewTab: "Ouvrir dans un nouvel onglet",
     },
     footer: {
       sourceCode: "Code source",
@@ -184,4 +210,10 @@ export const uiContent: Record<Locale, UiContent> = {
 
 export function getUiContent(locale: Locale) {
   return uiContent[locale]
+}
+
+export function getResumeAsset(locale: Locale) {
+  return locale === "fr"
+    ? "/assets/CV_Mathieu_WAHARTE.pdf"
+    : "/assets/Resume_Mathieu_WAHARTE.pdf"
 }
