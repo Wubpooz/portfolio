@@ -41,13 +41,10 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 
 ## Phase 2 - Features
 - [x] Light & Dark themes in the header
-- [ ] EN/FR language switcher in the header
-- [ ] Contact form
-  - [ ] Templates ?
-  - [ ] Validation
-  - [ ] Toasts
-  - [ ] Spam protection
-  - [ ] Email sending
+- [ ] EN/FR language
+  - [ ] language switcher (header)
+  - [ ] language detection
+  - [ ] language preference saving
 
 
 ## Phase 3 - Content
@@ -63,8 +60,11 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - Status (in progress, completed, abandoned) ?
   - Search
   - Filters
-- [ ] Contact page
-- [ ] Resume serving
+- [ ] Resume serving 
+  - [ ] EN/FR auto (based on language detection)
+  - [ ] PDF download
+  - [ ] HTML view
+  - [ ] Print view
 
 ## Phase 4 - SEO & Prod
 - [ ] JSON-LD schema
@@ -98,7 +98,6 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 
 
 
-
 ## Bonus
 ### Features
 - [ ] Arabic language support
@@ -125,3 +124,9 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Awards
 - [ ] Publications
 - [ ] Teachings
+- [ ] Contact form
+  - [ ] Templates ?
+  - [ ] Validation
+  - [ ] Toasts
+  - [ ] Spam protection
+  - [ ] Email sending
