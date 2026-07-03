@@ -1,20 +1,79 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useState } from "react"
+
+type Theme = "light" | "dark" | "system"
+type ResolvedTheme = "light" | "dark"
+
+const STORAGE_KEY = "theme"
+
+function getSystemTheme(): ResolvedTheme {
+  if (typeof window === "undefined") return "light"
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+}
+
+function getStoredTheme(): Theme | null {
+  if (typeof window === "undefined") return null
+
+  try {
+    const value = window.localStorage.getItem(STORAGE_KEY)
+    return value === "light" || value === "dark" || value === "system" ? value : null
+  } catch {
+    return null
+  }
+}
 
 export function useTheme() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    if (typeof globalThis !== 'undefined') {
-      return globalThis.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    return 'light'; // Fallback for SSR
-  }); // useState ensures lazy init
+  const [theme, setTheme] = useState<Theme>(() => getStoredTheme() ?? "system")
+  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() => getSystemTheme())
+
+  const resolvedTheme = useMemo<ResolvedTheme>(() => {
+    return theme === "system" ? systemTheme : theme
+  }, [theme, systemTheme])
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
+    if (typeof window === "undefined") return
 
-  const toggle = () => {
-    setTheme(t => t === 'light' ? 'dark' : 'light');
-  };
+    const media = window.matchMedia("(prefers-color-scheme: dark)")
 
-  return { theme, toggle };
+    const updateSystemTheme = () => {
+      setSystemTheme(media.matches ? "dark" : "light")
+    }
+
+    updateSystemTheme()
+    media.addEventListener("change", updateSystemTheme)
+
+    return () => {
+      media.removeEventListener("change", updateSystemTheme)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof document === "undefined") return
+
+    document.documentElement.dataset.theme = resolvedTheme
+    document.documentElement.dataset.themePreference = theme
+  }, [theme, resolvedTheme])
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    try {
+      window.localStorage.setItem(STORAGE_KEY, theme)
+    } catch {
+      // ignore storage failures
+    }
+  }, [theme])
+
+  const toggle = useCallback(() => {
+    setTheme((current) => {
+      const active = current === "system" ? getSystemTheme() : current
+      return active === "dark" ? "light" : "dark"
+    })
+  }, [])
+
+  return {
+    theme,
+    resolvedTheme,
+    setTheme,
+    toggle,
+  }
 }

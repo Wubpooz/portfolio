@@ -1,8 +1,8 @@
 import { useTheme } from '../../hooks/useTheme';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Monitor } from 'lucide-react';
 
 export default function Navbar() {
-  const { theme, toggle } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b" style={{ borderColor: 'var(--border)', background: 'var(--bg)' }}>
@@ -37,12 +37,46 @@ export default function Navbar() {
           </div>
 
           {/* Dark mode toggle */}
-          <button onClick={toggle} className="ml-4 p-1.5 rounded-md transition-colors hover:bg-(--surface)" aria-label="Toggle theme">
-            {theme === 'dark'
-              ? <Sun size={16} style={{ color: 'var(--muted)' }} />
-              : <Moon size={16} style={{ color: 'var(--muted)' }} />
-            }
-          </button>
+          <div className="ml-4 flex items-center rounded-md border border-(--border) bg-(--bg) p-1">
+            <button
+              type="button"
+              onClick={() => setTheme("light")}
+              className={`rounded-sm p-1.5 transition-colors ${
+                theme === "light" ? "bg-(--surface)" : "hover:bg-(--surface)"
+              }`}
+              aria-label="Use light theme"
+              aria-pressed={theme === "light"}
+              title="Light"
+            >
+              <Sun size={16} style={{ color: "var(--muted)" }} />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setTheme("dark")}
+              className={`rounded-sm p-1.5 transition-colors ${
+                theme === "dark" ? "bg-(--surface)" : "hover:bg-(--surface)"
+              }`}
+              aria-label="Use dark theme"
+              aria-pressed={theme === "dark"}
+              title="Dark"
+            >
+              <Moon size={16} style={{ color: "var(--muted)" }} />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setTheme("system")}
+              className={`rounded-sm p-1.5 transition-colors ${
+                theme === "system" ? "bg-(--surface)" : "hover:bg-(--surface)"
+              }`}
+              aria-label="Use system theme"
+              aria-pressed={theme === "system"}
+              title="System"
+            >
+              <Monitor size={16} style={{ color: "var(--muted)" }} />
+            </button>
+          </div>
         </div>
 
       </div>
