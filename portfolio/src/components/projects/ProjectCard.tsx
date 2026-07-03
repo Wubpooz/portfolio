@@ -1,0 +1,211 @@
+import { Globe, ArrowRight, BookOpen } from "lucide-react"
+import type { ProjectItem } from "@/data/projects"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+
+const MAX_VISIBLE_STACK = 6
+
+type TechIconMeta = {
+  icon?: string
+  iconUrl?: string
+}
+
+const techIconMap: Record<string, TechIconMeta> = {
+  "Next.js": { icon: "nextdotjs" },
+  TypeScript: { icon: "typescript" },
+  "Tailwind CSS": { icon: "tailwindcss" },
+  Vercel: { icon: "vercel" },
+  React: { icon: "react" },
+  "React Native": { icon: "react" },
+  Expo: { icon: "expo" },
+  "Node.js": { icon: "nodedotjs" },
+  Express: { icon: "express" },
+  "Express.js": { icon: "express" },
+  PostgreSQL: { icon: "postgresql" },
+  Prisma: { icon: "prisma" },
+  Drizzle: { icon: "drizzle" },
+  Docker: { icon: "docker" },
+  GraphQL: { icon: "graphql" },
+  MongoDB: { icon: "mongodb" },
+  Python: { icon: "python" },
+  HTML: { icon: "html5" },
+  CSS: { icon: "css3" },
+  JavaScript: { icon: "javascript" },
+  "C++": { icon: "cplusplus" },
+  CUDA: { icon: "nvidia" },
+  Java: {
+    iconUrl:
+      "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openjdk.svg",
+  },
+  GLSL: {
+    iconUrl:
+      "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opengl.svg",
+  },
+}
+
+function TechPillIcon({
+  name,
+  icon,
+  iconUrl,
+}: {
+  name: string
+  icon?: string
+  iconUrl?: string
+}) {
+  if (iconUrl) {
+    return (
+      <img
+        src={iconUrl}
+        alt={name}
+        width={14}
+        height={14}
+        loading="lazy"
+        className="size-3.5 shrink-0 object-contain"
+        aria-hidden="true"
+      />
+    )
+  }
+
+  if (icon) {
+    return (
+      <img
+        src={`https://cdn.simpleicons.org/${icon}`}
+        alt={name}
+        width={14}
+        height={14}
+        loading="lazy"
+        className="size-3.5 shrink-0 object-contain"
+        aria-hidden="true"
+      />
+    )
+  }
+
+  return null
+}
+
+export default function ProjectCard({ project }: { project: ProjectItem }) {
+  const visibleStack = project.stack.slice(0, MAX_VISIBLE_STACK)
+  const remaining = project.stack.length - visibleStack.length
+
+  const liveLink = project.links.find((l) => l.label === "Live")
+  const sourceLink = project.links.find((l) => l.label === "Source")
+  const readMoreLink = project.links.find((l) => l.label === "Case Study")
+
+  return (
+    <Card className="group flex h-full flex-col overflow-hidden rounded-none border-border bg-card p-0 shadow-none transition-colors hover:border-foreground/20">
+      <div className="relative aspect-[16/9] overflow-hidden border-b border-border">
+        <img
+          src={project.image}
+          alt={project.imageAlt}
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+      </div>
+
+      <CardContent className="flex h-full flex-1 flex-col p-6">
+        <div className="space-y-5">
+          <div className="space-y-1.5">
+            <h3 className="text-2xl font-semibold tracking-tight text-foreground">
+              {project.title}
+            </h3>
+            <p className="text-base leading-7 text-muted-foreground">
+              {project.subtitle}
+            </p>
+          </div>
+
+          <ul className="list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
+            {project.highlights.slice(0, 3).map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+
+          <div className="flex flex-wrap gap-2">
+            {visibleStack.map((tech) => {
+              const meta = techIconMap[tech]
+
+              return (
+                <Badge
+                  key={tech}
+                  variant="secondary"
+                  className="rounded-none px-2.5 py-1 font-normal"
+                >
+                  <span className="inline-flex items-center gap-1.5">
+                    <TechPillIcon
+                      name={tech}
+                      icon={meta?.icon}
+                      iconUrl={meta?.iconUrl}
+                    />
+                    <span>{tech}</span>
+                  </span>
+                </Badge>
+              )
+            })}
+
+            {remaining > 0 ? (
+              <Badge
+                variant="outline"
+                className="rounded-none px-2.5 py-1 font-normal text-muted-foreground"
+              >
+                +{remaining} more
+              </Badge>
+            ) : null}
+          </div>
+        </div>
+
+        <div className="mt-auto pt-5">
+          <Separator className="mb-5" />
+
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-3">
+              {liveLink ? (
+                <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
+                  <a href={liveLink.href} className="inline-flex items-center gap-2">
+                    <Globe className="size-4 shrink-0" />
+                    <span>Live</span>
+                  </a>
+                </Button>
+              ) : null}
+
+              {sourceLink ? (
+                <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
+                  <a href={sourceLink.href} className="inline-flex items-center gap-2">
+                    <img
+                      src="https://cdn.simpleicons.org/github"
+                      alt="GitHub"
+                      width={16}
+                      height={16}
+                      loading="lazy"
+                      className="size-4 shrink-0 object-contain"
+                      aria-hidden="true"
+                    />
+                    <span>Source</span>
+                  </a>
+                </Button>
+              ) : null}
+            </div>
+
+            {readMoreLink ? (
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                className="h-9 shrink-0 rounded-md px-0 hover:bg-transparent hover:text-foreground/70"
+              >
+                <a
+                  href={readMoreLink.href}
+                  className="inline-flex items-center gap-2 text-foreground"
+                >
+                  <BookOpen className="size-4 shrink-0" />
+                  <span>Read More</span>
+                  <ArrowRight className="size-4 shrink-0" />
+                </a>
+              </Button>
+            ) : null}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}

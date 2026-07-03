@@ -17,18 +17,18 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - [x] Download resume link
     - [ ] Contact me button
     - [ ] Call to scroll
-  - [ ] Experience section (possibly expandable)
-  - [ ] Education section
-  - [ ] Skills section
+  - [x] Experience section (possibly expandable)
+  - [x] Education section
+  - [x] Skills section
     - By categories
     - With icons (https://cdn.simpleicons.org/)
     - Sorting? 
   - [ ] Certifications section
     - With icons
-  - [ ] Projects section
+  - [x] Projects section
     - cards with an image, title, description, and (view more) link
     - [ ] preview on hover
-    - [ ] call to see all projects
+    - [x] call to see all projects
   - [ ] Awards section
     - with icons
   - [ ] Contact section
@@ -62,6 +62,9 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - Live demo link
   - GitHub link
   - Development steps if they exists
+  - Status (in progress, completed, abandoned) ?
+  - Search
+  - Filters
 - [ ] Contact page
 - [ ] Resume serving
 
