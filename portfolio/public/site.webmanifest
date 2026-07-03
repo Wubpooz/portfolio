@@ -1,0 +1,22 @@
+{
+  "name": "Mathieu Waharte Portfolio",
+  "short_name": "Portfolio",
+  "description": "Bilingual portfolio showcasing Mathieu Waharte’s work in fullstack engineering, AI, and scientific computing.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
