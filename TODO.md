@@ -8,7 +8,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [x] Following Header
     - [x] Logo
     - [x] Navigation links
-    - [ ] Linkedin/Github links
+    - [x] Linkedin/Github links
   - [x] Presentation section
     - [x] Name, title, and description
     - [x] Quick contact links (email, LinkedIn, GitHub)
@@ -27,7 +27,6 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - With icons
   - [x] Projects section
     - cards with an image, title, description, and (view more) link
-    - [ ] preview on hover
     - [x] call to see all projects
   - [x] Contact section
     - [x] Social links
@@ -63,6 +62,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - Status (in progress, completed, abandoned) ?
   - Search
   - Filters
+  - Preview on hover in home page
 
 ## Phase 4 - SEO & Prod
 - [ ] JSON-LD schema
