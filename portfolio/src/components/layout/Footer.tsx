@@ -1,17 +1,39 @@
-import './Footer.css';
+import "./Footer.css"
 
 export default function FooterSection() {
   return (
-  <footer className="flex flex-row w-full bg-(--surface) justify-around items-center px-4 py-10">
-    <div className="flex gap-4">
-      <p className="page-link"> Home </p>
-      <p className="page-link"> Projects </p>
-      <p> Blog </p>
-    </div>
-    <a href="https://github.com/Wubpooz/portfolio"> Source code</a>
-    <p>Copyright © 2026 Mathieu Waharte. All rights reserved.</p>
-    {/* lighter gray */}
-    <a href="https://www.apple.com/legal/intellectual-property/">Licence</a>
-  </footer>
-  );
+    <footer className="footer">
+      <nav className="footer-nav" aria-label="Footer">
+        <a href="/" className="footer-link">Home</a>
+        <a href="/projects" className="footer-link">Projects</a>
+        <a href="/blog" className="footer-link">Blog</a>
+      </nav>
+
+      <div className="footer-bottom">
+        <div className="footer-legal">
+          <a
+            href="https://github.com/Wubpooz/portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-secondary-link"
+          >
+            Source code
+          </a>
+
+          <a
+            href="https://www.apple.com/legal/intellectual-property/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-secondary-link"
+          >
+            Licence
+          </a>
+        </div>
+
+        <p className="footer-copy">
+          Copyright © 2026 Mathieu Waharte. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  )
 }
