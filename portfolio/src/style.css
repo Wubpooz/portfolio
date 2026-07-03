@@ -12,6 +12,10 @@
   --font-mono:    'Fira Code', monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 [data-theme="dark"] {
   --bg:       #111111;
   --surface:  #1a1a1a;
@@ -27,4 +31,10 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   transition: background 200ms, color 200ms;
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
 }

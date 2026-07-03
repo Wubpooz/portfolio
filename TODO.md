@@ -65,14 +65,14 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - Preview on hover in home page
 
 ## Phase 4 - SEO & Prod
-- [ ] JSON-LD schema
-- [ ] sitemap
-- [ ] robots
+- [x] JSON-LD schema
+- [x] sitemap
+- [x] robots
 - [ ] Analytics with PostHog and OpenPanel
 - [ ] Ensure that the website is fast
-- [ ] Ensure that the website is accessible
-- [ ] Ensure that the website is responsive
-  - [ ] Hamburger menu for mobile
+- [x] Ensure that the website is accessible
+- [x] Ensure that the website is responsive
+  - [x] Hamburger menu for mobile
 - [ ] Ensure that the website is secure
   - [ ] HTTPS
   - [ ] CSP
@@ -84,12 +84,12 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [ ] Input validation
   - [ ] Output encoding
 - [ ] SEO optimization
-  - [ ] Meta tags
-  - [ ] Open Graph tags
-  - [ ] Twitter card tags
-  - [ ] Favicon
-  - [ ] Apple touch icon
-  - [ ] Manifest
+  - [x] Meta tags
+  - [x] Open Graph tags
+  - [x] Twitter card tags
+  - [x] Favicon
+  - [x] Apple touch icon
+  - [x] Manifest
   - [ ] Google Search Console
   - [ ] Be noticed by AI search engines (like ChatGPT, Perplexity, etc)
 
