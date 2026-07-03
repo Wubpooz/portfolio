@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
+import { getProjectBySlug } from "@/data/projects"
 import { getUiContent, useLocale } from "@/i18n"
 
 const SITE_NAME = "Mathieu Waharte"
@@ -41,8 +42,25 @@ export default function Seo() {
 
   useEffect(() => {
     const isResume = location.pathname.startsWith("/resume")
-    const title = isResume ? `${content.resume.title} | ${SITE_NAME}` : `${SITE_NAME} | ${content.hero.role}`
-    const description = isResume ? content.resume.description : content.hero.summary
+    const isProjectsIndex = location.pathname === "/projects"
+    const projectSlugMatch = location.pathname.match(/^\/projects\/([^/]+)$/)
+    const project = projectSlugMatch ? getProjectBySlug(locale, projectSlugMatch[1]) : undefined
+
+    const title = isResume
+      ? `${content.resume.title} | ${SITE_NAME}`
+      : project
+        ? `${project.title} | ${content.projectsPage.title} | ${SITE_NAME}`
+        : isProjectsIndex
+          ? `${content.projectsPage.title} | ${SITE_NAME}`
+          : `${SITE_NAME} | ${content.hero.role}`
+
+    const description = isResume
+      ? content.resume.description
+      : project
+        ? project.summary
+        : isProjectsIndex
+          ? content.projectsPage.subtitle
+          : content.hero.summary
     const canonical = `${window.location.origin}${location.pathname}${location.search}${location.hash}`
     const ogImage = `${SITE_URL}/og-image.svg`
 
@@ -93,6 +111,17 @@ export default function Seo() {
           description,
           inLanguage: locale,
         },
+        ...(project
+          ? [
+              {
+                "@type": "CreativeWork",
+                name: project.title,
+                url: canonical,
+                description: project.summary,
+                inLanguage: locale,
+              },
+            ]
+          : []),
       ],
     }
 
@@ -107,7 +136,7 @@ export default function Seo() {
     }
 
     script.textContent = JSON.stringify(jsonLd)
-  }, [content.hero.role, content.hero.summary, content.resume.description, content.resume.title, locale, location.hash, location.pathname, location.search])
+  }, [content.hero.role, content.hero.summary, content.projectsPage.subtitle, content.projectsPage.title, content.resume.description, content.resume.title, locale, location.hash, location.pathname, location.search])
 
   return null
 }

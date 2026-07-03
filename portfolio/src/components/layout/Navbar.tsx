@@ -10,7 +10,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: content.nav.projects, href: '#projects' },
+    { label: content.nav.projects, href: '/projects' },
     { label: content.nav.blog, href: '#blog' },
   ];
 

@@ -36,6 +36,32 @@ export type UiContent = {
     viewAll: string
     moreSuffix: string
   }
+  projectsPage: {
+    title: string
+    subtitle: string
+    searchPlaceholder: string
+    filterAll: string
+    filterCompleted: string
+    filterInProgress: string
+    filterWon: string
+    statusCompleted: string
+    statusInProgress: string
+    statusWon: string
+    noResults: string
+    backHome: string
+    detailTitle: string
+    organization: string
+    period: string
+    status: string
+    technologies: string
+    highlights: string
+    links: string
+    openProject: string
+    openSource: string
+    openLive: string
+    openDemo: string
+    openDataset: string
+  }
   certifications: {
     showMore: string
     showLess: string
@@ -106,6 +132,33 @@ export const uiContent: Record<Locale, UiContent> = {
       viewAll: "View all projects",
       moreSuffix: "more",
     },
+    projectsPage: {
+      title: "Projects",
+      subtitle:
+        "A selection of projects spanning data visualization, AI systems, web apps, and scientific computing.",
+      searchPlaceholder: "Search projects, tech, or organizations",
+      filterAll: "All",
+      filterCompleted: "Completed",
+      filterInProgress: "In progress",
+      filterWon: "Won",
+      statusCompleted: "Completed",
+      statusInProgress: "In progress",
+      statusWon: "Won",
+      noResults: "No projects match your search.",
+      backHome: "Back to home",
+      detailTitle: "Project details",
+      organization: "Organization",
+      period: "Period",
+      status: "Status",
+      technologies: "Technologies",
+      highlights: "Highlights",
+      links: "Links",
+      openProject: "Open project",
+      openSource: "Source code",
+      openLive: "Live demo",
+      openDemo: "Demo",
+      openDataset: "Dataset",
+    },
     certifications: {
       showMore: "Show more",
       showLess: "Show less",
@@ -175,6 +228,33 @@ export const uiContent: Record<Locale, UiContent> = {
       viewAll: "Voir tous les projets",
       moreSuffix: "autres",
     },
+    projectsPage: {
+      title: "Projets",
+      subtitle:
+        "Une sélection de projets en visualisation de données, systèmes IA, applications web et calcul scientifique.",
+      searchPlaceholder: "Rechercher un projet, une techno ou une organisation",
+      filterAll: "Tous",
+      filterCompleted: "Terminés",
+      filterInProgress: "En cours",
+      filterWon: "Lauréats",
+      statusCompleted: "Terminé",
+      statusInProgress: "En cours",
+      statusWon: "Lauréat",
+      noResults: "Aucun projet ne correspond à votre recherche.",
+      backHome: "Retour à l’accueil",
+      detailTitle: "Détails du projet",
+      organization: "Organisation",
+      period: "Période",
+      status: "Statut",
+      technologies: "Technologies",
+      highlights: "Points forts",
+      links: "Liens",
+      openProject: "Ouvrir le projet",
+      openSource: "Code source",
+      openLive: "Démo live",
+      openDemo: "Démo",
+      openDataset: "Dataset",
+    },
     certifications: {
       showMore: "Voir plus",
       showLess: "Voir moins",
@@ -217,3 +297,4 @@ export function getResumeAsset(locale: Locale) {
     ? "/assets/CV_Mathieu_WAHARTE.pdf"
     : "/assets/Resume_Mathieu_WAHARTE.pdf"
 }
+

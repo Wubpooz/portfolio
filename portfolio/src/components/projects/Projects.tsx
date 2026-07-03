@@ -7,7 +7,7 @@ import { getUiContent, useLocale } from "@/i18n"
 export default function ProjectsSection() {
   const { locale } = useLocale()
   const content = getUiContent(locale)
-  const projects = useMemo(() => getProjects(locale), [locale])
+  const projects = useMemo(() => getProjects(locale).filter((project) => project.featured), [locale])
 
   return (
     <section id="projects" className="w-full py-20 md:py-28">

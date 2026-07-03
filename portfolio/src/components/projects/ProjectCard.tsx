@@ -92,6 +92,13 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
   const visibleStack = project.stack.slice(0, MAX_VISIBLE_STACK)
   const remaining = project.stack.length - visibleStack.length
 
+  const statusLabel =
+    project.status === "won"
+      ? content.projectsPage.statusWon
+      : project.status === "in-progress"
+        ? content.projectsPage.statusInProgress
+        : content.projectsPage.statusCompleted
+
   const liveLink = project.links.find((l) => l.labelKey === "live")
   const sourceLink = project.links.find((l) => l.labelKey === "source")
   const readMoreLink = project.links.find((l) => l.labelKey === "caseStudy")
@@ -116,6 +123,15 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
             <p className="text-base leading-7 text-muted-foreground">
               {project.subtitle}
             </p>
+            <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
+              {project.organization} · {project.period}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            <Badge variant="outline" className="rounded-none px-2.5 py-1 font-normal text-muted-foreground">
+              {statusLabel}
+            </Badge>
           </div>
 
           <ul className="list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">

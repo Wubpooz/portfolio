@@ -51,18 +51,19 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [x] EN/FR auto (based on language detection)
   - [x] PDF download
   - [x] PDF open
-- [ ] Projects page
-  - Mockup
-  - Details
-  - Technologies used
-  - Screenshots
-  - Live demo link
-  - GitHub link
-  - Development steps if they exists
-  - Status (in progress, completed, abandoned) ?
-  - Search
-  - Filters
-  - Preview on hover in home page
+- [x] Projects page
+  - [x] Mockup
+  - [x] Details
+  - [x] Technologies used
+  - [x] Screenshots
+  - [x] Live demo link
+  - [x] GitHub link
+  - [x] Development steps if they exists
+  - [x] Status (in progress, completed, abandoned) ?
+  - [x] Search
+  - [x] Filters
+  - [ ] Preview on hover in home page
+  - [x] Page per project
 
 ## Phase 4 - SEO & Prod
 - [x] JSON-LD schema

@@ -4,6 +4,8 @@ import FooterSection from "@/components/layout/Footer";
 import Home from './pages/Home';
 import ResumePage from './pages/Resume';
 import Seo from './components/Seo';
+import ProjectsPage from './pages/Projects';
+import ProjectDetailPage from './pages/ProjectDetail';
 
 function App() {
   return (
@@ -16,13 +18,15 @@ function App() {
         Skip to content
       </a>
       <Navbar />
-      <main className="flex flex-col justify-space-between h-full bg-[--background] text-[--on-background]">
+      <div className="flex flex-col justify-space-between h-full bg-[--background] text-[--on-background]">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
           <Route path="/resume" element={<ResumePage />} />
         </Routes>
         <FooterSection />
-      </main>
+      </div>
     </BrowserRouter>
   );
 }
