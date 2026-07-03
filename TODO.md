@@ -23,7 +23,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - By categories
     - With icons (https://cdn.simpleicons.org/)
     - Sorting? 
-  - [ ] Certifications section
+  - [x] Certifications section
     - With icons
   - [x] Projects section
     - cards with an image, title, description, and (view more) link
