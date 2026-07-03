@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#111111"/>
+  <circle cx="980" cy="120" r="180" fill="#8B5CF6" fill-opacity="0.18"/>
+  <circle cx="220" cy="500" r="220" fill="#4F98A3" fill-opacity="0.16"/>
+  <rect x="72" y="72" width="1056" height="486" rx="36" fill="#171717" stroke="#2A2A2A"/>
+  <text x="120" y="210" fill="#F5F5F5" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="700">Mathieu Waharte</text>
+  <text x="120" y="284" fill="#CFCFCF" font-family="Inter, Arial, sans-serif" font-size="34">Fullstack Engineer &amp; AI · Bilingual portfolio</text>
+  <text x="120" y="354" fill="#A6A6A6" font-family="Inter, Arial, sans-serif" font-size="28">Projects • Resume • Experience • Contact</text>
+  <rect x="120" y="402" width="300" height="72" rx="18" fill="#8B5CF6"/>
+  <text x="150" y="449" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600">wubpooz.dev</text>
+</svg>
