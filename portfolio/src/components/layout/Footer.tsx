@@ -1,12 +1,16 @@
 import "./Footer.css"
+import { getUiContent, useLocale } from "@/i18n"
 
 export default function FooterSection() {
+  const { locale } = useLocale()
+  const content = getUiContent(locale)
+
   return (
     <footer className="footer">
-      <nav className="footer-nav" aria-label="Footer">
-        <a href="/" className="footer-link">Home</a>
-        <a href="/projects" className="footer-link">Projects</a>
-        <a href="/blog" className="footer-link">Blog</a>
+      <nav className="footer-nav" aria-label={locale === "fr" ? "Navigation de pied de page" : "Footer navigation"}>
+        <a href="/" className="footer-link">{content.nav.home}</a>
+        <a href="/projects" className="footer-link">{content.nav.projects}</a>
+        <a href="/blog" className="footer-link">{content.nav.blog}</a>
       </nav>
 
       <div className="footer-bottom">
@@ -17,7 +21,7 @@ export default function FooterSection() {
             rel="noopener noreferrer"
             className="footer-secondary-link"
           >
-            Source code
+            {content.footer.sourceCode}
           </a>
 
           <a
@@ -26,13 +30,11 @@ export default function FooterSection() {
             rel="noopener noreferrer"
             className="footer-secondary-link"
           >
-            Licence
+            {content.footer.licence}
           </a>
         </div>
 
-        <p className="footer-copy">
-          Copyright © 2026 Mathieu Waharte. All rights reserved.
-        </p>
+        <p className="footer-copy">{content.footer.copyright}</p>
       </div>
     </footer>
   )

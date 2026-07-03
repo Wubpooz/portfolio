@@ -3,6 +3,7 @@ import { ArrowUpRight, ChevronDown, BadgeCheck } from "lucide-react"
 import type { CertificationItem } from "../../data/certifications"
 import { certifications } from "../../data/certifications"
 import { Button } from "@/components/ui/button"
+import { getUiContent, useLocale } from "@/i18n"
 
 function CertificationIcon({
   name,
@@ -74,6 +75,8 @@ function CertificationRow({ item }: { item: CertificationItem }) {
 }
 
 export default function CertificationsSection() {
+  const { locale } = useLocale()
+  const content = getUiContent(locale)
   const [expanded, setExpanded] = useState(false)
 
   const visibleCertifications = useMemo(() => {
@@ -85,7 +88,7 @@ export default function CertificationsSection() {
       <div className="overflow-hidden border border-border bg-card">
         <div className="border-b border-border px-4 py-4 md:px-6">
           <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-            Certifications
+            {content.sections.certifications}
             <span className="ml-1 text-lg font-normal text-muted-foreground">
               ({certifications.length})
             </span>
@@ -106,7 +109,7 @@ export default function CertificationsSection() {
               onClick={() => setExpanded((v) => !v)}
               className="mx-auto flex rounded-md"
             >
-              {expanded ? "Show less" : "Show more"}
+              {expanded ? content.certifications.showLess : content.certifications.showMore}
               <ChevronDown
                 className={`ml-2 size-4 transition-transform ${
                   expanded ? "rotate-180" : ""

@@ -41,14 +41,17 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 
 ## Phase 2 - Features
 - [x] Light & Dark themes in the header
-- [ ] EN/FR language
-  - [ ] language switcher (header)
-  - [ ] language detection
-  - [ ] language preference saving
+- [x] EN/FR language
+  - [x] language switcher (header)
+  - [x] language detection
+  - [x] language preference saving
 
 
 ## Phase 3 - Content
-- [ ] About page
+- [ ] Resume serving 
+  - [ ] EN/FR auto (based on language detection)
+  - [ ] PDF download
+  - [ ] PDF open
 - [ ] Projects page
   - Mockup
   - Details
@@ -60,18 +63,12 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - Status (in progress, completed, abandoned) ?
   - Search
   - Filters
-- [ ] Resume serving 
-  - [ ] EN/FR auto (based on language detection)
-  - [ ] PDF download
-  - [ ] HTML view
-  - [ ] Print view
 
 ## Phase 4 - SEO & Prod
 - [ ] JSON-LD schema
 - [ ] sitemap
 - [ ] robots
 - [ ] Analytics with PostHog and OpenPanel
-- [ ] Spam-protected email
 - [ ] Ensure that the website is fast
 - [ ] Ensure that the website is accessible
 - [ ] Ensure that the website is responsive
@@ -109,6 +106,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Toc minimap
 - [ ] Cool 404
 - [ ] Interactive & playful elements (draggable, games, terminal, chatbot for Q&A etc)
+- [ ] Logo (liquid metal, liquid glass, thermal ?)
 
 ### Content
 - [ ] Express fluency in each technology in a good way (heart next to the best)

@@ -1,7 +1,13 @@
-import { skillCategories } from "@/data/skills"
+import { useMemo } from "react"
+import { getSkillCategories } from "@/data/skills"
 import SkillIcon from "./SkillIcon"
+import { getUiContent, useLocale } from "@/i18n"
 
 export default function SkillsSection() {
+  const { locale } = useLocale()
+  const content = getUiContent(locale)
+  const skillCategories = useMemo(() => getSkillCategories(locale), [locale])
+
   return (
     <section id="skills" className="w-full min-w-0 max-w-full py-8">
       <div className="mb-10 space-y-3">
@@ -9,22 +15,21 @@ export default function SkillsSection() {
           className="text-xs uppercase tracking-[0.3em]"
           style={{ color: "var(--faint)" }}
         >
-          Skill arsenal
+          {content.sections.skillsEyebrow}
         </p>
 
         <h2
           className="text-3xl font-bold leading-tight"
           style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}
         >
-          Tools of modern engineering
+          {content.sections.skillsTitle}
         </h2>
 
         <p
           className="max-w-2xl text-sm leading-7"
           style={{ color: "var(--muted)" }}
         >
-          A curated set of languages, frameworks, protocols, and scientific methods
-          I use across full-stack, AI, and computational projects.
+          {content.sections.skillsDescription}
         </p>
       </div>
 

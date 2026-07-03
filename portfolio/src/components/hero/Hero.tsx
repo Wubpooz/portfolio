@@ -1,6 +1,7 @@
 import { ArrowDown, Download, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { getUiContent, useLocale } from "@/i18n"
 
 const quickLinks = [
   {
@@ -48,13 +49,16 @@ function QuickLinkIcon({
 }
 
 export default function HeroSection() {
+  const { locale } = useLocale()
+  const content = getUiContent(locale)
+
   return (
     <section id="home" className="w-full py-10 md:py-16">
       <Card className="overflow-hidden rounded-none border-border bg-card shadow-none">
         <div className="relative h-44 border-b border-border sm:h-56 md:h-72">
           <img
             src="https://picsum.photos/seed/mathieu-hero-banner/1600/700"
-            alt="Hero background"
+            alt={content.hero.backgroundAlt}
             className="h-full w-full object-cover"
             loading="eager"
           />
@@ -66,7 +70,7 @@ export default function HeroSection() {
             <div className="h-24 w-24 overflow-hidden border-4 border-card bg-muted shadow-sm md:h-32 md:w-32">
               <img
                 src="https://picsum.photos/seed/mathieu-profile/400/400"
-                alt="Portrait of Mathieu Waharte"
+                alt={content.hero.portraitAlt}
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
@@ -83,32 +87,29 @@ export default function HeroSection() {
               </h1>
 
               <p className="mt-3 text-lg leading-8 text-muted-foreground">
-                Fullstack Engineer & AI — Apprenti @ Dassault Systèmes
+                {content.hero.role}
               </p>
 
               <p className="mt-1 text-sm font-mono text-muted-foreground">
-                Polytech Paris-Saclay · Paris, France
+                {content.hero.location}
               </p>
 
               <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-[1.05rem]">
-                Je construis des applications fullstack, des agents IA et des
-                simulations scientifiques. J’aime les systèmes bien conçus, les
-                interfaces sobres et les sujets à la frontière entre logiciel,
-                IA et calcul.
+                {content.hero.summary}
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild className="rounded-md">
                   <a href="mailto:mathieu.waharte@gmail.com">
                     <Mail className="size-4" />
-                    Contact me
+                    {content.hero.contactCta}
                   </a>
                 </Button>
 
                 <Button asChild variant="outline" className="rounded-md">
                   <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
                     <Download className="size-4" />
-                    Download CV
+                    {content.hero.downloadCta}
                   </a>
                 </Button>
               </div>
@@ -148,7 +149,7 @@ export default function HeroSection() {
               className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               <ArrowDown className="size-4" />
-              Scroll to projects
+              {content.hero.scrollCta}
             </a>
           </div>
         </CardContent>

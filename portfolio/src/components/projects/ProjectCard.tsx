@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { getUiContent, useLocale } from "@/i18n"
 
 const MAX_VISIBLE_STACK = 6
 
@@ -86,12 +87,14 @@ function TechPillIcon({
 }
 
 export default function ProjectCard({ project }: { project: ProjectItem }) {
+  const { locale } = useLocale()
+  const content = getUiContent(locale)
   const visibleStack = project.stack.slice(0, MAX_VISIBLE_STACK)
   const remaining = project.stack.length - visibleStack.length
 
-  const liveLink = project.links.find((l) => l.label === "Live")
-  const sourceLink = project.links.find((l) => l.label === "Source")
-  const readMoreLink = project.links.find((l) => l.label === "Case Study")
+  const liveLink = project.links.find((l) => l.labelKey === "live")
+  const sourceLink = project.links.find((l) => l.labelKey === "source")
+  const readMoreLink = project.links.find((l) => l.labelKey === "caseStudy")
 
   return (
     <Card className="group flex h-full flex-col overflow-hidden rounded-none border-border bg-card p-0 shadow-none transition-colors hover:border-foreground/20">
@@ -148,7 +151,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
                 variant="outline"
                 className="rounded-none px-2.5 py-1 font-normal text-muted-foreground"
               >
-                +{remaining} more
+                +{remaining} {content.project.moreSuffix}
               </Badge>
             ) : null}
           </div>
@@ -163,7 +166,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
                 <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
                   <a href={liveLink.href} className="inline-flex items-center gap-2">
                     <Globe className="size-4 shrink-0" />
-                    <span>Live</span>
+                    <span>{content.project.live}</span>
                   </a>
                 </Button>
               ) : null}
@@ -180,7 +183,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
                       className="size-4 shrink-0 object-contain"
                       aria-hidden="true"
                     />
-                    <span>Source</span>
+                    <span>{content.project.source}</span>
                   </a>
                 </Button>
               ) : null}
@@ -198,7 +201,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
                   className="inline-flex items-center gap-2 text-foreground"
                 >
                   <BookOpen className="size-4 shrink-0" />
-                  <span>Read More</span>
+                  <span>{content.project.caseStudy}</span>
                   <ArrowRight className="size-4 shrink-0" />
                 </a>
               </Button>

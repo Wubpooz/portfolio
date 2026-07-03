@@ -1,6 +1,7 @@
 import { ArrowUpRight, Download, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { getUiContent, useLocale } from "@/i18n"
 
 const contacts = [
   {
@@ -48,18 +49,21 @@ function ContactIcon({
 }
 
 export default function ContactSection() {
+  const { locale } = useLocale()
+  const content = getUiContent(locale)
+
   return (
     <section id="contact" className="w-full py-20 md:py-28">
       <Card className="overflow-hidden rounded-none border-border bg-card shadow-none">
         <CardHeader className="border-b border-border px-5 py-5 md:px-6">
           <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
-            Contact
+            {content.sections.contactEyebrow}
           </p>
           <CardTitle className="mt-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-            Let’s connect
+            {content.sections.contactTitle}
           </CardTitle>
           <p className="mt-2 text-base text-muted-foreground">
-            LinkedIn, GitHub, or email.
+            {content.sections.contactSubtitle}
           </p>
         </CardHeader>
 
@@ -104,14 +108,14 @@ export default function ContactSection() {
             <Button asChild className="rounded-md">
               <a href="mailto:mathieu.waharte@gmail.com">
                 <Mail className="size-4" />
-                Email me
+                {content.contact.emailCta}
               </a>
             </Button>
 
             <Button asChild variant="outline" className="rounded-md">
               <a href="/resume-fr.pdf" target="_blank" rel="noopener noreferrer">
                 <Download className="size-4" />
-                Download resume
+                {content.contact.resumeCta}
               </a>
             </Button>
           </div>
