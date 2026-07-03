@@ -11,12 +11,12 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - [ ] Linkedin/Github links
   - [x] Presentation section
     - [x] Name, title, and description
-    - [ ] Quick contact links (email, LinkedIn, GitHub)
-    - [ ] Profile picture
-    - [ ] Background image
+    - [x] Quick contact links (email, LinkedIn, GitHub)
+    - [x] Profile picture
+    - [x] Background image
     - [x] Download resume link
-    - [ ] Contact me button
-    - [ ] Call to scroll
+    - [x] Contact me button
+    - [x] Call to scroll
   - [x] Experience section (possibly expandable)
   - [x] Education section
   - [x] Skills section
@@ -29,9 +29,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - cards with an image, title, description, and (view more) link
     - [ ] preview on hover
     - [x] call to see all projects
-  - [ ] Awards section
-    - with icons
-  - [ ] Contact section
+  - [x] Contact section
     - [x] Social links
     - [x] Email link
     - [x] Download resume link
@@ -42,7 +40,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
     - [x] name
 
 ## Phase 2 - Features
-- [ ] Light & Dark themes in the header
+- [x] Light & Dark themes in the header
 - [ ] EN/FR language switcher in the header
 - [ ] Contact form
   - [ ] Templates ?
@@ -114,7 +112,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Interactive & playful elements (draggable, games, terminal, chatbot for Q&A etc)
 
 ### Content
-- [ ] Express fluency in each technology in a good way
+- [ ] Express fluency in each technology in a good way (heart next to the best)
 - [ ] Licensing
 
 
@@ -124,5 +122,6 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 
 ## Future
 - [ ] Blog (with mdx support) & RSS feed
+- [ ] Awards
 - [ ] Publications
 - [ ] Teachings
