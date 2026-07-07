@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { PLANETS } from "./index";
+import { PLANETS, draw3DPlanet } from "./index";
 
 export default function WarpedGridBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -23,6 +23,7 @@ export default function WarpedGridBackground() {
     let animationFrameId: number;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    let time = 0;
 
     // Grid configuration
     const gridSpacing = 40;
@@ -56,10 +57,7 @@ export default function WarpedGridBackground() {
         gridColor: isDark ? "rgba(255, 255, 255, 0.04)" : "rgba(0, 0, 0, 0.04)",
         mouseGlow: isDark ? "rgba(179, 179, 241, 0.12)" : "rgba(179, 179, 241, 0.06)",
         textColor: isDark ? "rgba(255, 255, 255, 0.35)" : "rgba(0, 0, 0, 0.38)",
-        planetCoreBg: isDark ? "#1a1a1a" : "#ffffff",
-        planetBorder: isDark ? "rgba(179, 179, 241, 0.3)" : "rgba(179, 179, 241, 0.35)",
         planetGlow: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.015)",
-        planetSymbol: isDark ? "rgba(255, 255, 255, 0.6)" : "rgba(0, 0, 0, 0.6)",
       };
     };
 
@@ -107,6 +105,7 @@ export default function WarpedGridBackground() {
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
+      time += 0.0012; // Time tick for planet rotation
 
       const colors = getThemeColors();
       const mx = mouseRef.current.x;
@@ -118,20 +117,19 @@ export default function WarpedGridBackground() {
       const updatedCoords = PLANETS.map((planet, i) => {
         const prev = planetCoordsRef.current[i];
         
-        // Target X: placement in margin
-        const contentWidth = 920; // max-width of content
+        // Target X
+        const contentWidth = 920;
         let tx = planet.alignLeft
           ? width / 2 - contentWidth / 2 - 80
           : width / 2 + contentWidth / 2 + 80;
 
-        // Constraint to screen edges
         if (planet.alignLeft) {
           tx = Math.max(tx, 45);
         } else {
           tx = Math.min(tx, width - 45);
         }
 
-        // Target Y: locate DOM element
+        // Target Y
         let ty = height * planet.defaultYPercent - window.scrollY;
         const el = document.querySelector(planet.selector);
         if (el) {
@@ -139,7 +137,6 @@ export default function WarpedGridBackground() {
           ty = rect.top + rect.height / 2;
         }
 
-        // Interpolate (lerp) for smooth scroll lag
         const nextX = prev.x + (tx - prev.x) * 0.08;
         const nextY = prev.y + (ty - prev.y) * 0.08;
 
@@ -161,10 +158,8 @@ export default function WarpedGridBackground() {
         const coords = updatedCoords[i];
         const glowRadius = planet.gravityRadius * 0.7;
 
-        // Reduce opacity on mobile/overlapping layouts
-        const alphaFactor = isMobile ? 0.35 : 1.0;
         ctx.save();
-        ctx.globalAlpha = alphaFactor;
+        ctx.globalAlpha = isMobile ? 0.35 : 1.0;
 
         const gradient = ctx.createRadialGradient(coords.x, coords.y, 0, coords.x, coords.y, glowRadius);
         gradient.addColorStop(0, colors.planetGlow);
@@ -211,12 +206,11 @@ export default function WarpedGridBackground() {
         ctx.stroke();
       }
 
-      // 5. Draw Planet Core & Text Labels
+      // 5. Draw 3D Toy Planet Core & Text Labels
       PLANETS.forEach((planet, i) => {
         const coords = updatedCoords[i];
         
         ctx.save();
-        // Soft opacity on narrow/mobile viewports
         ctx.globalAlpha = isMobile ? 0.25 : 1.0;
 
         // Orbital ring
@@ -226,27 +220,17 @@ export default function WarpedGridBackground() {
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Planet core
-        ctx.beginPath();
-        ctx.arc(coords.x, coords.y, planet.radius, 0, Math.PI * 2);
-        ctx.fillStyle = colors.planetCoreBg;
-        ctx.strokeStyle = colors.planetBorder;
-        ctx.lineWidth = 1.2;
-        ctx.fill();
-        ctx.stroke();
+        // Render 3D planet using the shared helper
+        draw3DPlanet(ctx, coords.x, coords.y, planet, time, colors.isDark);
 
-        // Symbol
-        ctx.fillStyle = colors.planetSymbol;
-        ctx.font = "9px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(planet.symbol, coords.x, coords.y);
-
-        // Render text label ONLY on wider screens so it doesn't overlap text on mobile
+        // Render text label ONLY on wider screens
         if (!isMobile) {
           ctx.fillStyle = colors.textColor;
           ctx.font = "bold 9px 'Geist Variable', sans-serif";
-          ctx.fillText(planet.name.toUpperCase(), coords.x, coords.y + planet.radius + 14);
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          // Align labels nicely below the Saturn rings/moons
+          ctx.fillText(planet.name.toUpperCase(), coords.x, coords.y + planet.radius + 15);
         }
 
         ctx.restore();

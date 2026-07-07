@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { PLANETS } from "./index";
+import { PLANETS, draw3DPlanet } from "./index";
 
 interface Particle {
   x: number;
@@ -9,7 +9,7 @@ interface Particle {
   life: number;
   maxLife: number;
   speed: number;
-  colorRGB: string; // "r, g, b" format for easy alpha interpolation
+  colorRGB: string;
   history: { x: number; y: number }[];
 }
 
@@ -37,7 +37,7 @@ export default function FlowFieldBackground() {
     let height = (canvas.height = window.innerHeight);
 
     const particles: Particle[] = [];
-    const maxParticles = 110; // High density but optimized for history trails rendering
+    const maxParticles = 165; // Increased count for an even richer flow field
     let time = 0;
 
     const handleResize = () => {
@@ -63,27 +63,24 @@ export default function FlowFieldBackground() {
       const isDark = document.documentElement.classList.contains("dark");
       return {
         isDark,
-        // Elegant, desaturated base RGB values
+        fadeColor: isDark ? "rgba(17, 17, 17, 0.045)" : "rgba(255, 255, 255, 0.045)",
         particleRGBs: isDark
           ? [
-              "179, 179, 241", // Primary violet
+              "179, 179, 241", // Primary desaturated violet
               "147, 197, 253", // Soft blue
               "244, 114, 182", // Soft pink
-              "255, 255, 255", // Soft white
+              "255, 255, 255", 
             ]
           : [
               "99, 102, 241",  // Indigo
               "59, 130, 246",  // Blue
               "236, 72, 153",  // Pink
-              "0, 0, 0",        // Soft dark
+              "0, 0, 0", 
             ],
         cursorColor: isDark ? "#ffffff" : "#6366f1",
         cursorRingColor: isDark ? "rgba(255, 255, 255, 0.25)" : "rgba(99, 102, 241, 0.3)",
         textColor: isDark ? "rgba(255, 255, 255, 0.35)" : "rgba(0, 0, 0, 0.38)",
-        planetCoreBg: isDark ? "#1a1a1a" : "#ffffff",
-        planetBorder: isDark ? "rgba(179, 179, 241, 0.3)" : "rgba(179, 179, 241, 0.35)",
         planetGlow: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.015)",
-        planetSymbol: isDark ? "rgba(255, 255, 255, 0.6)" : "rgba(0, 0, 0, 0.6)",
       };
     };
 
@@ -98,7 +95,7 @@ export default function FlowFieldBackground() {
         y: pY,
         vx: 0,
         vy: 0,
-        speed: 1.0 + Math.random() * 1.2,
+        speed: 1.3 + Math.random() * 1.5, // Increased speed range
         life: 0,
         maxLife: 100 + Math.random() * 100,
         colorRGB: config.particleRGBs[Math.floor(Math.random() * config.particleRGBs.length)],
@@ -111,7 +108,6 @@ export default function FlowFieldBackground() {
     }
 
     const draw = () => {
-      // Clear canvas fully to avoid scrolling traces/smears
       ctx.clearRect(0, 0, width, height);
 
       time += 0.0018; 
@@ -123,7 +119,7 @@ export default function FlowFieldBackground() {
       const my = mouseRef.current.y;
       const mActive = mouseRef.current.active;
       const minMouseDist = 24;
-      const activeRadius = 150; // Declared here for global particle scope
+      const activeRadius = 150;
 
       // Update Planet Positions based on DOM section scrolls
       const updatedCoords = PLANETS.map((planet, i) => {
@@ -182,7 +178,7 @@ export default function FlowFieldBackground() {
         let totalForceX = Math.cos(angle) * p.speed;
         let totalForceY = Math.sin(angle) * p.speed;
 
-        // Gravity pull from animated planets (orbits)
+        // Gravity pull from animated planets (tighter orbital pull: dirX * 0.75 + swirlX * 0.45)
         PLANETS.forEach((planet, i) => {
           const coords = updatedCoords[i];
           const dx = coords.x - p.x;
@@ -190,18 +186,19 @@ export default function FlowFieldBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < planet.gravityRadius && dist > 10) {
-            const pull = (1 - dist / planet.gravityRadius) * planet.strength * 2.2;
+            const pull = (1 - dist / planet.gravityRadius) * planet.strength * 2.5;
             const dirX = dx / dist;
             const dirY = dy / dist;
             const swirlX = -dirY;
             const swirlY = dirX;
 
-            totalForceX += (dirX * 0.4 + swirlX * 0.6) * pull * p.speed;
-            totalForceY += (dirY * 0.4 + swirlY * 0.6) * pull * p.speed;
+            // Shift focus towards the center of planet (0.75 pull, 0.45 swirl)
+            totalForceX += (dirX * 0.75 + swirlX * 0.45) * pull * p.speed;
+            totalForceY += (dirY * 0.75 + swirlY * 0.45) * pull * p.speed;
           }
         });
 
-        // Mouse interaction (swirling vortex vortex with increased attraction)
+        // Mouse interaction (increased pull dirX * 1.3 to go closer to center before swirling)
         if (mActive) {
           const dx = mx - p.x;
           const dy = my - p.y;
@@ -215,16 +212,25 @@ export default function FlowFieldBackground() {
               const swirlX = -dirY;
               const swirlY = dirX;
 
-              // Force swirl to draw them into a strong orbit/vortex
-              totalForceX = totalForceX * (1 - influence * 0.25) + (swirlX * 1.8 + dirX * 0.6) * influence * p.speed;
-              totalForceY = totalForceY * (1 - influence * 0.25) + (swirlY * 1.8 + dirY * 0.6) * influence * p.speed;
+              // Pull tighter to center (swirl 1.1, pull 1.1)
+              totalForceX = totalForceX * (1 - influence * 0.3) + (swirlX * 1.1 + dirX * 1.1) * influence * p.speed;
+              totalForceY = totalForceY * (1 - influence * 0.3) + (swirlY * 1.1 + dirY * 1.1) * influence * p.speed;
             } else {
-              // Push back slightly if they get too close to cursor center to avoid fusing
               const push = (1 - dist / minMouseDist) * 0.5;
               totalForceX -= (dx / dist) * push * p.speed;
               totalForceY -= (dy / dist) * push * p.speed;
             }
           }
+        }
+
+        // Gentle constant pull towards vertical center column (X center)
+        const centerX = width / 2;
+        const dxCenter = centerX - p.x;
+        const distCenter = Math.abs(dxCenter);
+        if (distCenter > 40) {
+          // pull force proportional to distance
+          const pullCenter = (dxCenter / width) * 0.32 * p.speed;
+          totalForceX += pullCenter;
         }
 
         // Apply final forces to velocity
@@ -250,12 +256,12 @@ export default function FlowFieldBackground() {
         p.y += p.vy;
         p.life++;
 
-        // Draw trail segment-by-segment with fading opacity (tapered glow look)
+        // Draw trail segment-by-segment with fading opacity
         if (p.history.length > 1) {
           for (let i = 1; i < p.history.length; i++) {
             const pt1 = p.history[i - 1];
             const pt2 = p.history[i];
-            const opacity = i / p.history.length; // Fades out toward the tail
+            const opacity = i / p.history.length;
 
             ctx.beginPath();
             ctx.moveTo(pt1.x, pt1.y);
@@ -283,56 +289,43 @@ export default function FlowFieldBackground() {
           }
         }
 
-        // Respawn if expired or out of bounds
+        // Respawn
         const outOfBounds = p.x < -20 || p.x > width + 20 || p.y < -20 || p.y > height + 20;
         if (p.life >= p.maxLife || outOfBounds) {
           particles[idx] = createParticle();
         }
       });
 
-      // 3. Draw Planet Cores & Symbols (crisp, zero smears)
+      // 3. Draw 3D Toy Planets
       PLANETS.forEach((planet, i) => {
         const coords = updatedCoords[i];
 
         ctx.save();
         ctx.globalAlpha = isMobile ? 0.25 : 1.0;
 
-        // Core
-        ctx.beginPath();
-        ctx.arc(coords.x, coords.y, planet.radius, 0, Math.PI * 2);
-        ctx.fillStyle = config.planetCoreBg;
-        ctx.strokeStyle = config.planetBorder;
-        ctx.lineWidth = 1.2;
-        ctx.fill();
-        ctx.stroke();
-
-        // Symbol
-        ctx.fillStyle = config.planetSymbol;
-        ctx.font = "9px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(planet.symbol, coords.x, coords.y);
+        // Render 3D planet
+        draw3DPlanet(ctx, coords.x, coords.y, planet, time, config.isDark);
 
         // Text label
         if (!isMobile) {
           ctx.fillStyle = config.textColor;
           ctx.font = "bold 9px 'Geist Variable', sans-serif";
-          ctx.fillText(planet.name.toUpperCase(), coords.x, coords.y + planet.radius + 14);
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(planet.name.toUpperCase(), coords.x, coords.y + planet.radius + 15);
         }
 
         ctx.restore();
       });
 
-      // 4. Draw Interactive Cursor (Matches the constellation concentric circles style)
+      // 4. Draw Interactive Concentric Cursor
       if (mActive) {
-        // Outer Ring
         ctx.beginPath();
         ctx.arc(mx, my, minMouseDist, 0, Math.PI * 2);
         ctx.strokeStyle = config.cursorRingColor;
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Inner Solid Dot
         ctx.beginPath();
         ctx.arc(mx, my, 4, 0, Math.PI * 2);
         ctx.fillStyle = config.cursorColor;
@@ -341,6 +334,23 @@ export default function FlowFieldBackground() {
 
       animationFrameId = requestAnimationFrame(draw);
     };
+
+    // Pre-warm particles
+    ctx.fillStyle = document.documentElement.classList.contains("dark") ? "#111111" : "#ffffff";
+    ctx.fillRect(0, 0, width, height);
+    for (let i = 0; i < 50; i++) {
+      time += 0.0018;
+      particles.forEach((p) => {
+        let angle =
+          Math.sin(p.x * 0.0035 + time * 1.4) * 1.8 +
+          Math.cos(p.y * 0.0035 + time * 1.1) * 1.8;
+        p.vx = Math.cos(angle) * p.speed;
+        p.vy = Math.sin(angle) * p.speed;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life++;
+      });
+    }
 
     draw();
 

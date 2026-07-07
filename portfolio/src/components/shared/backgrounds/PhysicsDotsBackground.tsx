@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
-import { PLANETS } from "./index";
+import { PLANETS, draw3DPlanet } from "./index";
 
 interface Particle {
-  x: number;  // Page-space X (0 to canvas width)
-  y: number;  // Page-space Y (0 to document height)
+  x: number;  // Page-space X
+  y: number;  // Page-space Y
   vx: number; // Page-space velocity X
   vy: number; // Page-space velocity Y
   radius: number;
@@ -31,12 +31,13 @@ export default function PhysicsDotsBackground() {
     let animationFrameId: number;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    let time = 0;
 
     // Configuration
     const connectionDist = 115; // Max distance to connect two particles
     const mouseRadius = 145; // Mouse gravity and link radius in screen space
     const mouseAttraction = 0.28; // Strength of pull to mouse
-    const minMouseDist = 24; // Min distance to mouse (radius of cursor ring) to avoid fusing
+    const minMouseDist = 24; // Min distance to mouse to avoid fusing
 
     let particles: Particle[] = [];
 
@@ -49,11 +50,11 @@ export default function PhysicsDotsBackground() {
       );
     };
 
-    // Calculate particle count proportional to document size
+    // Calculate particle count proportional to document size (Increased density)
     const getParticleCount = (docHeight: number) => {
       const pageArea = width * docHeight;
-      // Proportional to page area, capped to avoid excessive lines
-      return Math.min(Math.floor(pageArea / 24000), 160);
+      // Increased density (divisor decreased from 13000 to 8000, cap increased from 240 to 380)
+      return Math.min(Math.floor(pageArea / 8000), 380);
     };
 
     const initParticles = () => {
@@ -83,7 +84,6 @@ export default function PhysicsDotsBackground() {
       height = canvas.height = window.innerHeight;
       const currentDocHeight = getDocHeight();
       
-      // Only fully re-initialize if size changes significantly
       if (Math.abs(currentDocHeight - lastDocHeight) > 200 || width !== window.innerWidth) {
         lastDocHeight = currentDocHeight;
         initParticles();
@@ -114,15 +114,13 @@ export default function PhysicsDotsBackground() {
         cursorColor: isDark ? "#ffffff" : "#6366f1",
         cursorRingColor: isDark ? "rgba(255, 255, 255, 0.25)" : "rgba(99, 102, 241, 0.3)",
         textColor: isDark ? "rgba(255, 255, 255, 0.35)" : "rgba(0, 0, 0, 0.38)",
-        planetCoreBg: isDark ? "#1a1a1a" : "#ffffff",
-        planetBorder: isDark ? "rgba(179, 179, 241, 0.3)" : "rgba(179, 179, 241, 0.35)",
         planetGlow: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.015)",
-        planetSymbol: isDark ? "rgba(255, 255, 255, 0.6)" : "rgba(0, 0, 0, 0.6)",
       };
     };
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
+      time += 0.0012; // Animate 3D planet textures & moons
 
       const colors = getThemeColors();
       const mx = mouseRef.current.x;
@@ -181,14 +179,13 @@ export default function PhysicsDotsBackground() {
 
       // 2. Physics & Particle Updates
       particles.forEach((p) => {
-        // Continuous organic drifting force (random brownian noise)
         p.vx += (Math.random() - 0.5) * 0.025;
         p.vy += (Math.random() - 0.5) * 0.025;
 
         // Planet gravity pull (calculated in page space)
         PLANETS.forEach((planet, i) => {
           const coords = updatedCoords[i];
-          const planetPageY = coords.y + scrollY; // Convert planet screen Y back to page Y
+          const planetPageY = coords.y + scrollY;
           const dx = coords.x - p.x;
           const dy = planetPageY - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
@@ -213,7 +210,6 @@ export default function PhysicsDotsBackground() {
               p.vx += (dx / dist) * pull;
               p.vy += (dy / dist) * pull;
             } else {
-              // Gentle repulsion to prevent overlapping directly in the center
               const push = (1 - dist / minMouseDist) * 0.35;
               p.vx -= (dx / dist) * push;
               p.vy -= (dy / dist) * push;
@@ -221,11 +217,11 @@ export default function PhysicsDotsBackground() {
           }
         }
 
-        // Apply friction/drag to cap speed
+        // Apply friction
         p.vx *= 0.94;
         p.vy *= 0.94;
 
-        // Ensure minimum speed so they float and maximum speed to avoid launching
+        // Speed boundaries
         const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
         const minSpeed = 0.15;
         const maxSpeed = 1.4;
@@ -238,11 +234,10 @@ export default function PhysicsDotsBackground() {
           p.vy = (p.vy / speed) * maxSpeed;
         }
 
-        // Update positions (in page space)
         p.x += p.vx;
         p.y += p.vy;
 
-        // Boundary collisions in page space
+        // Boundaries
         if (p.x < 0) { p.x = 0; p.vx = -p.vx; }
         if (p.x > width) { p.x = width; p.vx = -p.vx; }
         if (p.y < 0) { p.y = 0; p.vy = -p.vy; }
@@ -251,13 +246,12 @@ export default function PhysicsDotsBackground() {
 
       // 3. Filter Particles Visible in Viewport
       const visibleIndices: number[] = [];
-      const margin = 80; // margin outside viewport to render smoothly
+      const margin = 80;
       particles.forEach((p, idx) => {
         const screenY = p.y - scrollY;
         if (screenY > -margin && screenY < height + margin) {
           visibleIndices.push(idx);
 
-          // Draw the dot itself in screen space
           ctx.beginPath();
           ctx.arc(p.x, screenY, p.radius, 0, Math.PI * 2);
           ctx.fillStyle = colors.dotColor;
@@ -268,7 +262,6 @@ export default function PhysicsDotsBackground() {
       // 4. Draw Constellation Connections (Lines)
       ctx.lineWidth = 0.8;
       
-      // Connect visible points to each other (all physics & distances computed in page space)
       for (let i = 0; i < visibleIndices.length; i++) {
         const idx1 = visibleIndices[i];
         const p1 = particles[idx1];
@@ -292,7 +285,7 @@ export default function PhysicsDotsBackground() {
           }
         }
 
-        // Connect points to planets (computed in screen space)
+        // Connect points to planets
         PLANETS.forEach((planet, k) => {
           const coords = updatedCoords[k];
           const dx = p1.x - coords.x;
@@ -327,49 +320,36 @@ export default function PhysicsDotsBackground() {
         }
       }
 
-      // 5. Draw Planets
+      // 5. Draw 3D Toy Planets
       PLANETS.forEach((planet, i) => {
         const coords = updatedCoords[i];
 
         ctx.save();
         ctx.globalAlpha = isMobile ? 0.25 : 1.0;
 
-        // Core
-        ctx.beginPath();
-        ctx.arc(coords.x, coords.y, planet.radius, 0, Math.PI * 2);
-        ctx.fillStyle = colors.planetCoreBg;
-        ctx.strokeStyle = colors.planetBorder;
-        ctx.lineWidth = 1.2;
-        ctx.fill();
-        ctx.stroke();
+        // Render 3D planet
+        draw3DPlanet(ctx, coords.x, coords.y, planet, time, colors.isDark);
 
-        // Symbol
-        ctx.fillStyle = colors.planetSymbol;
-        ctx.font = "9px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(planet.symbol, coords.x, coords.y);
-
-        // Render text label ONLY on wider screens
+        // Text label
         if (!isMobile) {
           ctx.fillStyle = colors.textColor;
           ctx.font = "bold 9px 'Geist Variable', sans-serif";
-          ctx.fillText(planet.name.toUpperCase(), coords.x, coords.y + planet.radius + 14);
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(planet.name.toUpperCase(), coords.x, coords.y + planet.radius + 15);
         }
 
         ctx.restore();
       });
 
-      // 6. Draw Interactive Cursor (Concentric circles matching mockup)
+      // 6. Draw Interactive Concentric Cursor
       if (mActive) {
-        // Outer Ring
         ctx.beginPath();
         ctx.arc(mx, my, minMouseDist, 0, Math.PI * 2);
         ctx.strokeStyle = colors.cursorRingColor;
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Inner Solid Dot
         ctx.beginPath();
         ctx.arc(mx, my, 4, 0, Math.PI * 2);
         ctx.fillStyle = colors.cursorColor;
