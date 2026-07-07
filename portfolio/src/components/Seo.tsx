@@ -41,12 +41,17 @@ export default function Seo() {
   const location = useLocation()
 
   useEffect(() => {
-    const isResume = location.pathname.startsWith("/resume")
-    const isProjectsIndex = location.pathname === "/projects"
+    const pathname = location.pathname.replace(/\/+$/, "") || "/"
+    const isResume = pathname.startsWith("/resume")
+    const isProjectsIndex = pathname === "/projects"
     const projectSlugMatch = location.pathname.match(/^\/projects\/([^/]+)$/)
     const project = projectSlugMatch ? getProjectBySlug(locale, projectSlugMatch[1]) : undefined
+    const isKnownRoute = pathname === "/" || isResume || isProjectsIndex || Boolean(project)
+    const isNotFound = !isKnownRoute
 
-    const title = isResume
+    const title = isNotFound
+      ? `${content.notFound.title} | ${SITE_NAME}`
+      : isResume
       ? `${content.resume.title} | ${SITE_NAME}`
       : project
         ? `${project.title} | ${content.projectsPage.title} | ${SITE_NAME}`
@@ -54,7 +59,9 @@ export default function Seo() {
           ? `${content.projectsPage.title} | ${SITE_NAME}`
           : `${SITE_NAME} | ${content.hero.role}`
 
-    const description = isResume
+    const description = isNotFound
+      ? content.notFound.subtitle
+      : isResume
       ? content.resume.description
       : project
         ? project.summary
@@ -63,12 +70,13 @@ export default function Seo() {
           : content.hero.summary
     const canonical = `${window.location.origin}${location.pathname}${location.search}${location.hash}`
     const ogImage = `${SITE_URL}/og-image.svg`
+    const robots = isKnownRoute ? "index,follow" : "noindex,nofollow"
 
     document.title = title
     document.documentElement.lang = locale
 
     upsertMeta("description", description)
-    upsertMeta("robots", "index,follow")
+    upsertMeta("robots", robots)
     upsertMeta("theme-color", "#111111")
     upsertMeta("color-scheme", "light dark")
     upsertMeta("og:site_name", SITE_NAME, true)
@@ -136,7 +144,7 @@ export default function Seo() {
     }
 
     script.textContent = JSON.stringify(jsonLd)
-  }, [content.hero.role, content.hero.summary, content.projectsPage.subtitle, content.projectsPage.title, content.resume.description, content.resume.title, locale, location.hash, location.pathname, location.search])
+  }, [content.hero.role, content.hero.summary, content.notFound.subtitle, content.notFound.title, content.projectsPage.subtitle, content.projectsPage.title, content.resume.description, content.resume.title, locale, location.hash, location.pathname, location.search])
 
   return null
 }

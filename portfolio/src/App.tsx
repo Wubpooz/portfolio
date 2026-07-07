@@ -6,6 +6,7 @@ import ResumePage from './pages/Resume';
 import Seo from './components/Seo';
 import ProjectsPage from './pages/Projects';
 import ProjectDetailPage from './pages/ProjectDetail';
+import NotFoundPage from './pages/NotFound';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:slug" element={<ProjectDetailPage />} />
           <Route path="/resume" element={<ResumePage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <FooterSection />
       </div>

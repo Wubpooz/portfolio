@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Menu, X, Sun, Moon, Monitor } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { getUiContent, useLocale } from '@/i18n';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export default function Navbar() {
   const { locale, setLocale } = useLocale();
@@ -68,45 +69,8 @@ export default function Navbar() {
           </div>
 
           {/* Dark mode toggle */}
-          <div className="ml-4 hidden md:flex items-center rounded-md border border-(--border) bg-(--bg) p-1">
-            <button
-              type="button"
-              onClick={() => setTheme("light")}
-              className={`rounded-sm p-1.5 transition-colors ${
-                theme === "light" ? "bg-(--surface)" : "hover:bg-(--surface)"
-              }`}
-              aria-label={content.theme.useLight}
-              aria-pressed={theme === "light"}
-              title={content.theme.light}
-            >
-              <Sun size={16} style={{ color: "var(--muted)" }} />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setTheme("dark")}
-              className={`rounded-sm p-1.5 transition-colors ${
-                theme === "dark" ? "bg-(--surface)" : "hover:bg-(--surface)"
-              }`}
-              aria-label={content.theme.useDark}
-              aria-pressed={theme === "dark"}
-              title={content.theme.dark}
-            >
-              <Moon size={16} style={{ color: "var(--muted)" }} />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setTheme("system")}
-              className={`rounded-sm p-1.5 transition-colors ${
-                theme === "system" ? "bg-(--surface)" : "hover:bg-(--surface)"
-              }`}
-              aria-label={content.theme.useSystem}
-              aria-pressed={theme === "system"}
-              title={content.theme.system}
-            >
-              <Monitor size={16} style={{ color: "var(--muted)" }} />
-            </button>
+          <div className="ml-4 hidden md:block">
+            <ThemeSwitcher theme={theme} setTheme={setTheme} />
           </div>
         </div>
 
@@ -142,46 +106,7 @@ export default function Navbar() {
               </button>
             ))}
 
-            <div className="ml-4 flex items-center rounded-md border border-(--border) bg-(--bg) p-1">
-              <button
-                type="button"
-                onClick={() => setTheme("light")}
-                className={`rounded-sm p-1.5 transition-colors ${
-                  theme === "light" ? "bg-(--surface)" : "hover:bg-(--surface)"
-                }`}
-                aria-label={content.theme.useLight}
-                aria-pressed={theme === "light"}
-                title={content.theme.light}
-              >
-                <Sun size={16} style={{ color: "var(--muted)" }} />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setTheme("dark")}
-                className={`rounded-sm p-1.5 transition-colors ${
-                  theme === "dark" ? "bg-(--surface)" : "hover:bg-(--surface)"
-                }`}
-                aria-label={content.theme.useDark}
-                aria-pressed={theme === "dark"}
-                title={content.theme.dark}
-              >
-                <Moon size={16} style={{ color: "var(--muted)" }} />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setTheme("system")}
-                className={`rounded-sm p-1.5 transition-colors ${
-                  theme === "system" ? "bg-(--surface)" : "hover:bg-(--surface)"
-                }`}
-                aria-label={content.theme.useSystem}
-                aria-pressed={theme === "system"}
-                title={content.theme.system}
-              >
-                <Monitor size={16} style={{ color: "var(--muted)" }} />
-              </button>
-            </div>
+            <ThemeSwitcher theme={theme} setTheme={setTheme} compact />
           </div>
         </div>
       ) : null}

@@ -83,6 +83,13 @@ export type UiContent = {
     licence: string
     copyright: string
   }
+  notFound: {
+    title: string
+    subtitle: string
+    backHome: string
+    goProjects: string
+    goResume: string
+  }
   theme: {
     light: string
     dark: string
@@ -181,6 +188,14 @@ export const uiContent: Record<Locale, UiContent> = {
       licence: "Licence",
       copyright: "Copyright © 2026 Mathieu Waharte. All rights reserved.",
     },
+    notFound: {
+      title: "404 — Page not found",
+      subtitle:
+        "You’ve wandered into the void between pixels. Let’s get you back to something useful.",
+      backHome: "Back to home",
+      goProjects: "View projects",
+      goResume: "Open resume",
+    },
     theme: {
       light: "Light",
       dark: "Dark",
@@ -276,6 +291,14 @@ export const uiContent: Record<Locale, UiContent> = {
       sourceCode: "Code source",
       licence: "Licence",
       copyright: "Copyright © 2026 Mathieu Waharte. Tous droits réservés.",
+    },
+    notFound: {
+      title: "404 — Page introuvable",
+      subtitle:
+        "Vous avez quitté le chemin connu des pixels. Revenons vers quelque chose d’utile.",
+      backHome: "Retour à l’accueil",
+      goProjects: "Voir les projets",
+      goResume: "Ouvrir le CV",
     },
     theme: {
       light: "Clair",

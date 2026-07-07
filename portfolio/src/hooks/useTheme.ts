@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 
-type Theme = "light" | "dark" | "system"
+export type Theme = "light" | "dark" | "system"
 type ResolvedTheme = "light" | "dark"
 
 const STORAGE_KEY = "theme"
