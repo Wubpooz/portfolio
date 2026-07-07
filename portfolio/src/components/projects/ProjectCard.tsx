@@ -1,10 +1,10 @@
 import { Globe, ArrowRight, BookOpen } from "lucide-react"
 import type { ProjectItem } from "@/data/projects"
-import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { getUiContent, useLocale } from "@/i18n"
+import { shouldInvertIcon } from "@/lib/utils"
 
 const MAX_VISIBLE_STACK = 6
 
@@ -55,6 +55,8 @@ function TechPillIcon({
   icon?: string
   iconUrl?: string
 }) {
+  const invertClass = shouldInvertIcon(icon || name) ? "dark:invert" : ""
+
   if (iconUrl) {
     return (
       <img
@@ -63,7 +65,7 @@ function TechPillIcon({
         width={14}
         height={14}
         loading="lazy"
-        className="size-3.5 shrink-0 object-contain"
+        className={`size-3.5 shrink-0 object-contain ${invertClass}`}
         aria-hidden="true"
       />
     )
@@ -77,7 +79,7 @@ function TechPillIcon({
         width={14}
         height={14}
         loading="lazy"
-        className="size-3.5 shrink-0 object-contain"
+        className={`size-3.5 shrink-0 object-contain ${invertClass}`}
         aria-hidden="true"
       />
     )
@@ -104,7 +106,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
   const readMoreLink = project.links.find((l) => l.labelKey === "caseStudy")
 
   return (
-    <Card className="group flex h-full flex-col overflow-hidden rounded-none border-border bg-card p-0 shadow-none transition-colors hover:border-foreground/20">
+    <div className="group flex h-full flex-col overflow-hidden bg-card transition-colors hover:bg-muted/10">
       <div className="relative aspect-[16/9] overflow-hidden border-b border-border">
         <img
           src={project.image}
@@ -114,7 +116,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
         />
       </div>
 
-      <CardContent className="flex h-full flex-1 flex-col p-6">
+      <div className="flex h-full flex-1 flex-col p-6">
         <div className="space-y-5">
           <div className="space-y-1.5">
             <h3 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -196,7 +198,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
                       width={16}
                       height={16}
                       loading="lazy"
-                      className="size-4 shrink-0 object-contain"
+                      className={`size-4 shrink-0 object-contain ${shouldInvertIcon("github") ? "dark:invert" : ""}`}
                       aria-hidden="true"
                     />
                     <span>{content.project.source}</span>
@@ -224,7 +226,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
             ) : null}
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }

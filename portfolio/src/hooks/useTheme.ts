@@ -51,6 +51,11 @@ export function useTheme() {
 
     document.documentElement.dataset.theme = resolvedTheme
     document.documentElement.dataset.themePreference = theme
+    if (resolvedTheme === "dark") {
+      document.documentElement.classList.add("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
+    }
   }, [theme, resolvedTheme])
 
   useEffect(() => {

@@ -16,20 +16,22 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b" style={{ borderColor: 'var(--border)', background: 'var(--bg)' }}>
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
       <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
 
         {/* Logo */}
-        <a href="/" className="font-mono font-bold text-sm tracking-tight"
-           style={{ color: 'var(--text)' }}>
+        <a href="/" className="font-mono font-bold text-sm tracking-tight text-foreground">
           MW
         </a>
 
         {/* Nav links */}
         <nav className="hidden md:flex gap-8" aria-label="Primary navigation">
           {navLinks.map(link => (
-            <a key={link.label} href={link.href}
-               className="text-sm transition-colors hover:opacity-100 opacity-60" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-sm transition-colors hover:text-foreground text-muted-foreground font-mono"
+            >
               {link.label}
             </a>
           ))}
@@ -38,8 +40,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2 md:gap-3">
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md border border-(--border) p-2 md:hidden"
-            style={{ color: 'var(--text)' }}
+            className="inline-flex items-center justify-center rounded-md border border-border p-2 text-foreground md:hidden hover:bg-muted/20"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
             onClick={() => setMobileMenuOpen((value) => !value)}
@@ -48,7 +49,7 @@ export default function Navbar() {
           </button>
 
           {/* Language toggle */}
-          <div className="hidden gap-1 text-xs font-mono md:flex" style={{ color: 'var(--muted)' }}>
+          <div className="hidden gap-1 text-xs font-mono md:flex text-muted-foreground">
             {[
               { code: 'fr', label: 'FR' },
               { code: 'en', label: 'EN' },
@@ -57,7 +58,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setLocale(lang.code as 'en' | 'fr')}
-                  className={`transition-colors ${locale === lang.code ? 'text-(--text)' : 'hover:text-(--text)'}`}
+                  className={`transition-colors ${locale === lang.code ? 'text-foreground font-semibold' : 'hover:text-foreground'}`}
                   aria-pressed={locale === lang.code}
                   aria-label={lang.code === 'fr' ? 'Français' : 'English'}
                 >
@@ -77,13 +78,13 @@ export default function Navbar() {
       </div>
 
       {mobileMenuOpen ? (
-        <div className="border-t border-(--border) bg-[--bg] px-6 py-4 md:hidden">
+        <div className="border-t border-border bg-background px-6 py-4 md:hidden">
           <nav className="flex flex-col gap-3" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-mono text-[--text] opacity-80 transition-opacity hover:opacity-100"
+                className="text-sm font-mono text-foreground hover:text-foreground/80 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
@@ -100,7 +101,7 @@ export default function Navbar() {
                 key={lang.code}
                 type="button"
                 onClick={() => setLocale(lang.code as 'en' | 'fr')}
-                className={`rounded-md border px-3 py-1 text-xs font-mono transition-colors ${locale === lang.code ? 'border-(--text) text-(--text)' : 'border-(--border) text-(--muted)'}`}
+                className={`rounded-md border px-3 py-1 text-xs font-mono transition-colors ${locale === lang.code ? 'border-foreground text-foreground font-semibold' : 'border-border text-muted-foreground hover:text-foreground'}`}
               >
                 {lang.label}
               </button>

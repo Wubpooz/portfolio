@@ -10,27 +10,31 @@ export default function EducationSection() {
   const educations = useMemo(() => getEducations(locale), [locale])
 
   return (
-    <section id="education" className="py-8 w-full min-w-0 max-w-full">
-      <h2
-        className="text-xl font-bold mb-6"
-        style={{ fontFamily: 'var(--font-display)', color: 'var(--text)' }}
-      >
-        {content.sections.education}
-      </h2>
+    <section id="education" className="w-full py-8 md:py-10">
+      <div className="overflow-hidden border border-border bg-card">
+        <div className="border-b border-border px-4 py-4 md:px-6">
+          <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+            {content.sections.education}
+            <span className="ml-1 text-lg font-normal text-muted-foreground">
+              ({educations.length})
+            </span>
+          </h2>
+        </div>
 
-      <Accordion type="multiple" className="w-full min-w-0 max-w-full">
-        {educations.map((edu) => (
-          <ExpandableItem
-            key={edu.id}
-            value={edu.id}
-            title={edu.degree}
-            subtitle={`${edu.school} · ${edu.location}`}
-            dateRange={`${edu.startDate} — ${edu.endDate}`}
-            description={edu.description}
-            tags={edu.tags}
-          />
-        ))}
-      </Accordion>
+        <Accordion type="multiple" className="w-full min-w-0 max-w-full">
+          {educations.map((edu) => (
+            <ExpandableItem
+              key={edu.id}
+              value={edu.id}
+              title={edu.degree}
+              subtitle={`${edu.school} · ${edu.location}`}
+              dateRange={`${edu.startDate} — ${edu.endDate}`}
+              description={edu.description}
+              tags={edu.tags}
+            />
+          ))}
+        </Accordion>
+      </div>
     </section>
   );
 }

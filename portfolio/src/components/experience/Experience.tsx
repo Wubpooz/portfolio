@@ -10,27 +10,31 @@ export default function ExperienceSection() {
   const experiences = useMemo(() => getExperiences(locale), [locale])
 
   return (
-    <section id="experience" className="py-8 w-full min-w-0 max-w-full">
-      <h2
-        className="text-xl font-bold mb-6"
-        style={{ fontFamily: 'var(--font-display)', color: 'var(--text)' }}
-      >
-        {content.sections.experience}
-      </h2>
+    <section id="experience" className="w-full py-8 md:py-10">
+      <div className="overflow-hidden border border-border bg-card">
+        <div className="border-b border-border px-4 py-4 md:px-6">
+          <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+            {content.sections.experience}
+            <span className="ml-1 text-lg font-normal text-muted-foreground">
+              ({experiences.length})
+            </span>
+          </h2>
+        </div>
 
-      <Accordion type="multiple" className="w-full min-w-0 max-w-full">
-        {experiences.map((exp) => (
-          <ExpandableItem
-            key={exp.id}
-            value={exp.id}
-            title={exp.role}
-            subtitle={`${exp.company} · ${exp.location}`}
-            dateRange={`${exp.startDate} — ${exp.endDate}`}
-            description={exp.description}
-            tags={exp.tags}
-          />
-        ))}
-      </Accordion>
+        <Accordion type="multiple" className="w-full min-w-0 max-w-full">
+          {experiences.map((exp) => (
+            <ExpandableItem
+              key={exp.id}
+              value={exp.id}
+              title={exp.role}
+              subtitle={`${exp.company} · ${exp.location}`}
+              dateRange={`${exp.startDate} — ${exp.endDate}`}
+              description={exp.description}
+              tags={exp.tags}
+            />
+          ))}
+        </Accordion>
+      </div>
     </section>
   );
 }

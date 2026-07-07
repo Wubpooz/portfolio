@@ -20,12 +20,12 @@ export default function NotFoundPage() {
     <main className="relative isolate mx-auto flex min-h-[calc(100vh-9rem)] w-full max-w-5xl items-center justify-center px-4 py-12 md:px-6">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <motion.div
-          className="absolute left-1/2 top-1/3 size-[28rem] -translate-x-1/2 rounded-full bg-[--primary] opacity-10 blur-3xl"
+          className="absolute left-1/2 top-1/3 size-[28rem] -translate-x-1/2 rounded-full bg-primary opacity-10 blur-3xl"
           animate={{ scale: [1, 1.08, 1], opacity: [0.08, 0.16, 0.08] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-0 right-0 size-[24rem] rounded-full bg-[--surface] opacity-70 blur-3xl"
+          className="absolute bottom-0 right-0 size-[24rem] rounded-full bg-muted opacity-20 blur-3xl"
           animate={{ x: [0, -24, 0], y: [0, -18, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -43,7 +43,7 @@ export default function NotFoundPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
           >
-            <span className="block text-[clamp(5rem,18vw,11rem)] leading-none text-[--primary]">404</span>
+            <span className="block text-[clamp(5rem,18vw,11rem)] leading-none text-primary">404</span>
             <span>{content.notFound.title}</span>
           </motion.h1>
 
@@ -87,7 +87,7 @@ export default function NotFoundPage() {
               <span>signal: weak</span>
             </div>
 
-            <div className="rounded-3xl border border-border bg-[--bg] p-5">
+            <div className="rounded-3xl border border-border bg-background p-5">
               <pre className="overflow-x-auto text-xs leading-6 text-muted-foreground">
 {`> trying to resolve route...
 > no matching page found.
@@ -107,7 +107,7 @@ export default function NotFoundPage() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="rounded-2xl border border-border bg-[--surface] px-3 py-4 text-center text-[10px] uppercase tracking-[0.28em] text-muted-foreground"
+                  className="rounded-2xl border border-border bg-muted px-3 py-4 text-center text-[10px] uppercase tracking-[0.28em] text-muted-foreground"
                 >
                   {item}
                 </div>

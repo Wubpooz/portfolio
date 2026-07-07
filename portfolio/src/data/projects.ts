@@ -80,6 +80,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "caseStudy", href: addCaseStudy("deloitte-google-cloud-hackathon") },
       ],
+      featured: true,
     },
     {
       slug: "xtts-finetuning",
@@ -104,6 +105,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "demo", href: streamlitSearch },
         { labelKey: "caseStudy", href: addCaseStudy("xtts-finetuning") },
       ],
+      featured: true,
     },
     {
       slug: "quizine",
@@ -214,6 +216,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "caseStudy", href: addCaseStudy("deloitte-google-cloud-hackathon") },
       ],
+      featured: true,
     },
     {
       slug: "xtts-finetuning",

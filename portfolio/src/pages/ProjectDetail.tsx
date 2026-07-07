@@ -79,7 +79,11 @@ export default function ProjectDetailPage() {
       <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
         <div className="space-y-6">
           <div className="overflow-hidden border border-border bg-card">
-            <img src={project.image} alt={project.imageAlt} className="h-auto w-full object-cover" />
+            <img
+              src={project.image.startsWith("/") || project.image.startsWith("http://") || project.image.startsWith("https://") ? project.image : ""}
+              alt={project.imageAlt}
+              className="h-auto w-full object-cover"
+            />
           </div>
 
           <section className="space-y-4 rounded-none border border-border bg-card p-6">
@@ -118,7 +122,7 @@ export default function ProjectDetailPage() {
             <ul className="space-y-3 text-sm leading-7 text-muted-foreground">
               {project.highlights.map((item) => (
                 <li key={item} className="flex gap-3">
-                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[--primary]" />
+                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -160,11 +164,13 @@ export default function ProjectDetailPage() {
                       : content.projectsPage.openProject
 
                 const isExternal = /^https?:\/\//.test(link.href)
+                const isSafe = link.href.startsWith("/") || link.href.startsWith("http://") || link.href.startsWith("https://")
+                const safeHref = isSafe ? link.href : "#"
 
                 return (
                   <Button key={`${link.labelKey}-${link.href}`} asChild variant="outline" className="w-full justify-start rounded-md">
                     <a
-                      href={link.href}
+                      href={safeHref}
                       target={isExternal ? "_blank" : undefined}
                       rel={isExternal ? "noopener noreferrer" : undefined}
                       className="inline-flex items-center gap-2"

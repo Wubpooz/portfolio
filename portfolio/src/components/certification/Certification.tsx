@@ -4,6 +4,7 @@ import type { CertificationItem } from "../../data/certifications"
 import { certifications } from "../../data/certifications"
 import { Button } from "@/components/ui/button"
 import { getUiContent, useLocale } from "@/i18n"
+import { shouldInvertIcon } from "@/lib/utils"
 
 function CertificationIcon({
   name,
@@ -14,6 +15,8 @@ function CertificationIcon({
   icon?: string
   iconUrl?: string
 }) {
+  const invertClass = shouldInvertIcon(icon || name) ? "dark:invert" : ""
+
   if (iconUrl) {
     return (
       <img
@@ -22,21 +25,22 @@ function CertificationIcon({
         width={28}
         height={28}
         loading="lazy"
-        className="size-7 object-contain"
+        className={`size-7 object-contain ${invertClass}`}
         aria-hidden="true"
       />
     )
   }
 
   if (icon) {
+    const src = icon === "linkedin" ? "/icons/linkedin.svg" : `https://cdn.simpleicons.org/${icon}`
     return (
       <img
-        src={`https://cdn.simpleicons.org/${icon}`}
+        src={src}
         alt={name}
         width={28}
         height={28}
         loading="lazy"
-        className="size-7 object-contain"
+        className={`size-7 object-contain ${invertClass}`}
         aria-hidden="true"
       />
     )
@@ -84,7 +88,7 @@ export default function CertificationsSection() {
   }, [expanded])
 
   return (
-    <section id="certifications" className="w-full py-20 md:py-28">
+    <section id="certifications" className="w-full py-8 md:py-10">
       <div className="overflow-hidden border border-border bg-card">
         <div className="border-b border-border px-4 py-4 md:px-6">
           <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">

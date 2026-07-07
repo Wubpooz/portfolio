@@ -2,6 +2,7 @@ import { ArrowDown, ExternalLink, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { getUiContent, useLocale } from "@/i18n"
+import { shouldInvertIcon } from "@/lib/utils"
 
 const quickLinks = [
   {
@@ -35,14 +36,17 @@ function QuickLinkIcon({
     return <Mail className="size-4 text-muted-foreground" aria-hidden="true" />
   }
 
+  const src = icon === "linkedin" ? "/icons/linkedin.svg" : `https://cdn.simpleicons.org/${icon}`
+  const invertClass = shouldInvertIcon(icon || label) ? "dark:invert" : ""
+
   return (
     <img
-      src={`https://cdn.simpleicons.org/${icon}`}
+      src={src}
       alt={label}
       width={16}
       height={16}
       loading="lazy"
-      className="size-4 object-contain"
+      className={`size-4 object-contain ${invertClass}`}
       aria-hidden="true"
     />
   )
@@ -53,7 +57,7 @@ export default function HeroSection() {
   const content = getUiContent(locale)
 
   return (
-    <section id="home" className="w-full py-10 md:py-16">
+    <section id="home" className="w-full pt-0 pb-10 md:pb-12">
       <Card className="overflow-hidden rounded-none border-border bg-card shadow-none">
         <div className="relative h-44 border-b border-border sm:h-56 md:h-72">
           <img
@@ -80,8 +84,8 @@ export default function HeroSection() {
           <div className="grid gap-8 md:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.7fr)] md:items-start">
             <div>
               <h1
-                className="text-4xl font-bold tracking-tight md:text-5xl"
-                style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}
+                className="text-4xl font-bold tracking-tight md:text-5xl text-foreground"
+                style={{ fontFamily: "var(--font-display)" }}
               >
                 Mathieu Waharte
               </h1>

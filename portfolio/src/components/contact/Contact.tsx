@@ -2,6 +2,7 @@ import { ArrowUpRight, Download, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getResumeAsset, getUiContent, useLocale } from "@/i18n"
+import { shouldInvertIcon } from "@/lib/utils"
 
 const contacts = [
   {
@@ -35,14 +36,17 @@ function ContactIcon({
     return <Mail className="size-5 text-muted-foreground" aria-hidden="true" />
   }
 
+  const src = icon === "linkedin" ? "/icons/linkedin.svg" : `https://cdn.simpleicons.org/${icon}`
+  const invertClass = shouldInvertIcon(icon || label) ? "dark:invert" : ""
+
   return (
     <img
-      src={`https://cdn.simpleicons.org/${icon}`}
+      src={src}
       alt={label}
       width={20}
       height={20}
       loading="lazy"
-      className="size-5 object-contain"
+      className={`size-5 object-contain ${invertClass}`}
       aria-hidden="true"
     />
   )
@@ -54,7 +58,7 @@ export default function ContactSection() {
   const resumeAsset = getResumeAsset(locale)
 
   return (
-    <section id="contact" className="w-full py-20 md:py-28">
+    <section id="contact" className="w-full py-8 md:py-10">
       <Card className="overflow-hidden rounded-none border-border bg-card shadow-none">
         <CardHeader className="border-b border-border px-5 py-5 md:px-6">
           <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">

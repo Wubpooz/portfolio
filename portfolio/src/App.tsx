@@ -14,12 +14,12 @@ function App() {
       <Seo />
       <a
         href="#home"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-[--surface] focus:px-4 focus:py-2 focus:text-[--text]"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-muted focus:px-4 focus:py-2 focus:text-foreground"
       >
         Skip to content
       </a>
       <Navbar />
-      <div className="flex flex-col justify-space-between h-full bg-[--background] text-[--on-background]">
+      <div className="flex flex-col justify-space-between h-full bg-background text-foreground">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsPage />} />

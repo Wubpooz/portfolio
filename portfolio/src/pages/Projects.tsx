@@ -91,8 +91,8 @@ export default function ProjectsPage() {
                 onClick={() => setStatusFilter(filter)}
                 className={`rounded-md border px-3 py-2 text-xs font-mono uppercase tracking-[0.18em] transition-colors ${
                   isActive
-                    ? "border-[--text] bg-[--surface] text-[--text]"
-                    : "border-[--border] text-[--muted] hover:border-[--text] hover:text-[--text]"
+                    ? "border-foreground bg-muted text-foreground"
+                    : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
                 }`}
               >
                 {label}
@@ -102,7 +102,7 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6">
+      <div className="overflow-hidden border border-border bg-card divide-y divide-border">
         {filteredProjects.length ? (
           filteredProjects.map((project) => (
             <div id={project.slug} key={project.slug} className="scroll-mt-24">
@@ -110,7 +110,7 @@ export default function ProjectsPage() {
             </div>
           ))
         ) : (
-          <p className="rounded-md border border-border bg-card px-4 py-6 text-sm text-muted-foreground">
+          <p className="px-4 py-8 text-center text-sm text-muted-foreground">
             {content.projectsPage.noResults}
           </p>
         )}

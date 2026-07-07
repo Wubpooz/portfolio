@@ -10,7 +10,7 @@ import ContactSection from "@/components/contact/Contact";
 export default function Home() {
   return (
     <main className="w-full min-w-0">
-      <div className="mx-auto w-full min-w-0 max-w-4xl px-6 py-16 space-y-24">
+      <div className="mx-auto w-full min-w-0 max-w-4xl px-6 pt-4 pb-16 space-y-12">
         <HeroSection />
         <ExperienceSection />
         <EducationSection />

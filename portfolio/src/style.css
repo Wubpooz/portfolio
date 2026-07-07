@@ -5,7 +5,7 @@
   --text:     #111111;
   --muted:    #666666;
   --faint:    #999999;
-  --primary:  #01696f;
+  --primary:  #b3b3f1;
 
   --font-display: 'Epoch', 'Georgia', serif;
   --font-body:    'Satoshi', 'Inter', sans-serif;
@@ -23,7 +23,7 @@ html {
   --text:     #e8e8e8;
   --muted:    #888888;
   --faint:    #555555;
-  --primary:  #4f98a3;
+  --primary:  #b3b3f1;
 }
 
 body {

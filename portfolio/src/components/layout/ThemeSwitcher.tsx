@@ -12,7 +12,6 @@ const OPTIONS: Array<{ value: Theme; Icon: typeof Sun }> = [
 export default function ThemeSwitcher({
   theme,
   setTheme,
-  compact = false,
 }: {
   theme: Theme
   setTheme: (theme: Theme) => void
@@ -23,9 +22,7 @@ export default function ThemeSwitcher({
 
   return (
     <div
-      className={`relative inline-flex items-center rounded-md border border-(--border) bg-[--bg] p-1 shadow-sm ${
-        compact ? "gap-0" : "gap-0"
-      }`}
+      className="relative inline-flex items-center rounded-md border border-border bg-background p-1 shadow-sm"
       aria-label={content.theme.system}
     >
       {OPTIONS.map(({ value, Icon }) => {
@@ -43,7 +40,7 @@ export default function ThemeSwitcher({
             type="button"
             onClick={() => setTheme(value)}
             className={`relative z-10 inline-flex items-center justify-center rounded-sm p-1.5 transition-colors ${
-              isActive ? "text-[--text]" : "text-[--muted] hover:text-[--text]"
+              isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
             }`}
             aria-label={label}
             aria-pressed={isActive}
@@ -53,7 +50,7 @@ export default function ThemeSwitcher({
             {isActive ? (
               <motion.span
                 layoutId="theme-toggle-active"
-                className="absolute inset-0 rounded-sm bg-[--surface] shadow-[0_0_0_1px_var(--border)]"
+                className="absolute inset-0 rounded-sm bg-muted border border-border"
                 transition={{ type: "spring", stiffness: 420, damping: 28 }}
               />
             ) : null}

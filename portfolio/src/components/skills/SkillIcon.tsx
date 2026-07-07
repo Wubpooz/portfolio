@@ -12,6 +12,7 @@ import {
   TestTube2,
   Workflow,
 } from "lucide-react"
+import { shouldInvertIcon } from "@/lib/utils"
 
 interface SkillIconProps {
   name: string
@@ -40,6 +41,8 @@ const fallbackIcons: Record<
 }
 
 export default function SkillIcon({ name, icon, iconUrl }: SkillIconProps) {
+  const invertClass = shouldInvertIcon(icon || name) ? "dark:invert" : ""
+
   if (iconUrl) {
     return (
       <img
@@ -48,7 +51,7 @@ export default function SkillIcon({ name, icon, iconUrl }: SkillIconProps) {
         width={36}
         height={36}
         loading="lazy"
-        className="h-9 w-9 object-contain"
+        className={`h-9 w-9 object-contain ${invertClass}`}
         aria-hidden="true"
       />
     )
@@ -67,7 +70,7 @@ export default function SkillIcon({ name, icon, iconUrl }: SkillIconProps) {
         width={36}
         height={36}
         loading="lazy"
-        className="h-9 w-9 object-contain"
+        className={`h-9 w-9 object-contain ${invertClass}`}
         aria-hidden="true"
       />
     )
