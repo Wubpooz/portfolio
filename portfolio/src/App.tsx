@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import FooterSection from "@/components/layout/Footer";
@@ -7,6 +8,35 @@ import Seo from './components/Seo';
 import ProjectsPage from './pages/Projects';
 import ProjectDetailPage from './pages/ProjectDetail';
 import NotFoundPage from './pages/NotFound';
+import {
+  BackgroundContext,
+  type BackgroundType,
+  BackgroundSwitcher,
+  WarpedGridBackground,
+  FlowFieldBackground,
+  PhysicsDotsBackground
+} from './components/shared/backgrounds';
+
+function ActiveBackground() {
+  const [bg, setBg] = useState<BackgroundType>(() => {
+    const saved = localStorage.getItem("portfolio-background");
+    return (saved as BackgroundType) || "grid";
+  });
+
+  const setActiveBackground = (type: BackgroundType) => {
+    setBg(type);
+    localStorage.setItem("portfolio-background", type);
+  };
+
+  return (
+    <BackgroundContext.Provider value={{ activeBackground: bg, setActiveBackground }}>
+      {bg === "grid" && <WarpedGridBackground />}
+      {bg === "flow" && <FlowFieldBackground />}
+      {bg === "dots" && <PhysicsDotsBackground />}
+      <BackgroundSwitcher />
+    </BackgroundContext.Provider>
+  );
+}
 
 function App() {
   return (
@@ -18,8 +48,10 @@ function App() {
       >
         Skip to content
       </a>
+      <div className="fixed inset-0 -z-20 bg-background transition-colors duration-300" />
+      <ActiveBackground />
       <Navbar />
-      <div className="flex flex-col justify-space-between h-full bg-background text-foreground">
+      <div className="flex flex-col justify-space-between h-full bg-background/0 text-foreground relative z-10">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsPage />} />

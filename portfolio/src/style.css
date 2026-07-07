@@ -27,7 +27,7 @@ html {
 }
 
 body {
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   font-family: var(--font-body);
   transition: background 200ms, color 200ms;
