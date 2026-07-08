@@ -110,9 +110,9 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Logo (liquid metal, liquid glass, thermal ?)
 
 ### Content
-- [ ] Express fluency in each technology in a good way
-  - [ ] heart next to the best ?
-  - [ ] dots from 1 to 5 ?
+- [x] Express fluency in each technology in a good way
+  - [x] heart next to the best ?
+  - [x] dots from 1 to 5 ?
 - [ ] Licensing
 
 

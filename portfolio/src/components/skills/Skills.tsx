@@ -1,4 +1,5 @@
 import { useMemo } from "react"
+import { Heart } from "lucide-react"
 import { getSkillCategories } from "@/data/skills"
 import SkillIcon from "./SkillIcon"
 import { getUiContent, useLocale } from "@/i18n"
@@ -36,7 +37,7 @@ export default function SkillsSection() {
                 {category.items.map((skill) => (
                   <div
                     key={skill.name}
-                    className="flex min-h-[120px] flex-col items-center justify-center gap-3 border-b border-r border-border last:border-r-0 px-4 py-6 text-center transition-colors hover:bg-muted/20"
+                    className="flex min-h-[120px] flex-col items-center justify-center gap-3 border-b border-r border-border px-4 py-6 text-center transition-colors hover:bg-muted/20"
                   >
                     <SkillIcon
                       name={skill.name}
@@ -45,14 +46,32 @@ export default function SkillsSection() {
                     />
 
                     <div className="space-y-1">
-                      <p className="text-sm font-medium leading-snug text-foreground">
+                      <p className="inline-flex items-center justify-center gap-1 text-sm font-medium leading-snug text-foreground">
                         {skill.name}
+                        {skill.favorite ? (
+                          <Heart className="size-3 fill-current text-foreground shrink-0" aria-hidden="true" />
+                        ) : null}
                       </p>
 
                       {skill.note ? (
                         <p className="text-xs text-muted-foreground">
                           {skill.note}
                         </p>
+                      ) : null}
+
+                      {skill.proficiency ? (
+                        <div className="flex items-center justify-center gap-1 pt-1.5">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <span
+                              key={i}
+                              className={`size-1.5 rounded-full ${
+                                i < skill.proficiency!
+                                  ? "bg-primary"
+                                  : "bg-muted-foreground/20"
+                              }`}
+                            />
+                          ))}
+                        </div>
                       ) : null}
                     </div>
                   </div>
