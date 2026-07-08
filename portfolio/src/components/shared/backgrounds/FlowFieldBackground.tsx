@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { PLANETS, draw3DPlanet } from "./index";
 
 interface Particle {
   x: number;
@@ -16,14 +15,6 @@ interface Particle {
 export default function FlowFieldBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -1000, y: -1000, active: false });
-
-  // Track animated planet coordinates (screen space)
-  const planetCoordsRef = useRef(
-    PLANETS.map((planet) => ({
-      x: planet.alignLeft ? 50 : window.innerWidth - 50,
-      y: window.innerHeight * planet.defaultYPercent,
-    }))
-  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -66,21 +57,19 @@ export default function FlowFieldBackground() {
         fadeColor: isDark ? "rgba(17, 17, 17, 0.045)" : "rgba(255, 255, 255, 0.045)",
         particleRGBs: isDark
           ? [
-              "179, 179, 241", // Primary desaturated violet
-              "147, 197, 253", // Soft blue
-              "244, 114, 182", // Soft pink
+              "179, 179, 241", 
+              "147, 197, 253", 
+              "244, 114, 182", 
               "255, 255, 255", 
             ]
           : [
-              "99, 102, 241",  // Indigo
-              "59, 130, 246",  // Blue
-              "236, 72, 153",  // Pink
+              "99, 102, 241",  
+              "59, 130, 246",  
+              "236, 72, 153",  
               "0, 0, 0", 
             ],
         cursorColor: isDark ? "#ffffff" : "#6366f1",
         cursorRingColor: isDark ? "rgba(255, 255, 255, 0.25)" : "rgba(99, 102, 241, 0.3)",
-        textColor: isDark ? "rgba(255, 255, 255, 0.35)" : "rgba(0, 0, 0, 0.38)",
-        planetGlow: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.015)",
       };
     };
 
@@ -112,97 +101,27 @@ export default function FlowFieldBackground() {
 
       time += 0.0018; 
       const config = getThemeConfig();
-      const isMobile = width < 1024;
-      const scrollY = window.scrollY;
-
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
       const mActive = mouseRef.current.active;
       const minMouseDist = 24;
       const activeRadius = 150;
 
-      // Update Planet Positions based on DOM section scrolls
-      const updatedCoords = PLANETS.map((planet, i) => {
-        const prev = planetCoordsRef.current[i];
-        
-        // Target X
-        const contentWidth = 920;
-        let tx = planet.alignLeft
-          ? width / 2 - contentWidth / 2 - 80
-          : width / 2 + contentWidth / 2 + 80;
-
-        if (planet.alignLeft) {
-          tx = Math.max(tx, 45);
-        } else {
-          tx = Math.min(tx, width - 45);
-        }
-
-        // Target Y
-        let ty = height * planet.defaultYPercent - scrollY;
-        const el = document.querySelector(planet.selector);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          ty = rect.top + rect.height / 2;
-        }
-
-        const nextX = prev.x + (tx - prev.x) * 0.08;
-        const nextY = prev.y + (ty - prev.y) * 0.08;
-
-        planetCoordsRef.current[i] = { x: nextX, y: nextY };
-        return { x: nextX, y: nextY };
-      });
-
-      // 1. Draw Planet Light Glows (subtle, desaturated)
-      PLANETS.forEach((planet, i) => {
-        const coords = updatedCoords[i];
-        const glowRadius = planet.gravityRadius * 0.8;
-
-        ctx.save();
-        ctx.globalAlpha = isMobile ? 0.35 : 1.0;
-
-        const gradient = ctx.createRadialGradient(coords.x, coords.y, 0, coords.x, coords.y, glowRadius);
-        gradient.addColorStop(0, config.planetGlow);
-        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, width, height);
-        ctx.restore();
-      });
-
-      // 2. Update and Draw Flowing Particles
+      // 1. Update and Draw Flowing Particles
       particles.forEach((p, idx) => {
         // Base trigonometric flow field
-        let angle =
+        const angle =
           Math.sin(p.x * 0.0035 + time * 1.4) * 1.8 +
           Math.cos(p.y * 0.0035 + time * 1.1) * 1.8;
 
         let totalForceX = Math.cos(angle) * p.speed;
         let totalForceY = Math.sin(angle) * p.speed;
 
-        // Gravity pull from animated planets (tighter orbital pull: dirX * 0.75 + swirlX * 0.45)
-        PLANETS.forEach((planet, i) => {
-          const coords = updatedCoords[i];
-          const dx = coords.x - p.x;
-          const dy = coords.y - p.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < planet.gravityRadius && dist > 10) {
-            const pull = (1 - dist / planet.gravityRadius) * planet.strength * 2.5;
-            const dirX = dx / dist;
-            const dirY = dy / dist;
-            const swirlX = -dirY;
-            const swirlY = dirX;
-
-            // Shift focus towards the center of planet (0.75 pull, 0.45 swirl)
-            totalForceX += (dirX * 0.75 + swirlX * 0.45) * pull * p.speed;
-            totalForceY += (dirY * 0.75 + swirlY * 0.45) * pull * p.speed;
-          }
-        });
-
         // Mouse interaction (increased pull dirX * 1.3 to go closer to center before swirling)
         if (mActive) {
           const dx = mx - p.x;
           const dy = my - p.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const dist = Math.hypot(dx, dy);
 
           if (dist < activeRadius) {
             if (dist > minMouseDist) {
@@ -238,7 +157,7 @@ export default function FlowFieldBackground() {
         p.vy = totalForceY;
 
         // Speed caps
-        const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        const speed = Math.hypot(p.vx, p.vy);
         const maxSpeed = p.speed * 2.6;
         if (speed > maxSpeed) {
           p.vx = (p.vx / speed) * maxSpeed;
@@ -266,7 +185,7 @@ export default function FlowFieldBackground() {
             ctx.beginPath();
             ctx.moveTo(pt1.x, pt1.y);
             ctx.lineTo(pt2.x, pt2.y);
-            ctx.strokeStyle = `rgba(${p.colorRGB}, ${opacity * 0.38})`;
+            ctx.strokeStyle = `rgba(${p.colorRGB}, ${String(opacity * 0.38)})`;
             ctx.lineWidth = 1.0 + opacity * 0.8;
             ctx.stroke();
           }
@@ -276,14 +195,14 @@ export default function FlowFieldBackground() {
         if (mActive) {
           const dx = mx - p.x;
           const dy = my - p.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const dist = Math.hypot(dx, dy);
 
           if (dist < activeRadius - 20) {
             const alpha = (1 - dist / (activeRadius - 20)) * 0.16;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mx, my);
-            ctx.strokeStyle = `rgba(${config.isDark ? "179, 179, 241" : "99, 102, 241"}, ${alpha})`;
+            ctx.strokeStyle = `rgba(${config.isDark ? "179, 179, 241" : "99, 102, 241"}, ${String(alpha)})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -296,29 +215,7 @@ export default function FlowFieldBackground() {
         }
       });
 
-      // 3. Draw 3D Toy Planets
-      PLANETS.forEach((planet, i) => {
-        const coords = updatedCoords[i];
-
-        ctx.save();
-        ctx.globalAlpha = isMobile ? 0.25 : 1.0;
-
-        // Render 3D planet
-        draw3DPlanet(ctx, coords.x, coords.y, planet, time, config.isDark);
-
-        // Text label
-        if (!isMobile) {
-          ctx.fillStyle = config.textColor;
-          ctx.font = "bold 9px 'Geist Variable', sans-serif";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(planet.name.toUpperCase(), coords.x, coords.y + planet.radius + 15);
-        }
-
-        ctx.restore();
-      });
-
-      // 4. Draw Interactive Concentric Cursor
+      // 2. Draw Interactive Concentric Cursor
       if (mActive) {
         ctx.beginPath();
         ctx.arc(mx, my, minMouseDist, 0, Math.PI * 2);
@@ -341,7 +238,7 @@ export default function FlowFieldBackground() {
     for (let i = 0; i < 50; i++) {
       time += 0.0018;
       particles.forEach((p) => {
-        let angle =
+        const angle =
           Math.sin(p.x * 0.0035 + time * 1.4) * 1.8 +
           Math.cos(p.y * 0.0035 + time * 1.1) * 1.8;
         p.vx = Math.cos(angle) * p.speed;

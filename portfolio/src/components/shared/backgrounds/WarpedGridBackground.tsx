@@ -25,11 +25,14 @@ export default function WarpedGridBackground() {
     let height = (canvas.height = window.innerHeight);
     let time = 0;
 
-    // Grid configuration
-    const gridSpacing = 40;
-    const mouseRadius = 160;
-    const mouseStrength = 0.4;
-    const segmentLength = 10;
+    // 3D Gravity Funnel configuration
+    const gridSpacing = 42; // Grid spacing
+    const segmentLength = 6; // Smaller segments for ultra-smooth curves
+    const focalLength = 150; // Camera focal length for perspective depth
+    
+    // Mouse gravity well properties
+    const mouseRadius = 180;
+    const mouseZMax = 340; // Deep funnel depth
 
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
@@ -54,14 +57,15 @@ export default function WarpedGridBackground() {
       const isDark = document.documentElement.classList.contains("dark");
       return {
         isDark,
-        gridColor: isDark ? "rgba(255, 255, 255, 0.04)" : "rgba(0, 0, 0, 0.04)",
+        gridColor: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.012)",
         mouseGlow: isDark ? "rgba(179, 179, 241, 0.12)" : "rgba(179, 179, 241, 0.06)",
         textColor: isDark ? "rgba(255, 255, 255, 0.35)" : "rgba(0, 0, 0, 0.38)",
-        planetGlow: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.015)",
+        planetGlow: isDark ? "rgba(255, 255, 255, 0.025)" : "rgba(0, 0, 0, 0.015)",
       };
     };
 
-    // Calculate warped point coordinate based on animated coordinates
+    // Calculate warped point coordinate using 3D perspective gravity well projections
+    // and perpetual spacetime contraction flow based on ScienceClic's 4D model
     const getWarpedPoint = (
       px: number,
       py: number,
@@ -70,42 +74,81 @@ export default function WarpedGridBackground() {
       mActive: boolean,
       animatedCoords: { x: number; y: number }[]
     ) => {
-      let finalX = px;
-      let finalY = py;
+      let x = px;
+      let y = py;
+      let totalAlphaMult = 1.0;
 
-      // 1. Mouse Warp
-      if (mActive) {
-        const dx = px - mx;
-        const dy = py - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+      // Time multiplier for smooth, perpetual contracting flow
+      const flowTime = time * 220;
 
-        if (dist < mouseRadius) {
-          const factor = Math.pow(1 - dist / mouseRadius, 2);
-          finalX -= dx * factor * mouseStrength;
-          finalY -= dy * factor * mouseStrength;
-        }
-      }
-
-      // 2. Planets Warp
+      // 1. Apply Planets Gravity (Gaussian 3D Funnel with Fluid Perpetual Flow)
       PLANETS.forEach((planet, i) => {
         const coords = animatedCoords[i];
         const dx = px - coords.x;
         const dy = py - coords.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const dist = Math.hypot(dx, dy);
 
-        if (dist < planet.gravityRadius) {
-          const factor = Math.pow(1 - dist / planet.gravityRadius, 2);
-          finalX -= dx * factor * planet.strength;
-          finalY -= dy * factor * planet.strength;
+        // Gaussian gravity well extends up to 2.2x gravityRadius for smooth blending
+        const maxDist = planet.gravityRadius * 2.2;
+        if (dist < maxDist) {
+          // Smooth Gaussian curve instead of polynomial for fluid, organic bends
+          const factor = Math.exp(-Math.pow(dist / (planet.gravityRadius * 0.65), 2));
+          
+          // Spacetime contraction flow: coordinates slide inward towards the center.
+          // We use a wave phase moving radially inward to create a seamless flow.
+          const wavePhase = (dist / gridSpacing - flowTime / gridSpacing);
+          const flowWave = Math.sin(wavePhase * Math.PI * 2);
+          
+          // Apply flow deformation along the radial vector
+          const flowAmt = flowWave * 7.5 * factor;
+          
+          // Z-depth of the funnel (curvature of spacetime)
+          const Z = factor * 420;
+          const scale = focalLength / (focalLength + Z);
+          
+          // Deform relative coordinates first, then project to screen space
+          const rx = dx + (dx / (dist + 0.1)) * flowAmt;
+          const ry = dy + (dy / (dist + 0.1)) * flowAmt;
+          
+          x = coords.x + rx * scale;
+          y = coords.y + ry * scale;
+          
+          // Fade grid lines as they plunge deeper into the funnel
+          totalAlphaMult *= (scale * 1.05);
         }
       });
 
-      return { x: finalX, y: finalY };
+      // 2. Apply Mouse Gravity (Gaussian 3D Funnel with Fluid Perpetual Flow)
+      if (mActive) {
+        const dx = x - mx;
+        const dy = y - my;
+        const dist = Math.hypot(dx, dy);
+        const maxDist = mouseRadius * 2.2;
+
+        if (dist < maxDist) {
+          const factor = Math.exp(-Math.pow(dist / (mouseRadius * 0.65), 2));
+          const wavePhase = (dist / gridSpacing - flowTime / gridSpacing);
+          const flowWave = Math.sin(wavePhase * Math.PI * 2);
+          const flowAmt = flowWave * 7.5 * factor;
+          
+          const Z = factor * mouseZMax;
+          const scale = focalLength / (focalLength + Z);
+          
+          const rx = dx + (dx / (dist + 0.1)) * flowAmt;
+          const ry = dy + (dy / (dist + 0.1)) * flowAmt;
+          
+          x = mx + rx * scale;
+          y = my + ry * scale;
+          totalAlphaMult *= (scale * 1.05);
+        }
+      }
+
+      return { x, y, alpha: Math.min(1.2, Math.max(0, totalAlphaMult)) };
     };
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
-      time += 0.0012; // Time tick for planet rotation
+      time += 0.0012;
 
       const colors = getThemeColors();
       const mx = mouseRef.current.x;
@@ -153,7 +196,7 @@ export default function WarpedGridBackground() {
         ctx.fillRect(0, 0, width, height);
       }
 
-      // 2. Draw Planet Glows (Subtle, desaturated)
+      // 2. Draw Planet Glows
       PLANETS.forEach((planet, i) => {
         const coords = updatedCoords[i];
         const glowRadius = planet.gravityRadius * 0.7;
@@ -169,44 +212,59 @@ export default function WarpedGridBackground() {
         ctx.restore();
       });
 
+      // Split base color for alpha manipulation
+      const baseGridColorParts = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(colors.gridColor);
+      const rgbPrefix = baseGridColorParts ? `${baseGridColorParts[1]}, ${baseGridColorParts[2]}, ${baseGridColorParts[3]}` : "148, 163, 184";
+      const baseAlpha = baseGridColorParts ? Number.parseFloat(colors.gridColor.replace(/[^,]+$/, "")) : 0.05;
+
       // 3. Draw Vertical Grid Lines
       ctx.lineWidth = 1;
-      ctx.strokeStyle = colors.gridColor;
-
-      for (let x = 0; x < width + gridSpacing; x += gridSpacing) {
+      
+      // Draw grid slightly extended beyond borders to handle warping corners
+      const borderMargin = 120;
+      for (let x = -borderMargin; x < width + borderMargin; x += gridSpacing) {
         ctx.beginPath();
         let first = true;
 
-        for (let y = 0; y < height + segmentLength; y += segmentLength) {
+        for (let y = -borderMargin; y < height + borderMargin; y += segmentLength) {
           const warped = getWarpedPoint(x, y, mx, my, mActive, updatedCoords);
+          
           if (first) {
             ctx.moveTo(warped.x, warped.y);
             first = false;
           } else {
+            // Draw segment-by-segment to dynamically apply 3D alpha fading
             ctx.lineTo(warped.x, warped.y);
+            ctx.strokeStyle = `rgba(${rgbPrefix}, ${String(baseAlpha * warped.alpha)})`;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(warped.x, warped.y);
           }
         }
-        ctx.stroke();
       }
 
       // 4. Draw Horizontal Grid Lines
-      for (let y = 0; y < height + gridSpacing; y += gridSpacing) {
+      for (let y = -borderMargin; y < height + borderMargin; y += gridSpacing) {
         ctx.beginPath();
         let first = true;
 
-        for (let x = 0; x < width + segmentLength; x += segmentLength) {
+        for (let x = -borderMargin; x < width + borderMargin; x += segmentLength) {
           const warped = getWarpedPoint(x, y, mx, my, mActive, updatedCoords);
+          
           if (first) {
             ctx.moveTo(warped.x, warped.y);
             first = false;
           } else {
             ctx.lineTo(warped.x, warped.y);
+            ctx.strokeStyle = `rgba(${rgbPrefix}, ${String(baseAlpha * warped.alpha)})`;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(warped.x, warped.y);
           }
         }
-        ctx.stroke();
       }
 
-      // 5. Draw 3D Toy Planet Core & Text Labels
+      // 5. Draw 3D Procedural Toy Planets
       PLANETS.forEach((planet, i) => {
         const coords = updatedCoords[i];
         
@@ -220,16 +278,15 @@ export default function WarpedGridBackground() {
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Render 3D planet using the shared helper
+        // Render 3D planet
         draw3DPlanet(ctx, coords.x, coords.y, planet, time, colors.isDark);
 
-        // Render text label ONLY on wider screens
+        // Render text label
         if (!isMobile) {
           ctx.fillStyle = colors.textColor;
           ctx.font = "bold 9px 'Geist Variable', sans-serif";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
-          // Align labels nicely below the Saturn rings/moons
           ctx.fillText(planet.name.toUpperCase(), coords.x, coords.y + planet.radius + 15);
         }
 
