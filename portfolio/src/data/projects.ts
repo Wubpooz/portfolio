@@ -4,12 +4,12 @@ export type ProjectLinkKey = "live" | "source" | "caseStudy" | "demo" | "dataset
 
 export type ProjectStatus = "completed" | "in-progress" | "won"
 
-export type ProjectLink = {
+export interface ProjectLink {
   labelKey: ProjectLinkKey
   href: string
 }
 
-export type ProjectItem = {
+export interface ProjectItem {
   slug: string
   title: string
   subtitle: string
@@ -42,7 +42,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "How Europe Spends Its Time",
       subtitle: "Turning messy European time-use surveys into a clear visual narrative.",
       summary:
-        "Resolved severe codification drift across 20 years of European time-use surveys with resilient Python mapping pipelines, then designed an accessible web app with custom interactive charts for a Hugging Face dataset.",
+        "Resolved severe codification drift across **20 years** of European time-use surveys with resilient **Python** mapping pipelines, then designed an accessible web app with custom interactive charts for a **Hugging Face** dataset.",
       organization: "Polytech Paris-Saclay",
       period: "Mar 2026 – Apr 2026",
       status: "completed",
@@ -65,7 +65,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "Deloitte x Google Cloud Hackathon",
       subtitle: "Award-winning multi-agent system for campaign automation.",
       summary:
-        "Built a distributed multi-agent system with ADK and MCP to automate marketing campaign creation, orchestrating specialized agents via A2A and integrating BigQuery, Gemini, Imagen, Cloud Run, and Vertex AI Agent Engine.",
+        "Built a **distributed multi-agent system** with **ADK** and **MCP** to automate marketing campaign creation, orchestrating specialized agents via A2A and integrating **BigQuery**, **Gemini**, **Imagen**, **Cloud Run**, and **Vertex AI Agent Engine**.",
       organization: "Deloitte x Google Cloud",
       period: "Nov 2025",
       status: "won",
@@ -178,7 +178,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "How Europe Spends Its Time",
       subtitle: "Transformer des enquêtes européennes brouillonnes en récit visuel.",
       summary:
-        "A résolu une forte dérive de codification sur 20 ans d’enquêtes européennes sur l’usage du temps grâce à des pipelines de mapping robustes en Python, puis a conçu une application web accessible avec graphiques interactifs pour un dataset Hugging Face.",
+        "A résolu une forte dérive de codification sur **20 ans** d’enquêtes européennes sur l’usage du temps grâce à des pipelines de mapping robustes en **Python**, puis a conçu une application web accessible avec graphiques interactifs pour un dataset **Hugging Face**.",
       organization: "Polytech Paris-Saclay",
       period: "mars 2026 – avr. 2026",
       status: "completed",

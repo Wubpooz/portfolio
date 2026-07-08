@@ -11,11 +11,11 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       startDate: "2023",
       endDate: "Present",
       description: [
-        "Designed and developed the Scientific Notebook and Reaction Planner scientific applications end to end.",
-        "Steered a distributed computation queue that improved reliability from 40% to 100%.",
-        "Defined and built a LangChain AI agent and an MCP server for molecule conversion.",
+        "Led the development of a distributed computing queue, coordinating with cross-functional teams, which increased reliability from **40% to 100%**, even under load.",
+        "Engineered a robust **LangChain AI agent** and an **MCP server** for molecule conversion, validated by mock servers, **PACT** contracts, and LLM routing tests.",
+        "Autonomously delivered features across multiple environments, ensuring quality through unit/integration testing (**Jasmine**, **Page Objects**, **JUnit**, **JMeter**) and code reviews.",
       ],
-      tags: ["Angular", "Java", "TypeScript", "Python", "LangChain", "MCP"],
+      tags: ["Angular", "Java", "TypeScript", "Python", "LangChain", "MCP", "TDD"],
     },
     {
       id: "malta",
@@ -25,10 +25,10 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       startDate: "June 2025",
       endDate: "August 2025",
       description: [
-        "Reviewed the state of the art in speech synthesis (TTS).",
-        "Fine-tuned and ran XTTS inference on Google Colab to add Maltese without regressions.",
+        "Conducted a state-of-the-art review in Text-to-Speech (TTS) and developed an accelerated paper retrieval app with a ranking system using **Streamlit**.",
+        "Formatted data, fine-tuned, and ran inference for **XTTS** on Google Colab (**PyTorch** & GPT-2) to add Maltese language support without regressions.",
       ],
-      tags: ["Python", "PyTorch", "XTTS", "Streamlit", "HuggingFace"],
+      tags: ["Python", "PyTorch", "XTTS", "Streamlit", "Hugging Face"],
     },
   ],
   fr: [
@@ -40,11 +40,11 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       startDate: "2023",
       endDate: "Présent",
       description: [
-        "Conception et développement full-stack des applications scientifiques Scientific Notebook et Reaction Planner.",
-        "Pilotage d'une file de calcul distribuée augmentant la fiabilité de 40 à 100%.",
-        "Définition et création d'un Agent IA LangChain et d'un serveur MCP pour la conversion de molécules.",
+        "Pilotage d'une file de calcul distribuée (de la spécification à la production) augmentant la fiabilité de **40 à 100%**, même en charge.",
+        "Définition et création d'un **Agent IA LangChain** et d'un serveur **MCP** pour la conversion de molécules, validés par des contrats **PACT** et des tests de routage LLM.",
+        "Livraison autonome de fonctionnalités multi-environnements assurée par des tests d'intégration et unitaires (**Jasmine**, **Page Objects**, **JMeter**).",
       ],
-      tags: ["Angular", "Java", "TypeScript", "Python", "LangChain", "MCP"],
+      tags: ["Angular", "Java", "TypeScript", "Python", "LangChain", "MCP", "TDD"],
     },
     {
       id: "malta",
@@ -54,10 +54,10 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       startDate: "Juin 2025",
       endDate: "Août 2025",
       description: [
-        "Revue de l'état de l'art en synthèse vocale (TTS).",
-        "Fine-tuning et inférence de XTTS sur Google Colab pour ajouter le maltais sans régression.",
+        "Réalisé une revue de l'état de l'art en synthèse vocale (TTS) et développé une application de recherche d’articles avec **Streamlit**.",
+        "Formaté les données et réalisé le fine-tuning de **XTTS** sur Google Colab (**PyTorch** & GPT-2) pour ajouter le maltais sans régression.",
       ],
-      tags: ["Python", "PyTorch", "XTTS", "Streamlit", "HuggingFace"],
+      tags: ["Python", "PyTorch", "XTTS", "Streamlit", "Hugging Face"],
     },
   ],
 }

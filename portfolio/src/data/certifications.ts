@@ -1,4 +1,4 @@
-export type CertificationItem = {
+export interface CertificationItem {
   title: string
   issuer: string
   date: string
@@ -10,6 +10,12 @@ export type CertificationItem = {
 }
 
 export const certifications: CertificationItem[] = [
+  {
+    title: "MOOC SecNumAc in cybersecurity",
+    issuer: "ANSSI",
+    date: "2024",
+    href: "https://secnumacademie.gouv.fr/",
+  },
   {
     title: "Certificate of completion: Teaching the AI Fluency Framework",
     issuer: "Anthropic",
