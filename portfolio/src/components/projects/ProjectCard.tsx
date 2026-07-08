@@ -8,7 +8,7 @@ import { shouldInvertIcon } from "@/lib/utils"
 
 const MAX_VISIBLE_STACK = 6
 
-type TechIconMeta = {
+interface TechIconMeta {
   icon?: string
   iconUrl?: string
 }
@@ -37,12 +37,10 @@ const techIconMap: Record<string, TechIconMeta> = {
   "C++": { icon: "cplusplus" },
   CUDA: { icon: "nvidia" },
   Java: {
-    iconUrl:
-      "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openjdk.svg",
+    iconUrl: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openjdk.svg",
   },
   GLSL: {
-    iconUrl:
-      "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opengl.svg",
+    iconUrl: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opengl.svg",
   },
 }
 
@@ -50,12 +48,12 @@ function TechPillIcon({
   name,
   icon,
   iconUrl,
-}: {
+}: Readonly<{
   name: string
   icon?: string
   iconUrl?: string
-}) {
-  const invertClass = shouldInvertIcon(icon || name) ? "dark:invert" : ""
+}>) {
+  const invertClass = shouldInvertIcon(icon ?? name) ? "dark:invert" : ""
 
   if (iconUrl) {
     return (
@@ -88,7 +86,7 @@ function TechPillIcon({
   return null
 }
 
-export default function ProjectCard({ project }: { project: ProjectItem }) {
+export default function ProjectCard({ project }: Readonly<{ project: ProjectItem }>) {
   const { locale } = useLocale()
   const content = getUiContent(locale)
   const visibleStack = project.stack.slice(0, MAX_VISIBLE_STACK)
@@ -107,7 +105,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
 
   return (
     <div className="group flex h-full flex-col overflow-hidden bg-card transition-colors hover:bg-muted/10">
-      <div className="relative aspect-[16/9] overflow-hidden border-b border-border">
+      <div className="relative aspect-video overflow-hidden border-b border-border">
         <img
           src={project.image}
           alt={project.imageAlt}
@@ -155,8 +153,8 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
                   <span className="inline-flex items-center gap-1.5">
                     <TechPillIcon
                       name={tech}
-                      icon={meta?.icon}
-                      iconUrl={meta?.iconUrl}
+                      icon={meta.icon}
+                      iconUrl={meta.iconUrl}
                     />
                     <span>{tech}</span>
                   </span>
