@@ -1,4 +1,4 @@
-import { ArrowDown, ExternalLink, Mail } from "lucide-react"
+import { ArrowDown, Contact, ExternalLink, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { getUiContent, useLocale } from "@/i18n"
@@ -114,6 +114,13 @@ export default function HeroSection() {
                   <a href="/resume" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="size-4" />
                     {content.contact.openResumeCta}
+                  </a>
+                </Button>
+
+                <Button asChild variant="outline" className="rounded-md">
+                  <a href="/assets/mathieu-waharte.vcf" download="mathieu-waharte.vcf">
+                    <Contact className="size-4" />
+                    {content.contact.vcardCta}
                   </a>
                 </Button>
               </div>

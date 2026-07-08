@@ -1,6 +1,6 @@
 import type { Locale } from "./types"
 
-export type UiContent = {
+export interface UiContent {
   nav: {
     home: string
     projects: string
@@ -70,6 +70,7 @@ export type UiContent = {
     emailCta: string
     resumeCta: string
     openResumeCta: string
+    vcardCta: string
   }
   resume: {
     title: string
@@ -174,6 +175,7 @@ export const uiContent: Record<Locale, UiContent> = {
       emailCta: "Email me",
       resumeCta: "Download resume",
       openResumeCta: "Open resume",
+      vcardCta: "Save Contact",
     },
     resume: {
       title: "Resume",
@@ -278,6 +280,7 @@ export const uiContent: Record<Locale, UiContent> = {
       emailCta: "M’écrire",
       resumeCta: "Télécharger le CV",
       openResumeCta: "Ouvrir le CV",
+      vcardCta: "Enregistrer le contact",
     },
     resume: {
       title: "CV",

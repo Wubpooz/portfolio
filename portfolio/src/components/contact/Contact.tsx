@@ -1,4 +1,4 @@
-import { ArrowUpRight, Download, Mail } from "lucide-react"
+import { ArrowUpRight, Download, Mail, Contact } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getResumeAsset, getUiContent, useLocale } from "@/i18n"
@@ -121,6 +121,13 @@ export default function ContactSection() {
               <a href={resumeAsset} download>
                 <Download className="size-4" />
                 {content.contact.resumeCta}
+              </a>
+            </Button>
+
+            <Button asChild variant="outline" className="rounded-md">
+              <a href="/assets/mathieu-waharte.vcf" download="mathieu-waharte.vcf">
+                <Contact className="size-4" />
+                {content.contact.vcardCta}
               </a>
             </Button>
           </div>

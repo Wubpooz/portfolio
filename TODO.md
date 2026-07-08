@@ -99,7 +99,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 ## Bonus
 ### Features
 - [ ] Arabic language support
-- [ ] vCard integration
+- [x] vCard integration
 - [ ] Copying
 
 ### Design

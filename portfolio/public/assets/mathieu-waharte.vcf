@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Mathieu Waharte
+N:Waharte;Mathieu;;;
+TITLE:Fullstack Engineer & AI
+ORG:Dassault Systèmes
+EMAIL;TYPE=INTERNET;TYPE=WORK;TYPE=PREF:mathieu.waharte@gmail.com
+URL;TYPE=WORK:https://mw-portfolio-cfi.pages.dev/
+URL;TYPE=LinkedIn:https://www.linkedin.com/in/mathieu-w-a9ba36211/
+URL;TYPE=GitHub:https://github.com/Wubpooz
+NOTE:Mathieu Waharte - Fullstack Engineer & AI. Portfolio: https://mw-portfolio-cfi.pages.dev/
+END:VCARD
