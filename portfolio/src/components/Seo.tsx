@@ -4,7 +4,7 @@ import { getProjectBySlug } from "@/data/projects"
 import { getUiContent, useLocale } from "@/i18n"
 
 const SITE_NAME = "Mathieu Waharte"
-const SITE_URL = import.meta.env.VITE_SITE_URL ?? "https://wubpooz.github.io/portfolio"
+const SITE_URL = import.meta.env.VITE_SITE_URL ?? "https://mw-portfolio-cfi.pages.dev"
 
 function upsertMeta(name: string, content: string, property = false) {
   const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`
@@ -23,12 +23,13 @@ function upsertMeta(name: string, content: string, property = false) {
   element.setAttribute("content", content)
 }
 
-function upsertLink(rel: string, href: string) {
-  let element = document.head.querySelector<HTMLLinkElement>(`link[rel="${rel}"]`)
+function upsertLink(rel: string, href: string, type?: string) {
+  let element = document.head.querySelector<HTMLLinkElement>(`link[rel="${rel}"]${type ? `[type="${type}"]` : ''}`)
 
   if (!element) {
     element = document.createElement("link")
     element.setAttribute("rel", rel)
+    if (type) element.setAttribute("type", type)
     document.head.appendChild(element)
   }
 
@@ -91,6 +92,7 @@ export default function Seo() {
     upsertMeta("twitter:description", description)
     upsertMeta("twitter:image", ogImage)
     upsertLink("canonical", canonical)
+    upsertLink("alternate", "/llm.txt", "text/markdown")
 
     const jsonLd = {
       "@context": "https://schema.org",
