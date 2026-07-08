@@ -92,7 +92,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [x] Apple touch icon
   - [x] Manifest
   - [ ] Google Search Console
-  - [ ] Be noticed by AI search engines (like ChatGPT, Perplexity, etc)
+  - [x] Be noticed by AI search engines (like ChatGPT, Perplexity, etc)
 
 
 
@@ -110,7 +110,9 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Logo (liquid metal, liquid glass, thermal ?)
 
 ### Content
-- [ ] Express fluency in each technology in a good way (heart next to the best)
+- [ ] Express fluency in each technology in a good way
+  - [ ] heart next to the best ?
+  - [ ] dots from 1 to 5 ?
 - [ ] Licensing
 
 
@@ -119,7 +121,9 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 
 
 ## Future
-- [ ] Blog (with mdx support) & RSS feed
+- [ ] Blog
+  - [ ] mdx support
+  - [ ] RSS feed
 - [ ] Awards
 - [ ] Publications
 - [ ] Teachings
