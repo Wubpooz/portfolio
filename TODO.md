@@ -103,8 +103,8 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Copying
 
 ### Design
-- [ ] Theme toggle effect
-- [ ] Toc minimap
+- [x] Theme toggle effect
+- [x] Toc minimap
 - [ ] Cool 404
 - [ ] Interactive & playful elements (draggable, games, terminal, chatbot for Q&A etc)
 - [ ] Logo (liquid metal, liquid glass, thermal ?)

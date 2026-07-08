@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { flushSync } from "react-dom"
 
 export type Theme = "light" | "dark" | "system"
 type ResolvedTheme = "light" | "dark"
@@ -22,8 +23,27 @@ function getStoredTheme(): Theme | null {
 }
 
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(() => getStoredTheme() ?? "system")
+  const [theme, rawSetTheme] = useState<Theme>(() => getStoredTheme() ?? "system")
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() => getSystemTheme())
+
+  const setTheme = useCallback((newTheme: Theme | ((current: Theme) => Theme)) => {
+    const startViewTransition = (document as any).startViewTransition;
+    
+    // Check for prefers-reduced-motion (accessibility/performance setting)
+    const prefersReducedMotion = typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!startViewTransition || prefersReducedMotion) {
+      rawSetTheme(newTheme);
+      return;
+    }
+
+    startViewTransition.call(document, () => {
+      flushSync(() => {
+        rawSetTheme(newTheme);
+      });
+    });
+  }, []);
 
   const resolvedTheme = useMemo<ResolvedTheme>(() => {
     return theme === "system" ? systemTheme : theme
