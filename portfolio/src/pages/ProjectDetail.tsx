@@ -17,7 +17,8 @@ export default function ProjectDetailPage() {
   const content = getUiContent(locale)
   const { slug } = useParams()
   const navigate = useNavigate()
-  const project = slug ? getProjectBySlug(locale, slug) : undefined
+  const safeSlug = slug && /^[a-z0-9-]+$/.test(slug) ? slug : undefined
+  const project = safeSlug ? getProjectBySlug(locale, safeSlug) : undefined
 
   useEffect(() => {
     document.title = project

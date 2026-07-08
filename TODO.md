@@ -74,16 +74,16 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [x] Ensure that the website is accessible
 - [x] Ensure that the website is responsive
   - [x] Hamburger menu for mobile
-- [ ] Ensure that the website is secure
-  - [ ] HTTPS
-  - [ ] CSP
-  - [ ] HSTS
-  - [ ] XSS protection
-  - [ ] CSRF protection
-  - [ ] CORS
-  - [ ] Rate limiting
-  - [ ] Input validation
-  - [ ] Output encoding
+- [x] Ensure that the website is secure
+  - [x] HTTPS
+  - [x] CSP
+  - [x] HSTS
+  - [x] XSS protection
+  - [x] CSRF protection
+  - [x] CORS
+  - [x] Rate limiting
+  - [x] Input validation
+  - [x] Output encoding
 - [ ] SEO optimization
   - [x] Meta tags
   - [x] Open Graph tags

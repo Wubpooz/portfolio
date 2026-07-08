@@ -4,6 +4,7 @@ import ProjectCard from "@/components/projects/ProjectCard"
 import { getProjects } from "@/data/projects"
 import { Button } from "@/components/ui/button"
 import { getUiContent, useLocale } from "@/i18n"
+import { sanitizeInput } from "@/lib/security"
 
 const statusFilters = ["all", "completed", "in-progress", "won"] as const
 
@@ -15,7 +16,7 @@ export default function ProjectsPage() {
   const [statusFilter, setStatusFilter] = useState<(typeof statusFilters)[number]>("all")
 
   const filteredProjects = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase()
+    const normalizedQuery = sanitizeInput(query).toLowerCase()
 
     return projects.filter((project) => {
       const matchesStatus = statusFilter === "all" || project.status === statusFilter
@@ -66,7 +67,8 @@ export default function ProjectsPage() {
           <input
             type="search"
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => { setQuery(event.target.value); }}
+            maxLength={100}
             placeholder={content.projectsPage.searchPlaceholder}
             className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
           />
@@ -88,7 +90,7 @@ export default function ProjectsPage() {
               <button
                 key={filter}
                 type="button"
-                onClick={() => setStatusFilter(filter)}
+                onClick={() => { setStatusFilter(filter); }}
                 className={`rounded-md border px-3 py-2 text-xs font-mono uppercase tracking-[0.18em] transition-colors ${
                   isActive
                     ? "border-foreground bg-muted text-foreground"
