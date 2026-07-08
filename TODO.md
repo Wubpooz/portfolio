@@ -69,8 +69,8 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [x] JSON-LD schema
 - [x] sitemap
 - [x] robots
-- [ ] Analytics with PostHog and OpenPanel
-- [ ] Ensure that the website is fast
+- [x] Analytics with PostHog and OpenPanel
+- [x] Ensure that the website is fast
 - [x] Ensure that the website is accessible
 - [x] Ensure that the website is responsive
   - [x] Hamburger menu for mobile
@@ -84,14 +84,14 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [x] Rate limiting
   - [x] Input validation
   - [x] Output encoding
-- [ ] SEO optimization
+- [x] SEO optimization
   - [x] Meta tags
   - [x] Open Graph tags
   - [x] Twitter card tags
   - [x] Favicon
   - [x] Apple touch icon
   - [x] Manifest
-  - [ ] Google Search Console
+  - [x] Google Search Console
   - [x] Be noticed by AI search engines (like ChatGPT, Perplexity, etc)
 
 
