@@ -105,9 +105,9 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 ### Design
 - [x] Theme toggle effect
 - [x] Toc minimap
-- [ ] Cool 404
+- [x] Cool 404
 - [ ] Interactive & playful elements (draggable, games, terminal, chatbot for Q&A etc)
-- [ ] Logo (liquid metal, liquid glass, thermal ?)
+- [x] Logo (liquid metal, liquid glass, thermal ?)
 
 ### Content
 - [x] Express fluency in each technology in a good way

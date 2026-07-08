@@ -3,6 +3,7 @@ import { ArrowLeft, Home, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getUiContent, useLocale } from "@/i18n"
 import { useEffect } from "react"
+import { InteractiveEyes } from "@/components/shared/InteractiveEyes"
 
 export default function NotFoundPage() {
   const { locale } = useLocale()
@@ -76,46 +77,15 @@ export default function NotFoundPage() {
         </div>
 
         <motion.div
-          className="relative overflow-hidden rounded-[2rem] border border-border bg-card p-6 shadow-xl"
+          className="flex items-center justify-center"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.45 }}
         >
-          <div className="space-y-4">
-            <div className="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              <span>Lost packet</span>
-              <span>signal: weak</span>
-            </div>
-
-            <div className="rounded-3xl border border-border bg-background p-5">
-              <pre className="overflow-x-auto text-xs leading-6 text-muted-foreground">
-{`> trying to resolve route...
-> no matching page found.
-> returning a gentler universe.
-
-         ╭────────────────╮
-         │   404 / ???    │
-         ╰────────────────╯`}
-              </pre>
-            </div>
-
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                "home",
-                "projects",
-                "resume",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-border bg-muted px-3 py-4 text-center text-[10px] uppercase tracking-[0.28em] text-muted-foreground"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
+          <InteractiveEyes />
         </motion.div>
       </div>
     </main>
   )
 }
+
