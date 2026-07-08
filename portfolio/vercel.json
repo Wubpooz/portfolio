@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cdn.simpleicons.org https://picsum.photos https://cdn.jsdelivr.net https://upload.wikimedia.org https://cygri.github.io https://images.unsplash.com; font-src 'self' data:; connect-src 'self'; object-src 'none'; media-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cdn.simpleicons.org https://picsum.photos https://fastly.picsum.photos https://cdn.jsdelivr.net https://upload.wikimedia.org https://cygri.github.io https://images.unsplash.com https://raw.githubusercontent.com; font-src 'self' data:; connect-src 'self'; object-src 'none'; media-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
         },
         {
           "key": "Strict-Transport-Security",

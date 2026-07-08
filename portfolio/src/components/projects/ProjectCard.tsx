@@ -153,8 +153,8 @@ export default function ProjectCard({ project }: Readonly<{ project: ProjectItem
                   <span className="inline-flex items-center gap-1.5">
                     <TechPillIcon
                       name={tech}
-                      icon={meta.icon}
-                      iconUrl={meta.iconUrl}
+                      icon={meta?.icon}
+                      iconUrl={meta?.iconUrl}
                     />
                     <span>{tech}</span>
                   </span>
