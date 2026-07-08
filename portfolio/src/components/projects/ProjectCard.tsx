@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { getUiContent, useLocale } from "@/i18n"
 import { shouldInvertIcon } from "@/lib/utils"
+import { usePostHog } from "@posthog/react"
 
 const MAX_VISIBLE_STACK = 6
 
@@ -13,7 +14,7 @@ interface TechIconMeta {
   iconUrl?: string
 }
 
-const techIconMap: Record<string, TechIconMeta> = {
+const techIconMap: Partial<Record<string, TechIconMeta>> = {
   "Next.js": { icon: "nextdotjs" },
   TypeScript: { icon: "typescript" },
   "Tailwind CSS": { icon: "tailwindcss" },
@@ -89,6 +90,7 @@ function TechPillIcon({
 export default function ProjectCard({ project }: Readonly<{ project: ProjectItem }>) {
   const { locale } = useLocale()
   const content = getUiContent(locale)
+  const posthog = usePostHog()
   const visibleStack = project.stack.slice(0, MAX_VISIBLE_STACK)
   const remaining = project.stack.length - visibleStack.length
 
@@ -180,7 +182,11 @@ export default function ProjectCard({ project }: Readonly<{ project: ProjectItem
             <div className="flex flex-wrap items-center gap-3">
               {liveLink ? (
                 <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
-                  <a href={liveLink.href} className="inline-flex items-center gap-2">
+                  <a
+                    href={liveLink.href}
+                    onClick={() => posthog.capture('project_live_link_clicked', { project_title: project.title, project_slug: project.slug })}
+                    className="inline-flex items-center gap-2"
+                  >
                     <Globe className="size-4 shrink-0" />
                     <span>{content.project.live}</span>
                   </a>
@@ -189,7 +195,11 @@ export default function ProjectCard({ project }: Readonly<{ project: ProjectItem
 
               {sourceLink ? (
                 <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
-                  <a href={sourceLink.href} className="inline-flex items-center gap-2">
+                  <a
+                    href={sourceLink.href}
+                    onClick={() => posthog.capture('project_source_link_clicked', { project_title: project.title, project_slug: project.slug })}
+                    className="inline-flex items-center gap-2"
+                  >
                     <img
                       src="https://cdn.simpleicons.org/github"
                       alt="GitHub"
@@ -214,6 +224,7 @@ export default function ProjectCard({ project }: Readonly<{ project: ProjectItem
               >
                 <a
                   href={readMoreLink.href}
+                  onClick={() => posthog.capture('project_case_study_clicked', { project_title: project.title, project_slug: project.slug })}
                   className="inline-flex items-center gap-2 text-foreground"
                 >
                   <BookOpen className="size-4 shrink-0" />

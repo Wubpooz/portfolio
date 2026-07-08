@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { getUiContent, useLocale } from "@/i18n"
 import { shouldInvertIcon } from "@/lib/utils"
+import { usePostHog } from "@posthog/react"
 
 const quickLinks = [
   {
@@ -55,6 +56,7 @@ function QuickLinkIcon({
 export default function HeroSection() {
   const { locale } = useLocale()
   const content = getUiContent(locale)
+  const posthog = usePostHog()
 
   return (
     <section id="home" className="w-full pt-0 pb-10 md:pb-12">
@@ -104,21 +106,33 @@ export default function HeroSection() {
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild className="rounded-md">
-                  <a href="mailto:mathieu.waharte@gmail.com">
+                  <a
+                    href="mailto:mathieu.waharte@gmail.com"
+                    onClick={() => posthog.capture('hero_email_cta_clicked')}
+                  >
                     <Mail className="size-4" />
                     {content.hero.contactCta}
                   </a>
                 </Button>
 
                 <Button asChild variant="outline" className="rounded-md">
-                  <a href="/resume" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="/resume"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => posthog.capture('hero_resume_opened')}
+                  >
                     <ExternalLink className="size-4" />
                     {content.contact.openResumeCta}
                   </a>
                 </Button>
 
                 <Button asChild variant="outline" className="rounded-md">
-                  <a href="/assets/mathieu-waharte.vcf" download="mathieu-waharte.vcf">
+                  <a
+                    href="/assets/mathieu-waharte.vcf"
+                    download="mathieu-waharte.vcf"
+                    onClick={() => posthog.capture('vcard_downloaded')}
+                  >
                     <Contact className="size-4" />
                     {content.contact.vcardCta}
                   </a>
@@ -134,6 +148,7 @@ export default function HeroSection() {
                     href={item.href}
                     target={item.href.startsWith("mailto:") ? undefined : "_blank"}
                     rel={item.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                    onClick={() => posthog.capture('hero_social_link_clicked', { platform: item.icon })}
                     className="flex items-center gap-3 px-4 py-4 transition-colors hover:bg-muted/30"
                   >
                     <div className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border bg-card">

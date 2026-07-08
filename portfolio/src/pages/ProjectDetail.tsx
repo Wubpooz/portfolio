@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { getProjectBySlug } from "@/data/projects"
 import { getUiContent, useLocale } from "@/i18n"
+import { usePostHog } from "@posthog/react"
 
 function statusToLabel(content: ReturnType<typeof getUiContent>, status: "completed" | "in-progress" | "won") {
   if (status === "won") return content.projectsPage.statusWon
@@ -17,6 +18,7 @@ export default function ProjectDetailPage() {
   const content = getUiContent(locale)
   const { slug } = useParams()
   const navigate = useNavigate()
+  const posthog = usePostHog()
   const safeSlug = slug && /^[a-z0-9-]+$/.test(slug) ? slug : undefined
   const project = safeSlug ? getProjectBySlug(locale, safeSlug) : undefined
 
@@ -32,7 +34,7 @@ export default function ProjectDetailPage() {
         <h1 className="text-3xl font-semibold text-foreground">{content.projectsPage.title}</h1>
         <p className="text-sm text-muted-foreground">Project not found.</p>
         <div className="flex gap-3">
-          <Button onClick={() => navigate("/projects")} className="rounded-md">
+          <Button onClick={() => { void navigate("/projects"); }} className="rounded-md">
             {content.projectsPage.backHome}
           </Button>
           <Button asChild variant="outline" className="rounded-md">
@@ -151,18 +153,14 @@ export default function ProjectDetailPage() {
             </h2>
             <div className="space-y-3">
               {project.links.map((link) => {
-                const label =
-                  link.labelKey === "source"
-                    ? content.projectsPage.openSource
-                    : link.labelKey === "demo"
-                      ? content.projectsPage.openDemo
-                      : link.labelKey === "dataset"
-                        ? content.projectsPage.openDataset
-                    : link.labelKey === "caseStudy"
-                      ? content.project.caseStudy
-                      : link.labelKey === "live"
-                      ? content.projectsPage.openLive
-                      : content.projectsPage.openProject
+                const labelMap: Partial<Record<string, string>> = {
+                  source: content.projectsPage.openSource,
+                  demo: content.projectsPage.openDemo,
+                  dataset: content.projectsPage.openDataset,
+                  caseStudy: content.project.caseStudy,
+                  live: content.projectsPage.openLive,
+                }
+                const label = labelMap[link.labelKey] ?? content.projectsPage.openProject
 
                 const isExternal = /^https?:\/\//.test(link.href)
                 const isSafe = link.href.startsWith("/") || link.href.startsWith("http://") || link.href.startsWith("https://")
@@ -174,6 +172,7 @@ export default function ProjectDetailPage() {
                       href={safeHref}
                       target={isExternal ? "_blank" : undefined}
                       rel={isExternal ? "noopener noreferrer" : undefined}
+                      onClick={() => { if (isExternal) { posthog.capture('project_external_link_clicked', { project_title: project.title, project_slug: project.slug, link_type: link.labelKey }); } }}
                       className="inline-flex items-center gap-2"
                     >
                       {link.labelKey === "source" ? <Link2 className="size-4" /> : <Globe className="size-4" />}

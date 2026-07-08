@@ -5,6 +5,7 @@ import { getProjects } from "@/data/projects"
 import { Button } from "@/components/ui/button"
 import { getUiContent, useLocale } from "@/i18n"
 import { sanitizeInput } from "@/lib/security"
+import { usePostHog } from "@posthog/react"
 
 const statusFilters = ["all", "completed", "in-progress", "won"] as const
 
@@ -14,6 +15,7 @@ export default function ProjectsPage() {
   const projects = useMemo(() => getProjects(locale), [locale])
   const [query, setQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<(typeof statusFilters)[number]>("all")
+  const posthog = usePostHog()
 
   const filteredProjects = useMemo(() => {
     const normalizedQuery = sanitizeInput(query).toLowerCase()
@@ -90,7 +92,7 @@ export default function ProjectsPage() {
               <button
                 key={filter}
                 type="button"
-                onClick={() => { setStatusFilter(filter); }}
+                onClick={() => { setStatusFilter(filter); posthog.capture('projects_filter_applied', { filter }); }}
                 className={`rounded-md border px-3 py-2 text-xs font-mono uppercase tracking-[0.18em] transition-colors ${
                   isActive
                     ? "border-foreground bg-muted text-foreground"

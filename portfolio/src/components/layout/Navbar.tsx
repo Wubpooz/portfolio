@@ -3,12 +3,14 @@ import { Menu, X } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { getUiContent, useLocale } from '@/i18n';
 import ThemeSwitcher from './ThemeSwitcher';
+import { usePostHog } from '@posthog/react';
 
 export default function Navbar() {
   const { locale, setLocale } = useLocale();
   const content = getUiContent(locale);
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const posthog = usePostHog();
 
   const navLinks = [
     { label: content.nav.projects, href: '/projects' },
@@ -43,7 +45,7 @@ export default function Navbar() {
             className="inline-flex items-center justify-center rounded-md border border-border p-2 text-foreground md:hidden hover:bg-muted/20"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
-            onClick={() => setMobileMenuOpen((value) => !value)}
+            onClick={() => { setMobileMenuOpen((value) => !value); }}
           >
             {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -57,7 +59,7 @@ export default function Navbar() {
               <span key={lang.code}>
                 <button
                   type="button"
-                  onClick={() => setLocale(lang.code as 'en' | 'fr')}
+                  onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code as 'en' | 'fr'); }}
                   className={`transition-colors ${locale === lang.code ? 'text-foreground font-semibold' : 'hover:text-foreground'}`}
                   aria-pressed={locale === lang.code}
                   aria-label={lang.code === 'fr' ? 'Français' : 'English'}
@@ -85,7 +87,7 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 className="text-sm font-mono text-foreground hover:text-foreground/80 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => { setMobileMenuOpen(false); }}
               >
                 {link.label}
               </a>
@@ -100,7 +102,7 @@ export default function Navbar() {
               <button
                 key={lang.code}
                 type="button"
-                onClick={() => setLocale(lang.code as 'en' | 'fr')}
+                onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code as 'en' | 'fr'); }}
                 className={`rounded-md border px-3 py-1 text-xs font-mono transition-colors ${locale === lang.code ? 'border-foreground text-foreground font-semibold' : 'border-border text-muted-foreground hover:text-foreground'}`}
               >
                 {lang.label}
