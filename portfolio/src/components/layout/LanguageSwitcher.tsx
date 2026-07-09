@@ -4,9 +4,9 @@ import { usePostHog } from "@posthog/react"
 import type { Locale } from "@/i18n"
 
 const OPTIONS = [
-  { code: "fr", label: "FR", aria: "Français" },
-  { code: "en", label: "EN", aria: "English" },
-  { code: "ar", label: "AR", aria: "العربية" },
+  { code: "fr", label: "FR", aria: "FR - Français" },
+  { code: "en", label: "EN", aria: "EN - English" },
+  { code: "ar", label: "AR", aria: "AR - العربية" },
 ] as const
 
 export default function LanguageSwitcher({

@@ -47,8 +47,12 @@ export default function PhysicsDotsBackground() {
       return Math.min(Math.floor(pageArea / 8000), 380);
     };
 
+    const isMobileViewport = () => window.innerWidth < 768;
+
     const initParticles = () => {
       particles = [];
+      // Skip particles on mobile to avoid heavy CPU work on low-powered devices
+      if (isMobileViewport()) return;
       const docHeight = getDocHeight();
       const count = getParticleCount(docHeight);
       
@@ -107,6 +111,8 @@ export default function PhysicsDotsBackground() {
     };
 
     const draw = () => {
+      // No particles on mobile — exit without scheduling next frame
+      if (particles.length === 0) return;
       ctx.clearRect(0, 0, width, height);
 
       const colors = getThemeColors();
