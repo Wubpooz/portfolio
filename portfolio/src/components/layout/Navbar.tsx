@@ -4,28 +4,20 @@ import { Menu, X } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { getUiContent, useLocale } from '@/i18n';
 import ThemeSwitcher from './ThemeSwitcher';
-import { usePostHog } from '@posthog/react';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
-  const { locale, setLocale } = useLocale();
+  const { locale } = useLocale();
   const content = getUiContent(locale);
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const posthog = usePostHog();
 
   const navLinks = [
     { label: content.nav.home, href: '/' },
     { label: content.nav.projects, href: '/projects' },
     { label: content.nav.resume, href: '/resume' },
-    // { label: content.nav.blog, href: '#blog' },
   ];
-
-  const languageOptions = [
-    { code: 'fr', label: 'FR', aria: 'Français' },
-    { code: 'en', label: 'EN', aria: 'English' },
-    { code: 'ar', label: 'AR', aria: 'العربية' },
-  ] as const;
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -80,22 +72,7 @@ export default function Navbar() {
           </button>
 
           {/* Language toggle */}
-          <div className="hidden gap-1 text-xs font-mono text-muted-foreground md:flex">
-            {languageOptions.map((lang, i) => (
-              <span key={lang.code}>
-                <button
-                  type="button"
-                  onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code); }}
-                  className={`transition-colors ${locale === lang.code ? 'text-foreground font-semibold' : 'hover:text-foreground'} ${i < 2 ? 'mr-1' : ''}`}
-                  aria-pressed={locale === lang.code}
-                  aria-label={lang.aria}
-                >
-                  {lang.label}
-                </button>
-                {i < 2 && <span className="mx-1 opacity-30">|</span>}
-              </span>
-            ))}
-          </div>
+          <LanguageSwitcher />
 
           {/* Dark mode toggle */}
           <div className="hidden md:block">
@@ -139,19 +116,9 @@ export default function Navbar() {
               );
             })}
           
-            <div className="mt-4 grid gap-3">
-             <ThemeSwitcher theme={theme} setTheme={setTheme} compact variant="mobile" />
-                {languageOptions.map((lang) => (
-                  <button
-                    key={lang.code}
-                    type="button"
-                    onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code); }}
-                    className={`rounded-md border px-3 py-2 text-xs font-mono transition-colors ${locale === lang.code ? 'border-foreground text-foreground font-semibold' : 'border-border text-muted-foreground hover:text-foreground'}`}
-                    aria-label={lang.aria}
-                  >
-                    {lang.label}
-                  </button>
-                ))}
+            <div className="col-span-2 mt-4 flex items-center justify-between gap-2">
+              <ThemeSwitcher theme={theme} setTheme={setTheme} compact variant="mobile" />
+              <LanguageSwitcher variant="mobile" />
             </div>
           </nav>
 
