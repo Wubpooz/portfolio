@@ -13,9 +13,6 @@ export default function SkillsSection() {
     <section id="skills" className="w-full py-8 md:py-10">
       <div className="overflow-hidden border border-border bg-card">
         <div className="border-b border-border px-4 py-5 md:px-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-1">
-            {content.sections.skillsEyebrow}
-          </p>
           <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
             {content.sections.skillsTitle}
           </h2>

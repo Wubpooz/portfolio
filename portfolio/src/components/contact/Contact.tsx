@@ -63,15 +63,9 @@ export default function ContactSection() {
     <section id="contact" className="w-full py-8 md:py-10">
       <Card className="overflow-hidden rounded-none border-border bg-card shadow-none">
         <CardHeader className="border-b border-border px-5 py-5 md:px-6">
-          <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
-            {content.sections.contactEyebrow}
-          </p>
           <CardTitle className="mt-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
             {content.sections.contactTitle}
           </CardTitle>
-          <p className="mt-2 text-base text-muted-foreground">
-            {content.sections.contactSubtitle}
-          </p>
         </CardHeader>
 
         <CardContent className="p-0">

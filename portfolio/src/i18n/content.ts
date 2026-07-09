@@ -19,15 +19,11 @@ export interface UiContent {
   sections: {
     experience: string
     education: string
-    skillsEyebrow: string
     skillsTitle: string
     skillsDescription: string
-    selectedWork: string
     projects: string
     certifications: string
-    contactEyebrow: string
     contactTitle: string
-    contactSubtitle: string
   }
   project: {
     live: string
@@ -111,8 +107,7 @@ export const uiContent: Record<Locale, UiContent> = {
     hero: {
       role: "Fullstack Engineer & AI — Apprentice at Dassault Systèmes",
       location: "Polytech Paris-Saclay · Paris, France",
-      summary:
-        "I build full-stack applications, AI agents, and scientific simulations. I like well-designed systems, clean interfaces, and the space between software, AI, and computation.",
+      summary: "I build full-stack applications, AI agents, and scientific simulations. I like well-designed systems, clean interfaces, and the space between software, AI, and computation.",
       contactCta: "Contact me",
       downloadCta: "Download CV",
       scrollCta: "Scroll to projects",
@@ -122,16 +117,11 @@ export const uiContent: Record<Locale, UiContent> = {
     sections: {
       experience: "Experience",
       education: "Education",
-      skillsEyebrow: "Skill arsenal",
-      skillsTitle: "Tools of modern engineering",
-      skillsDescription:
-        "A curated set of languages, frameworks, protocols, and scientific methods I use across full-stack, AI, and computational projects.",
-      selectedWork: "Selected work",
+      skillsTitle: "Technical Skills",
+      skillsDescription: "The languages, frameworks, protocols, and scientific methods I use to design full-stack solutions and AI architectures.",
       projects: "Projects",
       certifications: "Certifications",
-      contactEyebrow: "Contact",
       contactTitle: "Let’s connect",
-      contactSubtitle: "LinkedIn, GitHub, or email.",
     },
     project: {
       live: "Live",
@@ -142,8 +132,7 @@ export const uiContent: Record<Locale, UiContent> = {
     },
     projectsPage: {
       title: "Projects",
-      subtitle:
-        "A selection of projects spanning data visualization, AI systems, web apps, and scientific computing.",
+      subtitle: "A selection of projects spanning data visualization, AI systems, web apps, and scientific computing.",
       searchPlaceholder: "Search projects, tech, or organizations",
       filterAll: "All",
       filterCompleted: "Completed",
@@ -179,8 +168,7 @@ export const uiContent: Record<Locale, UiContent> = {
     },
     resume: {
       title: "Resume",
-      description:
-        "The resume is automatically shown in the language best matched to your browser or location preference.",
+      description: "The resume is automatically shown in the language best matched to your browser or location preference.",
       backHome: "Back to home",
       download: "Download PDF",
       openInNewTab: "Open in new tab",
@@ -192,8 +180,7 @@ export const uiContent: Record<Locale, UiContent> = {
     },
     notFound: {
       title: "404 — Page not found",
-      subtitle:
-        "You’ve wandered into the void between pixels. Let’s get you back to something useful.",
+      subtitle: "You’ve wandered into the void between pixels. Let’s get you back to something useful.",
       backHome: "Back to home",
       goProjects: "View projects",
       goResume: "Open resume",
@@ -216,8 +203,7 @@ export const uiContent: Record<Locale, UiContent> = {
     hero: {
       role: "Ingénieur fullstack & IA — Apprenti chez Dassault Systèmes",
       location: "Polytech Paris-Saclay · Paris, France",
-      summary:
-        "Je construis des applications fullstack, des agents IA et des simulations scientifiques. J’aime les systèmes bien conçus, les interfaces sobres et les sujets à la frontière entre logiciel, IA et calcul.",
+      summary: "Je construis des applications fullstack, des agents IA et des simulations scientifiques. J’aime les systèmes bien conçus, les interfaces sobres et les sujets à la frontière entre logiciel, IA et calcul.",
       contactCta: "Me contacter",
       downloadCta: "Télécharger le CV",
       scrollCta: "Aller aux projets",
@@ -227,16 +213,11 @@ export const uiContent: Record<Locale, UiContent> = {
     sections: {
       experience: "Expérience",
       education: "Formation",
-      skillsEyebrow: "Arsenal de compétences",
-      skillsTitle: "Les outils de l’ingénierie moderne",
-      skillsDescription:
-        "Un ensemble sélectionné de langages, frameworks, protocoles et méthodes scientifiques que j’utilise dans mes projets fullstack, IA et calcul scientifique.",
-      selectedWork: "Travaux sélectionnés",
+      skillsTitle: "Compétences Techniques",
+      skillsDescription: "L'ensemble des technologies, protocoles et approches scientifiques que j'utilise pour concevoir des solutions fullstack et des architectures IA.",
       projects: "Projets",
       certifications: "Certifications",
-      contactEyebrow: "Contact",
       contactTitle: "Restons en contact",
-      contactSubtitle: "LinkedIn, GitHub ou email.",
     },
     project: {
       live: "Démo",
@@ -247,8 +228,7 @@ export const uiContent: Record<Locale, UiContent> = {
     },
     projectsPage: {
       title: "Projets",
-      subtitle:
-        "Une sélection de projets en visualisation de données, systèmes IA, applications web et calcul scientifique.",
+      subtitle: "Une sélection de projets en visualisation de données, systèmes IA, applications web et calcul scientifique.",
       searchPlaceholder: "Rechercher un projet, une techno ou une organisation",
       filterAll: "Tous",
       filterCompleted: "Terminés",
@@ -284,8 +264,7 @@ export const uiContent: Record<Locale, UiContent> = {
     },
     resume: {
       title: "CV",
-      description:
-        "Le CV s’affiche automatiquement dans la langue correspondant le mieux à la langue ou à la localisation de votre navigateur.",
+      description: "Le CV s’affiche automatiquement dans la langue correspondant le mieux à la langue ou à la localisation de votre navigateur.",
       backHome: "Retour à l’accueil",
       download: "Télécharger le PDF",
       openInNewTab: "Ouvrir dans un nouvel onglet",
@@ -297,8 +276,7 @@ export const uiContent: Record<Locale, UiContent> = {
     },
     notFound: {
       title: "404 — Page introuvable",
-      subtitle:
-        "Vous avez quitté le chemin connu des pixels. Revenons vers quelque chose d’utile.",
+      subtitle: "Vous avez quitté le chemin connu des pixels. Revenons vers quelque chose d’utile.",
       backHome: "Retour à l’accueil",
       goProjects: "Voir les projets",
       goResume: "Ouvrir le CV",

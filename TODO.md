@@ -123,7 +123,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] banner picture
 - [ ] certifications icons & text & date format
 - [ ] Layout
-  - [ ] Useless text
+  - [x] Remove Useless text
   - [ ] Actions alignement in hero section (grouping and alignement of "aller au projets to center")
   - [ ] Footer size and should always at least be at the bottom of the screen
   - [ ] Rename "etude de cas"
