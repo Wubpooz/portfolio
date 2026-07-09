@@ -36,6 +36,19 @@ function upsertLink(rel: string, href: string, type?: string) {
   element.setAttribute("href", href)
 }
 
+function upsertAlternateLink(hreflang: string, href: string) {
+  let element = document.head.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${hreflang}"]`)
+
+  if (!element) {
+    element = document.createElement("link")
+    element.setAttribute("rel", "alternate")
+    element.setAttribute("hreflang", hreflang)
+    document.head.appendChild(element)
+  }
+
+  element.setAttribute("href", href)
+}
+
 export default function Seo() {
   const { locale } = useLocale()
   const content = getUiContent(locale)
@@ -69,9 +82,9 @@ export default function Seo() {
         : isProjectsIndex
           ? content.projectsPage.subtitle
           : content.hero.summary
-    const canonical = `${window.location.origin}${location.pathname}${location.search}${location.hash}`
+    const canonical = `${SITE_URL}${location.pathname}${location.search}${location.hash}`
     const ogImage = `${SITE_URL}/og-image.svg`
-    const robots = isKnownRoute ? "index,follow" : "noindex,nofollow"
+    const robots = isKnownRoute ? "index,follow" : "noindex"
 
     document.title = title
     document.documentElement.lang = locale
@@ -92,7 +105,18 @@ export default function Seo() {
     upsertMeta("twitter:description", description)
     upsertMeta("twitter:image", ogImage)
     upsertLink("canonical", canonical)
-    upsertLink("alternate", "/llm.txt", "text/markdown")
+    upsertLink("alternate", "/llms.txt", "text/markdown")
+
+    // Add hreflang alternate links for SEO
+    const getLangUrl = (l: string) => {
+      const url = new URL(canonical)
+      url.searchParams.set("lang", l)
+      return url.toString()
+    }
+    upsertAlternateLink("en", getLangUrl("en"))
+    upsertAlternateLink("fr", getLangUrl("fr"))
+    upsertAlternateLink("ar", getLangUrl("ar"))
+    upsertAlternateLink("x-default", canonical)
 
     const jsonLd = {
       "@context": "https://schema.org",
