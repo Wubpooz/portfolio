@@ -44,15 +44,12 @@ export default function ProjectsPage() {
     <main className="mx-auto w-full max-w-6xl px-4 py-8 md:px-6 md:py-10">
       <div className="mb-8 flex flex-col gap-4 border-b border-border pb-6 md:flex-row md:items-end md:justify-between">
         <div className="space-y-3">
-          <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
-            {content.projectsPage.detailTitle}
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+          <h1 className="flex items-center gap-2 text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
             {content.projectsPage.title}
+            <span className="text-xl font-normal text-muted-foreground md:text-2xl">
+              ({filteredProjects.length})
+            </span>
           </h1>
-          <p className="max-w-3xl text-sm leading-7 text-muted-foreground md:text-base">
-            {content.projectsPage.subtitle}
-          </p>
         </div>
 
         <Button asChild variant="outline" className="w-fit rounded-md">

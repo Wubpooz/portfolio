@@ -7,14 +7,18 @@ import { getUiContent, useLocale } from "@/i18n"
 export default function ProjectsSection() {
   const { locale } = useLocale()
   const content = getUiContent(locale)
-  const projects = useMemo(() => getProjects(locale).filter((project) => project.featured), [locale])
+  const allProjects = useMemo(() => getProjects(locale), [locale])
+  const projects = useMemo(() => allProjects.filter((project) => project.featured), [allProjects])
 
   return (
     <section id="projects" className="w-full py-8 md:py-10">
       <div className="overflow-hidden border border-border bg-card">
         <div className="border-b border-border px-4 py-5 md:px-6">
-          <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+          <h2 className="flex items-center gap-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
             {content.sections.projects}
+            <span className="text-lg font-normal text-muted-foreground">
+              ({allProjects.length})
+            </span>
           </h2>
         </div>
 

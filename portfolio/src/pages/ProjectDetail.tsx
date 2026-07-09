@@ -51,9 +51,6 @@ export default function ProjectDetailPage() {
     <main className="mx-auto w-full max-w-6xl px-4 py-8 md:px-6 md:py-10">
       <div className="mb-8 flex flex-col gap-4 border-b border-border pb-6 md:flex-row md:items-end md:justify-between">
         <div className="space-y-3">
-          <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
-            {content.projectsPage.detailTitle}
-          </p>
           <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
             {project.title}
           </h1>

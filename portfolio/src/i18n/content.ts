@@ -45,7 +45,6 @@ export interface UiContent {
     statusWon: string
     noResults: string
     backHome: string
-    detailTitle: string
     organization: string
     period: string
     status: string
@@ -143,7 +142,6 @@ export const uiContent: Record<Locale, UiContent> = {
       statusWon: "Won",
       noResults: "No projects match your search.",
       backHome: "Back to home",
-      detailTitle: "Project details",
       organization: "Organization",
       period: "Period",
       status: "Status",
@@ -239,7 +237,6 @@ export const uiContent: Record<Locale, UiContent> = {
       statusWon: "Lauréat",
       noResults: "Aucun projet ne correspond à votre recherche.",
       backHome: "Retour à l’accueil",
-      detailTitle: "Détails du projet",
       organization: "Organisation",
       period: "Période",
       status: "Statut",
