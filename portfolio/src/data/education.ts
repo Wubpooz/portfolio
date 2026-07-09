@@ -14,7 +14,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
     },
     {
       id: "licence",
-      degree: "Computer Science Bachelor's degree — with honors",
+      degree: "Computer Science Bachelor's degree - with honors",
       school: "Université Paris-Saclay",
       location: "Orsay, France",
       startDate: "2021",
@@ -43,7 +43,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
     },
     {
       id: "licence",
-      degree: "Licence d'informatique — mention bien",
+      degree: "Licence d'informatique - mention bien",
       school: "Université Paris-Saclay",
       location: "Orsay, France",
       startDate: "2021",
@@ -72,7 +72,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
     },
     {
       id: "licence",
-      degree: "إجازة في علوم الحاسوب — بتقدير جيد",
+      degree: "إجازة في علوم الحاسوب - بتقدير جيد",
       school: "Université Paris-Saclay",
       location: "أورسيه، فرنسا",
       startDate: "2021",

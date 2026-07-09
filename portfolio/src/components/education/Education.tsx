@@ -28,7 +28,7 @@ export default function EducationSection() {
               value={edu.id}
               title={edu.degree}
               subtitle={`${edu.school} · ${edu.location}`}
-              dateRange={`${edu.startDate} — ${edu.endDate}`}
+              dateRange={`${edu.startDate} - ${edu.endDate}`}
               description={edu.description}
               tags={edu.tags}
             />

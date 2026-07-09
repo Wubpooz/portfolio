@@ -30,7 +30,7 @@ import {
 //   );
 // }
 
-// Lazy-loaded route pages for code splitting — reduces initial bundle size
+// Lazy-loaded route pages for code splitting - reduces initial bundle size
 const ResumePage = lazy(() => import('./pages/Resume'));
 const ProjectsPage = lazy(() => import('./pages/Projects'));
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetail'));

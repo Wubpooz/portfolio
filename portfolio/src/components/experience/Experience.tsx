@@ -28,7 +28,7 @@ export default function ExperienceSection() {
               value={exp.id}
               title={exp.role}
               subtitle={`${exp.company} · ${exp.location}`}
-              dateRange={`${exp.startDate} — ${exp.endDate}`}
+              dateRange={`${exp.startDate} - ${exp.endDate}`}
               description={exp.description}
               tags={exp.tags}
             />

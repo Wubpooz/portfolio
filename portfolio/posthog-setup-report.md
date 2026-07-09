@@ -21,7 +21,7 @@ The wizard has completed a deep integration of PostHog analytics into your React
 
 We've built some insights and a dashboard for you to keep an eye on user behavior, based on the events we just instrumented:
 
-- [Analytics basics (wizard) — Dashboard](https://eu.posthog.com/project/218686/dashboard/801906)
+- [Analytics basics (wizard) - Dashboard](https://eu.posthog.com/project/218686/dashboard/801906)
 - [Contact engagement over time](https://eu.posthog.com/project/218686/insights/AH08jOO1)
 - [Resume & vCard downloads](https://eu.posthog.com/project/218686/insights/LCWj5LpT)
 - [Project link clicks by type](https://eu.posthog.com/project/218686/insights/Clk3zMZ7)

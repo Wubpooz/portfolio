@@ -16,7 +16,7 @@ export default defineConfig({
     tsconfigPaths: true
   },
   build: {
-    // Target modern browsers — eliminates Math.trunc / Array.at polyfills (~8 KB savings)
+    // Target modern browsers - eliminates Math.trunc / Array.at polyfills (~8 KB savings)
     target: 'es2020',
     rollupOptions: {
       output: {
@@ -25,9 +25,9 @@ export default defineConfig({
           if (id.includes('posthog-js') || id.includes('@posthog')) return 'vendor-posthog';
           // Animation library
           if (id.includes('framer-motion') || id.includes('/motion/')) return 'vendor-motion';
-          // i18n — only loaded once locale is determined
+          // i18n - only loaded once locale is determined
           if (id.includes('i18next') || id.includes('react-i18next')) return 'vendor-i18n';
-          // Router — needed on every page but separable from app logic
+          // Router - needed on every page but separable from app logic
           if (id.includes('react-router')) return 'vendor-router';
           // Remaining large Radix/shadcn primitives
           if (id.includes('@radix-ui') || id.includes('radix-ui')) return 'vendor-ui';

@@ -20,7 +20,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
     {
       id: "malta",
       role: "Research Intern (NLP)",
-      company: "University of Malta — Dept. of AI",
+      company: "University of Malta - Dept. of AI",
       location: "Malta",
       startDate: "June 2025",
       endDate: "August 2025",
@@ -49,7 +49,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
     {
       id: "malta",
       role: "Stagiaire Recherche (NLP)",
-      company: "University of Malta — Dept. of AI",
+      company: "University of Malta - Dept. of AI",
       location: "Malte",
       startDate: "Juin 2025",
       endDate: "Août 2025",
@@ -78,7 +78,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
     {
       id: "malta",
       role: "متدرب بحث (معالجة اللغة الطبيعية)",
-      company: "جامعة مالطا — قسم الذكاء الاصطناعي",
+      company: "جامعة مالطا - قسم الذكاء الاصطناعي",
       location: "مالطا",
       startDate: "يونيو 2025",
       endDate: "أغسطس 2025",
