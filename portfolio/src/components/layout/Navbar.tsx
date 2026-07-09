@@ -91,13 +91,13 @@ export default function Navbar() {
       </div>
 
       {mobileMenuOpen ? (
-        <div className="border-t border-border bg-background px-6 py-4 md:hidden">
-          <nav className="flex flex-col gap-3" aria-label="Mobile navigation">
+        <div className="border-t border-border bg-background/95 px-4 py-4 shadow-lg backdrop-blur md:hidden">
+          <nav className="grid grid-cols-2 gap-2" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-mono text-foreground hover:text-foreground/80 transition-colors"
+                className="rounded-md border border-border bg-card/40 px-3 py-3 text-sm font-mono text-foreground transition-colors hover:bg-muted/30"
                 onClick={() => { setMobileMenuOpen(false); }}
               >
                 {link.label}
@@ -105,22 +105,32 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="mt-4 flex items-center gap-3">
-            {[
-              { code: 'fr', label: 'FR' },
-              { code: 'en', label: 'EN' },
-            ].map((lang) => (
-              <button
-                key={lang.code}
-                type="button"
-                onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code as 'en' | 'fr'); }}
-                className={`rounded-md border px-3 py-1 text-xs font-mono transition-colors ${locale === lang.code ? 'border-foreground text-foreground font-semibold' : 'border-border text-muted-foreground hover:text-foreground'}`}
-              >
-                {lang.label}
-              </button>
-            ))}
+          <div className="mt-4 grid gap-3">
+            <a
+              href="/resume"
+              className="inline-flex w-full items-center justify-center rounded-md border border-border bg-card px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted/30"
+              onClick={() => { setMobileMenuOpen(false); }}
+            >
+              {content.nav.resume}
+            </a>
 
-            <ThemeSwitcher theme={theme} setTheme={setTheme} compact />
+            <div className="grid grid-cols-3 gap-2">
+              {languageOptions.map((lang) => (
+                <button
+                  key={lang.code}
+                  type="button"
+                  onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code as 'en' | 'fr' | 'ar'); }}
+                  className={`rounded-md border px-3 py-2 text-xs font-mono transition-colors ${locale === lang.code ? 'border-foreground text-foreground font-semibold' : 'border-border text-muted-foreground hover:text-foreground'}`}
+                  aria-label={lang.aria}
+                >
+                  {lang.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center justify-between gap-3 rounded-md border border-border bg-card px-3 py-2.5">
+              <ThemeSwitcher theme={theme} setTheme={setTheme} compact />
+            </div>
           </div>
         </div>
       ) : null}
