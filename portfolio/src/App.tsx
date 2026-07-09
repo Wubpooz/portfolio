@@ -1,19 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { lazy, Suspense, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import FooterSection from "@/components/layout/Footer";
 import Home from './pages/Home';
-import ResumePage from './pages/Resume';
 import Seo from './components/Seo';
-import ProjectsPage from './pages/Projects';
-import ProjectDetailPage from './pages/ProjectDetail';
-import NotFoundPage from './pages/NotFound';
 import {
-  // BackgroundContext,
-  // type BackgroundType,
-  // BackgroundSwitcher,
-  // WarpedGridBackground,
-  // FlowFieldBackground,
   PhysicsDotsBackground
 } from './components/shared/backgrounds';
 
@@ -39,6 +30,12 @@ import {
 //   );
 // }
 
+// Lazy-loaded route pages for code splitting — reduces initial bundle size
+const ResumePage = lazy(() => import('./pages/Resume'));
+const ProjectsPage = lazy(() => import('./pages/Projects'));
+const ProjectDetailPage = lazy(() => import('./pages/ProjectDetail'));
+const NotFoundPage = lazy(() => import('./pages/NotFound'));
+
 function App() {
   const location = useLocation()
 
@@ -47,13 +44,15 @@ function App() {
       {location.pathname === "/" ? <PhysicsDotsBackground /> : null}
       <Navbar />
       <div className="relative z-10 flex flex-1 flex-col bg-background/0 text-foreground">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-          <Route path="/resume" element={<ResumePage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+            <Route path="/resume" element={<ResumePage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
         <FooterSection />
       </div>
     </div>
