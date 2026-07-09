@@ -121,6 +121,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] profile picture
 - [ ] banner picture
 - [ ] certifications icons
+- [ ] favicon
 - [x] certification text & date format
 - [x] Layout
   - [x] Remove Useless text
