@@ -83,6 +83,8 @@ export default function ProjectDetailPage() {
               src={project.image.startsWith("/") || project.image.startsWith("http://") || project.image.startsWith("https://") ? project.image : ""}
               alt={project.imageAlt}
               className="h-auto w-full object-cover"
+              loading="eager"
+              fetchPriority="high"
             />
           </div>
 

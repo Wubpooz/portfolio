@@ -13,7 +13,7 @@ export default function NotFoundPage() {
     document.title = content.notFound.title
     const robots = document.head.querySelector('meta[name="robots"]') ?? document.createElement("meta")
     robots.setAttribute("name", "robots")
-    robots.setAttribute("content", "noindex,nofollow")
+    robots.setAttribute("content", "noindex")
     if (!robots.parentElement) document.head.appendChild(robots)
   }, [content.notFound.title])
 

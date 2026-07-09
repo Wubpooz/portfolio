@@ -81,7 +81,7 @@ export default function HeroSection() {
                 src="https://picsum.photos/seed/mathieu-profile/400/400"
                 alt={content.hero.portraitAlt}
                 className="h-full w-full object-cover"
-                loading="lazy"
+                loading="eager"
               />
             </div>
           </div>
