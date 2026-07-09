@@ -1,10 +1,30 @@
 import { useMemo, useState } from "react"
-import { ArrowUpRight, ChevronDown, BadgeCheck } from "lucide-react"
+import { ArrowUpRight, BadgeCheck, CalendarDays, ChevronDown, ShieldCheck } from "lucide-react"
 import type { CertificationItem } from "../../data/certifications"
 import { certifications } from "../../data/certifications"
 import { Button } from "@/components/ui/button"
 import { getUiContent, useLocale } from "@/i18n"
 import { shouldInvertIcon } from "@/lib/utils"
+
+function formatCertificationDate(locale: string, value: string) {
+  const match = RegExp(/^(\d{2})\.(\d{4})$/).exec(value)
+
+  if (match) {
+    const month = Number(match[1])
+    const year = Number(match[2])
+
+    return new Intl.DateTimeFormat(locale === "fr" ? "fr-FR" : locale === "ar" ? "ar-EG" : "en-US", {
+      month: "short",
+      year: "numeric",
+    }).format(new Date(year, month - 1, 1))
+  }
+
+  if (/^\d{4}$/.test(value)) {
+    return value
+  }
+
+  return value
+}
 
 function CertificationIcon({
   name,
@@ -50,6 +70,9 @@ function CertificationIcon({
 }
 
 function CertificationRow({ item }: Readonly<{ item: CertificationItem }>) {
+  const { locale } = useLocale()
+  const formattedDate = formatCertificationDate(locale, item.date)
+
   return (
     <a
       href={item.href}
@@ -66,10 +89,21 @@ function CertificationRow({ item }: Readonly<{ item: CertificationItem }>) {
           {item.title}
         </h3>
 
-        <p className="mt-1 text-sm text-muted-foreground md:text-base">
-          <span>@ {item.issuer}</span>
-          <span className="mx-2 text-border">|</span>
-          <span>{item.date}</span>
+        <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground md:text-base">
+          <span className="inline-flex items-center gap-1.5">
+            <BadgeCheck className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+            <span>{item.issuer}</span>
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <CalendarDays className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+            <span>{formattedDate}</span>
+          </span>
+          {item.expiresAt ? (
+            <span className="inline-flex items-center gap-1.5">
+              <ShieldCheck className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+              <span>{item.expiresAt}</span>
+            </span>
+          ) : null}
         </p>
       </div>
 

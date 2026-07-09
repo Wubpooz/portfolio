@@ -125,7 +125,7 @@ export const uiContent: Record<Locale, UiContent> = {
     project: {
       live: "Live",
       source: "Source",
-      caseStudy: "Case Study",
+      caseStudy: "Details",
       viewAll: "View all projects",
       moreSuffix: "more",
     },
@@ -220,7 +220,7 @@ export const uiContent: Record<Locale, UiContent> = {
     project: {
       live: "Démo",
       source: "Code",
-      caseStudy: "Étude de cas",
+      caseStudy: "Détails",
       viewAll: "Voir tous les projets",
       moreSuffix: "autres",
     },

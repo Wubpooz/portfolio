@@ -10,6 +10,7 @@ import {
   SearchCode,
   SlidersHorizontal,
   TestTube2,
+  Shield,
   Workflow,
 } from "lucide-react"
 import { shouldInvertIcon } from "@/lib/utils"
@@ -25,23 +26,33 @@ const fallbackIcons: Record<
   React.ComponentType<{ size?: number; className?: string }>
 > = {
   llm: Brain,
+  nlp: Brain,
   rag: SearchCode,
   lora: SlidersHorizontal,
   rest: Braces,
+  "functional-programming": Braces,
+  logic: Workflow,
+  computability: Binary,
   "page-objects": FileStack,
   tdd: TestTube2,
   cicd: Workflow,
   math: Binary,
+  hpc: Cpu,
   mpi: Network,
   openmp: Cpu,
   sql: Database,
   rdf: Database,
   sparql: SearchCode,
   pact: GitBranch,
+  security: Shield,
+  cybersecurity: Shield,
+  "distributed-algorithms": Network,
+  "graph-algorithms": GitBranch,
+  "supervised-learning": Workflow,
 }
 
-export default function SkillIcon({ name, icon, iconUrl }: SkillIconProps) {
-  const invertClass = shouldInvertIcon(icon || name) ? "dark:invert" : ""
+export default function SkillIcon({ name, icon, iconUrl }: Readonly<SkillIconProps>) {
+  const invertClass = shouldInvertIcon(icon ?? name) ? "dark:invert" : ""
 
   if (iconUrl) {
     return (
