@@ -1,7 +1,8 @@
 import { useEffect } from "react"
-import { Download, ExternalLink } from "lucide-react"
+import { ArrowLeft, Download, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getResumeAsset, getUiContent, useLocale } from "@/i18n"
+import { Link } from "react-router-dom"
 
 export default function ResumePage() {
   const { locale } = useLocale()
@@ -14,6 +15,16 @@ export default function ResumePage() {
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:px-6 md:py-10">
+      <div>
+        <Link
+          to="/"
+          className="group inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
+          <span>{content.resume.backHome}</span>
+        </Link>
+      </div>
+
       <header className="flex flex-col gap-4 border-b border-border pb-4 md:flex-row md:items-end md:justify-between">
         <div className="space-y-3">
           <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
