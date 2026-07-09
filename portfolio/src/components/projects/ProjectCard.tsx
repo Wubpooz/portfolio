@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Globe, ArrowRight, BookOpen } from "lucide-react"
 import type { ProjectItem } from "@/data/projects"
 import { Badge } from "@/components/ui/badge"
@@ -6,7 +7,6 @@ import { Separator } from "@/components/ui/separator"
 import { getUiContent, useLocale } from "@/i18n"
 import { shouldInvertIcon } from "@/lib/utils"
 import { usePostHog } from "@posthog/react"
-import { Link } from "react-router-dom"
 
 const MAX_VISIBLE_STACK = 6
 
@@ -108,74 +108,82 @@ export default function ProjectCard({ project }: Readonly<{ project: ProjectItem
 
   return (
     <div className="group flex h-full flex-col overflow-hidden bg-card transition-colors hover:bg-muted/10">
-      <div className="relative aspect-video overflow-hidden border-b border-border">
-        <img
-          src={project.image}
-          alt={project.imageAlt}
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-          loading="lazy"
-        />
-      </div>
-
-      <div className="flex h-full flex-1 flex-col p-6">
-        <div className="space-y-5">
-          <div className="space-y-1.5">
-            <h3 className="text-2xl font-semibold tracking-tight text-foreground">
-              {project.title}
-            </h3>
-            <p className="text-base leading-7 text-muted-foreground">
-              {project.subtitle}
-            </p>
-            <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
-              {project.organization} · {project.period}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="outline" className="rounded-none px-2.5 py-1 font-normal text-muted-foreground">
-              {statusLabel}
-            </Badge>
-          </div>
-
-          <ul className="list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
-            {project.highlights.slice(0, 3).map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-
-          <div className="flex flex-wrap gap-2">
-            {visibleStack.map((tech) => {
-              const meta = techIconMap[tech]
-
-              return (
-                <Badge
-                  key={tech}
-                  variant="secondary"
-                  className="rounded-none px-2.5 py-1 font-normal"
-                >
-                  <span className="inline-flex items-center gap-1.5">
-                    <TechPillIcon
-                      name={tech}
-                      icon={meta?.icon}
-                      iconUrl={meta?.iconUrl}
-                    />
-                    <span>{tech}</span>
-                  </span>
-                </Badge>
-              )
-            })}
-
-            {remaining > 0 ? (
-              <Badge
-                variant="outline"
-                className="rounded-none px-2.5 py-1 font-normal text-muted-foreground"
-              >
-                +{remaining} {content.project.moreSuffix}
-              </Badge>
-            ) : null}
-          </div>
+      <Link
+        to={`/projects/${project.slug}`}
+        onClick={() => posthog.capture("project_card_clicked", { project_title: project.title, project_slug: project.slug })}
+        className="flex flex-1 flex-col text-foreground hover:no-underline"
+      >
+        <div className="relative aspect-video overflow-hidden border-b border-border">
+          <img
+            src={project.image}
+            alt={project.imageAlt}
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
         </div>
 
+        <div className="flex flex-1 flex-col p-6 pb-0">
+          <div className="space-y-5">
+            <div className="space-y-1.5">
+              <h3 className="text-2xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                {project.title}
+              </h3>
+              <p className="text-base leading-7 text-muted-foreground">
+                {project.subtitle}
+              </p>
+              <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
+                {project.organization} · {project.period}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="outline" className="rounded-none px-2.5 py-1 font-normal text-muted-foreground">
+                {statusLabel}
+              </Badge>
+            </div>
+
+            <ul className="list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
+              {project.highlights.slice(0, 3).map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+
+            <div className="flex flex-wrap gap-2">
+              {visibleStack.map((tech) => {
+                const meta = techIconMap[tech]
+
+                return (
+                  <Badge
+                    key={tech}
+                    variant="secondary"
+                    className="rounded-none px-2.5 py-1 font-normal"
+                  >
+                    <span className="inline-flex items-center gap-1.5">
+                      <TechPillIcon
+                        name={tech}
+                        icon={meta?.icon}
+                        iconUrl={meta?.iconUrl}
+                      />
+                      <span>{tech}</span>
+                    </span>
+                  </Badge>
+                )
+              })}
+
+              {remaining > 0 ? (
+                <Badge
+                  variant="outline"
+                  className="rounded-none px-2.5 py-1 font-normal text-muted-foreground"
+                >
+                  +{remaining} {content.project.moreSuffix}
+                </Badge>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </Link>
+
+      <div className="flex flex-col p-6 pt-0">
         <div className="mt-auto pt-5">
           <Separator className="mb-5" />
 
@@ -223,15 +231,15 @@ export default function ProjectCard({ project }: Readonly<{ project: ProjectItem
                 size="sm"
                 className="h-9 shrink-0 rounded-md px-0 hover:bg-transparent hover:text-foreground/70"
               >
-                <Link
-                  to={readMoreLink.href}
+                <a
+                  href={readMoreLink.href}
                   onClick={() => posthog.capture('project_case_study_clicked', { project_title: project.title, project_slug: project.slug })}
                   className="inline-flex items-center gap-2 text-foreground"
                 >
                   <BookOpen className="size-4 shrink-0" />
                   <span>{content.project.caseStudy}</span>
                   <ArrowRight className="size-4 shrink-0" />
-                </Link>
+                </a>
               </Button>
             ) : null}
           </div>
