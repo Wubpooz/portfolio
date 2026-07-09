@@ -60,6 +60,35 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       tags: ["Mathématiques", "Physique", "Modélisation", "Résolution de problèmes"],
     },
   ],
+  ar: [
+    {
+      id: "polytech",
+      degree: "مهندس في علوم الحاسوب والهندسة الرياضية",
+      school: "Polytech Paris-Saclay",
+      location: "أورسيه، فرنسا",
+      startDate: "2023",
+      endDate: "حاليًا",
+      tags: ["C++ متقدم", "الحوسبة عالية الأداء", "الخوارزميات الموزعة", "خوارزميات الرسوم البيانية", "البرمجة الخطية الصحيحة", "تحليل القيم المفردة", "معادلات تفاضلية عادية وجزئية", "معالجة اللغة الطبيعية", "الأمن السيبراني"],
+    },
+    {
+      id: "licence",
+      degree: "إجازة في علوم الحاسوب — بتقدير جيد",
+      school: "Université Paris-Saclay",
+      location: "أورسيه، فرنسا",
+      startDate: "2021",
+      endDate: "2023",
+      tags: ["التعلم الخاضع للإشراف", "البرمجة كائنية التوجه", "البرمجة الوظيفية", "المنطق", "قابلية الحساب"],
+    },
+    {
+      id: "prepa",
+      degree: "الأقسام التحضيرية PSI",
+      school: "Lycée de l'Essouriau",
+      location: "لي ألز، فرنسا",
+      startDate: "2019",
+      endDate: "2021",
+      tags: ["الرياضيات", "الفيزياء", "النمذجة", "حل المشكلات"],
+    },
+  ],
 }
 
 export function getEducations(locale: Locale): EducationEntry[] {

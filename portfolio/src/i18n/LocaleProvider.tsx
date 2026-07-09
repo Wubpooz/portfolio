@@ -8,6 +8,10 @@ function isFrenchLocale(value: string) {
   return /^fr\b/i.test(value) || /[-_]FR\b/i.test(value)
 }
 
+function isArabicLocale(value: string) {
+  return /^ar\b/i.test(value) || /[-_]AR\b/i.test(value) || /[-_]SA\b/i.test(value)
+}
+
 export function detectLocale(): Locale {
   if (typeof window === "undefined") {
     return "en"
@@ -18,6 +22,10 @@ export function detectLocale(): Locale {
     navigator.language,
     Intl.DateTimeFormat().resolvedOptions().locale,
   ].filter(Boolean)
+
+  if (candidates.some((value) => isArabicLocale(value))) {
+    return "ar"
+  }
 
   return candidates.some((value) => isFrenchLocale(value)) ? "fr" : "en"
 }
@@ -30,14 +38,14 @@ function readStoredLocale(): Locale | null {
   const manual = window.localStorage.getItem(STORAGE_META_KEY)
   const saved = window.localStorage.getItem(STORAGE_KEY)
 
-  if (manual === "true" && (saved === "fr" || saved === "en")) {
+  if (manual === "true" && (saved === "fr" || saved === "en" || saved === "ar")) {
     return saved
   }
 
   return null
 }
 
-type LocaleContextValue = {
+interface LocaleContextValue {
   locale: Locale
   setLocale: (locale: Locale) => void
 }
@@ -63,7 +71,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     }
 
     document.documentElement.lang = locale
-    document.documentElement.dir = "ltr"
+    document.documentElement.dir = locale === "ar" ? "rtl" : "ltr"
   }, [isManualOverride, locale])
 
   const value = useMemo<LocaleContextValue>(

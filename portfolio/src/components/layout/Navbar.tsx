@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { getUiContent, useLocale } from '@/i18n';
@@ -10,6 +11,7 @@ export default function Navbar() {
   const content = getUiContent(locale);
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
   const posthog = usePostHog();
 
   const navLinks = [
@@ -19,9 +21,19 @@ export default function Navbar() {
     { label: content.nav.blog, href: '#blog' },
   ];
 
+  const languageOptions = [
+    { code: 'fr', label: 'FR', aria: 'Français' },
+    { code: 'en', label: 'EN', aria: 'English' },
+    { code: 'ar', label: 'AR', aria: 'العربية' },
+  ] as const;
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname, location.hash]);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
-      <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
+      <div className="mx-auto flex h-14 max-w-4xl items-center justify-between gap-4 px-6">
 
         {/* Logo */}
         <a href="/" className="font-mono font-bold text-sm tracking-tight text-foreground">
@@ -44,7 +56,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2 md:gap-3">
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md border border-border p-2 text-foreground md:hidden hover:bg-muted/20"
+            className="inline-flex items-center justify-center rounded-md border border-border p-2 text-foreground transition-colors hover:bg-muted/20 md:hidden"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
             onClick={() => { setMobileMenuOpen((value) => !value); }}
@@ -53,28 +65,25 @@ export default function Navbar() {
           </button>
 
           {/* Language toggle */}
-          <div className="hidden gap-1 text-xs font-mono md:flex text-muted-foreground">
-            {[
-              { code: 'fr', label: 'FR' },
-              { code: 'en', label: 'EN' },
-            ].map((lang, i) => (
+          <div className="hidden gap-1 text-xs font-mono text-muted-foreground md:flex">
+            {languageOptions.map((lang, i) => (
               <span key={lang.code}>
                 <button
                   type="button"
-                  onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code as 'en' | 'fr'); }}
-                  className={`transition-colors ${locale === lang.code ? 'text-foreground font-semibold' : 'hover:text-foreground'}`}
+                  onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code as 'en' | 'fr' | 'ar'); }}
+                  className={`transition-colors ${locale === lang.code ? 'text-foreground font-semibold' : 'hover:text-foreground'} ${i < 2 ? 'mr-1' : ''}`}
                   aria-pressed={locale === lang.code}
-                  aria-label={lang.code === 'fr' ? 'Français' : 'English'}
+                  aria-label={lang.aria}
                 >
                   {lang.label}
                 </button>
-                {i < 1 && <span className="mx-1 opacity-30">|</span>}
+                {i < 2 && <span className="mx-1 opacity-30">|</span>}
               </span>
             ))}
           </div>
 
           {/* Dark mode toggle */}
-          <div className="ml-4 hidden md:block">
+          <div className="hidden md:block">
             <ThemeSwitcher theme={theme} setTheme={setTheme} />
           </div>
         </div>

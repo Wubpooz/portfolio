@@ -60,6 +60,35 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       tags: ["Python", "PyTorch", "XTTS", "Streamlit", "Hugging Face"],
     },
   ],
+  ar: [
+    {
+      id: "dassault",
+      role: "متدرّب مهندس Fullstack وذكاء اصطناعي",
+      company: "Dassault Systèmes",
+      location: "فيليزي-فياكو بلو، فرنسا",
+      startDate: "2023",
+      endDate: "حاليًا",
+      description: [
+        "قدت تطوير طابور حوسبة موزّع بالتنسيق مع فرق متعددة التخصصات، ما رفع الاعتمادية من 40% إلى 100% حتى تحت الضغط.",
+        "صممت وطورّت وكيلًا ذكياًا باستخدام LangChain وخادم MCP لتحويل الجزيئات، وتم التحقق منه عبر خوادم وهمية وعقود PACT واختبارات توجيه LLM.",
+        "سلّمت ميزات بشكل مستقل عبر عدة بيئات مع ضمان الجودة عبر اختبارات الوحدة/التكامل (Jasmine وPage Objects وJUnit وJMeter) ومراجعات الكود.",
+      ],
+      tags: ["Angular", "Java", "TypeScript", "Python", "LangChain", "MCP", "TDD"],
+    },
+    {
+      id: "malta",
+      role: "متدرب بحث (معالجة اللغة الطبيعية)",
+      company: "جامعة مالطا — قسم الذكاء الاصطناعي",
+      location: "مالطا",
+      startDate: "يونيو 2025",
+      endDate: "أغسطس 2025",
+      description: [
+        "أعددت مراجعة حديثة في تحويل النص إلى كلام (TTS) وطوّرت تطبيقًا لتسريع البحث في الأوراق العلمية مع نظام ترتيب باستخدام Streamlit.",
+        "هيّأت البيانات، وأجريت fine-tuning و inference لنموذج XTTS على Google Colab (PyTorch وGPT-2) لإضافة دعم المالطية دون أي تراجع في الأداء.",
+      ],
+      tags: ["Python", "PyTorch", "XTTS", "Streamlit", "Hugging Face"],
+    },
+  ],
 }
 
 export function getExperiences(locale: Locale): ExperienceEntry[] {
