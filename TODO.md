@@ -122,6 +122,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] banner picture
 - [ ] certifications icons
 - [ ] favicon
+- [ ] MAKE THE IFRAME MATCH THE A4 size of a resume page
 - [x] certification text & date format
 - [x] Layout
   - [x] Remove Useless text

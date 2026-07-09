@@ -54,7 +54,6 @@ export default function ResumePage() {
           title={`${content.resume.title} - Mathieu Waharte`}
           className="h-[85vh] w-full"
         />
-        {/* TODO MAKE THE IFRAME MATCH THE A4 size of a resume page */}
       </section>
     </div>
   )
