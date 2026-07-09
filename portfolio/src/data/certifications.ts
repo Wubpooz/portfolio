@@ -15,6 +15,7 @@ export const certifications: CertificationItem[] = [
     issuer: "ANSSI",
     date: "2024",
     href: "https://secnumacademie.gouv.fr/",
+    icon: "anssi",
   },
   {
     title: "Certificate of completion: Teaching the AI Fluency Framework",
@@ -38,12 +39,14 @@ export const certifications: CertificationItem[] = [
     date: "04.2026",
     expiresAt: "04.2028",
     href: "https://www.linkedin.com/in/mathieu-w-a9ba36211/overlay/Certifications/1592903899/treasury/?profileId=ACoAADW5aZcBL3ssfT-EVzpXmBA1-KNVxZQKOqk",
+    icon: "languages",
   },
   {
     title: "Label Handimanagement",
     issuer: "Companieros",
     date: "04.2026",
     href: "https://www.linkedin.com/in/mathieu-w-a9ba36211/overlay/Certifications/1592660574/treasury/?profileId=ACoAADW5aZcBL3ssfT-EVzpXmBA1-KNVxZQKOqk",
+    icon: "accessibility",
   },
   {
     title: "CodinGame Certification - C++",
@@ -105,6 +108,7 @@ export const certifications: CertificationItem[] = [
     date: "10.2025",
     href: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww%2Ecredly%2Ecom%2Fbadges%2Fd6e20a74-9895-417e-b476-e3edf206e7fc%2Fpublic_url&urlhash=d0ew&mt=DDLLanv-Wf5MFs3M71SZpryciSLqXKJ7OL7IGi9yewAeJ7K7kEqFRv386I5eMvKpInfY38XMghI_YCVwjqc9o6MiukE&isSdui=true",
     credentialId: "d6e20a74-9895-417e-b476-e3edf206e7fc",
+    icon: "owasp",
   },
   {
     title: "Test of English for International Communication (TOEIC) - 990, C1",
@@ -112,6 +116,7 @@ export const certifications: CertificationItem[] = [
     date: "10.2025",
     href: "https://www.linkedin.com/in/mathieu-w-a9ba36211/overlay/Certifications/1554172007/treasury/?profileId=ACoAADW5aZcBL3ssfT-EVzpXmBA1-KNVxZQKOqk",
     credentialId: "5940728016",
+    icon: "languages",
   },
   {
     title: "L'essentiel de Node.js",
@@ -195,5 +200,6 @@ export const certifications: CertificationItem[] = [
     issuer: "Com'Santé sexuelle",
     date: "05.2021",
     href: "#",
+    icon: "heart",
   },
 ]
