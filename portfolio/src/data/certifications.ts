@@ -125,6 +125,7 @@ export const certifications: CertificationItem[] = [
     issuer: "ANSSI - Agence nationale de la sécurité des systèmes d'information",
     date: "04.2024",
     href: "#",
+    icon: "anssi",
   },
   {
     title: "Gérer des talents très performants ou à haut potentiel",

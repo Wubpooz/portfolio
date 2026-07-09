@@ -308,6 +308,142 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
     },
   ],
+  ar: [
+    {
+      slug: "how-europe-spends-its-time",
+      title: "How Europe Spends Its Time",
+      subtitle: "تحويل استبيانات استخدام الوقت الأوروبية المبعثرة إلى سرد بصري واضح.",
+      summary:
+        "حُلّت مشكلة انحراف الترميز الشديد عبر 20 عامًا من استبيانات استخدام الوقت الأوروبية باستخدام خطوط معالجة مرنة في Python، ثم صُممت واجهة ويب سهلة الوصول مع رسوم بيانية تفاعلية مخصصة لمجموعة بيانات Hugging Face.",
+      organization: "Polytech Paris-Saclay",
+      period: "مارس 2026 – أبريل 2026",
+      status: "completed",
+      image: cover("how-europe-spends-its-time"),
+      imageAlt: "معاينة How Europe Spends Its Time",
+      highlights: [
+        "خطوط معالجة بيانات قوية في Python وpandas لتصحيح انحراف الترميز.",
+        "تجربة ويب سهلة الوصول وقابلة للتنقل بلوحة المفاتيح مع تصورات بيانات تفاعلية.",
+        "نُشر كمجموعة بيانات على Hugging Face لإعادة الاستخدام على نطاق أوسع.",
+      ],
+      stack: ["Python", "pandas", "تصور البيانات", "إتاحة الوصول", "Hugging Face"],
+      links: [
+        { labelKey: "live", href: datasetUrl },
+        { labelKey: "caseStudy", href: addCaseStudy("how-europe-spends-its-time") },
+      ],
+      featured: true,
+    },
+    {
+      slug: "deloitte-google-cloud-hackathon",
+      title: "Hackathon Deloitte x Google Cloud",
+      subtitle: "نظام متعدد الوكلاء فائز لأتمتة الحملات التسويقية.",
+      summary:
+        "بُني نظام موزع متعدد الوكلاء باستخدام ADK وMCP لأتمتة إنشاء الحملات التسويقية، مع تنسيق الوكلاء المتخصصين عبر A2A ودمج BigQuery وGemini وImagen وCloud Run وVertex AI Agent Engine.",
+      organization: "Deloitte x Google Cloud",
+      period: "نوفمبر 2025",
+      status: "won",
+      image: cover("deloitte-google-cloud-hackathon"),
+      imageAlt: "معاينة Hackathon Deloitte x Google Cloud",
+      highlights: [
+        "نظام موزع متعدد الوكلاء باستخدام ADK وMCP وA2A.",
+        "تكامل سحابي أصيل: BigQuery وGemini وImagen وCloud Run وVertex AI Agent Engine.",
+        "فاز الهاكاثون.",
+      ],
+      stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("deloitte-google-cloud-hackathon") },
+      ],
+      featured: true,
+    },
+    {
+      slug: "xtts-finetuning",
+      title: "XTTS Finetuning",
+      subtitle: "بحث في توليد الكلام ودعم اللغة المالطية.",
+      summary:
+        "أُجريت مراجعة حديثة في مجال TTS، وطُوّر تطبيق Streamlit لتسريع اكتشاف الأوراق العلمية، ثم نُفذ fine-tuning لنموذج XTTS على Google Colab باستخدام PyTorch وGPT-2 لإضافة المالطية دون تراجع.",
+      organization: "L-Università ta' Malta (University of Malta)",
+      period: "يونيو 2025 – أغسطس 2025",
+      status: "completed",
+      image: cover("xtts-finetuning"),
+      imageAlt: "معاينة XTTS Finetuning",
+      highlights: [
+        "مراجعة حديثة في TTS مع أداة للبحث في الأوراق العلمية عبر Streamlit.",
+        "fine-tuning واستدلال XTTS على Google Colab باستخدام PyTorch وGPT-2.",
+        "إضافة دعم المالطية دون تراجع في الأداء.",
+      ],
+      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face"],
+      links: [
+        { labelKey: "source", href: maltaRepo },
+        { labelKey: "live", href: streamlitDemo },
+        { labelKey: "demo", href: streamlitSearch },
+        { labelKey: "caseStudy", href: addCaseStudy("xtts-finetuning") },
+      ],
+      featured: true,
+    },
+    {
+      slug: "quizine",
+      title: "Quizine",
+      subtitle: "منصة مسابقات متعددة اللاعبين في الوقت الحقيقي مع WebSockets.",
+      summary:
+        "صُممت بنية متينة لمسابقات فورية قادرة على إدارة 50 لاعبًا لكل غرفة، مع واجهة Angular مرنة وإدارة جلسات مدعومة بـ Redis ونشر على Vercel وSupabase.",
+      organization: "Polytech Paris-Saclay",
+      period: "يناير 2025 – مايو 2025",
+      status: "completed",
+      image: cover("quizine"),
+      imageAlt: "معاينة Quizine",
+      highlights: [
+        "بنية WebSockets لمزامنة اللعب ومعالجة إعادة الاتصال.",
+        "واجهة Angular مرنة مع routing وAuthGuard وإشعارات وعقد API.",
+        "توثيق متكامل من نماذج Figma حتى النشر المستمر.",
+      ],
+      stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("quizine") },
+      ],
+      featured: true,
+    },
+    {
+      slug: "magnus-carlos",
+      title: "Magnus Carlos",
+      subtitle: "محاكاة علمية ثلاثية الأبعاد لتأثير Magnus.",
+      summary:
+        "أدرت مشروع محاكاة علمية ثلاثية الأبعاد ضمن فريق من ستة طلاب باستخدام منهجية Agile، وطبّقت تصور التأثير باستخدام SDL2 (الخامات والكاميرات والدورانات).",
+      organization: "Polytech Paris-Saclay",
+      period: "سبتمبر 2024 – ديسمبر 2024",
+      status: "completed",
+      image: cover("magnus-carlos"),
+      imageAlt: "معاينة Magnus Carlos",
+      highlights: [
+        "مشروع محاكاة علمية ثلاثية الأبعاد لتأثير Magnus.",
+        "تصور باستخدام SDL2: الخامات والكاميرات والدورانات.",
+        "قيادة العمل ضمن فريق من ستة طلاب.",
+      ],
+      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualization"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("magnus-carlos") },
+      ],
+    },
+    {
+      slug: "nyxen",
+      title: "Nyxen",
+      subtitle: "تجربة صفحة واحدة مع نموذج ثلاثي الأبعاد تفاعلي.",
+      summary:
+        "صُمم التخطيط ولوحة الألوان ومسارات الاستخدام وSPA routing لتجربة ويب عصرية، مع دمج نموذج ثلاثي الأبعاد متحرك في القسم الرئيسي.",
+      organization: "Polytech Paris-Saclay",
+      period: "2023 – 2024",
+      status: "completed",
+      image: cover("nyxen"),
+      imageAlt: "معاينة Nyxen",
+      highlights: [
+        "تصميم التخطيط ولوحة الألوان ومسارات المستخدم وSPA routing.",
+        "إدماج نموذج ثلاثي الأبعاد تفاعلي ومتحرك.",
+        "تركيز قوي على التوجيه البصري ودقة التفاعل.",
+      ],
+      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("nyxen") },
+      ],
+    },
+  ],
 }
 
 export function getProjects(locale: Locale): ProjectItem[] {

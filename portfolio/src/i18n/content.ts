@@ -4,6 +4,7 @@ export interface UiContent {
   nav: {
     home: string
     projects: string
+    resume: string
     blog: string
   }
   hero: {
@@ -35,6 +36,7 @@ export interface UiContent {
   projectsPage: {
     title: string
     subtitle: string
+    hoverPreview: string
     searchPlaceholder: string
     filterAll: string
     filterCompleted: string
@@ -101,6 +103,7 @@ export const uiContent: Record<Locale, UiContent> = {
     nav: {
       home: "Home",
       projects: "Projects",
+      resume: "Resume",
       blog: "Blog",
     },
     hero: {
@@ -125,13 +128,14 @@ export const uiContent: Record<Locale, UiContent> = {
     project: {
       live: "Live",
       source: "Source",
-      caseStudy: "Case Study",
+      caseStudy: "Details",
       viewAll: "View all projects",
       moreSuffix: "more",
     },
     projectsPage: {
       title: "Projects",
       subtitle: "A selection of projects spanning data visualization, AI systems, web apps, and scientific computing.",
+      hoverPreview: "Hover preview",
       searchPlaceholder: "Search projects, tech, or organizations",
       filterAll: "All",
       filterCompleted: "Completed",
@@ -196,6 +200,7 @@ export const uiContent: Record<Locale, UiContent> = {
     nav: {
       home: "Accueil",
       projects: "Projets",
+      resume: "CV",
       blog: "Blog",
     },
     hero: {
@@ -220,13 +225,14 @@ export const uiContent: Record<Locale, UiContent> = {
     project: {
       live: "Démo",
       source: "Code",
-      caseStudy: "Étude de cas",
+      caseStudy: "Détails",
       viewAll: "Voir tous les projets",
       moreSuffix: "autres",
     },
     projectsPage: {
       title: "Projets",
       subtitle: "Une sélection de projets en visualisation de données, systèmes IA, applications web et calcul scientifique.",
+      hoverPreview: "Aperçu au survol",
       searchPlaceholder: "Rechercher un projet, une techno ou une organisation",
       filterAll: "Tous",
       filterCompleted: "Terminés",
@@ -285,6 +291,103 @@ export const uiContent: Record<Locale, UiContent> = {
       useLight: "Utiliser le thème clair",
       useDark: "Utiliser le thème sombre",
       useSystem: "Utiliser le thème système",
+    },
+  },
+  ar: {
+    nav: {
+      home: "الرئيسية",
+      projects: "المشاريع",
+      resume: "السيرة الذاتية",
+      blog: "المدونة",
+    },
+    hero: {
+      role: "مهندس Fullstack وذكاء اصطناعي — متدرّب لدى Dassault Systèmes",
+      location: "Polytech Paris-Saclay · باريس، فرنسا",
+      summary: "أبني تطبيقات full-stack، ووكلاء ذكاء اصطناعي، ومحاكاة علمية. أُحب الأنظمة المصممة بعناية، والواجهات النظيفة، والمساحة الفاصلة بين البرمجيات والذكاء الاصطناعي والحوسبة.",
+      contactCta: "تواصل معي",
+      downloadCta: "تنزيل السيرة الذاتية",
+      scrollCta: "انتقل إلى المشاريع",
+      backgroundAlt: "خلفية القسم الرئيسي",
+      portraitAlt: "صورة لMathieu Waharte",
+    },
+    sections: {
+      experience: "الخبرة",
+      education: "التعليم",
+      skillsTitle: "المهارات التقنية",
+      skillsDescription: "اللغات والأطر والبروتوكولات والأساليب العلمية التي أستخدمها لتصميم حلول full-stack وهندسات الذكاء الاصطناعي.",
+      projects: "المشاريع",
+      certifications: "الشهادات",
+      contactTitle: "لنَبقَ على تواصل",
+    },
+    project: {
+      live: "مباشر",
+      source: "المصدر",
+      caseStudy: "التفاصيل",
+      viewAll: "عرض كل المشاريع",
+      moreSuffix: "إضافية",
+    },
+    projectsPage: {
+      title: "المشاريع",
+      subtitle: "مجموعة مختارة من المشاريع في تصور البيانات، وأنظمة الذكاء الاصطناعي، وتطبيقات الويب، والحوسبة العلمية.",
+      hoverPreview: "معاينة عند التمرير",
+      searchPlaceholder: "ابحث في المشاريع أو التقنيات أو الجهات",
+      filterAll: "الكل",
+      filterCompleted: "مكتملة",
+      filterInProgress: "قيد التنفيذ",
+      filterWon: "فائزة",
+      statusCompleted: "مكتمل",
+      statusInProgress: "قيد التنفيذ",
+      statusWon: "فائز",
+      noResults: "لا توجد مشاريع تطابق بحثك.",
+      backHome: "العودة إلى الرئيسية",
+      organization: "الجهة",
+      period: "الفترة",
+      status: "الحالة",
+      technologies: "التقنيات",
+      highlights: "أبرز النقاط",
+      links: "الروابط",
+      openProject: "فتح المشروع",
+      openSource: "شفرة المصدر",
+      openLive: "عرض مباشر",
+      openDemo: "عرض توضيحي",
+      openDataset: "مجموعة البيانات",
+    },
+    certifications: {
+      showMore: "عرض المزيد",
+      showLess: "عرض أقل",
+    },
+    contact: {
+      emailCta: "راسلني",
+      resumeCta: "تنزيل السيرة الذاتية",
+      openResumeCta: "فتح السيرة الذاتية",
+      vcardCta: "حفظ جهة الاتصال",
+    },
+    resume: {
+      title: "السيرة الذاتية",
+      description: "تظهر السيرة الذاتية تلقائيًا باللغة الأنسب وفقًا للغة أو تفضيل الموقع في المتصفح.",
+      backHome: "العودة إلى الرئيسية",
+      download: "تنزيل PDF",
+      openInNewTab: "فتح في تبويب جديد",
+    },
+    footer: {
+      sourceCode: "الشفرة المصدرية",
+      licence: "الترخيص",
+      copyright: "حقوق النشر © 2026 Mathieu Waharte. جميع الحقوق محفوظة.",
+    },
+    notFound: {
+      title: "404 — الصفحة غير موجودة",
+      subtitle: "يبدو أنك ابتعدت قليلًا عن مسار البكسلات. لنعد إلى شيء مفيد.",
+      backHome: "العودة إلى الرئيسية",
+      goProjects: "عرض المشاريع",
+      goResume: "فتح السيرة الذاتية",
+    },
+    theme: {
+      light: "فاتح",
+      dark: "داكن",
+      system: "النظام",
+      useLight: "استخدام السمة الفاتحة",
+      useDark: "استخدام السمة الداكنة",
+      useSystem: "استخدام سمة النظام",
     },
   },
 }

@@ -4,7 +4,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [x] Create a Next.js project with TypeScript
 - [x] Add TailwindCSS
 - [x] Add Framer Motion
-- [ ] Layout
+- [x] Layout
   - [x] Following Header
     - [x] Logo
     - [x] Navigation links
@@ -97,8 +97,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 
 ## Bonus
 ### Features
-- [ ] Arabic language support
-- [ ] Copying
+- [x] Arabic language support
 
 ### Design
 - [x] Theme toggle effect
@@ -121,16 +120,17 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Add the missing certifications
 - [ ] profile picture
 - [ ] banner picture
-- [ ] certifications icons & text & date format
+- [ ] certifications icons 
+- [x] certification text & date format
 - [ ] Layout
   - [x] Remove Useless text
-  - [ ] Actions alignement in hero section (grouping and alignement of "aller au projets to center")
-  - [ ] Footer size and should always at least be at the bottom of the screen
-  - [ ] Rename "etude de cas"
+  - [x] Actions alignement in hero section (grouping and alignement of "aller au projets to center")
+  - [x] Footer size and should always at least be at the bottom of the screen
+  - [x] Rename "etude de cas"
   - [ ] Retour & ouvrir buttons on projects
-  - [ ] Background animation on 404, projet details => only hero ?
-  - [ ] Mobile menu
-  - [ ] Mobile background
+  - [x] remove Background animation on 404, projet details etc => only hero
+  - [x] Improve Mobile menu
+  - [x] Fix Mobile background
   - [ ] Projects links top on mobile
   - [ ] Allow flow to the right of location on experiences/formation (it currently is a block and doesn't flow below the dates when small space) on 400px or less (not large mobiles)
   - [ ] Click on projects to open the project details page (currently it opens only on the details)
@@ -141,6 +141,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Licensing
 - [ ] DMCA Protection Certificate
 - [x] vCard integration
+- [ ] Allow flow to the right of location on experiences/formation (it currently is a block and doesn't flow below the dates when small space) on 400px or less (not large mobiles)
 
 
 ## Future

@@ -1,5 +1,5 @@
 // import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import FooterSection from "@/components/layout/Footer";
 import Home from './pages/Home';
@@ -40,19 +40,13 @@ import {
 // }
 
 function App() {
+  const location = useLocation()
+
   return (
-    <BrowserRouter>
-      <Seo />
-      <a
-        href="#home"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-60 focus:rounded-md focus:bg-muted focus:px-4 focus:py-2 focus:text-foreground"
-      >
-        Skip to content
-      </a>
-      <div className="fixed inset-0 -z-20 bg-background transition-colors duration-300" />
-      <PhysicsDotsBackground />
+    <div className="relative flex min-h-screen flex-col bg-background text-foreground">
+      {location.pathname === "/" ? <PhysicsDotsBackground /> : null}
       <Navbar />
-      <div className="flex flex-col justify-space-between h-full bg-background/0 text-foreground relative z-10">
+      <div className="relative z-10 flex flex-1 flex-col bg-background/0 text-foreground">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsPage />} />
@@ -62,8 +56,23 @@ function App() {
         </Routes>
         <FooterSection />
       </div>
-    </BrowserRouter>
-  );
+    </div>
+  )
 }
 
-export default App;
+function AppShell() {
+  return (
+    <BrowserRouter>
+      <Seo />
+      <a
+        href="#home"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-60 focus:rounded-md focus:bg-muted focus:px-4 focus:py-2 focus:text-foreground"
+      >
+        Skip to content
+      </a>
+      <App />
+    </BrowserRouter>
+  )
+}
+
+export default AppShell;

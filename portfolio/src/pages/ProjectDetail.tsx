@@ -59,15 +59,15 @@ export default function ProjectDetailPage() {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          <Button asChild variant="outline" className="rounded-md">
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+          <Button asChild variant="outline" className="w-full rounded-md sm:w-auto">
             <a href="/projects" className="inline-flex items-center gap-2">
               <ArrowLeft className="size-4" />
               {content.projectsPage.backHome}
             </a>
           </Button>
 
-          <Button asChild className="rounded-md">
+          <Button asChild className="w-full rounded-md sm:w-auto">
             <a href={`/projects#${project.slug}`} className="inline-flex items-center gap-2">
               <FolderOpen className="size-4" />
               {content.projectsPage.openProject}
@@ -130,8 +130,8 @@ export default function ProjectDetailPage() {
           </section>
         </div>
 
-        <aside className="space-y-6">
-          <section className="rounded-none border border-border bg-card p-6">
+        <aside className="flex flex-col gap-6">
+          <section className="order-2 rounded-none border border-border bg-card p-6 lg:order-none">
             <h2 className="mb-4 text-xl font-semibold text-foreground">
               {content.projectsPage.technologies}
             </h2>
@@ -144,7 +144,7 @@ export default function ProjectDetailPage() {
             </div>
           </section>
 
-          <section className="rounded-none border border-border bg-card p-6">
+          <section className="order-1 rounded-none border border-border bg-card p-6 lg:order-none">
             <h2 className="mb-4 text-xl font-semibold text-foreground">
               {content.projectsPage.links}
             </h2>

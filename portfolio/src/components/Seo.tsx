@@ -45,7 +45,7 @@ export default function Seo() {
     const pathname = location.pathname.replace(/\/+$/, "") || "/"
     const isResume = pathname.startsWith("/resume")
     const isProjectsIndex = pathname === "/projects"
-    const projectSlugMatch = location.pathname.match(/^\/projects\/([^/]+)$/)
+    const projectSlugMatch = RegExp(/^\/projects\/([^/]+)$/).exec(location.pathname)
     const project = projectSlugMatch ? getProjectBySlug(locale, projectSlugMatch[1]) : undefined
     const isKnownRoute = pathname === "/" || isResume || isProjectsIndex || Boolean(project)
     const isNotFound = !isKnownRoute
@@ -86,7 +86,7 @@ export default function Seo() {
     upsertMeta("og:description", description, true)
     upsertMeta("og:url", canonical, true)
     upsertMeta("og:image", ogImage, true)
-    upsertMeta("og:locale", locale === "fr" ? "fr_FR" : "en_US", true)
+    upsertMeta("og:locale", locale === "fr" ? "fr_FR" : locale === "ar" ? "ar_AR" : "en_US", true)
     upsertMeta("twitter:card", "summary_large_image")
     upsertMeta("twitter:title", title)
     upsertMeta("twitter:description", description)
@@ -101,7 +101,7 @@ export default function Seo() {
           "@type": "Person",
           name: SITE_NAME,
           url: SITE_URL,
-          jobTitle: locale === "fr" ? "Ingénieur fullstack & IA" : "Fullstack Engineer & AI",
+          jobTitle: locale === "fr" ? "Ingénieur fullstack & IA" : locale === "ar" ? "مهندس Fullstack وذكاء اصطناعي" : "Fullstack Engineer & AI",
           sameAs: [
             "https://www.linkedin.com/in/mathieu-w-a9ba36211/",
             "https://github.com/Wubpooz",
