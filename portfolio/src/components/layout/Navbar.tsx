@@ -13,7 +13,9 @@ export default function Navbar() {
   const posthog = usePostHog();
 
   const navLinks = [
+    { label: content.nav.home, href: '/' },
     { label: content.nav.projects, href: '/projects' },
+    { label: content.nav.resume, href: '/resume' },
     { label: content.nav.blog, href: '#blog' },
   ];
 
