@@ -26,15 +26,16 @@ const initAnalytics = () => {
   posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN as string, {
     api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST as string,
     defaults: '2026-01-30',
-    bootstrap: {},
+    // Disable features that load additional scripts eagerly
+    disable_session_recording: false,
+    autocapture: false,
   });
 };
 
 if (document.readyState === 'complete') {
-  // Already loaded (e.g. script injected late)
-  requestIdleCallback ? requestIdleCallback(initAnalytics) : setTimeout(initAnalytics, 0);
+  (window.requestIdleCallback ?? setTimeout)(initAnalytics);
 } else {
   window.addEventListener('load', () => {
-    requestIdleCallback ? requestIdleCallback(initAnalytics) : setTimeout(initAnalytics, 0);
+    (window.requestIdleCallback ?? setTimeout)(initAnalytics);
   });
 }

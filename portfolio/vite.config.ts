@@ -8,6 +8,10 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // Use the slim build of @posthog/react which does NOT import posthog-js.
+      // This removes vendor-posthog from the modulepreload list so the 70 KB
+      // chunk is never fetched on the critical path.
+      "@posthog/react": path.resolve(__dirname, "node_modules/@posthog/react/dist/esm/slim/index.js"),
     },
     tsconfigPaths: true
   },
