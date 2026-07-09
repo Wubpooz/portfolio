@@ -12,17 +12,22 @@ const OPTIONS: Array<{ value: Theme; Icon: typeof Sun }> = [
 export default function ThemeSwitcher({
   theme,
   setTheme,
+  variant = "default",
 }: {
   theme: Theme
   setTheme: (theme: Theme) => void
+  variant?: "default" | "mobile"
   compact?: boolean
 }) {
   const { locale } = useLocale()
   const content = getUiContent(locale)
+  const isMobile = variant === "mobile"
 
   return (
     <div
-      className="relative inline-flex items-center rounded-md border border-border bg-background p-1 shadow-sm"
+      className={`relative inline-flex items-center rounded-md border border-border bg-background p-1 shadow-sm ${
+        isMobile ? "gap-1" : ""
+      }`}
       aria-label={content.theme.system}
     >
       {OPTIONS.map(({ value, Icon }) => {
@@ -39,7 +44,9 @@ export default function ThemeSwitcher({
             key={value}
             type="button"
             onClick={() => setTheme(value)}
-            className={`relative z-10 inline-flex items-center justify-center rounded-sm p-1.5 transition-colors ${
+            className={`relative z-10 inline-flex items-center justify-center rounded-sm transition-colors ${
+              isMobile ? "p-2 min-w-10 min-h-10" : "p-1.5"
+            } ${
               isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
             }`}
             aria-label={label}
@@ -54,7 +61,7 @@ export default function ThemeSwitcher({
                 transition={{ type: "spring", stiffness: 420, damping: 28 }}
               />
             ) : null}
-            <Icon size={16} className="relative z-10" aria-hidden="true" />
+            <Icon size={isMobile ? 18 : 16} className="relative z-10" aria-hidden="true" />
           </motion.button>
         )
       })}

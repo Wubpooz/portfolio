@@ -85,7 +85,7 @@ export default function Navbar() {
               <span key={lang.code}>
                 <button
                   type="button"
-                  onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code as 'en' | 'fr' | 'ar'); }}
+                  onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code); }}
                   className={`transition-colors ${locale === lang.code ? 'text-foreground font-semibold' : 'hover:text-foreground'} ${i < 2 ? 'mr-1' : ''}`}
                   aria-pressed={locale === lang.code}
                   aria-label={lang.aria}
@@ -105,17 +105,24 @@ export default function Navbar() {
 
       </div>
 
+
+      {/* Mobile menu */}
       {mobileMenuOpen ? (
-        <div className="border-t border-border bg-background/95 px-4 py-4 shadow-lg backdrop-blur md:hidden">
+        <div className="animate-slide-down border-t border-border bg-background/95 px-4 py-4 shadow-lg backdrop-blur md:hidden">
           <nav className="grid grid-cols-2 gap-2" aria-label="Mobile navigation">
-            {navLinks.map((link) => {
+            {navLinks.map((link, index) => {
               const isHash = link.href.startsWith("#");
+              const className = "animate-fade-in rounded-md border border-border bg-card/40 px-3 py-3 text-sm font-mono text-foreground transition-colors hover:bg-muted/30";
+              const style = { animationDelay: `${index * 40}ms` };
+              const onClick = () => { setMobileMenuOpen(false); };
+
               return isHash ? (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="rounded-md border border-border bg-card/40 px-3 py-3 text-sm font-mono text-foreground transition-colors hover:bg-muted/30"
-                  onClick={() => { setMobileMenuOpen(false); }}
+                  className={className}
+                  style={style}
+                  onClick={onClick}
                 >
                   {link.label}
                 </a>
@@ -123,42 +130,31 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className="rounded-md border border-border bg-card/40 px-3 py-3 text-sm font-mono text-foreground transition-colors hover:bg-muted/30"
-                  onClick={() => { setMobileMenuOpen(false); }}
+                  className={className}
+                  style={style}
+                  onClick={onClick}
                 >
                   {link.label}
                 </Link>
               );
             })}
+          
+            <div className="mt-4 grid gap-3">
+             <ThemeSwitcher theme={theme} setTheme={setTheme} compact variant="mobile" />
+                {languageOptions.map((lang) => (
+                  <button
+                    key={lang.code}
+                    type="button"
+                    onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code); }}
+                    className={`rounded-md border px-3 py-2 text-xs font-mono transition-colors ${locale === lang.code ? 'border-foreground text-foreground font-semibold' : 'border-border text-muted-foreground hover:text-foreground'}`}
+                    aria-label={lang.aria}
+                  >
+                    {lang.label}
+                  </button>
+                ))}
+            </div>
           </nav>
 
-          <div className="mt-4 grid gap-3">
-            <Link
-              to="/resume"
-              className="inline-flex w-full items-center justify-center rounded-md border border-border bg-card px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted/30"
-              onClick={() => { setMobileMenuOpen(false); }}
-            >
-              {content.nav.resume}
-            </Link>
-
-            <div className="grid grid-cols-3 gap-2">
-              {languageOptions.map((lang) => (
-                <button
-                  key={lang.code}
-                  type="button"
-                  onClick={() => { posthog.capture('language_switched', { from: locale, to: lang.code }); setLocale(lang.code as 'en' | 'fr' | 'ar'); }}
-                  className={`rounded-md border px-3 py-2 text-xs font-mono transition-colors ${locale === lang.code ? 'border-foreground text-foreground font-semibold' : 'border-border text-muted-foreground hover:text-foreground'}`}
-                  aria-label={lang.aria}
-                >
-                  {lang.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="flex items-center justify-between gap-3 rounded-md border border-border bg-card px-3 py-2.5">
-              <ThemeSwitcher theme={theme} setTheme={setTheme} compact />
-            </div>
-          </div>
         </div>
       ) : null}
     </header>
