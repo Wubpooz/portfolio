@@ -1,54 +1,73 @@
 # Mathieu Waharte - Fullstack Engineer & AI
 
-**Role**: Fullstack Engineer & AI
-**Location**: Paris, France
+**Role**: Fullstack Engineer & AI  
+**Location**: Paris, France  
 **Links**:
-- LinkedIn: https://www.linkedin.com/in/mathieu-w-a9ba36211/
-- GitHub: https://github.com/Wubpooz
-- Website: https://mw-portfolio-cfi.pages.dev/
+- [LinkedIn](https://www.linkedin.com/in/mathieu-w-a9ba36211/)
+- [GitHub](https://github.com/Wubpooz)
+- [Website](https://mw-portfolio-cfi.pages.dev/)
 
 ## About
+
 Mathieu Waharte is a Fullstack Engineer & AI enthusiast based in Paris. He builds comprehensive web applications and integrates AI solutions into real-world projects.
 
 ## Projects
 
 ### How Europe Spends Its Time
-**Period**: Mar 2026 – Apr 2026
-**Organization**: Polytech Paris-Saclay
-**Summary**: Resolved severe codification drift across 20 years of European time-use surveys with resilient Python mapping pipelines, then designed an accessible web app with custom interactive charts for a Hugging Face dataset.
-**Stack**: Python, pandas, Data Visualization, Accessibility, Hugging Face
-**Link**: https://huggingface.co/datasets/Bluefir/hetus-time-use
+
+**Period**: Mar 2026 – Apr 2026  
+**Organization**: Polytech Paris-Saclay  
+**Summary**: Resolved severe codification drift across 20 years of European time-use surveys with resilient Python mapping pipelines, then designed an accessible web app with custom interactive charts for a Hugging Face dataset.  
+**Stack**: Python, pandas, Data Visualization, Accessibility, Hugging Face  
+**Links**:
+- [Dataset on Hugging Face](https://huggingface.co/datasets/Bluefir/hetus-time-use)
+- [Case Study](/projects/how-europe-spends-its-time)
 
 ### Deloitte x Google Cloud Hackathon
-**Period**: Nov 2025
-**Organization**: Deloitte x Google Cloud
-**Status**: Won
-**Summary**: Built a distributed multi-agent system with ADK and MCP to automate marketing campaign creation, orchestrating specialized agents via A2A and integrating BigQuery, Gemini, Imagen, Cloud Run, and Vertex AI Agent Engine.
-**Stack**: AI Agents, Agentic AI, MCP, BigQuery, Cloud Run, Vertex AI
+
+**Period**: Nov 2025  
+**Organization**: Deloitte x Google Cloud  
+**Status**: Won  
+**Summary**: Built a distributed multi-agent system with ADK and MCP to automate marketing campaign creation, orchestrating specialized agents via A2A and integrating BigQuery, Gemini, Imagen, Cloud Run, and Vertex AI Agent Engine.  
+**Stack**: AI Agents, Agentic AI, MCP, BigQuery, Cloud Run, Vertex AI  
+**Links**:
+- [Case Study](/projects/deloitte-google-cloud-hackathon)
 
 ### XTTS Finetuning
-**Period**: Jun 2025 – Aug 2025
-**Organization**: L-Università ta' Malta
-**Summary**: Reviewed the state of the art in TTS, built a Streamlit app for faster paper discovery, and fine-tuned XTTS on Google Colab with PyTorch and GPT-2 to add Maltese without regressions.
-**Stack**: Git, PyTorch, GPT-2, XTTS, Streamlit, Hugging Face
-**Links**: 
-- Source: https://github.com/Wubpooz/Malta-TTS
-- Demo: https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/
+
+**Period**: Jun 2025 – Aug 2025  
+**Organization**: L-Università ta' Malta  
+**Summary**: Reviewed the state of the art in TTS, built a Streamlit app for faster paper discovery, and fine-tuned XTTS on Google Colab with PyTorch and GPT-2 to add Maltese without regressions.  
+**Stack**: Git, PyTorch, GPT-2, XTTS, Streamlit, Hugging Face  
+**Links**:
+- [Source on GitHub](https://github.com/Wubpooz/Malta-TTS)
+- [Maltese TTS Demo](https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/)
+- [Paper Discovery Tool](https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/)
+- [Case Study](/projects/xtts-finetuning)
 
 ### Quizine
-**Period**: Jan 2025 – May 2025
-**Organization**: Polytech Paris-Saclay
-**Summary**: Designed a robust real-time quiz architecture handling 50 players per room, built a modular Angular frontend, and integrated Redis-backed session management with deployment on Vercel and Supabase.
-**Stack**: WebSockets, Angular, Redis, Vercel, Supabase, Figma
+
+**Period**: Jan 2025 – May 2025  
+**Organization**: Polytech Paris-Saclay  
+**Summary**: Designed a robust real-time quiz architecture handling 50 players per room, built a modular Angular frontend, and integrated Redis-backed session management with deployment on Vercel and Supabase.  
+**Stack**: WebSockets, Angular, Redis, Vercel, Supabase, Figma  
+**Links**:
+- [Case Study](/projects/quizine)
 
 ### Magnus Carlos
-**Period**: Sep 2024 – Dec 2024
-**Organization**: Polytech Paris-Saclay
-**Summary**: Managed a 3D scientific simulation project with a six-person team using Agile practices, and implemented the effect’s visualization with SDL2 textures, cameras, and rotations.
-**Stack**: C, SDL2, 3D Simulation, Agile, Visualization
+
+**Period**: Sep 2024 – Dec 2024  
+**Organization**: Polytech Paris-Saclay  
+**Summary**: Managed a 3D scientific simulation project with a six-person team using Agile practices, and implemented the effect's visualization with SDL2 textures, cameras, and rotations.  
+**Stack**: C, SDL2, 3D Simulation, Agile, Visualization  
+**Links**:
+- [Case Study](/projects/magnus-carlos)
 
 ### Nyxen
-**Period**: 2023 – 2024
-**Organization**: Polytech Paris-Saclay
-**Summary**: Designed the layout, palette, flows, and SPA routing for a modern web experience while integrating an animated 3D model into the main section.
-**Stack**: CSS, SPA Routing, 3D, Animation, Git
+
+**Period**: 2023 – 2024  
+**Organization**: Polytech Paris-Saclay  
+**Summary**: Designed the layout, palette, flows, and SPA routing for a modern web experience while integrating an animated 3D model into the main section.  
+**Stack**: CSS, SPA Routing, 3D, Animation, Git  
+**Links**:
+- [Case Study](/projects/nyxen)
