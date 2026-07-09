@@ -1,9 +1,9 @@
-import { ArrowDown, Contact, ExternalLink, Mail } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { getUiContent, useLocale } from "@/i18n"
-import { shouldInvertIcon } from "@/lib/utils"
-import { usePostHog } from "@posthog/react"
+import { ArrowDown, Contact, ExternalLink, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { getUiContent, useLocale } from "@/i18n";
+import { shouldInvertIcon } from "@/lib/utils";
+import { usePostHog } from "@posthog/react";
 
 const quickLinks = [
   {
@@ -24,21 +24,24 @@ const quickLinks = [
     href: "mailto:mathieu.waharte@gmail.com",
     icon: "mail",
   },
-]
+];
 
 function QuickLinkIcon({
   label,
   icon,
-}: {
-  label: string
-  icon: string
-}) {
+}: Readonly<{
+  label: string;
+  icon: string;
+}>) {
   if (icon === "mail") {
-    return <Mail className="size-4 text-muted-foreground" aria-hidden="true" />
+    return <Mail className="size-4 text-muted-foreground" aria-hidden="true" />;
   }
 
-  const src = icon === "linkedin" ? "/icons/linkedin.svg" : `https://cdn.simpleicons.org/${icon}`
-  const invertClass = shouldInvertIcon(icon || label) ? "dark:invert" : ""
+  const src =
+    icon === "linkedin"
+      ? "/icons/linkedin.svg"
+      : `https://cdn.simpleicons.org/${icon}`;
+  const invertClass = shouldInvertIcon(icon || label) ? "dark:invert" : "";
 
   return (
     <img
@@ -50,28 +53,28 @@ function QuickLinkIcon({
       className={`size-4 object-contain ${invertClass}`}
       aria-hidden="true"
     />
-  )
+  );
 }
 
 export default function HeroSection() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  const posthog = usePostHog()
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
+  const posthog = usePostHog();
 
   return (
-    <section id="home" className="w-full pt-0 pb-10 md:pb-12">
-      <Card className="overflow-hidden rounded-none border-border bg-card shadow-none">
+    <section id="home" className="w-full pt-0 pb-6">
+      <Card className="overflow-hidden rounded-none border-border bg-card shadow-none pt-0">
         <div className="relative h-44 border-b border-border sm:h-56 md:h-72">
           <img
             src="https://picsum.photos/seed/mathieu-hero-banner/1600/700"
             alt={content.hero.backgroundAlt}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-center md:object-top"
             loading="eager"
           />
           <div className="absolute inset-0 bg-black/10" />
         </div>
 
-        <CardContent className="relative px-5 pb-6 pt-0 md:px-8 md:pb-8">
+        <CardContent className="relative px-5 pb-4 pt-0 md:px-8">
           <div className="-mt-14 mb-6 md:-mt-16">
             <div className="h-24 w-24 overflow-hidden border-4 border-card bg-muted shadow-sm md:h-32 md:w-32">
               <img
@@ -103,41 +106,6 @@ export default function HeroSection() {
               <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-[1.05rem]">
                 {content.hero.summary}
               </p>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Button asChild className="rounded-md">
-                  <a
-                    href="mailto:mathieu.waharte@gmail.com"
-                    onClick={() => posthog.capture('hero_email_cta_clicked')}
-                  >
-                    <Mail className="size-4" />
-                    {content.hero.contactCta}
-                  </a>
-                </Button>
-
-                <Button asChild variant="outline" className="rounded-md">
-                  <a
-                    href="/resume"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => posthog.capture('hero_resume_opened')}
-                  >
-                    <ExternalLink className="size-4" />
-                    {content.contact.openResumeCta}
-                  </a>
-                </Button>
-
-                <Button asChild variant="outline" className="rounded-md">
-                  <a
-                    href="/assets/mathieu-waharte.vcf"
-                    download="mathieu-waharte.vcf"
-                    onClick={() => posthog.capture('vcard_downloaded')}
-                  >
-                    <Contact className="size-4" />
-                    {content.contact.vcardCta}
-                  </a>
-                </Button>
-              </div>
             </div>
 
             <div className="border border-border bg-background">
@@ -146,9 +114,19 @@ export default function HeroSection() {
                   <a
                     key={item.label}
                     href={item.href}
-                    target={item.href.startsWith("mailto:") ? undefined : "_blank"}
-                    rel={item.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                    onClick={() => posthog.capture('hero_social_link_clicked', { platform: item.icon })}
+                    target={
+                      item.href.startsWith("mailto:") ? undefined : "_blank"
+                    }
+                    rel={
+                      item.href.startsWith("mailto:")
+                        ? undefined
+                        : "noopener noreferrer"
+                    }
+                    onClick={() =>
+                      posthog.capture("hero_social_link_clicked", {
+                        platform: item.icon,
+                      })
+                    }
                     className="flex items-center gap-3 px-4 py-4 transition-colors hover:bg-muted/30"
                   >
                     <div className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border bg-card">
@@ -169,7 +147,42 @@ export default function HeroSection() {
             </div>
           </div>
 
-          <div className="mt-8 flex">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-start">
+            <Button asChild className="rounded-md">
+              <a
+                href="mailto:mathieu.waharte@gmail.com"
+                onClick={() => posthog.capture("hero_email_cta_clicked")}
+              >
+                <Mail className="size-4" />
+                {content.hero.contactCta}
+              </a>
+            </Button>
+
+            <Button asChild variant="outline" className="rounded-md">
+              <a
+                href="/resume"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => posthog.capture("hero_resume_opened")}
+              >
+                <ExternalLink className="size-4" />
+                {content.contact.openResumeCta}
+              </a>
+            </Button>
+
+            <Button asChild variant="outline" className="rounded-md">
+              <a
+                href="/assets/mathieu-waharte.vcf"
+                download="mathieu-waharte.vcf"
+                onClick={() => posthog.capture("vcard_downloaded")}
+              >
+                <Contact className="size-4" />
+                {content.contact.vcardCta}
+              </a>
+            </Button>
+          </div>
+
+          <div className="mt-8 flex justify-center md:justify-start">
             <a
               href="#projects"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -181,5 +194,5 @@ export default function HeroSection() {
         </CardContent>
       </Card>
     </section>
-  )
+  );
 }
