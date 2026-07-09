@@ -53,12 +53,26 @@ interface LocaleContextValue {
 const LocaleContext = createContext<LocaleContextValue | undefined>(undefined)
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => readStoredLocale() ?? detectLocale())
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search)
+      const queryLang = params.get("lang")
+      if (queryLang === "en" || queryLang === "fr" || queryLang === "ar") {
+        return queryLang
+      }
+    }
+    return readStoredLocale() ?? detectLocale()
+  })
   const [isManualOverride, setIsManualOverride] = useState(() => readStoredLocale() !== null)
 
   const setLocale = useCallback((nextLocale: Locale) => {
     setIsManualOverride(true)
     setLocaleState(nextLocale)
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href)
+      url.searchParams.set("lang", nextLocale)
+      window.history.pushState({}, "", url.toString())
+    }
   }, [])
 
   useEffect(() => {
@@ -73,6 +87,19 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = locale
     document.documentElement.dir = locale === "ar" ? "rtl" : "ltr"
   }, [isManualOverride, locale])
+
+  // Sync locale if user navigates back/forward in browser history
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search)
+      const queryLang = params.get("lang")
+      if (queryLang === "en" || queryLang === "fr" || queryLang === "ar") {
+        setLocaleState(queryLang)
+      }
+    }
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [])
 
   const value = useMemo<LocaleContextValue>(
     () => ({
