@@ -44,7 +44,7 @@ A robust Content Security Policy has been defined to block Cross-Site Scripting 
 - `font-src 'self' data:`: Permits fonts bundled locally.
 - `connect-src 'self'`: Prevents sending tracking or data payloads to arbitrary external APIs.
 - `object-src 'none'`: Prevents rendering flash or Java plugins.
-- `frame-ancestors 'none'`: Prevents clickjacking by disabling embedding of this site inside external iframes.
+- `frame-ancestors 'self'`: Prevents clickjacking by disabling embedding of this site inside external iframes (allows same-origin framing for features like PDF resumes).
 - `base-uri 'self'`: Limits base element href values to same-origin.
 - `form-action 'self'`: Restricts where form submissions can be sent.
 
