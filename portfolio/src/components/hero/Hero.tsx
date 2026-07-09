@@ -67,10 +67,13 @@ export default function HeroSection() {
       <Card className="overflow-hidden rounded-none border-border bg-card shadow-none pt-0">
         <div className="relative h-44 border-b border-border sm:h-56 md:h-72">
           <img
-            src="https://picsum.photos/seed/mathieu-hero-banner/1600/700"
+            src="/assets/hero-banner.webp"
             alt={content.hero.backgroundAlt}
             className="h-full w-full object-cover object-center md:object-top"
+            width={1000}
+            height={437}
             loading="eager"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-black/10" />
         </div>
@@ -79,9 +82,11 @@ export default function HeroSection() {
           <div className="-mt-14 mb-6 md:-mt-16">
             <div className="h-24 w-24 overflow-hidden border-4 border-card bg-muted shadow-sm md:h-32 md:w-32">
               <img
-                src="https://picsum.photos/seed/mathieu-profile/400/400"
+                src="/assets/profile.webp"
                 alt={content.hero.portraitAlt}
                 className="h-full w-full object-cover"
+                width={256}
+                height={256}
                 loading="eager"
               />
             </div>
