@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { getUiContent, useLocale } from "@/i18n"
 import { useEffect } from "react"
 import { InteractiveEyes } from "@/components/shared/InteractiveEyes"
+import { Link } from "react-router-dom"
 
 export default function NotFoundPage() {
   const { locale } = useLocale()
@@ -54,24 +55,24 @@ export default function NotFoundPage() {
 
           <div className="flex flex-wrap gap-3">
             <Button asChild className="rounded-md">
-              <a href="/" className="inline-flex items-center gap-2">
+              <Link to="/" className="inline-flex items-center gap-2">
                 <Home className="size-4" />
                 {content.notFound.backHome}
-              </a>
+              </Link>
             </Button>
 
             <Button asChild variant="outline" className="rounded-md">
-              <a href="/projects" className="inline-flex items-center gap-2">
+              <Link to="/projects" className="inline-flex items-center gap-2">
                 <ArrowLeft className="size-4" />
                 {content.notFound.goProjects}
-              </a>
+              </Link>
             </Button>
 
             <Button asChild variant="secondary" className="rounded-md">
-              <a href="/resume" className="inline-flex items-center gap-2">
+              <Link to="/resume" className="inline-flex items-center gap-2">
                 <Sparkles className="size-4" />
                 {content.notFound.goResume}
-              </a>
+              </Link>
             </Button>
           </div>
         </div>

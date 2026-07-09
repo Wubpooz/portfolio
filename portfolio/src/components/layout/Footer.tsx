@@ -1,5 +1,6 @@
 import "./Footer.css"
 import { getUiContent, useLocale } from "@/i18n"
+import { Link } from "react-router-dom"
 
 export default function FooterSection() {
   const { locale } = useLocale()
@@ -8,9 +9,9 @@ export default function FooterSection() {
   return (
     <footer className="footer mt-auto">
       <nav className="footer-nav" aria-label={locale === "fr" ? "Navigation de pied de page" : "Footer navigation"}>
-        <a href="/" className="footer-link">{content.nav.home}</a>
-        <a href="/projects" className="footer-link">{content.nav.projects}</a>
-        <a href="/blog" className="footer-link">{content.nav.blog}</a>
+        <Link to="/" className="footer-link">{content.nav.home}</Link>
+        <Link to="/projects" className="footer-link">{content.nav.projects}</Link>
+        <Link to="/blog" className="footer-link">{content.nav.blog}</Link>
       </nav>
 
       <div className="footer-bottom">

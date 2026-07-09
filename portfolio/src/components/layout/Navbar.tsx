@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { getUiContent, useLocale } from '@/i18n';
@@ -36,21 +36,36 @@ export default function Navbar() {
       <div className="mx-auto flex h-14 max-w-4xl items-center justify-between gap-4 px-6">
 
         {/* Logo */}
-        <a href="/" className="font-mono font-bold text-sm tracking-tight text-foreground">
+        <Link to="/" className="font-mono font-bold text-sm tracking-tight text-foreground">
           MW
-        </a>
+        </Link>
 
         {/* Nav links */}
         <nav className="hidden md:flex gap-8" aria-label="Primary navigation">
-          {navLinks.map(link => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm transition-colors hover:text-foreground text-muted-foreground font-mono"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map(link => {
+            const isHash = link.href.startsWith("#");
+            return isHash ? (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-sm transition-colors hover:text-foreground text-muted-foreground font-mono"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <NavLink
+                key={link.label}
+                to={link.href}
+                className={({ isActive }) =>
+                  `text-sm transition-colors hover:text-foreground font-mono ${
+                    isActive ? "text-foreground font-semibold" : "text-muted-foreground"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
@@ -93,26 +108,38 @@ export default function Navbar() {
       {mobileMenuOpen ? (
         <div className="border-t border-border bg-background/95 px-4 py-4 shadow-lg backdrop-blur md:hidden">
           <nav className="grid grid-cols-2 gap-2" aria-label="Mobile navigation">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="rounded-md border border-border bg-card/40 px-3 py-3 text-sm font-mono text-foreground transition-colors hover:bg-muted/30"
-                onClick={() => { setMobileMenuOpen(false); }}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isHash = link.href.startsWith("#");
+              return isHash ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="rounded-md border border-border bg-card/40 px-3 py-3 text-sm font-mono text-foreground transition-colors hover:bg-muted/30"
+                  onClick={() => { setMobileMenuOpen(false); }}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="rounded-md border border-border bg-card/40 px-3 py-3 text-sm font-mono text-foreground transition-colors hover:bg-muted/30"
+                  onClick={() => { setMobileMenuOpen(false); }}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="mt-4 grid gap-3">
-            <a
-              href="/resume"
+            <Link
+              to="/resume"
               className="inline-flex w-full items-center justify-center rounded-md border border-border bg-card px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted/30"
               onClick={() => { setMobileMenuOpen(false); }}
             >
               {content.nav.resume}
-            </a>
+            </Link>
 
             <div className="grid grid-cols-3 gap-2">
               {languageOptions.map((lang) => (

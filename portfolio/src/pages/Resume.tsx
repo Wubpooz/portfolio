@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { ArrowLeft, Download, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getResumeAsset, getUiContent, useLocale } from "@/i18n"
+import { Link } from "react-router-dom"
 
 export default function ResumePage() {
   const { locale } = useLocale()
@@ -29,10 +30,10 @@ export default function ResumePage() {
 
         <div className="flex flex-wrap gap-3">
           <Button asChild variant="outline" className="rounded-md">
-            <a href="/" className="inline-flex items-center gap-2">
+            <Link to="/" className="inline-flex items-center gap-2">
               <ArrowLeft className="size-4" />
               {content.resume.backHome}
-            </a>
+            </Link>
           </Button>
 
           <Button asChild className="rounded-md">

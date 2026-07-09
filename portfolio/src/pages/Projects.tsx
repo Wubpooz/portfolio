@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { getUiContent, useLocale } from "@/i18n"
 import { sanitizeInput } from "@/lib/security"
 import { usePostHog } from "@posthog/react"
+import { Link } from "react-router-dom"
 
 const statusFilters = ["all", "completed", "in-progress", "won"] as const
 
@@ -53,10 +54,10 @@ export default function ProjectsPage() {
         </div>
 
         <Button asChild variant="outline" className="w-fit rounded-md">
-          <a href="/" className="inline-flex items-center gap-2">
+          <Link to="/" className="inline-flex items-center gap-2">
             <ArrowLeft className="size-4" />
             {content.projectsPage.backHome}
-          </a>
+          </Link>
         </Button>
       </div>
 

@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams, Link } from "react-router-dom"
 import { ArrowLeft, ArrowUpRight, FolderOpen, Globe, Link2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -38,7 +38,7 @@ export default function ProjectDetailPage() {
             {content.projectsPage.backHome}
           </Button>
           <Button asChild variant="outline" className="rounded-md">
-            <a href="/projects">{content.project.viewAll}</a>
+            <Link to="/projects">{content.project.viewAll}</Link>
           </Button>
         </div>
       </main>
@@ -61,17 +61,17 @@ export default function ProjectDetailPage() {
 
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
           <Button asChild variant="outline" className="w-full rounded-md sm:w-auto">
-            <a href="/projects" className="inline-flex items-center gap-2">
+            <Link to="/projects" className="inline-flex items-center gap-2">
               <ArrowLeft className="size-4" />
               {content.projectsPage.backHome}
-            </a>
+            </Link>
           </Button>
 
           <Button asChild className="w-full rounded-md sm:w-auto">
-            <a href={`/projects#${project.slug}`} className="inline-flex items-center gap-2">
+            <Link to={`/projects#${project.slug}`} className="inline-flex items-center gap-2">
               <FolderOpen className="size-4" />
               {content.projectsPage.openProject}
-            </a>
+            </Link>
           </Button>
         </div>
       </div>

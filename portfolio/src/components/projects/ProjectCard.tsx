@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator"
 import { getUiContent, useLocale } from "@/i18n"
 import { shouldInvertIcon } from "@/lib/utils"
 import { usePostHog } from "@posthog/react"
+import { Link } from "react-router-dom"
 
 const MAX_VISIBLE_STACK = 6
 
@@ -222,15 +223,15 @@ export default function ProjectCard({ project }: Readonly<{ project: ProjectItem
                 size="sm"
                 className="h-9 shrink-0 rounded-md px-0 hover:bg-transparent hover:text-foreground/70"
               >
-                <a
-                  href={readMoreLink.href}
+                <Link
+                  to={readMoreLink.href}
                   onClick={() => posthog.capture('project_case_study_clicked', { project_title: project.title, project_slug: project.slug })}
                   className="inline-flex items-center gap-2 text-foreground"
                 >
                   <BookOpen className="size-4 shrink-0" />
                   <span>{content.project.caseStudy}</span>
                   <ArrowRight className="size-4 shrink-0" />
-                </a>
+                </Link>
               </Button>
             ) : null}
           </div>

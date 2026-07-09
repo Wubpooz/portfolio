@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getUiContent, useLocale } from "@/i18n";
 import { shouldInvertIcon } from "@/lib/utils";
 import { usePostHog } from "@posthog/react";
+import { Link } from "react-router-dom";
 
 const quickLinks = [
   {
@@ -159,15 +160,15 @@ export default function HeroSection() {
             </Button>
 
             <Button asChild variant="outline" className="rounded-md">
-              <a
-                href="/resume"
+              <Link
+                to="/resume"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => posthog.capture("hero_resume_opened")}
               >
                 <ExternalLink className="size-4" />
                 {content.contact.openResumeCta}
-              </a>
+              </Link>
             </Button>
 
             <Button asChild variant="outline" className="rounded-md">
