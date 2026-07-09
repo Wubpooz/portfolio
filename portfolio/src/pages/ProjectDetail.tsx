@@ -13,6 +13,58 @@ function statusToLabel(content: ReturnType<typeof getUiContent>, status: "comple
   return content.projectsPage.statusCompleted
 }
 
+function ProjectLinksSection({
+  project,
+  content,
+  posthog,
+}: Readonly<{
+  project: NonNullable<ReturnType<typeof getProjectBySlug>>
+  content: ReturnType<typeof getUiContent>
+  posthog: any
+}>) {
+  if (!project.links || project.links.length === 0) return null
+
+  return (
+    <section className="rounded-none border border-border bg-card p-6">
+      <h2 className="mb-4 text-xl font-semibold text-foreground">
+        {content.projectsPage.links}
+      </h2>
+      <div className="space-y-3">
+        {project.links.map((link) => {
+          const labelMap: Partial<Record<string, string>> = {
+            source: content.projectsPage.openSource,
+            demo: content.projectsPage.openDemo,
+            dataset: content.projectsPage.openDataset,
+            caseStudy: content.project.caseStudy,
+            live: content.projectsPage.openLive,
+          }
+          const label = labelMap[link.labelKey] ?? content.projectsPage.openProject
+
+          const isExternal = /^https?:\/\//.test(link.href)
+          const isSafe = link.href.startsWith("/") || link.href.startsWith("http://") || link.href.startsWith("https://")
+          const safeHref = isSafe ? link.href : "#"
+
+          return (
+            <Button key={`${link.labelKey}-${link.href}`} asChild variant="outline" className="w-full justify-start rounded-md">
+              <a
+                href={safeHref}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                onClick={() => { if (isExternal) { posthog.capture('project_external_link_clicked', { project_title: project.title, project_slug: project.slug, link_type: link.labelKey }); } }}
+                className="inline-flex items-center gap-2"
+              >
+                {link.labelKey === "source" ? <Link2 className="size-4" /> : <Globe className="size-4" />}
+                {label}
+                {isExternal ? <ArrowUpRight className="ml-auto size-4" /> : null}
+              </a>
+            </Button>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+
 export default function ProjectDetailPage() {
   const { locale } = useLocale()
   const content = getUiContent(locale)
@@ -133,7 +185,13 @@ export default function ProjectDetailPage() {
         </div>
 
         <aside className="flex flex-col gap-6">
-          <section className="order-2 rounded-none border border-border bg-card p-6 lg:order-none">
+
+          {/* Desktop layout */}
+          <div className="hidden lg:block">
+            <ProjectLinksSection project={project} content={content} posthog={posthog} />
+          </div>
+
+          <section className="rounded-none border border-border bg-card p-6">
             <h2 className="mb-4 text-xl font-semibold text-foreground">
               {content.projectsPage.technologies}
             </h2>
@@ -146,43 +204,10 @@ export default function ProjectDetailPage() {
             </div>
           </section>
 
-          <section className="order-1 rounded-none border border-border bg-card p-6 lg:order-none">
-            <h2 className="mb-4 text-xl font-semibold text-foreground">
-              {content.projectsPage.links}
-            </h2>
-            <div className="space-y-3">
-              {project.links.map((link) => {
-                const labelMap: Partial<Record<string, string>> = {
-                  source: content.projectsPage.openSource,
-                  demo: content.projectsPage.openDemo,
-                  dataset: content.projectsPage.openDataset,
-                  caseStudy: content.project.caseStudy,
-                  live: content.projectsPage.openLive,
-                }
-                const label = labelMap[link.labelKey] ?? content.projectsPage.openProject
-
-                const isExternal = /^https?:\/\//.test(link.href)
-                const isSafe = link.href.startsWith("/") || link.href.startsWith("http://") || link.href.startsWith("https://")
-                const safeHref = isSafe ? link.href : "#"
-
-                return (
-                  <Button key={`${link.labelKey}-${link.href}`} asChild variant="outline" className="w-full justify-start rounded-md">
-                    <a
-                      href={safeHref}
-                      target={isExternal ? "_blank" : undefined}
-                      rel={isExternal ? "noopener noreferrer" : undefined}
-                      onClick={() => { if (isExternal) { posthog.capture('project_external_link_clicked', { project_title: project.title, project_slug: project.slug, link_type: link.labelKey }); } }}
-                      className="inline-flex items-center gap-2"
-                    >
-                      {link.labelKey === "source" ? <Link2 className="size-4" /> : <Globe className="size-4" />}
-                      {label}
-                      {isExternal ? <ArrowUpRight className="ml-auto size-4" /> : null}
-                    </a>
-                  </Button>
-                )
-              })}
-            </div>
-          </section>
+          {/* Mobile layout */}
+          <div className="block lg:hidden">
+            <ProjectLinksSection project={project} content={content} posthog={posthog} />
+          </div>
         </aside>
       </div>
     </main>
