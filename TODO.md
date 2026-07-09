@@ -62,7 +62,6 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [x] Status (in progress, completed, abandoned) ?
   - [x] Search
   - [x] Filters
-  - [ ] Preview on hover in home page
   - [x] Page per project
 
 ## Phase 4 - SEO & Prod
@@ -99,7 +98,6 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 ## Bonus
 ### Features
 - [ ] Arabic language support
-- [x] vCard integration
 - [ ] Copying
 
 ### Design
@@ -113,7 +111,6 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [x] Express fluency in each technology in a good way
   - [x] heart next to the best ?
   - [x] dots from 1 to 5 ?
-- [ ] Licensing
 - [ ] Project details
   - picture
   - description
@@ -139,7 +136,10 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 
 
 ## Very Bonus
+- [ ] Preview projects on hover in home page
+- [ ] Licensing
 - [ ] DMCA Protection Certificate
+- [x] vCard integration
 
 
 ## Future
