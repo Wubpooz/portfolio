@@ -6,7 +6,7 @@ export default function FooterSection() {
   const content = getUiContent(locale)
 
   return (
-    <footer className="footer">
+    <footer className="footer mt-auto">
       <nav className="footer-nav" aria-label={locale === "fr" ? "Navigation de pied de page" : "Footer navigation"}>
         <a href="/" className="footer-link">{content.nav.home}</a>
         <a href="/projects" className="footer-link">{content.nav.projects}</a>
