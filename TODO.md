@@ -122,12 +122,12 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] banner picture
 - [ ] certifications icons
 - [x] certification text & date format
-- [ ] Layout
+- [x] Layout
   - [x] Remove Useless text
   - [x] Actions alignement in hero section (grouping and alignement of "aller au projets to center")
   - [x] Footer size and should always at least be at the bottom of the screen
   - [x] Rename "etude de cas"
-  - [ ] Retour & ouvrir buttons on projects
+  - [x] Retour & ouvrir buttons on projects
   - [x] remove Background animation on 404, projet details etc => only hero
   - [x] Improve Mobile menu
   - [x] Fix Mobile background
