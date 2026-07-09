@@ -120,6 +120,9 @@
 - [Chanhdai Copy Button](https://chanhdai.com/components/copy-button)
 - [Waves CN](https://waves-cn.vercel.app/) - waveforms
 - [React Bits Card Nav](https://reactbits.dev/components/card-nav)
+- [Chanhdai Code Block Command](https://chanhdai.com/components/code-block-command)
+- [Chanhdai Consent Manager](https://chanhdai.com/components/consent-manager)
+- [Chanhdai Share Menu](https://chanhdai.com/components/share-menu)
 
 ---
 
