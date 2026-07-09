@@ -10,6 +10,7 @@ export function InteractiveEyes() {
   const rightRotateSpring = useSpring(45, { stiffness: 150, damping: 15 })
 
   const [isBlinking, setIsBlinking] = useState(false)
+  const absoluteCenterRef = useRef({ x: 0, y: 0 })
 
   // Track cursor/touch coordinates and update eye angles
   useEffect(() => {
@@ -17,6 +18,16 @@ export function InteractiveEyes() {
     let mouseY = window.innerHeight / 2
     let isIdle = true
     let idleTimeout: ReturnType<typeof setTimeout>
+
+    const updateCenter = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        absoluteCenterRef.current = {
+          x: rect.left + window.scrollX + rect.width / 2,
+          y: rect.top + window.scrollY + rect.height / 2,
+        }
+      }
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX
@@ -47,33 +58,30 @@ export function InteractiveEyes() {
     const updateAngles = () => {
       if (isIdle) return
 
-      // Use the container center (midpoint between both eyes) to ensure both eyes track at the exact same angle
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect()
-        const centerX = rect.left + rect.width / 2
-        const centerY = rect.top + rect.height / 2
-        
-        // Angle in radians
-        const angleRad = Math.atan2(mouseY - centerY, mouseX - centerX)
-        // Convert to degrees
-        const angleDeg = (angleRad * 180) / Math.PI
-        
-        // Since pupils are placed at bottom-right (45 deg initially),
-        // we subtract 45 deg to point the pupils directly at the target.
-        const rawTargetAngle = angleDeg - 45
+      // Use the cached container center (midpoint between both eyes) to ensure both eyes track at the exact same angle
+      const centerX = absoluteCenterRef.current.x - window.scrollX
+      const centerY = absoluteCenterRef.current.y - window.scrollY
+      
+      // Angle in radians
+      const angleRad = Math.atan2(mouseY - centerY, mouseX - centerX)
+      // Convert to degrees
+      const angleDeg = (angleRad * 180) / Math.PI
+      
+      // Since pupils are placed at bottom-right (45 deg initially),
+      // we subtract 45 deg to point the pupils directly at the target.
+      const rawTargetAngle = angleDeg - 45
 
-        // Shortest-path interpolation to prevent spring spinning when crossing the 180°/-180° boundary
-        let diff = rawTargetAngle - prevAngleRef.current
-        diff = ((diff + 180) % 360)
-        if (diff < 0) diff += 360
-        diff -= 180
+      // Shortest-path interpolation to prevent spring spinning when crossing the 180°/-180° boundary
+      let diff = rawTargetAngle - prevAngleRef.current
+      diff = ((diff + 180) % 360)
+      if (diff < 0) diff += 360
+      diff -= 180
 
-        const targetAngle = prevAngleRef.current + diff
-        prevAngleRef.current = targetAngle
+      const targetAngle = prevAngleRef.current + diff
+      prevAngleRef.current = targetAngle
 
-        leftRotateSpring.set(targetAngle)
-        rightRotateSpring.set(targetAngle)
-      }
+      leftRotateSpring.set(targetAngle)
+      rightRotateSpring.set(targetAngle)
     }
 
     const animateToIdle = () => {
@@ -87,18 +95,28 @@ export function InteractiveEyes() {
     // Set initial position
     animateToIdle()
 
+    // Calculate center coordinates
+    updateCenter()
+    // Setup a tiny timeout to guarantee layout calculations have settled
+    const initTimeout = setTimeout(updateCenter, 150)
+
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("touchmove", handleTouchMove)
     window.addEventListener("touchstart", handleTouchMove)
-    // Handle window resize to recalculate centers if mouse stays static
+    // Handle window resize and scroll to recalculate center coordinates
+    window.addEventListener("resize", updateCenter)
+    window.addEventListener("scroll", updateCenter, { passive: true })
     window.addEventListener("resize", updateAngles)
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("touchmove", handleTouchMove)
       window.removeEventListener("touchstart", handleTouchMove)
+      window.removeEventListener("resize", updateCenter)
+      window.removeEventListener("scroll", updateCenter)
       window.removeEventListener("resize", updateAngles)
       clearTimeout(idleTimeout)
+      clearTimeout(initTimeout)
     }
   }, [leftRotateSpring, rightRotateSpring])
 
@@ -128,7 +146,7 @@ export function InteractiveEyes() {
   // The eyebrow SVG path extracted from A Color Bright
   const Eyebrow = () => (
     <motion.svg
-      className="w-[4.5rem] md:w-[6.5rem] text-foreground transition-colors duration-300"
+      className="w-18 md:w-26 text-foreground transition-colors duration-300"
       viewBox="0 0 137 45"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

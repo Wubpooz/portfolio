@@ -34,9 +34,26 @@ export default function WarpedGridBackground() {
     const mouseRadius = 180;
     const mouseZMax = 340; // Deep funnel depth
 
+    // Cache absolute document-relative Y centers of each selector to eliminate getBoundingClientRect in RAF loop
+    const elementCenters: Record<string, number> = {};
+
+    const updateElementCenters = () => {
+      PLANETS.forEach((planet) => {
+        const el = document.querySelector(planet.selector);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          elementCenters[planet.selector] = rect.top + window.scrollY + rect.height / 2;
+        }
+      });
+    };
+
+    updateElementCenters();
+    const centersTimeout = setTimeout(updateElementCenters, 200);
+
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      updateElementCenters();
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -174,10 +191,9 @@ export default function WarpedGridBackground() {
 
         // Target Y
         let ty = height * planet.defaultYPercent - window.scrollY;
-        const el = document.querySelector(planet.selector);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          ty = rect.top + rect.height / 2;
+        const center = elementCenters[planet.selector];
+        if (center !== undefined) {
+          ty = center - window.scrollY;
         }
 
         const nextX = prev.x + (tx - prev.x) * 0.08;
@@ -300,6 +316,7 @@ export default function WarpedGridBackground() {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      clearTimeout(centersTimeout);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
