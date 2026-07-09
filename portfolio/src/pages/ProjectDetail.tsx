@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate, useParams, Link } from "react-router-dom"
-import { ArrowLeft, ArrowUpRight, Globe, Database, Play, Search, Code2 } from "lucide-react"
+import { ArrowUpRight, Globe, Database, Play, Search, Code2 } from "lucide-react"
+import BackLink from "@/components/shared/BackLink"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { getProjectBySlug } from "@/data/projects"
@@ -151,13 +152,9 @@ export default function ProjectDetailPage() {
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 md:px-6 md:py-10">
       <div className="mb-6">
-        <Link
-          to="/projects"
-          className="group inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
-          <span>{content.projectsPage.backProjects}</span>
-        </Link>
+        <BackLink to="/projects">
+          {content.projectsPage.backProjects}
+        </BackLink>
       </div>
 
       <div className="mb-8 border-b border-border pb-6">

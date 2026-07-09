@@ -1,5 +1,5 @@
-// import { useState } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import FooterSection from "@/components/layout/Footer";
 import Home from './pages/Home';
@@ -60,9 +60,62 @@ function App() {
   )
 }
 
+function ScrollToTop() {
+  const { pathname, hash, key } = useLocation()
+  const navigationType = useNavigationType()
+  const scrollPositions = useRef<Record<string, number>>({})
+
+  useEffect(() => {
+    const handleScroll = () => {
+      scrollPositions.current[key] = window.scrollY
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [key])
+
+  useEffect(() => {
+    const htmlElement = document.documentElement
+    const originalScrollBehavior = htmlElement.style.scrollBehavior
+    htmlElement.style.scrollBehavior = "auto"
+
+    let isRestoring = false
+
+    if (navigationType === "POP") {
+      const savedPosition = scrollPositions.current[key]
+      if (savedPosition !== undefined) {
+        window.scrollTo(0, savedPosition)
+        isRestoring = true
+      }
+    }
+
+    if (!isRestoring) {
+      if (!hash) {
+        window.scrollTo(0, 0)
+      } else {
+        const id = hash.replace("#", "")
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: "auto" })
+        }
+      }
+    }
+
+    const timeoutId = setTimeout(() => {
+      htmlElement.style.scrollBehavior = originalScrollBehavior
+    }, 50)
+
+    return () => clearTimeout(timeoutId)
+  }, [pathname, hash, key, navigationType])
+
+  return null
+}
+
 function AppShell() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Seo />
       <a
         href="#home"

@@ -131,9 +131,8 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [x] remove Background animation on 404, projet details etc => only hero
   - [x] Improve Mobile menu
   - [x] Fix Mobile background
-  - [ ] Projects links top on mobile
-  - [ ] Allow flow to the right of location on experiences/formation (it currently is a block and doesn't flow below the dates when small space) on 400px or less (not large mobiles)
-  - [ ] Click on projects to open the project details page (currently it opens only on the details)
+  - [x] Projects links top on mobile
+  - [x] Click on projects to open the project details page (currently it opens only on the details)
 
 
 ## Very Bonus
@@ -141,7 +140,6 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Licensing
 - [ ] DMCA Protection Certificate
 - [x] vCard integration
-- [ ] Allow flow to the right of location on experiences/formation (it currently is a block and doesn't flow below the dates when small space) on 400px or less (not large mobiles)
 
 
 ## Future

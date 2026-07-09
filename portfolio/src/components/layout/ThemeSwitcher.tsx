@@ -1,4 +1,3 @@
-import { motion } from "framer-motion"
 import { Monitor, Moon, Sun } from "lucide-react"
 import type { Theme } from "@/hooks/useTheme"
 import { getUiContent, useLocale } from "@/i18n"
@@ -22,14 +21,22 @@ export default function ThemeSwitcher({
   const { locale } = useLocale()
   const content = getUiContent(locale)
   const isMobile = variant === "mobile"
+  const activeIndex = OPTIONS.findIndex((opt) => opt.value === theme)
 
   return (
     <div
-      className={`relative inline-flex items-center rounded-md border border-border bg-background p-1 shadow-sm ${
-        isMobile ? "gap-1" : ""
-      }`}
+      className="relative inline-flex items-center gap-1 rounded-md border border-border bg-background p-1 shadow-sm"
       aria-label={content.theme.system}
     >
+      {/* Sliding active theme highlight background */}
+      <span
+        className="absolute top-1 bottom-1 rounded-sm bg-muted border border-border transition-all duration-200 ease-out"
+        style={{
+          width: isMobile ? "40px" : "32px",
+          left: `calc(4px + ${activeIndex} * ${isMobile ? "44px" : "36px"})`,
+        }}
+      />
+
       {OPTIONS.map(({ value, Icon }) => {
         const isActive = theme === value
         const label =
@@ -40,29 +47,20 @@ export default function ThemeSwitcher({
               : content.theme.useSystem
 
         return (
-          <motion.button
+          <button
             key={value}
             type="button"
             onClick={() => setTheme(value)}
             className={`relative z-10 inline-flex items-center justify-center rounded-sm transition-colors ${
-              isMobile ? "p-2 min-w-10 min-h-10" : "p-1.5"
+              isMobile ? "w-10 h-10" : "w-8 h-8"
             } ${
               isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
             }`}
             aria-label={label}
             aria-pressed={isActive}
-            whileTap={{ scale: 0.96 }}
-            whileHover={{ y: -1 }}
           >
-            {isActive ? (
-              <motion.span
-                layoutId="theme-toggle-active"
-                className="absolute inset-0 rounded-sm bg-muted border border-border"
-                transition={{ type: "spring", stiffness: 420, damping: 28 }}
-              />
-            ) : null}
             <Icon size={isMobile ? 18 : 16} className="relative z-10" aria-hidden="true" />
-          </motion.button>
+          </button>
         )
       })}
     </div>

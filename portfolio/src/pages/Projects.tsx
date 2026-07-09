@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react"
-import { ArrowLeft, Search } from "lucide-react"
+import { Search } from "lucide-react"
 import ProjectCard from "@/components/projects/ProjectCard"
 import { getProjects } from "@/data/projects"
 import { getUiContent, useLocale } from "@/i18n"
 import { sanitizeInput } from "@/lib/security"
 import { usePostHog } from "@posthog/react"
-import { Link } from "react-router-dom"
+import BackLink from "@/components/shared/BackLink"
 
 const statusFilters = ["all", "completed", "in-progress", "won"] as const
 
@@ -43,13 +43,9 @@ export default function ProjectsPage() {
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 md:px-6 md:py-10">
       <div className="mb-6">
-        <Link
-          to="/"
-          className="group inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
-          <span>{content.projectsPage.backHome}</span>
-        </Link>
+        <BackLink to="/">
+          {content.projectsPage.backHome}
+        </BackLink>
       </div>
 
       <div className="mb-8 flex flex-col gap-4 border-b border-border pb-6 md:flex-row md:items-end md:justify-between">
