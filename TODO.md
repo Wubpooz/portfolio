@@ -133,6 +133,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [ ] Mobile background
   - [ ] Projects links top on mobile
   - [ ] Allow flow to the right of location on experiences/formation (it currently is a block and doesn't flow below the dates when small space) on 400px or less (not large mobiles)
+  - [ ] Click on projects to open the project details page (currently it opens only on the details)
 
 
 ## Very Bonus
