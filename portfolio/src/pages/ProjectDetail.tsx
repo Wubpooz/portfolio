@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate, useParams, Link } from "react-router-dom"
-import { ArrowLeft, ArrowUpRight, FolderOpen, Globe, Link2 } from "lucide-react"
+import { ArrowLeft, ArrowUpRight, Globe, Database, Play, Search, Code2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { getProjectBySlug } from "@/data/projects"
@@ -22,7 +22,31 @@ function ProjectLinksSection({
   content: ReturnType<typeof getUiContent>
   posthog: any
 }>) {
-  if (!project.links || project.links.length === 0) return null
+  const { locale } = useLocale()
+
+  // Priority map for sorting (smaller value = higher priority/first)
+  const priorityOrder: Record<string, number> = {
+    live: 1,
+    demo: 2,
+    search: 3,
+    source: 4,
+    dataset: 5,
+  }
+
+  // Filter out caseStudy links since we are already on the details page
+  // Sort the links based on the priority order
+  const displayLinks = project.links
+    .filter((link) => link.labelKey !== "caseStudy")
+    .sort((a, b) => {
+      const priorityA = priorityOrder[a.labelKey] ?? 100
+      const priorityB = priorityOrder[b.labelKey] ?? 100
+      return priorityA - priorityB
+    })
+
+  if (displayLinks.length === 0) return null
+
+  // The first link in our sorted array is our primary link
+  const primaryLink = displayLinks[0]
 
   return (
     <section className="rounded-none border border-border bg-card p-6">
@@ -30,32 +54,57 @@ function ProjectLinksSection({
         {content.projectsPage.links}
       </h2>
       <div className="space-y-3">
-        {project.links.map((link) => {
+        {displayLinks.map((link) => {
           const labelMap: Partial<Record<string, string>> = {
             source: content.projectsPage.openSource,
             demo: content.projectsPage.openDemo,
             dataset: content.projectsPage.openDataset,
-            caseStudy: content.project.caseStudy,
             live: content.projectsPage.openLive,
+            search: content.projectsPage.openSearch,
           }
-          const label = labelMap[link.labelKey] ?? content.projectsPage.openProject
+          const label = link.label?.[locale] ?? labelMap[link.labelKey] ?? content.projectsPage.openProject
 
           const isExternal = /^https?:\/\//.test(link.href)
           const isSafe = link.href.startsWith("/") || link.href.startsWith("http://") || link.href.startsWith("https://")
           const safeHref = isSafe ? link.href : "#"
 
+          // Choose appropriate icon for each type of link
+          let LinkIcon = Globe
+          if (link.labelKey === "source") LinkIcon = Code2
+          else if (link.labelKey === "dataset") LinkIcon = Database
+          else if (link.labelKey === "demo") LinkIcon = Play
+          else if (link.labelKey === "search") LinkIcon = Search
+
+          const isPrimary = link === primaryLink
+          const buttonVariant = isPrimary ? "default" : "outline"
+
           return (
-            <Button key={`${link.labelKey}-${link.href}`} asChild variant="outline" className="w-full justify-start rounded-md">
+            <Button
+              key={`${link.labelKey}-${link.href}`}
+              asChild
+              variant={buttonVariant}
+              className="w-full justify-start rounded-md"
+            >
               <a
                 href={safeHref}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noopener noreferrer" : undefined}
-                onClick={() => { if (isExternal) { posthog.capture('project_external_link_clicked', { project_title: project.title, project_slug: project.slug, link_type: link.labelKey }); } }}
+                onClick={() => {
+                  if (isExternal) {
+                    posthog.capture("project_external_link_clicked", {
+                      project_title: project.title,
+                      project_slug: project.slug,
+                      link_type: link.labelKey,
+                    })
+                  }
+                }}
                 className="inline-flex items-center gap-2"
               >
-                {link.labelKey === "source" ? <Link2 className="size-4" /> : <Globe className="size-4" />}
-                {label}
-                {isExternal ? <ArrowUpRight className="ml-auto size-4" /> : null}
+                <LinkIcon className={`size-4 shrink-0 ${isPrimary ? "" : "text-muted-foreground"}`} />
+                <span>{label}</span>
+                {isExternal ? (
+                  <ArrowUpRight className={`ml-auto size-4 ${isPrimary ? "" : "text-muted-foreground/60"}`} />
+                ) : null}
               </a>
             </Button>
           )
@@ -101,42 +150,37 @@ export default function ProjectDetailPage() {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 md:px-6 md:py-10">
-      <div className="mb-8 flex flex-col gap-4 border-b border-border pb-6 md:flex-row md:items-end md:justify-between">
-        <div className="space-y-3">
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-            {project.title}
-          </h1>
-          <p className="max-w-3xl text-sm leading-7 text-muted-foreground md:text-base">
-            {project.subtitle}
-          </p>
-        </div>
+      <div className="mb-6">
+        <Link
+          to="/projects"
+          className="group inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
+          <span>{content.projectsPage.backProjects}</span>
+        </Link>
+      </div>
 
-        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-          <Button asChild variant="outline" className="w-full rounded-md sm:w-auto">
-            <Link to="/projects" className="inline-flex items-center gap-2">
-              <ArrowLeft className="size-4" />
-              {content.projectsPage.backHome}
-            </Link>
-          </Button>
-
-          <Button asChild className="w-full rounded-md sm:w-auto">
-            <Link to={`/projects#${project.slug}`} className="inline-flex items-center gap-2">
-              <FolderOpen className="size-4" />
-              {content.projectsPage.openProject}
-            </Link>
-          </Button>
-        </div>
+      <div className="mb-8 border-b border-border pb-6">
+        <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+          {project.title}
+        </h1>
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground md:text-base">
+          {project.subtitle}
+        </p>
       </div>
 
       <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+        {/* Mobile Links */}
+        <div className="block lg:hidden">
+          <ProjectLinksSection project={project} content={content} posthog={posthog} />
+        </div>
+
         <div className="space-y-6">
           <div className="overflow-hidden border border-border bg-card">
             <img
               src={project.image.startsWith("/") || project.image.startsWith("http://") || project.image.startsWith("https://") ? project.image : ""}
               alt={project.imageAlt}
               className="h-auto w-full object-cover"
-              loading="eager"
-              fetchPriority="high"
             />
           </div>
 
@@ -185,8 +229,7 @@ export default function ProjectDetailPage() {
         </div>
 
         <aside className="flex flex-col gap-6">
-
-          {/* Desktop layout */}
+          {/* Desktop Links */}
           <div className="hidden lg:block">
             <ProjectLinksSection project={project} content={content} posthog={posthog} />
           </div>
@@ -203,11 +246,6 @@ export default function ProjectDetailPage() {
               ))}
             </div>
           </section>
-
-          {/* Mobile layout */}
-          <div className="block lg:hidden">
-            <ProjectLinksSection project={project} content={content} posthog={posthog} />
-          </div>
         </aside>
       </div>
     </main>

@@ -1,12 +1,13 @@
 import type { Locale } from "@/i18n"
 
-export type ProjectLinkKey = "live" | "source" | "caseStudy" | "demo" | "dataset"
+export type ProjectLinkKey = "live" | "source" | "caseStudy" | "demo" | "dataset" | "search"
 
 export type ProjectStatus = "completed" | "in-progress" | "won"
 
 export interface ProjectLink {
   labelKey: ProjectLinkKey
   href: string
+  label?: Record<Locale, string>
 }
 
 export interface ProjectItem {
@@ -101,8 +102,24 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face"],
       links: [
         { labelKey: "source", href: maltaRepo },
-        { labelKey: "live", href: streamlitDemo },
-        { labelKey: "demo", href: streamlitSearch },
+        {
+          labelKey: "live",
+          href: streamlitDemo,
+          label: {
+            en: "Maltese TTS Demo",
+            fr: "Synthèse vocale maltaise",
+            ar: "عرض توليد الكلام المالطي"
+          }
+        },
+        {
+          labelKey: "search",
+          href: streamlitSearch,
+          label: {
+            en: "Paper Discovery Tool",
+            fr: "Outil de recherche d'articles",
+            ar: "أداة البحث عن الأوراق"
+          }
+        },
         { labelKey: "caseStudy", href: addCaseStudy("xtts-finetuning") },
       ],
       featured: true,

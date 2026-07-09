@@ -47,6 +47,8 @@ export interface UiContent {
     statusWon: string
     noResults: string
     backHome: string
+    backProjects: string
+    openSearch: string
     organization: string
     period: string
     status: string
@@ -146,6 +148,8 @@ export const uiContent: Record<Locale, UiContent> = {
       statusWon: "Won",
       noResults: "No projects match your search.",
       backHome: "Back to home",
+      backProjects: "Back to projects",
+      openSearch: "Search tool",
       organization: "Organization",
       period: "Period",
       status: "Status",
@@ -243,6 +247,8 @@ export const uiContent: Record<Locale, UiContent> = {
       statusWon: "Lauréat",
       noResults: "Aucun projet ne correspond à votre recherche.",
       backHome: "Retour à l’accueil",
+      backProjects: "Retour aux projets",
+      openSearch: "Outil de recherche",
       organization: "Organisation",
       period: "Période",
       status: "Statut",
@@ -340,6 +346,8 @@ export const uiContent: Record<Locale, UiContent> = {
       statusWon: "فائز",
       noResults: "لا توجد مشاريع تطابق بحثك.",
       backHome: "العودة إلى الرئيسية",
+      backProjects: "العودة إلى المشاريع",
+      openSearch: "أداة البحث",
       organization: "الجهة",
       period: "الفترة",
       status: "الحالة",
