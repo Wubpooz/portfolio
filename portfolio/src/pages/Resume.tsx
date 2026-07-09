@@ -4,6 +4,11 @@ import { Button } from "@/components/ui/button"
 import { getResumeAsset, getUiContent, useLocale } from "@/i18n"
 import BackLink from "@/components/shared/BackLink"
 
+// A4 dimensions: 210mm × 297mm → aspect ratio ≈ 1 : 1.4142
+// At 96 DPI: 794px wide × 1123px tall
+const A4_WIDTH_PX = 794
+const A4_HEIGHT_PX = 1123
+
 export default function ResumePage() {
   const { locale } = useLocale()
   const content = getUiContent(locale)
@@ -14,7 +19,7 @@ export default function ResumePage() {
   }, [content.resume.title])
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:px-6 md:py-10">
+    <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-8 md:px-6 md:py-10">
       <div>
         <BackLink to="/">
           {content.resume.backHome}
@@ -48,12 +53,19 @@ export default function ResumePage() {
         </div>
       </header>
 
-      <section className="overflow-hidden rounded-none border border-border bg-card shadow-none">
-        <iframe
-          src={resumeAsset}
-          title={`${content.resume.title} - Mathieu Waharte`}
-          className="h-[85vh] w-full"
-        />
+      {/* A4-proportioned iframe container: scales to fill width while preserving 210×297mm ratio */}
+      <section className="overflow-hidden border border-border bg-card shadow-none">
+        <div
+          className="relative w-full"
+          style={{ paddingTop: `${(A4_HEIGHT_PX / A4_WIDTH_PX) * 103}%` }}
+        >
+          <iframe
+            src={resumeAsset}
+            title={`${content.resume.title} - Mathieu Waharte`}
+            className="absolute inset-0 h-full w-full"
+            style={{ border: "none" }}
+          />
+        </div>
       </section>
     </div>
   )
