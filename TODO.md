@@ -120,7 +120,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Add the missing certifications
 - [ ] profile picture
 - [ ] banner picture
-- [ ] certifications icons 
+- [ ] certifications icons
 - [x] certification text & date format
 - [ ] Layout
   - [x] Remove Useless text

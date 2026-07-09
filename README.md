@@ -34,6 +34,8 @@
 - [ ] TP noté Recherche Opérationnelle
 - [ ] Rapport Cybersec + labs
 - [ ] TP3 Apprentissage automatisé
+- [ ] http://mwaharte.free.fr/test/feuille_html_principale.html?
+- [ ] https://www.shadertoy.com/
 
 ---
 
