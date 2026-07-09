@@ -1,12 +1,10 @@
 import { useMemo, useState } from "react"
-import { ArrowLeft, Search } from "lucide-react"
+import { Search } from "lucide-react"
 import ProjectCard from "@/components/projects/ProjectCard"
 import { getProjects } from "@/data/projects"
-import { Button } from "@/components/ui/button"
 import { getUiContent, useLocale } from "@/i18n"
 import { sanitizeInput } from "@/lib/security"
 import { usePostHog } from "@posthog/react"
-import { Link } from "react-router-dom"
 
 const statusFilters = ["all", "completed", "in-progress", "won"] as const
 
@@ -52,13 +50,6 @@ export default function ProjectsPage() {
             </span>
           </h1>
         </div>
-
-        <Button asChild variant="outline" className="w-fit rounded-md">
-          <Link to="/" className="inline-flex items-center gap-2">
-            <ArrowLeft className="size-4" />
-            {content.projectsPage.backHome}
-          </Link>
-        </Button>
       </div>
 
       <div className="mb-8 grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">

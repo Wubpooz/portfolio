@@ -170,7 +170,7 @@ export const uiContent: Record<Locale, UiContent> = {
     },
     resume: {
       title: "Resume",
-      description: "The resume is automatically shown in the language best matched to your browser or location preference.",
+      description: "The resume is automatically localized. You can change the language to see it in your preferred language.",
       backHome: "Back to home",
       download: "Download PDF",
       openInNewTab: "Open in new tab",
@@ -181,7 +181,7 @@ export const uiContent: Record<Locale, UiContent> = {
       copyright: "Copyright © 2026 Mathieu Waharte. All rights reserved.",
     },
     notFound: {
-      title: "404 — Page not found",
+      title: "404 - Page not found",
       subtitle: "You’ve wandered into the void between pixels. Let’s get you back to something useful.",
       backHome: "Back to home",
       goProjects: "View projects",
@@ -267,7 +267,7 @@ export const uiContent: Record<Locale, UiContent> = {
     },
     resume: {
       title: "CV",
-      description: "Le CV s’affiche automatiquement dans la langue correspondant le mieux à la langue ou à la localisation de votre navigateur.",
+      description: "Le CV est automatiquement localisé. Vous pouvez changer la langue pour le voir dans une autre langue.",
       backHome: "Retour à l’accueil",
       download: "Télécharger le PDF",
       openInNewTab: "Ouvrir dans un nouvel onglet",
@@ -278,7 +278,7 @@ export const uiContent: Record<Locale, UiContent> = {
       copyright: "Copyright © 2026 Mathieu Waharte. Tous droits réservés.",
     },
     notFound: {
-      title: "404 — Page introuvable",
+      title: "404 - Page introuvable",
       subtitle: "Vous avez quitté le chemin connu des pixels. Revenons vers quelque chose d’utile.",
       backHome: "Retour à l’accueil",
       goProjects: "Voir les projets",
@@ -301,7 +301,7 @@ export const uiContent: Record<Locale, UiContent> = {
       blog: "المدونة",
     },
     hero: {
-      role: "مهندس Fullstack وذكاء اصطناعي — متدرّب لدى Dassault Systèmes",
+      role: "مهندس Fullstack وذكاء اصطناعي - متدرّب لدى Dassault Systèmes",
       location: "Polytech Paris-Saclay · باريس، فرنسا",
       summary: "أبني تطبيقات full-stack، ووكلاء ذكاء اصطناعي، ومحاكاة علمية. أُحب الأنظمة المصممة بعناية، والواجهات النظيفة، والمساحة الفاصلة بين البرمجيات والذكاء الاصطناعي والحوسبة.",
       contactCta: "تواصل معي",
@@ -364,7 +364,7 @@ export const uiContent: Record<Locale, UiContent> = {
     },
     resume: {
       title: "السيرة الذاتية",
-      description: "تظهر السيرة الذاتية تلقائيًا باللغة الأنسب وفقًا للغة أو تفضيل الموقع في المتصفح.",
+      description: "السيرة الذاتية متوفرة بلغات متعددة. يمكنك تغيير اللغة لرؤية السيرة الذاتية في لغتك المفضلة.",
       backHome: "العودة إلى الرئيسية",
       download: "تنزيل PDF",
       openInNewTab: "فتح في تبويب جديد",
@@ -375,7 +375,7 @@ export const uiContent: Record<Locale, UiContent> = {
       copyright: "حقوق النشر © 2026 Mathieu Waharte. جميع الحقوق محفوظة.",
     },
     notFound: {
-      title: "404 — الصفحة غير موجودة",
+      title: "404 - الصفحة غير موجودة",
       subtitle: "يبدو أنك ابتعدت قليلًا عن مسار البكسلات. لنعد إلى شيء مفيد.",
       backHome: "العودة إلى الرئيسية",
       goProjects: "عرض المشاريع",

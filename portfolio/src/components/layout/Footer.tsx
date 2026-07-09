@@ -11,7 +11,7 @@ export default function FooterSection() {
       <nav className="footer-nav" aria-label={locale === "fr" ? "Navigation de pied de page" : "Footer navigation"}>
         <Link to="/" className="footer-link">{content.nav.home}</Link>
         <Link to="/projects" className="footer-link">{content.nav.projects}</Link>
-        <Link to="/blog" className="footer-link">{content.nav.blog}</Link>
+        {/* <Link to="/blog" className="footer-link">{content.nav.blog}</Link> */}
       </nav>
 
       <div className="footer-bottom">
