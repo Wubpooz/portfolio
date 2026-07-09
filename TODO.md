@@ -114,6 +114,28 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [x] heart next to the best ?
   - [x] dots from 1 to 5 ?
 - [ ] Licensing
+- [ ] Project details
+  - picture
+  - description
+  - tags
+- [ ] Hero description
+- [ ] Add the missing skills
+- [ ] Add the missing projects
+- [ ] Add the missing certifications
+- [ ] profile picture
+- [ ] banner picture
+- [ ] certifications icons & text & date format
+- [ ] Layout
+  - [ ] Useless text
+  - [ ] Actions alignement in hero section (grouping and alignement of "aller au projets to center")
+  - [ ] Footer size and should always at least be at the bottom of the screen
+  - [ ] Rename "etude de cas"
+  - [ ] Retour & ouvrir buttons on projects
+  - [ ] Background animation on 404, projet details => only hero ?
+  - [ ] Mobile menu
+  - [ ] Mobile background
+  - [ ] Projects links top on mobile
+  - [ ] Allow flow to the right of location on experiences/formation (it currently is a block and doesn't flow below the dates when small space) on 400px or less (not large mobiles)
 
 
 ## Very Bonus
