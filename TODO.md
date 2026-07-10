@@ -122,7 +122,14 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] banner picture
 - [ ] certifications icons
 - [ ] favicon
-- [ ] MAKE THE IFRAME MATCH THE A4 size of a resume page
+- [ ] School & experience logos
+- [ ] Add interests: RO, crypto, traitement image/signal ondellettes, IA, bioinfo
+- [ ] Section Langues:
+  - Allemand: Capacité professionnelle limitée
+  - Anglais: Capacité professionnelle fonctionnelle (Score Duolingo 130 - May 2026, Test of English for International Communication (TOEIC) - 990, C1, English CEFR C1 (Oral Expression/Comprehension, Written Expression/Comprehension) - ICIMS)
+  - Arabe: Notions de base
+  - Français: Bilingue ou langue natale
+- [x] MAKE THE IFRAME MATCH THE A4 size of a resume page
 - [x] certification text & date format
 - [x] Layout
   - [x] Remove Useless text
@@ -136,6 +143,10 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [x] Projects links top on mobile
   - [x] Click on projects to open the project details page (currently it opens only on the details)
 
+
+[Paper Relevance Dashboard](https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/)
+[HETUS Visualisation App 5](https://wubpooz.github.io/visualisation-app5/)
+![alt text](1777673073293.jpg)
 
 ## Very Bonus
 - [ ] Preview projects on hover in home page
