@@ -173,11 +173,15 @@ export default function ProjectDetailPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="overflow-hidden border border-border bg-card">
+          <div className="overflow-hidden border border-border bg-card aspect-video relative">
             <img
-              src={project.image.startsWith("/") || project.image.startsWith("http://") || project.image.startsWith("https://") ? project.image : ""}
+              src={project.image}
+              srcSet={`${project.image.replace(/\.webp$/, "-sm.webp")} 600w, ${project.image} 1200w`}
+              sizes="(max-width: 768px) 100vw, 1200px"
               alt={project.imageAlt}
-              className="h-auto w-full object-cover"
+              className="h-full w-full object-cover"
+              width={1200}
+              height={675}
             />
           </div>
 

@@ -1,3 +1,5 @@
+import { Atom, Briefcase, GraduationCap } from 'lucide-react'
+import { shouldInvertIcon } from '@/lib/utils'
 import TagPills from './TagPills'
 import {
   AccordionContent,
@@ -12,6 +14,7 @@ interface ExpandableItemProps {
   dateRange: string
   description?: string[]
   tags?: string[]
+  logo?: string
 }
 
 export default function ExpandableItem({
@@ -21,23 +24,86 @@ export default function ExpandableItem({
   dateRange,
   description,
   tags,
+  logo,
 }: ExpandableItemProps) {
   const hasContent = description && description.length > 0
 
-  const headerContent = (
-    <div className="grid w-full grid-cols-[minmax(0,1fr)_auto] gap-x-4 text-left">
-      <div className="min-w-0">
-        <h3 className="text-base font-semibold wrap-break-word text-foreground md:text-[1.05rem]">
-          {title}
-        </h3>
-        <p className="text-sm wrap-break-words text-muted-foreground mt-1">
-          {subtitle}
-        </p>
-      </div>
+  const renderLogo = () => {
+    if (!logo) return null
 
-      <span className="whitespace-nowrap text-xs font-mono self-start text-muted-foreground pt-1">
-        {dateRange}
-      </span>
+    const containerClass = "flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-border bg-background md:h-11 md:w-11 overflow-hidden p-1.5"
+
+    // If it's a URL/path
+    if (logo.startsWith("http") || logo.startsWith("/")) {
+      return (
+        <div className={containerClass}>
+          <img
+            src={logo}
+            alt={title}
+            className="max-h-full max-w-full object-contain"
+            loading="lazy"
+          />
+        </div>
+      )
+    }
+
+    // Special Lucide icons
+    if (logo === "atom" || logo === "Atom") {
+      return (
+        <div className={containerClass}>
+          <Atom className="size-5 text-primary shrink-0" aria-hidden="true" />
+        </div>
+      )
+    }
+    if (logo === "graduation-cap" || logo === "GraduationCap" || logo === "education" || logo === "school") {
+      return (
+        <div className={containerClass}>
+          <GraduationCap className="size-5 text-primary shrink-0" aria-hidden="true" />
+        </div>
+      )
+    }
+    if (logo === "briefcase" || logo === "Briefcase" || logo === "experience") {
+      return (
+        <div className={containerClass}>
+          <Briefcase className="size-5 text-primary shrink-0" aria-hidden="true" />
+        </div>
+      )
+    }
+
+    // Default to SimpleIcons
+    const invertClass = shouldInvertIcon(logo) ? "dark:invert" : ""
+    return (
+      <div className={containerClass}>
+        <img
+          src={`https://cdn.simpleicons.org/${logo}`}
+          alt={title}
+          className={`max-h-full max-w-full object-contain ${invertClass}`}
+          loading="lazy"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
+        />
+      </div>
+    )
+  }
+
+  const headerContent = (
+    <div className="flex items-start gap-3 md:gap-4 text-left w-full min-w-0">
+      {renderLogo()}
+      <div className="grid w-full grid-cols-[minmax(0,1fr)_auto] gap-x-4">
+        <div className="min-w-0">
+          <h3 className="text-base font-semibold wrap-break-word text-foreground md:text-[1.05rem]">
+            {title}
+          </h3>
+          <p className="text-sm wrap-break-words text-muted-foreground mt-1">
+            {subtitle}
+          </p>
+        </div>
+
+        <span className="whitespace-nowrap text-xs font-mono self-start text-muted-foreground pt-1">
+          {dateRange}
+        </span>
+      </div>
     </div>
   )
 

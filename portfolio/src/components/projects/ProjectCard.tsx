@@ -115,10 +115,14 @@ export default function ProjectCard({ project }: Readonly<{ project: ProjectItem
       >
         <div className="relative aspect-video overflow-hidden border-b border-border">
           <img
-            src={project.image}
+            src={project.image.replace(/\.webp$/, "-sm.webp")}
+            srcSet={`${project.image.replace(/\.webp$/, "-sm.webp")} 600w, ${project.image} 1200w`}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             alt={project.imageAlt}
             className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
             loading="lazy"
+            width={600}
+            height={338}
           />
         </div>
 

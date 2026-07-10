@@ -27,7 +27,7 @@ export interface ProjectItem {
 }
 
 const cover = (seed: string) =>
-  `https://picsum.photos/seed/${seed}/1200/675`
+  `/assets/projects/${seed}.webp`
 
 const datasetUrl = "https://huggingface.co/datasets/Bluefir/hetus-time-use"
 const maltaRepo = "https://github.com/Wubpooz/Malta-TTS"
