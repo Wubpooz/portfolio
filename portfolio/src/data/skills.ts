@@ -39,7 +39,7 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
       items: [
         { name: "Angular", icon: "angular", proficiency: 5, favorite: true },
         { name: "React", icon: "react", proficiency: 4 },
-        { name: "Vue.js", icon: "vuejs", proficiency: 3 },
+        { name: "Vue.js", icon: "vuedotjs", proficiency: 3 },
         { name: "Tailwind CSS", icon: "tailwindcss", proficiency: 5 },
         { name: "Expo / React Native", icon: "expo", proficiency: 4 },
         { name: "SwiftUI", icon: "swift", proficiency: 3 },
@@ -161,7 +161,7 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
       items: [
         { name: "Angular", icon: "angular", proficiency: 5, favorite: true },
         { name: "React", icon: "react", proficiency: 4 },
-        { name: "Vue.js", icon: "vuejs", proficiency: 3 },
+        { name: "Vue.js", icon: "vuedotjs", proficiency: 3 },
         { name: "Tailwind CSS", icon: "tailwindcss", proficiency: 5 },
         { name: "Expo / React Native", icon: "expo", proficiency: 4 },
         { name: "SwiftUI", icon: "swift", proficiency: 3 },
@@ -283,7 +283,7 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
       items: [
         { name: "Angular", icon: "angular", proficiency: 5, favorite: true },
         { name: "React", icon: "react", proficiency: 4 },
-        { name: "Vue.js", icon: "vuejs", proficiency: 3 },
+        { name: "Vue.js", icon: "vuedotjs", proficiency: 3 },
         { name: "Tailwind CSS", icon: "tailwindcss", proficiency: 5 },
         { name: "Expo / React Native", icon: "expo", proficiency: 4 },
         { name: "SwiftUI", icon: "swift", proficiency: 3 },
