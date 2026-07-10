@@ -15,7 +15,7 @@ export interface SkillCategory {
   items: SkillItem[]
 }
 
-const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
+const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = { //TODO order + cateogories + show where they were used on hover and a way for mobile too
   en: [
     {
       id: "languages",
@@ -153,6 +153,15 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
         { name: "SQL", iconUrl: "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg", proficiency: 3 },
         { name: "Bash", icon: "gnubash", proficiency: 3 },
         { name: "SPARQL", iconUrl: "https://cygri.github.io/rdf-logos/svg/sparql.svg", proficiency: 3 },
+        // TODO
+        // myqlm/qat
+        // PHP
+        // GLSL
+        // Processing
+        // Jupyter
+        // MATLAB
+        // MIPS assembly
+        // LaTeX
       ],
     },
     {
@@ -166,7 +175,8 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
         { name: "Expo / React Native", icon: "expo", proficiency: 4 },
         { name: "SwiftUI", icon: "swift", proficiency: 3 },
         { name: "Three.js", icon: "threedotjs", proficiency: 3 },
-        { name: "Hono", iconUrl: "https://upload.wikimedia.org/wikipedia/commons/6/60/Hono-logo.svg", proficiency: 4 },
+        // TODO
+        // HTML, CSS
       ],
     },
     {
@@ -176,7 +186,29 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
         { name: "Programmation fonctionnelle", icon: "functional-programming", proficiency: 4 },
         { name: "Logique", icon: "logic", proficiency: 4 },
         { name: "Calculabilité", icon: "computability", proficiency: 4 },
+        // TODO
+        // Logique
       ],
+    },
+    {
+      id: "concepts",
+      label: "Concepts avancés",
+      items: [
+        { name: "Programmation orientée objet", icon: "oop", proficiency: 4 },
+        { name: "Programmation concurrente", icon: "concurrent-programming", proficiency: 4 },
+        { name: "Programmation distribuée", icon: "distributed-programming", proficiency: 4 },
+        // TODO
+        // API REST
+        // Design Patterns
+        // UML
+        // Agile
+        // Informatique quantique
+        // API Security
+        // Cloud Security
+        // Cloud Computing
+        // Distributed Systems
+        // Containerization
+      ]
     },
     {
       id: "backend",
@@ -185,16 +217,42 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
         { name: "Node.js", icon: "nodedotjs", proficiency: 5 },
         { name: "Express", icon: "express", proficiency: 5 },
         { name: "REST APIs", icon: "rest", proficiency: 5 },
+        { name: "Hono", iconUrl: "https://upload.wikimedia.org/wikipedia/commons/6/60/Hono-logo.svg", proficiency: 4 },
         { name: "OpenAPI", icon: "openapiinitiative", proficiency: 4 },
         { name: "MCP", iconUrl: "https://upload.wikimedia.org/wikipedia/commons/f/fe/Model_Context_Protocol_logo.svg", proficiency: 5 },
         { name: "LangChain", icon: "langchain", proficiency: 5 },
+        // TODO
+        // Bun
+        // Zod
+        // turtle files
+        // Linux
+      ],
+    },
+    {
+      id: "libraries",
+      label: "Bibliothèques & frameworks",
+      items: [
+        // TODO
+        // SDL2
+        // framaC (ACNL + AFL)
+      ],
+    },
+    {
+      id: "tools",
+      label: "Outils & DevOps",
+      items: [
+        // TODO
+        // Git, CI/CD, Docker, Postman, OpenAPI, Packaging, Tomcat, VMware, Hugging Face, LaTeX}
+        // Figma, Trello, Jira, Google Colab, Supabase, Vercel, Chrome DevTools
+        // Cloudflare
+        // Vercel
       ],
     },
     {
       id: "ai-data",
       label: "IA & données",
       items: [
-        { name: "LLM", icon: "llm", proficiency: 5 },
+        { name: "LLM", icon: "llm", proficiency: 5 }, // TODO change all to "Modèles de langage de grande taille (LLM)"
         { name: "RAG", icon: "rag", proficiency: 5 },
         { name: "LoRA", icon: "lora", proficiency: 4 },
         { name: "NLP", icon: "nlp", proficiency: 4 },
@@ -205,6 +263,26 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
         { name: "scikit-learn", icon: "scikitlearn", proficiency: 4 },
         { name: "OpenCV", icon: "opencv", proficiency: 4, favorite: true },
         { name: "Hugging Face", icon: "huggingface", proficiency: 4 },
+        // TODO
+        // LangChain
+        // PACT
+        // MCP
+        // Agents IA, entraînement et évaluation de modèles, Prétraitement des données, Big Data, PCA, apprentissage supervisé/non supervisé
+        // Artificial Neural Networks
+        // MiniMax, agent/LLM testing, skills
+        // MSE/MLE/MDL, GMM, k-fold, kNN, SVM, KDD, LCM, apriori, transformer, tokenizer, finetuning, RLHF, cosine sim
+        // - Google Agent Development Kit (ADK)
+        // - A2A
+        // - Data Visualization
+        // - Visualization
+        // - Data Analysis
+        // - Model Training
+        // - Fine Tuning
+        // - Big Data
+        // - Text-to-Speech Synthesis (TTS)
+        // - Datasets
+        // - Agentic AI Development
+        // - AI Agents
       ],
     },
     {
@@ -216,6 +294,8 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
         { name: "Redis", icon: "redis", proficiency: 3 },
         { name: "Prisma", icon: "prisma", proficiency: 4 },
         { name: "RDF", iconUrl: "https://cygri.github.io/rdf-logos/svg/no-text.svg", proficiency: 4 },
+        // TODO
+        // Mysql
       ],
     },
     {
@@ -228,6 +308,10 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
         { name: "PACT", iconUrl: "https://raw.githubusercontent.com/pact-foundation/pact-logo/master/media/link.svg", proficiency: 5 },
         { name: "Page Objects", icon: "page-objects", proficiency: 4 },
         { name: "TDD", icon: "tdd", proficiency: 5 },
+        // TODO
+        // Karma
+        // PCS (JMeter)
+        // Cypress
       ],
     },
     {
@@ -254,11 +338,21 @@ const skillCategoriesByLocale: Record<Locale, SkillCategory[]> = {
         { name: "MPI", iconUrl: "https://raw.githubusercontent.com/mpi-forum/mpi-forum.github.io/master/images/mpi-forum-icon.jpg", proficiency: 4 },
         { name: "OpenMP", iconUrl: "https://upload.wikimedia.org/wikipedia/commons/4/40/OpenMP_logo.svg", proficiency: 5, favorite: true },
         { name: "OpenCV", icon: "opencv", proficiency: 4, favorite: true },
-        { name: "ODE / PDE", icon: "math", proficiency: 5 },
+        { name: "ODE / PDE", icon: "math", proficiency: 5 }, //// TODO: Résolution
         { name: "PCA / SVD", icon: "math", proficiency: 4 },
         { name: "Modèles probabilistes", icon: "math", proficiency: 4 },
       ],
     },
+    // TODO
+    // Category name ?????
+    // - Research Skills
+    // - Scientific Communications
+    // - Management
+    
+    // - Governance, Risk Management, and Compliance (GRC)
+    // - Sécurité
+    // - Application Security
+
   ],
   ar: [
     {

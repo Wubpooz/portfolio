@@ -5,8 +5,8 @@ export interface ExperienceEntry {
   location: string
   startDate: string      // "2023" ou "Juin 2025"
   endDate: string         // "Présent" ou "Août 2025"
-  description: string[]   // liste de bullet points
-  tags: string[]           // technologies
+  description?: string[]   // liste de bullet points
+  tags?: string[]           // technologies
 }
 
 export interface EducationEntry {

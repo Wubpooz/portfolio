@@ -31,12 +31,12 @@ const cover = (seed: string) =>
 
 const datasetUrl = "https://huggingface.co/datasets/Bluefir/hetus-time-use"
 const maltaRepo = "https://github.com/Wubpooz/Malta-TTS"
-const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/"
-const streamlitSearch = "https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/"
+const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/" // XTTS demo (broken bcs of librosa)
+const streamlitSearch = "https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/" // Paper Relevance Dashboard
 
 const addCaseStudy = (slug: string) => `/projects/${slug}`
 
-const projectsByLocale: Record<Locale, ProjectItem[]> = {
+const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featured
   en: [
     {
       slug: "how-europe-spends-its-time",
@@ -190,6 +190,48 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
   ],
   fr: [
+    { //TODO redo
+      slug: "vireli",
+      title: "Vireli",
+      subtitle: "Application web progressive (PWA).",
+      summary:
+        "Développement d'une application web progressive (PWA) avec Angular 21 et Capacitor.",
+      organization: "Polytech Paris-Saclay",
+      period: "2026",
+      status: "completed",
+      image: cover("vireli"),
+      imageAlt: "Vireli preview",
+      highlights: [
+        "Lead developer for a progressive web application.",
+        "Full-stack development with Bun, Hono, and Zod.",
+        "Integration with Postman and OpenAPI.",
+      ],
+      stack: ["PWA", "Angular", "Capacitor", "Bun", "Hono", "Zod", "Prisma", "BetterAuth", "Postman", "OpenAPI"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("vireli") },
+      ],
+    },
+    { //TODO redo
+      slug: "minimax-resnet",
+      title: "Band aware dual perspective ResNet for board game evaluation",
+      subtitle: "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau.",
+      summary:
+        "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau.",
+      organization: "Polytech Paris-Saclay",
+      period: "march 2026",
+      status: "completed",
+      image: cover("minimax-resnet"),
+      imageAlt: "Minimax ResNet preview",
+      highlights: [
+        "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau.",
+        "Implémentation du algorithme Minimax avec élagage alpha-bêta.",
+        "Développement d'un réseau de neurones personnalisé pour l'évaluation des positions.",
+      ],
+      stack: ["Python", "TensorFlow", "Minimax", "ResNet", "ML"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("minimax-resnet") },
+      ],
+    },
     {
       slug: "how-europe-spends-its-time",
       title: "How Europe Spends Its Time",
@@ -202,11 +244,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("how-europe-spends-its-time"),
       imageAlt: "Aperçu de How Europe Spends Its Time",
       highlights: [
+        // TODO Conçu et déployé une \href{https://wubpooz.github.io/visualisation-app5/}{application web accessible et navigable au clavier} en utilisant des graphiques interactifs personnalisés pour transformer le \href{https://huggingface.co/datasets/Bluefir/hetus-time-use}{jeu de données Hugging Face} en une narration visuelle intuitive.
+        // TODO Résolu une dérive majeure de codification sur 20 ans des enquêtes européennes d'usage du temps, souvent hétérogènes, en développant des pipelines robustes de mise en correspondance des données en \textbf{Python} (pandas).
         "Pipelines de mapping robustes en Python et pandas pour corriger la dérive de codification.",
         "Application web accessible et navigable au clavier avec visualisations interactives.",
         "Publié sous forme de dataset Hugging Face.",
       ],
-      stack: ["Python", "pandas", "Visualisation", "Accessibilité", "Hugging Face"],
+      stack: ["Python", "pandas", "Visualisation", "Accessibilité", "Hugging Face"], // TODO Big Data, Data Viz, Data Analysis, Datasets, Python
       links: [
         { labelKey: "live", href: datasetUrl },
         { labelKey: "caseStudy", href: addCaseStudy("how-europe-spends-its-time") },
@@ -215,21 +259,23 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "deloitte-google-cloud-hackathon",
-      title: "Hackathon Deloitte x Google Cloud",
+      title: "Hackathon Deloitte x Google Cloud, Lauréat",
       subtitle: "Système multi-agent lauréat pour automatiser les campagnes marketing.",
       summary:
         "Création d’un système distribué multi-agent avec ADK et MCP pour automatiser la génération de campagnes marketing, orchestration via A2A et intégration de BigQuery, Gemini, Imagen, Cloud Run et Vertex AI Agent Engine.",
-      organization: "Deloitte x Google Cloud",
+      organization: "Deloitte & Google Cloud",
       period: "nov. 2025",
       status: "won",
       image: cover("deloitte-google-cloud-hackathon"),
       imageAlt: "Aperçu du hackathon Deloitte x Google Cloud",
       highlights: [
+        // TODO Développé un \textbf{système multi-agents distribué} utilisant \textbf{ADK} et le protocole \textbf{MCP} pour automatiser la création de campagnes marketing. Orchestration des agents spécialisés communiquant via le protocole A2A.
+        // TODO Intégré des services Cloud natifs pour réaliser des requêtes démographiques via BigQuery, générer du contenu multimodal avec Gemini et Imagen, et déployer sur Cloud Run et Vertex AI Agent Engine.
         "Système multi-agent distribué avec ADK, MCP et orchestration A2A.",
         "Intégration Cloud native : BigQuery, Gemini, Imagen, Cloud Run et Vertex AI Agent Engine.",
         "Lauréat du hackathon.",
       ],
-      stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI"],
+      stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI"], // TODO google cloud, Agent Development Kit, cloud computing, A2A
       links: [
         { labelKey: "caseStudy", href: addCaseStudy("deloitte-google-cloud-hackathon") },
       ],
@@ -240,6 +286,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "XTTS Finetuning",
       subtitle: "Recherche en synthèse vocale et support du maltais.",
       summary:
+      // TODO review
         "Revue de l’état de l’art en TTS, création d’une application Streamlit pour accélérer la recherche de papiers, puis fine-tuning de XTTS sur Google Colab avec PyTorch et GPT-2 pour ajouter le maltais sans régression.",
       organization: "L-Università ta' Malta (University of Malta)",
       period: "juin 2025 – août 2025",
@@ -247,11 +294,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("xtts-finetuning"),
       imageAlt: "Aperçu du projet XTTS Finetuning",
       highlights: [
+        // TODO review
         "Revue de l’état de l’art en TTS avec un outil de recherche de papiers sous Streamlit.",
         "Fine-tuning et inférence de XTTS sur Google Colab avec PyTorch et GPT-2.",
         "Support du maltais ajouté sans régression.",
       ],
-      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face"],
+      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face"], // TODO Apprentissage automatique, LLM training
       links: [
         { labelKey: "source", href: maltaRepo },
         { labelKey: "live", href: streamlitDemo },
@@ -272,15 +320,57 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("quizine"),
       imageAlt: "Aperçu de Quizine",
       highlights: [
+        // TODO
+        // Conçu une architecture de quiz en temps réel, robuste, via WebSockets pour gérer \textbf{50 joueurs} par salle (questions synchronisées, tableau des scores partagé, gestion des connexions/reconnexions). Frontend Angular \textbf{modulaire} (routing, AuthGuard, notifications, contrat d’API). Mocks locaux et \textbf{session utilisateur Redis}. + et responsive avec Tailwind CSS
+        // Organisé et planifié le cycle de vie complet du projet, des maquettes \href{https://www.figma.com/design/aIMeyjUQSQoAYLZoIbqEE4/Quiz-app?node-id=0-1&t=oOwVkBpXpddyvPUO-1}{Figma} au déploiement continu (Vercel, Supabase), incluant la gestion des tâches, la documentation et la coordination des parties prenantes.
         "Architecture WebSockets pour synchroniser les questions, les scores et les reconnexions.",
         "Frontend Angular modulaire avec routing, AuthGuard, notifications et contrat API.",
         "Du mockup Figma au déploiement continu.",
       ],
-      stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma"],
+      stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma"], // TODO Angular, TypeScript, ExpressJS, WebSocket, Tailwind CSS, Figma, Vercel, Supabase, Redis, Git, HTML, Gestion humaine, Express.js, Node.js, Agile, REST
       links: [
         { labelKey: "caseStudy", href: addCaseStudy("quizine") },
       ],
       featured: true,
+    },
+    { //TODO
+      slug: "compilateur-c-java",
+      title: "Compilateur de C",
+      subtitle: "Compilateur de C écris en Java.",
+      summary:
+        "Développement d'un compilateur de C en Java, avec gestion des erreurs, compilation et boucles.",
+      organization: "Polytech Paris-Saclay",
+      period: "2024 – 2025",
+      status: "completed",
+      image: cover("compilateur-c-java"),
+      imageAlt: "Aperçu du projet Compilateur de C",
+      highlights: [
+        "Développement d'un compilateur de C en Java.",
+        "Gestion des erreurs, compilation et boucles.",
+      ],
+      stack: ["C", "Java", "Compilateur"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("compilateur-c-java") },
+      ],
+    },
+    { //TODO
+      slug: "jeux-entreprise",
+      title: "Jeux d'entreprise",
+      subtitle: "Pilotage d'une entreprise fictive.",
+      summary:
+        "Pilotage d'une entreprise fictive dans le cadre d'un jeu d'entreprise.",
+      organization: "Polytech Paris-Saclay",
+      period: "2025",
+      status: "completed",
+      image: cover("jeux-entreprise"),
+      imageAlt: "Aperçu du projet Jeux d'entreprise",
+      highlights: [
+        "Pilotage d'une entreprise fictive.",
+      ],
+      stack: ["Gestion", "Stratégie", "Finance"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("jeux-entreprise") },
+      ],
     },
     {
       slug: "magnus-carlos",
@@ -294,11 +384,14 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("magnus-carlos"),
       imageAlt: "Aperçu de Magnus Carlos",
       highlights: [
+        // TODO
+        // \textbf{Gestion Agile} d'un projet de simulation scientifique et rendu 3D de l’effet Magnus avec une équipe de 6 étudiants.
+        // Résolution numérique et implémentation en \textbf{C++} (visualisation temps réel avec \textbf{SDL2}) pour reproduire, modéliser et prédire dynamiquement le comportement d'un système physique complexe (trajectoires, fluides).
         "Projet de simulation scientifique 3D sur l’effet Magnus.",
         "Visualisation avec SDL2 : textures, caméras et rotations.",
         "Pilotage d’une équipe de six étudiants.",
       ],
-      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualisation"],
+      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualisation"], // TODO Modélisation Physique, C++, gestion humaine, management
       links: [
         { labelKey: "caseStudy", href: addCaseStudy("magnus-carlos") },
       ],
@@ -319,11 +412,73 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Intégration d’un modèle 3D interactif et animé.",
         "Fort accent sur la direction artistique et les interactions.",
       ],
-      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git"],
+      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git"], // TODO Angular, ThreeJs, HTML, Typescript, Javascript, Agile, front-end
       links: [
         { labelKey: "caseStudy", href: addCaseStudy("nyxen") },
       ],
     },
+    { //TODO
+      slug: "house-finder",
+      title: "House finder",
+      subtitle: "Conception de modèles de données et outil CLI.",
+      summary:
+        "Conception des modèles de données pour structurer la connectivité et les attributs des logements, et développement d’un outil CLI pour classer les biens selon des critères personnalisés.",
+      organization: "Polytech Paris-Saclay",
+      period: "2023",
+      status: "completed",
+      image: cover("house-finder"),
+      imageAlt: "Aperçu de House finder",
+      highlights: [
+        "Conception des modèles de données pour structurer la connectivité et les attributs des logements.",
+        "Développement d’un outil CLI pour classer les biens selon des critères personnalisés.",
+      ],
+      stack: ["Java", "Données OpenSource", "CLI"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("house-finder") },
+      ],
+    },
+    { //TODO
+      slug: "escape-the-mummy",
+      title: "Escape the mummy",
+      subtitle: "Jeu de labyrinthe 3D en Processing et GLSL.",
+      summary:
+        "Développement d’un jeu de labyrinthe 3D où il faut échapper à une momie après être entré dans une pyramide sur un désert généré procéduralement.",
+      organization: "Université Paris-Saclay",
+      period: "2022",
+      status: "completed",
+      image: cover("escape-the-mummy"),
+      imageAlt: "Aperçu de Escape the mummy",
+      highlights: [
+        "Développement d’un jeu de labyrinthe 3D avec Processing et GLSL.",
+        "Génération procédurale d’un désert et d’une pyramide.",
+        "Mécanique de jeu où le joueur doit échapper à une momie.",
+      ],
+      stack: ["Processing", "GLSL", "Jeu 3D"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("escape-the-mummy") },
+      ],
+    },
+    { //TODO
+      slug: "cli-messaging",
+      title: "CLI Messaging",
+      subtitle: "Applications de messagerie TCP-IP en C.",
+      summary:
+        "Développement d’applications de messagerie serveur et client en TCP-IP avec interface en ligne de commande.",
+      organization: "Université Paris-Saclay",
+      period: "2022",
+      status: "completed",
+      image: cover("cli-messaging"),
+      imageAlt: "Aperçu de CLI Messaging",
+      highlights: [
+        "Développement d’applications de messagerie serveur et client en TCP-IP.",
+        "Interface en ligne de commande pour la communication.",
+        "Gestion des connexions et des messages entre clients et serveur.",
+      ],
+      stack: ["C", "TCP-IP", "CLI"],
+      links: [
+        { labelKey: "caseStudy", href: addCaseStudy("cli-messaging") },
+      ],
+    }
   ],
   ar: [
     {

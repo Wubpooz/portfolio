@@ -123,7 +123,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] certifications icons
 - [ ] favicon
 - [ ] School & experience logos
-- [ ] Add interests: RO, crypto, traitement image/signal ondellettes, IA, bioinfo
+- [ ] Add interests: RO, crypto, traitement image/signal ondellettes, IA, bioinfo, Cheerleading, Photographie, Equitation
 - [ ] Section Langues:
   - Allemand: Capacité professionnelle limitée
   - Anglais: Capacité professionnelle fonctionnelle (Score Duolingo 130 - May 2026, Test of English for International Communication (TOEIC) - 990, C1, English CEFR C1 (Oral Expression/Comprehension, Written Expression/Comprehension) - ICIMS)

@@ -9,19 +9,26 @@ export interface CertificationItem {
   iconUrl?: string
 }
 
-export const certifications: CertificationItem[] = [
+export const certifications: CertificationItem[] = [ //TODO: actual urls + order (either date or relevance, maybe give a button to sort it with a posthog signal)
   {
     title: "MOOC SecNumAc in cybersecurity",
     issuer: "ANSSI",
     date: "2024",
     href: "https://secnumacademie.gouv.fr/",
-    icon: "anssi",
+    icon: "anssi", //TODO: actual icon
+  },
+  {
+    title: "Formation à la réglementation en santé et sécurité au travail (INRS)",
+    issuer: "INRS",
+    date: "2024",
+    href: "https://www.inrs.fr/",
+    icon: "inrs", //TODO: actual icon
   },
   {
     title: "Certificate of completion: Teaching the AI Fluency Framework",
     issuer: "Anthropic",
     date: "06.2026",
-    href: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fverify%2Eskilljar%2Ecom%2Fc%2Fgde9e7ewhv9y&urlhash=SRsl&mt=lfJ8bOygYBkDQkC13hJxUicLVgSJThkbIqATkorWJatw4jLds43hPc8NhVdc8zKFDTdaBKq6_PaMgUN3zC2ZOT7HDHA&isSdui=true",
+    href: "https://verify.skilljar.com/c/gde9e7ewhv9y",
     credentialId: "gde9e7ewhv9y",
     icon: "anthropic",
   },
@@ -29,7 +36,7 @@ export const certifications: CertificationItem[] = [
     title: "Model Context Protocol: Advanced Topics",
     issuer: "Anthropic",
     date: "06.2026",
-    href: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fverify%2Eskilljar%2Ecom%2Fc%2Fiv7bzfowztcd&urlhash=5in5&mt=MfU_BD6W32EQpwFcW3cQFY6eHj7BHVMCt34GcpB1cnxpwZy_zLeXKdiILUxlOFtmHAOIGC0yE5gD4aHNAJJUkTK9XT4&isSdui=true",
+    href: "https://verify.skilljar.com/c/iv7bzfowztcd",
     credentialId: "iv7bzfowztcd",
     icon: "anthropic",
   },
@@ -38,21 +45,21 @@ export const certifications: CertificationItem[] = [
     issuer: "ICIMS",
     date: "04.2026",
     expiresAt: "04.2028",
-    href: "https://www.linkedin.com/in/mathieu-w-a9ba36211/overlay/Certifications/1592903899/treasury/?profileId=ACoAADW5aZcBL3ssfT-EVzpXmBA1-KNVxZQKOqk",
-    icon: "languages",
+    href: "https://media.licdn.com/dms/image/v2/D4E2DAQGn13t1AfawUA/profile-treasury-document-images_1280/B4EZ3kS7ZMJUAU-/1/1777651662679?e=1784764800&v=beta&t=Zm7TRXJ86j4Gz-fho1Z1ivMO1VorTmR8DU2rXk7jRZs", //TODO
+    icon: "languages", //TODO: actual icon
   },
   {
     title: "Label Handimanagement",
     issuer: "Companieros",
     date: "04.2026",
-    href: "https://www.linkedin.com/in/mathieu-w-a9ba36211/overlay/Certifications/1592660574/treasury/?profileId=ACoAADW5aZcBL3ssfT-EVzpXmBA1-KNVxZQKOqk",
-    icon: "accessibility",
+    href: "https://media.licdn.com/dms/image/v2/D4E2DAQFO__00vpclig/profile-treasury-document-images_1280/B4EZ3kTbM4KQAU-/1/1777651793060?e=1784764800&v=beta&t=koyYjuW7Hj_qoi3C4HvgnsR4PkoYoLm3ggEk-kh4lAU", //TODO
+    icon: "accessibility", //TODO: actual icon
   },
   {
     title: "CodinGame Certification - C++",
     issuer: "CodinGame",
     date: "2026",
-    href: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww%2Ecodingame%2Ecom%2Fcertification%2F4isuVQxdBt0f6EeZSGGX7g&urlhash=PQz5&mt=3o6JZCV57TxqDsAZ1EbHoZwF7lYMRcj4FU8ekuv1EvC7ZicqlGXzEQmN3B427zbDO5EfrOO9zy36GIA5jDjMKxVdoQw&isSdui=true",
+    href: "https://www.codingame.com/certification/4isuVQxdBt0f6EeZSGGX7g",
     credentialId: "4isuVQxdBt0f6EeZSGGX7g",
     icon: "codingame",
   },
@@ -60,7 +67,7 @@ export const certifications: CertificationItem[] = [
     title: "CodinGame Certification - C",
     issuer: "CodinGame",
     date: "2026",
-    href: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww%2Ecodingame%2Ecom%2Fcertification%2FFnAMCXuWq6tzj9GdI8ZCXg&urlhash=eHAJ&mt=VKcmAlDypG553WPbEABJ9w4Wfxvz5c0G1HSw27z50kgaf8aHzAds2SIxQz_9zG3cxxAofdFoJIf9VojBhTnr4Y703gk&isSdui=true",
+    href: "https://www.codingame.com/certification/FnAMCXuWq6tzj9GdI8ZCXg",
     credentialId: "FnAMCXuWq6tzj9GdI8ZCXg",
     icon: "codingame",
   },
@@ -68,7 +75,7 @@ export const certifications: CertificationItem[] = [
     title: "CodinGame Certification - Java",
     issuer: "CodinGame",
     date: "2026",
-    href: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww%2Ecodingame%2Ecom%2Fcertification%2FJ8fLMAvLu6vkfCC1mnq8ig&urlhash=cbz5&mt=xsf3kl97r7XsUgUT-FOUD_w6MfGNV9dq5Rq0Bbdgbz6yYfQhhpc0F0GEW1DMl56o-1_g83IVPy9j5L0CkFYWKaXedJw&isSdui=true",
+    href: "https://www.codingame.com/certification/J8fLMAvLu6vkfCC1mnq8ig",
     credentialId: "J8fLMAvLu6vkfCC1mnq8ig",
     icon: "codingame",
   },
@@ -76,7 +83,7 @@ export const certifications: CertificationItem[] = [
     title: "CodinGame Certification - Python 3",
     issuer: "CodinGame",
     date: "2026",
-    href: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww%2Ecodingame%2Ecom%2Fcertification%2FEYJHy-VFr9Gp7pLGDgOFzA&urlhash=B2-F&mt=VyjU95-S9uxNHe08__6CioIso0VReCb9Q_kdoesOEVIs8DoG3EfN5DJpcu7FpKfdcy7A7tpYISlBrJR4jeohRrpKkfA&isSdui=true",
+    href: "https://www.codingame.com/certification/EYJHy-VFr9Gp7pLGDgOFzA",
     credentialId: "EYJHy-VFr9Gp7pLGDgOFzA",
     icon: "codingame",
   },
@@ -84,7 +91,7 @@ export const certifications: CertificationItem[] = [
     title: "CodinGame Certification - TypeScript",
     issuer: "CodinGame",
     date: "2026",
-    href: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww%2Ecodingame%2Ecom%2Fcertification%2FWzftG4Du4dwFm5bQvLTpcw&urlhash=0O5o&mt=1ipijeODL1A2EDa4sM_h2lANRu9N6dKHhm9YLhEm8oCRJcr4fGdgicsssKW18ROrgxPSqscCKMJy1IsRGVNhQQYrABs&isSdui=true",
+    href: "https://www.codingame.com/certification/WzftG4Du4dwFm5bQvLTpcw",
     credentialId: "WzftG4Du4dwFm5bQvLTpcw",
     icon: "codingame",
   },
@@ -92,7 +99,7 @@ export const certifications: CertificationItem[] = [
     title: "Microsoft Security Essentials Professional Certificate by Microsoft and LinkedIn",
     issuer: "Microsoft",
     date: "12.2025",
-    href: "https://www.linkedin.com/learning/certificates/3dbde0d64466e8577cc9ed11faa69619f071d273d49b5d66b96f81b03bcca26a/",
+    href: "https://www.linkedin.com/learning/certificates/3dbde0d64466e8577cc9ed11faa69619f071d273d49b5d66b96f81b03bcca26a",
     icon: "microsoft",
   },
   {
@@ -106,17 +113,17 @@ export const certifications: CertificationItem[] = [
     title: "OWASP API Security Top 10",
     issuer: "APIsec University",
     date: "10.2025",
-    href: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww%2Ecredly%2Ecom%2Fbadges%2Fd6e20a74-9895-417e-b476-e3edf206e7fc%2Fpublic_url&urlhash=d0ew&mt=DDLLanv-Wf5MFs3M71SZpryciSLqXKJ7OL7IGi9yewAeJ7K7kEqFRv386I5eMvKpInfY38XMghI_YCVwjqc9o6MiukE&isSdui=true",
+    href: "https://www.credly.com/badges/d6e20a74-9895-417e-b476-e3edf206e7fc/public_url",
     credentialId: "d6e20a74-9895-417e-b476-e3edf206e7fc",
-    icon: "owasp",
+    icon: "owasp", //TODO: actual icon
   },
   {
     title: "Test of English for International Communication (TOEIC) - 990, C1",
     issuer: "ETS",
     date: "10.2025",
-    href: "https://www.linkedin.com/in/mathieu-w-a9ba36211/overlay/Certifications/1554172007/treasury/?profileId=ACoAADW5aZcBL3ssfT-EVzpXmBA1-KNVxZQKOqk",
+    href: "https://media.licdn.com/dms/image/v2/D4E2DAQFyYh8odcLrVA/profile-treasury-document-cover-images_1280/B4EZncwdumKkAw-/0/1760345317944?e=1784300400&v=beta&t=9mhtMIUxkHi7ecBmzZw5h5rtoZLF24QrTDoRHZI7MhE", //TODO
     credentialId: "5940728016",
-    icon: "languages",
+    icon: "languages", //TODO: actual icon
   },
   {
     title: "L'essentiel de Node.js",
@@ -124,13 +131,6 @@ export const certifications: CertificationItem[] = [
     date: "09.2024",
     href: "https://www.linkedin.com/learning/certificates/de2c4937b3b5bdf8180ae0b0a178abe01f038819f456901bc5826024b8651b8c/",
     icon: "linkedin",
-  },
-  {
-    title: "MOOC SecNumAcademie",
-    issuer: "ANSSI - Agence nationale de la sécurité des systèmes d'information",
-    date: "04.2024",
-    href: "#",
-    icon: "anssi",
   },
   {
     title: "Gérer des talents très performants ou à haut potentiel",
@@ -179,7 +179,7 @@ export const certifications: CertificationItem[] = [
     issuer: "LinkedIn",
     date: "11.2022",
     href: "https://www.linkedin.com/skill-assessments/Cascading%20Style%20Sheets%20(CSS)/report/",
-    icon: "css3",
+    icon: "css3", //TODO: actual icon
   },
   {
     title: "OOP paradigm",
@@ -199,7 +199,7 @@ export const certifications: CertificationItem[] = [
     title: "MOOC RIGHTS, SEX & EDUCATION",
     issuer: "Com'Santé sexuelle",
     date: "05.2021",
-    href: "#",
-    icon: "heart",
+    href: "https://santesexuelle-droitshumains.org/mooc-rights-sex-and-education/",
+    icon: "heart", //TODO: actual icon
   },
 ]

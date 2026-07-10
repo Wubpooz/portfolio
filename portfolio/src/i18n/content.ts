@@ -210,11 +210,11 @@ export const uiContent: Record<Locale, UiContent> = {
     hero: {
       role: "Ingénieur fullstack & IA @ Dassault Systèmes",
       location: "Polytech Paris-Saclay · Paris, France",
-      summary: "Je construis des applications fullstack, des agents IA et des simulations scientifiques. J’aime les systèmes bien conçus, les interfaces sobres et les sujets à la frontière entre logiciel, IA et calcul.",
+      summary: "Expérimenté dans la conception et le déploiement d'applications scientifiques complexes chez Dassault Systèmes, je cherche à appliquer mes compétences en résolution de problèmes pour développer des technologies innovantes dans le cadre d'un poste d'ingénieur Fullstack, IA ou Machine Learning.",
       contactCta: "Me contacter",
       downloadCta: "Télécharger le CV",
       scrollCta: "Aller aux projets",
-      backgroundAlt: "Fond d’écran du hero",
+      backgroundAlt: "Fond d’écran de la présentation",
       portraitAlt: "Portrait de Mathieu Waharte",
     },
     sections: {
