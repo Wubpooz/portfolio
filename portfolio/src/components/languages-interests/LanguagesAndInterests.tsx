@@ -1,27 +1,44 @@
-import { useMemo } from "react"
-import type { ComponentType } from "react"
-import * as LucideIcons from "lucide-react"
-import { motion } from "framer-motion"
-import { getLanguages, getInterests } from "@/data/about"
-import { getUiContent, useLocale } from "@/i18n"
+import { useMemo } from "react";
+import type { ComponentType } from "react";
+import * as LucideIcons from "lucide-react";
+import { motion } from "framer-motion";
+import { getLanguages, getInterests } from "@/data/about";
+import { getUiContent, useLocale } from "@/i18n";
 
-const SEGMENTS = [0, 1, 2, 3, 4]
+const SEGMENTS = [0, 1, 2, 3, 4];
 
 function getProficiencyLevel(level: string): number {
   const l = level.toLowerCase();
-  if (l.includes("native") || l.includes("bilingue") || l.includes("bilingual") || l.includes("الأم")) return 5;
-  if (l.includes("professional") || l.includes("professionnelle") || l.includes("عملية")) return 4;
-  if (l.includes("limited") || l.includes("limitée") || l.includes("محدودة")) return 3;
-  if (l.includes("elementary") || l.includes("base") || l.includes("أساسية")) return 1;
+  if (
+    l.includes("native") ||
+    l.includes("bilingue") ||
+    l.includes("bilingual") ||
+    l.includes("الأم")
+  )
+    return 5;
+  if (
+    l.includes("professional") ||
+    l.includes("professionnelle") ||
+    l.includes("عملية")
+  )
+    return 4;
+  if (l.includes("limited") || l.includes("limitée") || l.includes("محدودة"))
+    return 3;
+  if (l.includes("elementary") || l.includes("base") || l.includes("أساسية"))
+    return 1;
   return 3;
 }
 
 function InterestIcon({ name }: Readonly<{ name: string }>) {
-  const IconComponent = (LucideIcons as Record<string, unknown>)[name] as ComponentType<{ className?: string }> | undefined
+  const IconComponent = (LucideIcons as Record<string, unknown>)[name] as
+    | ComponentType<{ className?: string }>
+    | undefined;
   if (!IconComponent) {
-    return <LucideIcons.Sparkles className="size-5 shrink-0" aria-hidden="true" />
+    return (
+      <LucideIcons.Sparkles className="size-5 shrink-0" aria-hidden="true" />
+    );
   }
-  return <IconComponent className="size-5 shrink-0" aria-hidden="true" />
+  return <IconComponent className="size-5 shrink-0" aria-hidden="true" />;
 }
 
 const containerVariants = {
@@ -32,7 +49,7 @@ const containerVariants = {
       staggerChildren: 0.05,
     },
   },
-}
+};
 
 const itemVariants = {
   hidden: { opacity: 0, y: 15 },
@@ -45,16 +62,17 @@ const itemVariants = {
       damping: 20,
     },
   },
-}
+};
 
 export default function LanguagesAndInterestsSection() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  
-  const languages = useMemo(() => getLanguages(locale), [locale])
-  const interests = useMemo(() => getInterests(locale), [locale])
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
 
-  const borderClass = locale === "ar" ? "md:border-r md:pr-8" : "md:border-l md:pl-8"
+  const languages = useMemo(() => getLanguages(locale), [locale]);
+  const interests = useMemo(() => getInterests(locale), [locale]);
+
+  const borderClass =
+    locale === "ar" ? "md:border-r md:pr-8" : "md:border-l md:pl-8";
 
   return (
     <section id="languages-interests" className="w-full py-8 md:py-10">
@@ -69,27 +87,42 @@ export default function LanguagesAndInterestsSection() {
           {/* Languages Column */}
           <div className="space-y-6">
             <h3 className="text-lg font-semibold tracking-tight text-foreground flex items-center gap-2">
-              <LucideIcons.Languages className="size-5 text-primary" aria-hidden="true" />
-              {locale === "fr" ? "Langues" : locale === "ar" ? "اللغات" : "Languages"}
+              <LucideIcons.Languages
+                className="size-5 text-primary"
+                aria-hidden="true"
+              />
+              {locale === "fr"
+                ? "Langues"
+                : locale === "ar"
+                  ? "اللغات"
+                  : "Languages"}
             </h3>
 
             <div className="space-y-5">
               {languages.map((lang) => {
-                const val = getProficiencyLevel(lang.level)
+                const val = getProficiencyLevel(lang.level);
                 return (
-                  <div key={lang.name} className="border-b border-border/50 pb-4 last:border-0 last:pb-0">
+                  <div
+                    key={lang.name}
+                    className="border-b border-border/50 pb-4 last:border-0 last:pb-0"
+                  >
                     <div className="flex items-center justify-between gap-4">
                       <div className="space-y-1">
-                        <span className="font-semibold text-foreground block">{lang.name}</span>
+                        <span className="font-semibold text-foreground block">
+                          {lang.name}
+                        </span>
                         <span className="text-xs text-muted-foreground">
                           {lang.level}
                         </span>
                       </div>
-                      
+
                       {/* Segmented level indicator */}
-                      <div className="flex items-center gap-1" aria-label={`${lang.name} level: ${val.toString()} out of 5`}>
+                      <div
+                        className="flex items-center gap-1"
+                        aria-label={`${lang.name} level: ${val.toString()} out of 5`}
+                      >
                         {SEGMENTS.map((sVal) => {
-                          const isActive = sVal < val
+                          const isActive = sVal < val;
                           return (
                             <div
                               key={sVal}
@@ -99,11 +132,11 @@ export default function LanguagesAndInterestsSection() {
                                   : "bg-muted-foreground/20"
                               }`}
                             />
-                          )
+                          );
                         })}
                       </div>
                     </div>
-                    
+
                     {lang.details?.length ? (
                       <div className="mt-3 flex flex-wrap gap-2">
                         {lang.details.map((detail) => (
@@ -118,19 +151,28 @@ export default function LanguagesAndInterestsSection() {
                       </div>
                     ) : null}
                   </div>
-                )
+                );
               })}
             </div>
           </div>
 
           {/* Interests Column */}
-          <div className={`space-y-6 pt-6 border-t border-border md:pt-0 md:border-t-0 ${borderClass}`}>
+          <div
+            className={`space-y-6 pt-6 border-t border-border md:pt-0 md:border-t-0 ${borderClass}`}
+          >
             <h3 className="text-lg font-semibold tracking-tight text-foreground flex items-center gap-2">
-              <LucideIcons.Heart className="size-5 fill-primary text-primary" aria-hidden="true" />
-              {locale === "fr" ? "Intérêts" : locale === "ar" ? "الاهتمامات" : "Interests"}
+              <LucideIcons.Heart
+                className="size-5 fill-primary text-primary"
+                aria-hidden="true"
+              />
+              {locale === "fr"
+                ? "Intérêts"
+                : locale === "ar"
+                  ? "الاهتمامات"
+                  : "Interests"}
             </h3>
 
-            <motion.div 
+            <motion.div
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -156,5 +198,5 @@ export default function LanguagesAndInterestsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

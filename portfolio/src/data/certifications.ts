@@ -1,14 +1,14 @@
 export interface CertificationItem {
-  title: string
-  issuer: string
-  date: string
-  href: string
-  credentialId?: string
-  expiresAt?: string
-  icon?: string
-  iconUrl?: string
-  relevance: number
-}
+  title: string;
+  issuer: string;
+  date: string;
+  href: string;
+  credentialId?: string;
+  expiresAt?: string;
+  icon?: string;
+  iconUrl?: string;
+  relevance: number;
+};
 
 export const certifications: CertificationItem[] = [
   {
@@ -229,4 +229,4 @@ export const certifications: CertificationItem[] = [
     icon: "/icons/com_sante_sexuelle.png",
     relevance: 1,
   },
-]
+];

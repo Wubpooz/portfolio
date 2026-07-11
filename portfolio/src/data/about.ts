@@ -1,15 +1,15 @@
-import type { Locale } from "@/i18n"
+import type { Locale } from "@/i18n";
 
 export interface LanguageEntry {
-  name: string
-  level: string
-  details?: string[]
-}
+  name: string;
+  level: string;
+  details?: string[];
+};
 
 export interface InterestEntry {
-  name: string
-  icon: string // Lucide icon name
-}
+  name: string;
+  icon: string; // Lucide icon name
+};
 
 const languagesByLocale: Record<Locale, LanguageEntry[]> = {
   en: [
@@ -114,12 +114,12 @@ const interestsByLocale: Record<Locale, InterestEntry[]> = {
     { name: "التصوير الفوتوغرافي", icon: "Camera" },
     { name: "الفروسية", icon: "Award" }
   ]
-}
+};
 
 export function getLanguages(locale: Locale): LanguageEntry[] {
-  return languagesByLocale[locale]
-}
+  return languagesByLocale[locale];
+};
 
 export function getInterests(locale: Locale): InterestEntry[] {
-  return interestsByLocale[locale]
-}
+  return interestsByLocale[locale];
+};

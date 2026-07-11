@@ -1,35 +1,37 @@
-import { Atom, Briefcase, GraduationCap } from 'lucide-react'
-import { shouldInvertIcon, getIconUrl } from '@/lib/utils'
-import TagPills from './TagPills'
+import { Atom, Briefcase, GraduationCap } from "lucide-react";
+import { shouldInvertIcon, getIconUrl } from "@/lib/utils";
+import TagPills from "./TagPills";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion'
+} from "@/components/ui/accordion";
 
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const renderTextWithLinks = (text: string) => {
-  const regex = /\[([^\]]+)\]\(([^)]+)\)/g
-  const parts = []
-  let lastIndex = 0
-  let match
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
 
   while ((match = regex.exec(text)) !== null) {
-    const matchIndex = match.index
+    const matchIndex = match.index;
     if (matchIndex > lastIndex) {
-      parts.push(text.substring(lastIndex, matchIndex))
+      parts.push(text.substring(lastIndex, matchIndex));
     }
-    const linkText = match[1]
-    const linkUrl = match[2]
-    const isInternal = linkUrl.startsWith("/")
-    
+    const linkText = match[1];
+    const linkUrl = match[2];
+    const isInternal = linkUrl.startsWith("/");
+
     parts.push(
       isInternal ? (
         <Link
           key={matchIndex}
           to={linkUrl}
-          onClick={(e) => { e.stopPropagation(); }}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
           className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
         >
           {linkText}
@@ -40,31 +42,33 @@ const renderTextWithLinks = (text: string) => {
           href={linkUrl}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={(e) => { e.stopPropagation(); }}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
           className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
         >
           {linkText}
         </a>
-      )
-    )
-    lastIndex = regex.lastIndex
+      ),
+    );
+    lastIndex = regex.lastIndex;
   }
 
   if (lastIndex < text.length) {
-    parts.push(text.substring(lastIndex))
+    parts.push(text.substring(lastIndex));
   }
 
-  return parts.length > 0 ? parts : text
-}
+  return parts.length > 0 ? parts : text;
+};
 
 interface ExpandableItemProps {
-  value: string
-  title: string
-  subtitle: string
-  dateRange: string
-  description?: string[]
-  tags?: string[]
-  logo?: string
+  value: string;
+  title: string;
+  subtitle: string;
+  dateRange: string;
+  description?: string[];
+  tags?: string[];
+  logo?: string;
 }
 
 export default function ExpandableItem({
@@ -76,12 +80,13 @@ export default function ExpandableItem({
   tags,
   logo,
 }: Readonly<ExpandableItemProps>) {
-  const hasContent = description && description.length > 0
+  const hasContent = description && description.length > 0;
 
   const renderLogo = () => {
-    if (!logo) return null
+    if (!logo) return null;
 
-    const containerClass = "flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-border bg-background md:h-11 md:w-11 overflow-hidden p-1.5"
+    const containerClass =
+      "flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-border bg-background md:h-11 md:w-11 overflow-hidden p-1.5";
 
     // If it's a URL/path
     if (logo.startsWith("http") || logo.startsWith("/")) {
@@ -94,7 +99,7 @@ export default function ExpandableItem({
             loading="lazy"
           />
         </div>
-      )
+      );
     }
 
     // Special Lucide icons
@@ -103,25 +108,36 @@ export default function ExpandableItem({
         <div className={containerClass}>
           <Atom className="size-5 text-primary shrink-0" aria-hidden="true" />
         </div>
-      )
+      );
     }
-    if (logo === "graduation-cap" || logo === "GraduationCap" || logo === "education" || logo === "school") {
+    if (
+      logo === "graduation-cap" ||
+      logo === "GraduationCap" ||
+      logo === "education" ||
+      logo === "school"
+    ) {
       return (
         <div className={containerClass}>
-          <GraduationCap className="size-5 text-primary shrink-0" aria-hidden="true" />
+          <GraduationCap
+            className="size-5 text-primary shrink-0"
+            aria-hidden="true"
+          />
         </div>
-      )
+      );
     }
     if (logo === "briefcase" || logo === "Briefcase" || logo === "experience") {
       return (
         <div className={containerClass}>
-          <Briefcase className="size-5 text-primary shrink-0" aria-hidden="true" />
+          <Briefcase
+            className="size-5 text-primary shrink-0"
+            aria-hidden="true"
+          />
         </div>
-      )
+      );
     }
 
     // Default to SimpleIcons
-    const invertClass = shouldInvertIcon(logo) ? "dark:invert" : ""
+    const invertClass = shouldInvertIcon(logo) ? "dark:invert" : "";
     return (
       <div className={containerClass}>
         <img
@@ -130,12 +146,12 @@ export default function ExpandableItem({
           className={`max-h-full max-w-full object-contain ${invertClass}`}
           loading="lazy"
           onError={(e) => {
-            e.currentTarget.style.display = 'none';
+            e.currentTarget.style.display = "none";
           }}
         />
       </div>
-    )
-  }
+    );
+  };
 
   const headerContent = (
     <div className="flex items-start gap-3 md:gap-4 text-left w-full min-w-0">
@@ -155,8 +171,7 @@ export default function ExpandableItem({
         </span>
       </div>
     </div>
-  )
-
+  );
 
   return (
     <AccordionItem
@@ -173,24 +188,22 @@ export default function ExpandableItem({
             {headerContent}
           </div>
         )}
- 
+
         {tags?.length ? (
           <div className="pb-3">
             <TagPills tags={tags} />
           </div>
         ) : null}
- 
+
         {description?.length ? (
           <AccordionContent className="pb-5">
             <ul className="space-y-2">
               {description.map((line, i) => (
                 <li
-                  key={i}
+                  key={`description-line-${i.toString()}`}
                   className="relative pl-4 text-sm leading-relaxed wrap-break-words text-muted-foreground"
                 >
-                  <span
-                    className="absolute left-0 top-2 h-1 w-1 rounded-full bg-primary"
-                  />
+                  <span className="absolute left-0 top-2 h-1 w-1 rounded-full bg-primary" />
                   {renderTextWithLinks(line)}
                 </li>
               ))}
@@ -199,5 +212,5 @@ export default function ExpandableItem({
         ) : null}
       </div>
     </AccordionItem>
-  )
+  );
 }

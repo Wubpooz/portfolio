@@ -1,107 +1,107 @@
-import type { Locale } from "./types"
+import type { Locale } from "./types";
 
 export interface UiContent {
   nav: {
-    home: string
-    projects: string
-    resume: string
-    blog: string
+    home: string;
+    projects: string;
+    resume: string;
+    blog: string;
   }
   hero: {
-    role: string
-    location: string
-    summary: string
-    contactCta: string
-    downloadCta: string
-    scrollCta: string
-    backgroundAlt: string
-    portraitAlt: string
+    role: string;
+    location: string;
+    summary: string;
+    contactCta: string;
+    downloadCta: string;
+    scrollCta: string;
+    backgroundAlt: string;
+    portraitAlt: string;
   }
   sections: {
-    experience: string
-    education: string
-    skillsTitle: string
-    skillsDescription: string
-    projects: string
-    certifications: string
-    languagesAndInterests: string
-    contactTitle: string
+    experience: string;
+    education: string;
+    skillsTitle: string;
+    skillsDescription: string;
+    projects: string;
+    certifications: string;
+    languagesAndInterests: string;
+    contactTitle: string;
   }
   project: {
-    live: string
-    source: string
-    details: string
-    viewAll: string
-    moreSuffix: string
+    live: string;
+    source: string;
+    details: string;
+    viewAll: string;
+    moreSuffix: string;
   }
   projectsPage: {
-    title: string
-    subtitle: string
-    hoverPreview: string
-    searchPlaceholder: string
-    filterAll: string
-    filterCompleted: string
-    filterInProgress: string
-    filterWon: string
-    statusCompleted: string
-    statusInProgress: string
-    statusWon: string
-    noResults: string
-    backHome: string
-    backProjects: string
-    openSearch: string
-    organization: string
-    period: string
-    status: string
-    technologies: string
-    highlights: string
-    links: string
-    openProject: string
-    openSource: string
-    openLive: string
-    openDemo: string
-    openDataset: string
-    viewCard: string
-    viewList: string
-    sortRecent: string
-    sortRelevance: string
+    title: string;
+    subtitle: string;
+    hoverPreview: string;
+    searchPlaceholder: string;
+    filterAll: string;
+    filterCompleted: string;
+    filterInProgress: string;
+    filterWon: string;
+    statusCompleted: string;
+    statusInProgress: string;
+    statusWon: string;
+    noResults: string;
+    backHome: string;
+    backProjects: string;
+    openSearch: string;
+    organization: string;
+    period: string;
+    status: string;
+    technologies: string;
+    highlights: string;
+    links: string;
+    openProject: string;
+    openSource: string;
+    openLive: string;
+    openDemo: string;
+    openDataset: string;
+    viewCard: string;
+    viewList: string;
+    sortRecent: string;
+    sortRelevance: string;
   }
   certifications: {
-    showMore: string
-    showLess: string
+    showMore: string;
+    showLess: string;
   }
   contact: {
-    emailCta: string
-    resumeCta: string
-    openResumeCta: string
-    vcardCta: string
+    emailCta: string;
+    resumeCta: string;
+    openResumeCta: string;
+    vcardCta: string;
   }
   resume: {
-    title: string
-    description: string
-    backHome: string
-    download: string
-    openInNewTab: string
+    title: string;
+    description: string;
+    backHome: string;
+    download: string;
+    openInNewTab: string;
   }
   footer: {
-    sourceCode: string
-    licence: string
-    copyright: string
+    sourceCode: string;
+    licence: string;
+    copyright: string;
   }
   notFound: {
-    title: string
-    subtitle: string
-    backHome: string
-    goProjects: string
-    goResume: string
+    title: string;
+    subtitle: string;
+    backHome: string;
+    goProjects: string;
+    goResume: string;
   }
   theme: {
-    light: string
-    dark: string
-    system: string
-    useLight: string
-    useDark: string
-    useSystem: string
+    light: string;
+    dark: string;
+    system: string;
+    useLight: string;
+    useDark: string;
+    useSystem: string;
   }
 }
 
@@ -418,15 +418,15 @@ export const uiContent: Record<Locale, UiContent> = {
       useSystem: "استخدام سمة النظام",
     },
   },
-}
+};
 
 export function getUiContent(locale: Locale) {
-  return uiContent[locale]
+  return uiContent[locale];
 }
 
 export function getResumeAsset(locale: Locale) {
   return locale === "fr"
     ? "/assets/CV_Mathieu_WAHARTE.pdf"
-    : "/assets/Resume_Mathieu_WAHARTE.pdf"
+    : "/assets/Resume_Mathieu_WAHARTE.pdf";
 }
 

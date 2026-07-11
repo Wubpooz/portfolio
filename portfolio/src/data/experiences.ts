@@ -1,5 +1,5 @@
-import type { Locale } from "@/i18n"
-import type { ExperienceEntry } from "./types"
+import type { Locale } from "@/i18n";
+import type { ExperienceEntry } from "./types";
 
 const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
   en: [
@@ -185,5 +185,5 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
 }
 
 export function getExperiences(locale: Locale): ExperienceEntry[] {
-  return experiencesByLocale[locale]
-}
+  return experiencesByLocale[locale];
+};

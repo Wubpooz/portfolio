@@ -22,14 +22,14 @@ import {
   Presentation,
   ChartScatter,
   Milestone,
-  DatabaseSearch
-} from "lucide-react"
-import { shouldInvertIcon, getIconUrl } from "@/lib/utils"
+  DatabaseSearch,
+} from "lucide-react";
+import { shouldInvertIcon, getIconUrl } from "@/lib/utils";
 
 interface SkillIconProps {
-  name: string
-  icon?: string
-  iconUrl?: string
+  name: string;
+  icon?: string;
+  iconUrl?: string;
 }
 
 const fallbackIcons: Record<
@@ -59,23 +59,27 @@ const fallbackIcons: Record<
   cybersecurity: Shield,
   "distributed-algorithms": Network,
   "supervised-learning": ChartScatter,
-  "oop": Blocks,
+  oop: Blocks,
   "distributed-systems": Network,
   "design-patterns": Shapes,
   "ai-agents": Bot,
   "neural-network": BrainCircuit,
   "model-training": SlidersHorizontal,
-  "TTS": AudioLines,
+  TTS: AudioLines,
   "big-data": Database,
-  "pca": Shrink,
-  "research": NotebookPen,
-  "communication": Presentation,
+  pca: Shrink,
+  research: NotebookPen,
+  communication: Presentation,
   "data-analysis": DatabaseSearch,
-  "pm": Milestone
-}
+  pm: Milestone,
+};
 
-export default function SkillIcon({ name, icon, iconUrl }: Readonly<SkillIconProps>) {
-  const invertClass = shouldInvertIcon(icon ?? name) ? "dark:invert" : ""
+export default function SkillIcon({
+  name,
+  icon,
+  iconUrl,
+}: Readonly<SkillIconProps>) {
+  const invertClass = shouldInvertIcon(icon ?? name) ? "dark:invert" : "";
 
   if (iconUrl) {
     return (
@@ -88,12 +92,12 @@ export default function SkillIcon({ name, icon, iconUrl }: Readonly<SkillIconPro
         className={`h-9 w-9 object-contain ${invertClass}`}
         aria-hidden="true"
       />
-    )
+    );
   }
 
   if (icon && fallbackIcons[icon]) {
-    const Icon = fallbackIcons[icon]
-    return <Icon size={28} className="opacity-80" aria-hidden="true" />
+    const Icon = fallbackIcons[icon];
+    return <Icon size={28} className="opacity-80" aria-hidden="true" />;
   }
 
   if (icon) {
@@ -107,9 +111,9 @@ export default function SkillIcon({ name, icon, iconUrl }: Readonly<SkillIconPro
         className={`h-9 w-9 object-contain ${invertClass}`}
         aria-hidden="true"
       />
-    )
+    );
     // use opacity-95 grayscale transition duration-200 hover:grayscale-0 for muted icons
   }
 
-  return <Database size={28} className="opacity-70" aria-hidden="true" />
+  return <Database size={28} className="opacity-70" aria-hidden="true" />;
 }

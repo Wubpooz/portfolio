@@ -20,7 +20,7 @@ export default function BackgroundSwitcher() {
       {isOpen && (
         <div
           className={cn(
-            "flex flex-col gap-1.5 p-2 rounded-2xl border border-border bg-background/80 backdrop-blur-md shadow-lg transition-all duration-200 ease-out translate-y-0 opacity-100 scale-100 origin-bottom-right"
+            "flex flex-col gap-1.5 p-2 rounded-2xl border border-border bg-background/80 backdrop-blur-md shadow-lg transition-all duration-200 ease-out translate-y-0 opacity-100 scale-100 origin-bottom-right",
           )}
         >
           <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground border-b border-border/50 mb-1">
@@ -41,14 +41,21 @@ export default function BackgroundSwitcher() {
                   "flex items-center justify-between gap-6 px-3 py-1.5 rounded-lg text-xs font-medium text-left transition-colors cursor-pointer",
                   isActive
                     ? "bg-primary/10 text-primary"
-                    : "hover:bg-muted/60 text-muted-foreground hover:text-foreground"
+                    : "hover:bg-muted/60 text-muted-foreground hover:text-foreground",
                 )}
               >
                 <div className="flex items-center gap-2">
-                  <Icon className={cn("size-3.5", isActive ? "text-primary" : "text-muted-foreground")} />
+                  <Icon
+                    className={cn(
+                      "size-3.5",
+                      isActive ? "text-primary" : "text-muted-foreground",
+                    )}
+                  />
                   {bg.label}
                 </div>
-                {isActive && <Check className="size-3 text-primary stroke-[3px]" />}
+                {isActive && (
+                  <Check className="size-3 text-primary stroke-[3px]" />
+                )}
               </button>
             );
           })}
@@ -57,10 +64,12 @@ export default function BackgroundSwitcher() {
 
       {/* Floating Toggle Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => { setIsOpen(!isOpen); }}
         className={cn(
           "flex size-11 items-center justify-center rounded-full border border-border bg-background/80 backdrop-blur-md shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer text-foreground",
-          isOpen ? "border-primary/50 text-primary rotate-45" : "hover:border-primary/30"
+          isOpen
+            ? "border-primary/50 text-primary rotate-45"
+            : "hover:border-primary/30",
         )}
         aria-label="Toggle background options"
       >

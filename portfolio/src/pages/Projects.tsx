@@ -1,45 +1,48 @@
-import { useMemo, useState } from "react"
-import { Search, LayoutGrid, List } from "lucide-react"
-import ProjectCard from "@/components/projects/ProjectCard"
-import { getProjects } from "@/data/projects"
-import { getUiContent, useLocale } from "@/i18n"
-import { sanitizeInput } from "@/lib/security"
-import { usePostHog } from "@posthog/react"
-import BackLink from "@/components/shared/BackLink"
-import { parseProjectPeriod } from "@/lib/utils"
+import { useMemo, useState } from "react";
+import { Search, LayoutGrid, List } from "lucide-react";
+import ProjectCard from "@/components/projects/ProjectCard";
+import { getProjects } from "@/data/projects";
+import { getUiContent, useLocale } from "@/i18n";
+import { sanitizeInput } from "@/lib/security";
+import { usePostHog } from "@posthog/react";
+import BackLink from "@/components/shared/BackLink";
+import { parseProjectPeriod } from "@/lib/utils";
 
-
-const statusFilters = ["all", "completed", "in-progress", "won"] as const
+const statusFilters = ["all", "completed", "in-progress", "won"] as const;
 
 export default function ProjectsPage() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  const projects = useMemo(() => getProjects(locale), [locale])
-  const [query, setQuery] = useState("")
-  const [statusFilter, setStatusFilter] = useState<(typeof statusFilters)[number]>("all")
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
+  const projects = useMemo(() => getProjects(locale), [locale]);
+  const [query, setQuery] = useState("");
+  const [statusFilter, setStatusFilter] =
+    useState<(typeof statusFilters)[number]>("all");
   const [viewMode, setViewMode] = useState<"card" | "list">(() => {
-    const saved = localStorage.getItem("projects-view-mode")
-    return (saved as "card" | "list") || "card"
-  })
-  const [sortBy, setSortBy] = useState<"recency_featured" | "relevance">("recency_featured")
-  const posthog = usePostHog()
+    const saved = localStorage.getItem("projects-view-mode");
+    return (saved as "card" | "list") || "card";
+  });
+  const [sortBy, setSortBy] = useState<"recency_featured" | "relevance">(
+    "recency_featured",
+  );
+  const posthog = usePostHog();
 
   const handleViewModeChange = (mode: "card" | "list") => {
-    setViewMode(mode)
-    localStorage.setItem("projects-view-mode", mode)
-    posthog.capture("projects_view_mode_changed", { view_mode: mode })
-  }
+    setViewMode(mode);
+    localStorage.setItem("projects-view-mode", mode);
+    posthog.capture("projects_view_mode_changed", { view_mode: mode });
+  };
 
   const handleSortChange = (sort: "recency_featured" | "relevance") => {
-    setSortBy(sort)
-    posthog.capture("projects_sort_applied", { sort_by: sort })
-  }
+    setSortBy(sort);
+    posthog.capture("projects_sort_applied", { sort_by: sort });
+  };
 
   const filteredProjects = useMemo(() => {
-    const normalizedQuery = sanitizeInput(query).toLowerCase()
+    const normalizedQuery = sanitizeInput(query).toLowerCase();
 
     return projects.filter((project) => {
-      const matchesStatus = statusFilter === "all" || project.status === statusFilter
+      const matchesStatus =
+        statusFilter === "all" || project.status === statusFilter;
       const haystack = [
         project.title,
         project.subtitle,
@@ -50,41 +53,40 @@ export default function ProjectsPage() {
         project.highlights.join(" "),
       ]
         .join(" ")
-        .toLowerCase()
+        .toLowerCase();
 
-      const matchesQuery = !normalizedQuery || haystack.includes(normalizedQuery)
+      const matchesQuery =
+        !normalizedQuery || haystack.includes(normalizedQuery);
 
-      return matchesStatus && matchesQuery
-    })
-  }, [projects, query, statusFilter])
+      return matchesStatus && matchesQuery;
+    });
+  }, [projects, query, statusFilter]);
 
   const sortedAndFilteredProjects = useMemo(() => {
-    const sorted = [...filteredProjects]
+    const sorted = [...filteredProjects];
 
     return sorted.sort((a, b) => {
       if (sortBy === "relevance") {
-        const scoreA = a.relevance ?? 0
-        const scoreB = b.relevance ?? 0
+        const scoreA = a.relevance ?? 0;
+        const scoreB = b.relevance ?? 0;
         if (scoreB !== scoreA) {
-          return scoreB - scoreA
+          return scoreB - scoreA;
         }
       } else {
         // Featured first
-        if (a.featured && !b.featured) return -1
-        if (!a.featured && b.featured) return 1
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
       }
 
       // Fallback to recency
-      return parseProjectPeriod(b.period) - parseProjectPeriod(a.period)
-    })
-  }, [filteredProjects, sortBy])
+      return parseProjectPeriod(b.period) - parseProjectPeriod(a.period);
+    });
+  }, [filteredProjects, sortBy]);
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 md:px-6 md:py-10">
       <div className="mb-6">
-        <BackLink to="/">
-          {content.projectsPage.backHome}
-        </BackLink>
+        <BackLink to="/">{content.projectsPage.backHome}</BackLink>
       </div>
 
       <div className="mb-8 flex flex-col gap-4 border-b border-border pb-6 md:flex-row md:items-end md:justify-between">
@@ -105,7 +107,9 @@ export default function ProjectsPage() {
           <input
             type="search"
             value={query}
-            onChange={(event) => { setQuery(event.target.value); }}
+            onChange={(event) => {
+              setQuery(event.target.value);
+            }}
             maxLength={100}
             placeholder={content.projectsPage.searchPlaceholder}
             className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
@@ -117,7 +121,7 @@ export default function ProjectsPage() {
           {/* Status Filters */}
           <div className="flex flex-wrap gap-2">
             {statusFilters.map((filter) => {
-              const isActive = statusFilter === filter
+              const isActive = statusFilter === filter;
               const label =
                 filter === "all"
                   ? content.projectsPage.filterAll
@@ -125,13 +129,16 @@ export default function ProjectsPage() {
                     ? content.projectsPage.filterCompleted
                     : filter === "in-progress"
                       ? content.projectsPage.filterInProgress
-                      : content.projectsPage.filterWon
+                      : content.projectsPage.filterWon;
 
               return (
                 <button
                   key={filter}
                   type="button"
-                  onClick={() => { setStatusFilter(filter); posthog.capture('projects_filter_applied', { filter }); }}
+                  onClick={() => {
+                    setStatusFilter(filter);
+                    posthog.capture("projects_filter_applied", { filter });
+                  }}
                   className={`rounded-md border px-3 py-2 text-xs font-mono uppercase tracking-[0.18em] transition-colors ${
                     isActive
                       ? "border-foreground bg-muted text-foreground"
@@ -140,7 +147,7 @@ export default function ProjectsPage() {
                 >
                   {label}
                 </button>
-              )
+              );
             })}
           </div>
 
@@ -207,7 +214,11 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedAndFilteredProjects.length ? (
             sortedAndFilteredProjects.map((project) => (
-              <div id={project.slug} key={project.slug} className="scroll-mt-24 flex w-full">
+              <div
+                id={project.slug}
+                key={project.slug}
+                className="scroll-mt-24 flex w-full"
+              >
                 <ProjectCard project={project} viewMode="card" />
               </div>
             ))
@@ -221,7 +232,11 @@ export default function ProjectsPage() {
         <div className="overflow-hidden border border-border bg-card divide-y divide-border">
           {sortedAndFilteredProjects.length ? (
             sortedAndFilteredProjects.map((project) => (
-              <div id={project.slug} key={project.slug} className="scroll-mt-24">
+              <div
+                id={project.slug}
+                key={project.slug}
+                className="scroll-mt-24"
+              >
                 <ProjectCard project={project} viewMode="list" />
               </div>
             ))
@@ -233,5 +248,5 @@ export default function ProjectsPage() {
         </div>
       )}
     </main>
-  )
+  );
 }

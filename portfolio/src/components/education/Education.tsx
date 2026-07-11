@@ -1,13 +1,13 @@
-import { useMemo } from "react"
-import { getEducations } from '../../data/education';
-import ExpandableItem from '../shared/ExpandableItem';
-import { Accordion } from '@/components/ui/accordion';
-import { getUiContent, useLocale } from '@/i18n'
+import { useMemo } from "react";
+import { getEducations } from "../../data/education";
+import ExpandableItem from "../shared/ExpandableItem";
+import { Accordion } from "@/components/ui/accordion";
+import { getUiContent, useLocale } from "@/i18n";
 
 export default function EducationSection() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  const educations = useMemo(() => getEducations(locale), [locale])
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
+  const educations = useMemo(() => getEducations(locale), [locale]);
 
   return (
     <section id="education" className="w-full py-8 md:py-10">

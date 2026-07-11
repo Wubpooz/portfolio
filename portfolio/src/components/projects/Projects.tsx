@@ -1,15 +1,18 @@
-import { ArrowRight } from "lucide-react"
-import { useMemo } from "react"
-import { Link } from "react-router-dom"
-import { getProjects } from "@/data/projects"
-import ProjectCard from "./ProjectCard"
-import { getUiContent, useLocale } from "@/i18n"
+import { ArrowRight } from "lucide-react";
+import { useMemo } from "react";
+import { Link } from "react-router-dom";
+import { getProjects } from "@/data/projects";
+import ProjectCard from "./ProjectCard";
+import { getUiContent, useLocale } from "@/i18n";
 
 export default function ProjectsSection() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  const allProjects = useMemo(() => getProjects(locale), [locale])
-  const projects = useMemo(() => allProjects.filter((project) => project.featured), [allProjects])
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
+  const allProjects = useMemo(() => getProjects(locale), [locale]);
+  const projects = useMemo(
+    () => allProjects.filter((project) => project.featured),
+    [allProjects],
+  );
 
   return (
     <section id="projects" className="w-full py-8 md:py-10">
@@ -40,11 +43,13 @@ export default function ProjectsSection() {
             href="/projects"
             className="group inline-flex items-center gap-2 text-sm font-medium text-foreground"
           >
-            <span className="underline underline-offset-4">{content.project.viewAll}</span>
+            <span className="underline underline-offset-4">
+              {content.project.viewAll}
+            </span>
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
         </div>
       </div>
     </section>
-  )
+  );
 }

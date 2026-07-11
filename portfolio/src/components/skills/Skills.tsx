@@ -1,37 +1,51 @@
-import { useMemo, useState } from "react"
-import { Heart, ChevronDown, ChevronUp } from "lucide-react"
-import { getSkillCategories } from "@/data/skills"
-import SkillIcon from "./SkillIcon"
-import { getUiContent, useLocale } from "@/i18n"
+import { useMemo, useState } from "react";
+import { Heart, ChevronDown, ChevronUp } from "lucide-react";
+import { getSkillCategories } from "@/data/skills";
+import SkillIcon from "./SkillIcon";
+import { getUiContent, useLocale } from "@/i18n";
 
 export default function SkillsSection() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  const skillCategories = useMemo(() => getSkillCategories(locale), [locale])
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
+  const skillCategories = useMemo(() => getSkillCategories(locale), [locale]);
 
-  const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>(() => {
+  const [collapsedCategories, setCollapsedCategories] = useState<
+    Record<string, boolean>
+  >(() => {
     try {
-      const stored = localStorage.getItem("collapsed-skills-categories")
-      return stored ? JSON.parse(stored) : {}
-    } catch {
-      return {}
+      const stored = localStorage.getItem("collapsed-skills-categories");
+      if(!stored) return {};
+
+      const parsed = JSON.parse(stored);
+      if (typeof parsed === "object" && parsed !== null) {
+        return parsed as Record<string, boolean>;
+      } else {
+        console.warn("Invalid data in localStorage for collapsed-skills-categories, resetting to empty object.");
+        return {};
+      }
+    } catch (e) {
+      console.error("Failed to parse collapsed-skills-categories from localStorage", e);
+      return {};
     }
-  })
+  });
 
   const toggleCategory = (categoryId: string) => {
     setCollapsedCategories((prev) => {
       const updated = {
         ...prev,
         [categoryId]: !prev[categoryId],
-      }
+      };
       try {
-        localStorage.setItem("collapsed-skills-categories", JSON.stringify(updated))
+        localStorage.setItem(
+          "collapsed-skills-categories",
+          JSON.stringify(updated),
+        );
       } catch (e) {
-        console.error("Failed to save collapsed skills categories state", e)
+        console.error("Failed to save collapsed skills categories state", e);
       }
-      return updated
-    })
-  }
+      return updated;
+    });
+  };
 
   return (
     <section id="skills" className="w-full py-8 md:py-10">
@@ -49,12 +63,13 @@ export default function SkillsSection() {
         {/* Section Content */}
         <div className="divide-y divide-border">
           {skillCategories.map((category) => {
-            const isCategoryCollapsed = collapsedCategories[category.id] ?? false
+            const isCategoryCollapsed =
+              collapsedCategories[category.id] ?? false;
             return (
               <div key={category.id} className="space-y-0">
                 {/* Category Header (Clickable to collapse/expand category) */}
                 <button
-                  onClick={() => toggleCategory(category.id)}
+                  onClick={() => { toggleCategory(category.id); }}
                   className="w-full bg-muted/10 px-4 py-3 border-b border-border md:px-6 flex items-center justify-between text-left transition-colors hover:bg-muted/20 select-none"
                   aria-expanded={!isCategoryCollapsed}
                 >
@@ -74,7 +89,7 @@ export default function SkillsSection() {
                     {category.items.map((skill) => (
                       <div
                         key={skill.name}
-                        className="flex min-h-[120px] flex-col items-center justify-center gap-3 border-b border-r border-border px-4 py-6 text-center transition-colors hover:bg-muted/20"
+                        className="flex min-h-30 flex-col items-center justify-center gap-3 border-b border-r border-border px-4 py-6 text-center transition-colors hover:bg-muted/20"
                       >
                         <SkillIcon
                           name={skill.name}
@@ -86,7 +101,10 @@ export default function SkillsSection() {
                           <p className="inline-flex items-center justify-center gap-1 text-sm font-medium leading-snug text-foreground">
                             {skill.name}
                             {skill.favorite ? (
-                              <Heart className="size-3 fill-current text-foreground shrink-0" aria-hidden="true" />
+                              <Heart
+                                className="size-3 fill-current text-foreground shrink-0"
+                                aria-hidden="true"
+                              />
                             ) : null}
                           </p>
 
@@ -100,9 +118,9 @@ export default function SkillsSection() {
                             <div className="flex items-center justify-center gap-1 pt-1.5">
                               {Array.from({ length: 5 }).map((_, i) => (
                                 <span
-                                  key={i}
+                                  key={`skill-${skill.name}-proficiency-${i.toString()}`}
                                   className={`size-1.5 rounded-full ${
-                                    i < skill.proficiency!
+                                    i < (skill.proficiency || 0)
                                       ? "bg-primary"
                                       : "bg-muted-foreground/20"
                                   }`}
@@ -116,10 +134,10 @@ export default function SkillsSection() {
                   </div>
                 )}
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }

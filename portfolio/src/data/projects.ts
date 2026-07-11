@@ -1,41 +1,40 @@
-import type { Locale } from "@/i18n"
+import type { Locale } from "@/i18n";
 
-export type ProjectLinkKey = "live" | "source" | "details" | "demo" | "dataset" | "search"
+export type ProjectLinkKey = "live" | "source" | "details" | "demo" | "dataset" | "search";
 
-export type ProjectStatus = "completed" | "in-progress" | "won"
+export type ProjectStatus = "completed" | "in-progress" | "won";
 
 export interface ProjectLink {
-  labelKey: ProjectLinkKey
-  href: string
-  label?: Record<Locale, string>
-}
+  labelKey: ProjectLinkKey;
+  href: string;
+  label?: Record<Locale, string>;
+};
 
 export interface ProjectItem {
-  slug: string
-  title: string
-  subtitle: string
-  summary: string
-  organization: string
-  period: string
-  status: ProjectStatus
-  image: string
-  imageAlt: string
-  highlights: string[]
-  stack: string[]
-  links: ProjectLink[]
-  featured?: boolean
-  relevance: number
-}
+  slug: string;
+  title: string;
+  subtitle: string;
+  summary: string;
+  organization: string;
+  period: string;
+  status: ProjectStatus;
+  image: string;
+  imageAlt: string;
+  highlights: string[];
+  stack: string[];
+  links: ProjectLink[];
+  featured?: boolean;
+  relevance: number;
+};
 
-const cover = (seed: string) =>
-  `/assets/projects/${seed}.webp`
+const cover = (seed: string) => `/assets/projects/${seed}.webp`;
 
-const datasetUrl = "https://huggingface.co/datasets/Bluefir/hetus-time-use"
-const maltaRepo = "https://github.com/Wubpooz/Malta-TTS"
-const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/" // XTTS demo
-const streamlitSearch = "https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/" // Paper Relevance Dashboard
-const escampeUrl = "https://escampe.vercel.app/" // Escampe web
-const watchlistUrl = "https://watchlist-service.vercel.app/landing?redirect=/" // Watchlist web
+const datasetUrl = "https://huggingface.co/datasets/Bluefir/hetus-time-use";
+const maltaRepo = "https://github.com/Wubpooz/Malta-TTS";
+const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/"; // XTTS demo
+const streamlitSearch = "https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/"; // Paper Relevance Dashboard
+const escampeUrl = "https://escampe.vercel.app/"; // Escampe web
+const watchlistUrl = "https://watchlist-service.vercel.app/landing?redirect=/"; // Watchlist web
 
 const addDetails = (slug: string) => `/projects/${slug}`;
 
@@ -1086,12 +1085,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
     }
   ],
-}
+};
 
 export function getProjects(locale: Locale): ProjectItem[] {
-  return projectsByLocale[locale]
-}
+  return projectsByLocale[locale];
+};
 
 export function getProjectBySlug(locale: Locale, slug: string) {
-  return getProjects(locale).find((project) => project.slug === slug)
-}
+  return getProjects(locale).find((project) => project.slug === slug);
+};

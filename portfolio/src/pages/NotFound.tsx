@@ -1,22 +1,24 @@
-import { motion } from "framer-motion"
-import { Home, FileText, Folder } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { getUiContent, useLocale } from "@/i18n"
-import { useEffect } from "react"
-import { InteractiveEyes } from "@/components/shared/InteractiveEyes"
-import { Link } from "react-router-dom"
+import { motion } from "framer-motion";
+import { Home, FileText, Folder } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { getUiContent, useLocale } from "@/i18n";
+import { useEffect } from "react";
+import { InteractiveEyes } from "@/components/shared/InteractiveEyes";
+import { Link } from "react-router-dom";
 
 export default function NotFoundPage() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
 
   useEffect(() => {
-    document.title = content.notFound.title
-    const robots = document.head.querySelector('meta[name="robots"]') ?? document.createElement("meta")
-    robots.setAttribute("name", "robots")
-    robots.setAttribute("content", "noindex")
-    if (!robots.parentElement) document.head.appendChild(robots)
-  }, [content.notFound.title])
+    document.title = content.notFound.title;
+    const robots =
+      document.head.querySelector('meta[name="robots"]') ??
+      document.createElement("meta");
+    robots.setAttribute("name", "robots");
+    robots.setAttribute("content", "noindex");
+    if (!robots.parentElement) document.head.appendChild(robots);
+  }, [content.notFound.title]);
 
   return (
     <main className="relative isolate mx-auto flex min-h-[calc(100vh-9rem)] w-full max-w-5xl items-center justify-center px-4 py-12 md:px-6">
@@ -41,7 +43,9 @@ export default function NotFoundPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
           >
-            <span className="block text-[clamp(5rem,18vw,11rem)] leading-none text-primary">404</span>
+            <span className="block text-[clamp(5rem,18vw,11rem)] leading-none text-primary">
+              404
+            </span>
           </motion.h1>
 
           <motion.h2
@@ -49,10 +53,9 @@ export default function NotFoundPage() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            >
-              {content.notFound.subtitle}
+          >
+            {content.notFound.subtitle}
           </motion.h2>
-
 
           <div className="flex flex-wrap gap-3">
             <Button asChild className="rounded-md">
@@ -88,6 +91,5 @@ export default function NotFoundPage() {
         </motion.div>
       </div>
     </main>
-  )
+  );
 }
-

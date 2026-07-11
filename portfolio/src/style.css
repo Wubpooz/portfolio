@@ -1,15 +1,16 @@
-:root, [data-theme="light"] {
-  --bg:       #ffffff;
-  --surface:  #f7f7f7;
-  --border:   #e8e8e8;
-  --text:     #111111;
+:root,
+[data-theme="light"] {
+  --bg: #ffffff;
+  --surface: #f7f7f7;
+  --border: #e8e8e8;
+  --text: #111111;
   --muted-text: #666666;
-  --faint:    #999999;
-  --primary:  #b3b3f1;
+  --faint: #999999;
+  --primary: #b3b3f1;
 
-  --font-display: 'Epoch', 'Georgia', serif;
-  --font-body:    'Satoshi', 'Inter', sans-serif;
-  --font-mono:    'Fira Code', monospace;
+  --font-display: "Epoch", "Georgia", serif;
+  --font-body: "Satoshi", "Inter", sans-serif;
+  --font-mono: "Fira Code", monospace;
 }
 
 html {
@@ -17,20 +18,22 @@ html {
 }
 
 [data-theme="dark"] {
-  --bg:       #111111;
-  --surface:  #1a1a1a;
-  --border:   #2a2a2a;
-  --text:     #e8e8e8;
+  --bg: #111111;
+  --surface: #1a1a1a;
+  --border: #2a2a2a;
+  --text: #e8e8e8;
   --muted-text: #888888;
-  --faint:    #555555;
-  --primary:  #b3b3f1;
+  --faint: #555555;
+  --primary: #b3b3f1;
 }
 
 body {
   background: transparent;
   color: var(--text);
   font-family: var(--font-body);
-  transition: background 200ms, color 200ms;
+  transition:
+    background 200ms,
+    color 200ms;
   min-height: 100vh;
 }
 

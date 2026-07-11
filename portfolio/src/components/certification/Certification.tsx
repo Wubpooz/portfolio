@@ -1,30 +1,39 @@
-import { useMemo, useState } from "react"
-import { ArrowUpRight, BadgeCheck, CalendarDays, ChevronDown, ShieldCheck } from "lucide-react"
-import type { CertificationItem } from "../../data/certifications"
-import { certifications } from "../../data/certifications"
-import { Button } from "@/components/ui/button"
-import { getUiContent, useLocale } from "@/i18n"
-import { shouldInvertIcon, parseCertDate, getIconUrl } from "@/lib/utils"
-import { usePostHog } from "@posthog/react"
+import { useMemo, useState } from "react";
+import {
+  ArrowUpRight,
+  BadgeCheck,
+  CalendarDays,
+  ChevronDown,
+  ShieldCheck,
+} from "lucide-react";
+import type { CertificationItem } from "../../data/certifications";
+import { certifications } from "../../data/certifications";
+import { Button } from "@/components/ui/button";
+import { getUiContent, useLocale } from "@/i18n";
+import { shouldInvertIcon, parseCertDate, getIconUrl } from "@/lib/utils";
+import { usePostHog } from "@posthog/react";
 
 function formatCertificationDate(locale: string, value: string) {
-  const match = new RegExp(/^(\d{2})\.(\d{4})$/).exec(value)
+  const match = new RegExp(/^(\d{2})\.(\d{4})$/).exec(value);
 
   if (match) {
-    const month = Number(match[1])
-    const year = Number(match[2])
+    const month = Number(match[1]);
+    const year = Number(match[2]);
 
-    return new Intl.DateTimeFormat(locale === "fr" ? "fr-FR" : locale === "ar" ? "ar-EG" : "en-US", {
-      month: "short",
-      year: "numeric",
-    }).format(new Date(year, month - 1, 1))
+    return new Intl.DateTimeFormat(
+      locale === "fr" ? "fr-FR" : locale === "ar" ? "ar-EG" : "en-US",
+      {
+        month: "short",
+        year: "numeric",
+      },
+    ).format(new Date(year, month - 1, 1));
   }
 
   if (/^\d{4}$/.test(value)) {
-    return value
+    return value;
   }
 
-  return value
+  return value;
 }
 
 function CertificationIcon({
@@ -32,15 +41,17 @@ function CertificationIcon({
   icon,
   iconUrl,
 }: Readonly<{
-  name: string
-  icon?: string
-  iconUrl?: string
+  name: string;
+  icon?: string;
+  iconUrl?: string;
 }>) {
-  const [error, setError] = useState(false)
-  const invertClass = shouldInvertIcon(icon ?? name) ? "dark:invert" : ""
+  const [error, setError] = useState(false);
+  const invertClass = shouldInvertIcon(icon ?? name) ? "dark:invert" : "";
 
   if (error) {
-    return <BadgeCheck className="size-7 text-muted-foreground" aria-hidden="true" />
+    return (
+      <BadgeCheck className="size-7 text-muted-foreground" aria-hidden="true" />
+    );
   }
 
   if (iconUrl) {
@@ -53,14 +64,16 @@ function CertificationIcon({
         loading="lazy"
         className={`size-7 object-contain ${invertClass}`}
         aria-hidden="true"
-        onError={() => { setError(true); }}
+        onError={() => {
+          setError(true);
+        }}
       />
-    )
+    );
   }
 
   if (icon) {
     if (icon.startsWith("/") || icon.includes(".") || icon.includes("/")) {
-      const localSrc = icon.startsWith("/") ? icon : `/${icon}`
+      const localSrc = icon.startsWith("/") ? icon : `/${icon}`;
       return (
         <img
           src={localSrc}
@@ -70,12 +83,14 @@ function CertificationIcon({
           loading="lazy"
           className={`size-7 object-contain ${invertClass}`}
           aria-hidden="true"
-          onError={() => { setError(true); }}
+          onError={() => {
+            setError(true);
+          }}
         />
-      )
+      );
     }
 
-    const src = getIconUrl(icon)
+    const src = getIconUrl(icon);
     return (
       <img
         src={src}
@@ -85,17 +100,21 @@ function CertificationIcon({
         loading="lazy"
         className={`size-7 object-contain ${invertClass}`}
         aria-hidden="true"
-        onError={() => { setError(true); }}
+        onError={() => {
+          setError(true);
+        }}
       />
-    )
+    );
   }
 
-  return <BadgeCheck className="size-7 text-muted-foreground" aria-hidden="true" />
+  return (
+    <BadgeCheck className="size-7 text-muted-foreground" aria-hidden="true" />
+  );
 }
 
 function CertificationRow({ item }: Readonly<{ item: CertificationItem }>) {
-  const { locale } = useLocale()
-  const formattedDate = formatCertificationDate(locale, item.date)
+  const { locale } = useLocale();
+  const formattedDate = formatCertificationDate(locale, item.date);
 
   return (
     <a
@@ -105,7 +124,11 @@ function CertificationRow({ item }: Readonly<{ item: CertificationItem }>) {
       className="group grid min-h-24 grid-cols-[56px_1fr_20px] items-center gap-4 border-t border-border px-4 py-4 transition-colors hover:bg-muted/30 md:grid-cols-[72px_1fr_20px] md:px-6"
     >
       <div className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background md:h-11 md:w-11">
-        <CertificationIcon name={item.title} icon={item.icon} iconUrl={item.iconUrl} />
+        <CertificationIcon
+          name={item.title}
+          icon={item.icon}
+          iconUrl={item.iconUrl}
+        />
       </div>
 
       <div className="min-w-0">
@@ -115,16 +138,25 @@ function CertificationRow({ item }: Readonly<{ item: CertificationItem }>) {
 
         <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground md:text-base">
           <span className="inline-flex items-center gap-1.5">
-            <BadgeCheck className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+            <BadgeCheck
+              className="size-4 shrink-0 text-muted-foreground"
+              aria-hidden="true"
+            />
             <span>{item.issuer}</span>
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <CalendarDays className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+            <CalendarDays
+              className="size-4 shrink-0 text-muted-foreground"
+              aria-hidden="true"
+            />
             <span>{formattedDate}</span>
           </span>
           {item.expiresAt ? (
             <span className="inline-flex items-center gap-1.5">
-              <ShieldCheck className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+              <ShieldCheck
+                className="size-4 shrink-0 text-muted-foreground"
+                aria-hidden="true"
+              />
               <span>{item.expiresAt}</span>
             </span>
           ) : null}
@@ -133,37 +165,39 @@ function CertificationRow({ item }: Readonly<{ item: CertificationItem }>) {
 
       <ArrowUpRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
     </a>
-  )
+  );
 }
 
 export default function CertificationsSection() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  const [expanded, setExpanded] = useState(false)
-  const [sortBy, setSortBy] = useState<"recency" | "relevance">("recency")
-  const posthog = usePostHog()
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
+  const [expanded, setExpanded] = useState(false);
+  const [sortBy, setSortBy] = useState<"recency" | "relevance">("recency");
+  const posthog = usePostHog();
 
   const sortedCertifications = useMemo(() => {
     return [...certifications].sort((a, b) => {
       if (sortBy === "relevance") {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         const scoreA = a.relevance ?? 0;
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         const scoreB = b.relevance ?? 0;
         if (scoreB !== scoreA) {
           return scoreB - scoreA;
         }
       }
-      return parseCertDate(b.date) - parseCertDate(a.date)
-    })
-  }, [sortBy])
+      return parseCertDate(b.date) - parseCertDate(a.date);
+    });
+  }, [sortBy]);
 
   const visibleCertifications = useMemo(() => {
-    return expanded ? sortedCertifications : sortedCertifications.slice(0, 6)
-  }, [sortedCertifications, expanded])
+    return expanded ? sortedCertifications : sortedCertifications.slice(0, 6);
+  }, [sortedCertifications, expanded]);
 
   const handleSortChange = (mode: "recency" | "relevance") => {
-    setSortBy(mode)
-    posthog.capture("certifications_sort_applied", { sort_by: mode })
-  }
+    setSortBy(mode);
+    posthog.capture("certifications_sort_applied", { sort_by: mode });
+  };
 
   return (
     <section id="certifications" className="w-full py-8 md:py-10">
@@ -179,7 +213,9 @@ export default function CertificationsSection() {
           <div className="flex items-center rounded-md border border-border bg-card p-1 self-start sm:self-auto">
             <button
               type="button"
-              onClick={() => { handleSortChange("recency"); }}
+              onClick={() => {
+                handleSortChange("recency");
+              }}
               className={`rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
                 sortBy === "recency"
                   ? "bg-muted text-foreground font-semibold"
@@ -190,7 +226,9 @@ export default function CertificationsSection() {
             </button>
             <button
               type="button"
-              onClick={() => { handleSortChange("relevance"); }}
+              onClick={() => {
+                handleSortChange("relevance");
+              }}
               className={`rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
                 sortBy === "relevance"
                   ? "bg-muted text-foreground font-semibold"
@@ -213,10 +251,14 @@ export default function CertificationsSection() {
             <Button
               type="button"
               variant="secondary"
-              onClick={() => { setExpanded((v) => !v); }}
+              onClick={() => {
+                setExpanded((v) => !v);
+              }}
               className="mx-auto flex rounded-md"
             >
-              {expanded ? content.certifications.showLess : content.certifications.showMore}
+              {expanded
+                ? content.certifications.showLess
+                : content.certifications.showMore}
               <ChevronDown
                 className={`ml-2 size-4 transition-transform ${
                   expanded ? "rotate-180" : ""
@@ -227,5 +269,5 @@ export default function CertificationsSection() {
         ) : null}
       </div>
     </section>
-  )
+  );
 }

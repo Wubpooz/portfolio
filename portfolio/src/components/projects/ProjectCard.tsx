@@ -1,18 +1,18 @@
-import { Link } from "react-router-dom"
-import { Globe, ArrowRight, BookOpen } from "lucide-react"
-import type { ProjectItem } from "@/data/projects"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { getUiContent, useLocale } from "@/i18n"
-import { shouldInvertIcon, getIconUrl } from "@/lib/utils"
-import { usePostHog } from "@posthog/react"
+import { Link } from "react-router-dom";
+import { Globe, ArrowRight, BookOpen } from "lucide-react";
+import type { ProjectItem } from "@/data/projects";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { getUiContent, useLocale } from "@/i18n";
+import { shouldInvertIcon, getIconUrl } from "@/lib/utils";
+import { usePostHog } from "@posthog/react";
 
-const MAX_VISIBLE_STACK = 6
+const MAX_VISIBLE_STACK = 6;
 
 interface TechIconMeta {
-  icon?: string
-  iconUrl?: string
+  icon?: string;
+  iconUrl?: string;
 }
 
 const techIconMap: Partial<Record<string, TechIconMeta>> = {
@@ -39,23 +39,25 @@ const techIconMap: Partial<Record<string, TechIconMeta>> = {
   "C++": { icon: "cplusplus" },
   CUDA: { icon: "nvidia" },
   Java: {
-    iconUrl: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openjdk.svg",
+    iconUrl:
+      "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openjdk.svg",
   },
   GLSL: {
-    iconUrl: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opengl.svg",
+    iconUrl:
+      "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opengl.svg",
   },
-}
+};
 
 function TechPillIcon({
   name,
   icon,
   iconUrl,
 }: Readonly<{
-  name: string
-  icon?: string
-  iconUrl?: string
+  name: string;
+  icon?: string;
+  iconUrl?: string;
 }>) {
-  const invertClass = shouldInvertIcon(icon ?? name) ? "dark:invert" : ""
+  const invertClass = shouldInvertIcon(icon ?? name) ? "dark:invert" : "";
 
   if (iconUrl) {
     return (
@@ -68,7 +70,7 @@ function TechPillIcon({
         className={`size-3.5 shrink-0 object-contain ${invertClass}`}
         aria-hidden="true"
       />
-    )
+    );
   }
 
   if (icon) {
@@ -82,42 +84,47 @@ function TechPillIcon({
         className={`size-3.5 shrink-0 object-contain ${invertClass}`}
         aria-hidden="true"
       />
-    )
+    );
   }
 
-  return null
+  return null;
 }
 
 export default function ProjectCard({
   project,
   viewMode = "card",
 }: Readonly<{
-  project: ProjectItem
-  viewMode?: "card" | "list"
+  project: ProjectItem;
+  viewMode?: "card" | "list";
 }>) {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  const posthog = usePostHog()
-  const visibleStack = project.stack.slice(0, MAX_VISIBLE_STACK)
-  const remaining = project.stack.length - visibleStack.length
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
+  const posthog = usePostHog();
+  const visibleStack = project.stack.slice(0, MAX_VISIBLE_STACK);
+  const remaining = project.stack.length - visibleStack.length;
 
   const statusLabel =
     project.status === "won"
       ? content.projectsPage.statusWon
       : project.status === "in-progress"
         ? content.projectsPage.statusInProgress
-        : content.projectsPage.statusCompleted
+        : content.projectsPage.statusCompleted;
 
-  const liveLink = project.links.find((l) => l.labelKey === "live")
-  const sourceLink = project.links.find((l) => l.labelKey === "source")
-  const readMoreLink = project.links.find((l) => l.labelKey === "details")
+  const liveLink = project.links.find((l) => l.labelKey === "live");
+  const sourceLink = project.links.find((l) => l.labelKey === "source");
+  const readMoreLink = project.links.find((l) => l.labelKey === "details");
 
   if (viewMode === "list") {
     return (
       <div className="group flex flex-col md:flex-row w-full h-full overflow-hidden bg-card transition-colors hover:bg-muted/10">
         <Link
           to={`/projects/${project.slug}`}
-          onClick={() => posthog.capture("project_card_clicked", { project_title: project.title, project_slug: project.slug })}
+          onClick={() =>
+            posthog.capture("project_card_clicked", {
+              project_title: project.title,
+              project_slug: project.slug,
+            })
+          }
           className="relative aspect-video md:aspect-auto md:w-72 lg:w-96 shrink-0 overflow-hidden border-b md:border-b-0 md:border-r border-border"
         >
           <img
@@ -135,7 +142,12 @@ export default function ProjectCard({
         <div className="flex flex-1 flex-col justify-between min-w-0">
           <Link
             to={`/projects/${project.slug}`}
-            onClick={() => posthog.capture("project_card_clicked", { project_title: project.title, project_slug: project.slug })}
+            onClick={() =>
+              posthog.capture("project_card_clicked", {
+                project_title: project.title,
+                project_slug: project.slug,
+              })
+            }
             className="flex flex-1 flex-col text-foreground hover:no-underline p-6 pb-0"
           >
             <div className="space-y-4">
@@ -144,7 +156,10 @@ export default function ProjectCard({
                   <h3 className="text-2xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
                     {project.title}
                   </h3>
-                  <Badge variant="outline" className="rounded-none px-2.5 py-1 font-normal text-muted-foreground shrink-0">
+                  <Badge
+                    variant="outline"
+                    className="rounded-none px-2.5 py-1 font-normal text-muted-foreground shrink-0"
+                  >
                     {statusLabel}
                   </Badge>
                 </div>
@@ -164,7 +179,7 @@ export default function ProjectCard({
 
               <div className="flex flex-wrap gap-2">
                 {visibleStack.map((tech) => {
-                  const meta = techIconMap[tech]
+                  const meta = techIconMap[tech];
 
                   return (
                     <Badge
@@ -181,7 +196,7 @@ export default function ProjectCard({
                         <span>{tech}</span>
                       </span>
                     </Badge>
-                  )
+                  );
                 })}
 
                 {remaining > 0 ? (
@@ -202,10 +217,20 @@ export default function ProjectCard({
             <div className="flex items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-3">
                 {liveLink ? (
-                  <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="h-9 rounded-md"
+                  >
                     <a
                       href={liveLink.href}
-                      onClick={() => posthog.capture('project_live_link_clicked', { project_title: project.title, project_slug: project.slug })}
+                      onClick={() =>
+                        posthog.capture("project_live_link_clicked", {
+                          project_title: project.title,
+                          project_slug: project.slug,
+                        })
+                      }
                       className="inline-flex items-center gap-2"
                     >
                       <Globe className="size-4 shrink-0" />
@@ -215,10 +240,20 @@ export default function ProjectCard({
                 ) : null}
 
                 {sourceLink ? (
-                  <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="h-9 rounded-md"
+                  >
                     <a
                       href={sourceLink.href}
-                      onClick={() => posthog.capture('project_source_link_clicked', { project_title: project.title, project_slug: project.slug })}
+                      onClick={() =>
+                        posthog.capture("project_source_link_clicked", {
+                          project_title: project.title,
+                          project_slug: project.slug,
+                        })
+                      }
                       className="inline-flex items-center gap-2"
                     >
                       <img
@@ -245,7 +280,12 @@ export default function ProjectCard({
                 >
                   <a
                     href={readMoreLink.href}
-                    onClick={() => posthog.capture('project_case_study_clicked', { project_title: project.title, project_slug: project.slug })}
+                    onClick={() =>
+                      posthog.capture("project_case_study_clicked", {
+                        project_title: project.title,
+                        project_slug: project.slug,
+                      })
+                    }
                     className="inline-flex items-center gap-2 text-foreground"
                   >
                     <BookOpen className="size-4 shrink-0" />
@@ -258,14 +298,19 @@ export default function ProjectCard({
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <div className="group flex h-full flex-col overflow-hidden bg-card transition-colors hover:bg-muted/10">
       <Link
         to={`/projects/${project.slug}`}
-        onClick={() => posthog.capture("project_card_clicked", { project_title: project.title, project_slug: project.slug })}
+        onClick={() =>
+          posthog.capture("project_card_clicked", {
+            project_title: project.title,
+            project_slug: project.slug,
+          })
+        }
         className="flex flex-1 flex-col text-foreground hover:no-underline"
       >
         <div className="relative aspect-video overflow-hidden border-b border-border">
@@ -296,7 +341,10 @@ export default function ProjectCard({
             </div>
 
             <div className="flex flex-wrap gap-2">
-              <Badge variant="outline" className="rounded-none px-2.5 py-1 font-normal text-muted-foreground">
+              <Badge
+                variant="outline"
+                className="rounded-none px-2.5 py-1 font-normal text-muted-foreground"
+              >
                 {statusLabel}
               </Badge>
             </div>
@@ -309,7 +357,7 @@ export default function ProjectCard({
 
             <div className="flex flex-wrap gap-2">
               {visibleStack.map((tech) => {
-                const meta = techIconMap[tech]
+                const meta = techIconMap[tech];
 
                 return (
                   <Badge
@@ -326,7 +374,7 @@ export default function ProjectCard({
                       <span>{tech}</span>
                     </span>
                   </Badge>
-                )
+                );
               })}
 
               {remaining > 0 ? (
@@ -349,10 +397,20 @@ export default function ProjectCard({
           <div className="flex items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-3">
               {liveLink ? (
-                <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="h-9 rounded-md"
+                >
                   <a
                     href={liveLink.href}
-                    onClick={() => posthog.capture('project_live_link_clicked', { project_title: project.title, project_slug: project.slug })}
+                    onClick={() =>
+                      posthog.capture("project_live_link_clicked", {
+                        project_title: project.title,
+                        project_slug: project.slug,
+                      })
+                    }
                     className="inline-flex items-center gap-2"
                   >
                     <Globe className="size-4 shrink-0" />
@@ -362,10 +420,20 @@ export default function ProjectCard({
               ) : null}
 
               {sourceLink ? (
-                <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="h-9 rounded-md"
+                >
                   <a
                     href={sourceLink.href}
-                    onClick={() => posthog.capture('project_source_link_clicked', { project_title: project.title, project_slug: project.slug })}
+                    onClick={() =>
+                      posthog.capture("project_source_link_clicked", {
+                        project_title: project.title,
+                        project_slug: project.slug,
+                      })
+                    }
                     className="inline-flex items-center gap-2"
                   >
                     <img
@@ -392,7 +460,12 @@ export default function ProjectCard({
               >
                 <a
                   href={readMoreLink.href}
-                  onClick={() => posthog.capture('project_case_study_clicked', { project_title: project.title, project_slug: project.slug })}
+                  onClick={() =>
+                    posthog.capture("project_case_study_clicked", {
+                      project_title: project.title,
+                      project_slug: project.slug,
+                    })
+                  }
                   className="inline-flex items-center gap-2 text-foreground"
                 >
                   <BookOpen className="size-4 shrink-0" />
@@ -405,5 +478,5 @@ export default function ProjectCard({
         </div>
       </div>
     </div>
-  )
+  );
 }

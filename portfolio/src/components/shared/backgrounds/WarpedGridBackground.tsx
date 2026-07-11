@@ -4,13 +4,13 @@ import { PLANETS, draw3DPlanet } from "./index";
 export default function WarpedGridBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -1000, y: -1000, active: false });
-  
+
   // Track animated planet coordinates (screen space)
   const planetCoordsRef = useRef(
     PLANETS.map((planet) => ({
       x: planet.alignLeft ? 50 : window.innerWidth - 50,
       y: window.innerHeight * planet.defaultYPercent,
-    }))
+    })),
   );
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function WarpedGridBackground() {
     const gridSpacing = 42; // Grid spacing
     const segmentLength = 6; // Smaller segments for ultra-smooth curves
     const focalLength = 150; // Camera focal length for perspective depth
-    
+
     // Mouse gravity well properties
     const mouseRadius = 180;
     const mouseZMax = 340; // Deep funnel depth
@@ -42,7 +42,8 @@ export default function WarpedGridBackground() {
         const el = document.querySelector(planet.selector);
         if (el) {
           const rect = el.getBoundingClientRect();
-          elementCenters[planet.selector] = rect.top + window.scrollY + rect.height / 2;
+          elementCenters[planet.selector] =
+            rect.top + window.scrollY + rect.height / 2;
         }
       });
     };
@@ -74,10 +75,16 @@ export default function WarpedGridBackground() {
       const isDark = document.documentElement.classList.contains("dark");
       return {
         isDark,
-        gridColor: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.012)",
-        mouseGlow: isDark ? "rgba(179, 179, 241, 0.12)" : "rgba(179, 179, 241, 0.06)",
+        gridColor: isDark
+          ? "rgba(255, 255, 255, 0.05)"
+          : "rgba(0, 0, 0, 0.012)",
+        mouseGlow: isDark
+          ? "rgba(179, 179, 241, 0.12)"
+          : "rgba(179, 179, 241, 0.06)",
         textColor: isDark ? "rgba(255, 255, 255, 0.35)" : "rgba(0, 0, 0, 0.38)",
-        planetGlow: isDark ? "rgba(255, 255, 255, 0.025)" : "rgba(0, 0, 0, 0.015)",
+        planetGlow: isDark
+          ? "rgba(255, 255, 255, 0.025)"
+          : "rgba(0, 0, 0, 0.015)",
       };
     };
 
@@ -89,7 +96,7 @@ export default function WarpedGridBackground() {
       mx: number,
       my: number,
       mActive: boolean,
-      animatedCoords: { x: number; y: number }[]
+      animatedCoords: { x: number; y: number }[],
     ) => {
       let x = px;
       let y = py;
@@ -109,29 +116,31 @@ export default function WarpedGridBackground() {
         const maxDist = planet.gravityRadius * 2.2;
         if (dist < maxDist) {
           // Smooth Gaussian curve instead of polynomial for fluid, organic bends
-          const factor = Math.exp(-Math.pow(dist / (planet.gravityRadius * 0.65), 2));
-          
+          const factor = Math.exp(
+            -Math.pow(dist / (planet.gravityRadius * 0.65), 2),
+          );
+
           // Spacetime contraction flow: coordinates slide inward towards the center.
           // We use a wave phase moving radially inward to create a seamless flow.
-          const wavePhase = (dist / gridSpacing - flowTime / gridSpacing);
+          const wavePhase = dist / gridSpacing - flowTime / gridSpacing;
           const flowWave = Math.sin(wavePhase * Math.PI * 2);
-          
+
           // Apply flow deformation along the radial vector
           const flowAmt = flowWave * 7.5 * factor;
-          
+
           // Z-depth of the funnel (curvature of spacetime)
           const Z = factor * 420;
           const scale = focalLength / (focalLength + Z);
-          
+
           // Deform relative coordinates first, then project to screen space
           const rx = dx + (dx / (dist + 0.1)) * flowAmt;
           const ry = dy + (dy / (dist + 0.1)) * flowAmt;
-          
+
           x = coords.x + rx * scale;
           y = coords.y + ry * scale;
-          
+
           // Fade grid lines as they plunge deeper into the funnel
-          totalAlphaMult *= (scale * 1.05);
+          totalAlphaMult *= scale * 1.05;
         }
       });
 
@@ -144,19 +153,19 @@ export default function WarpedGridBackground() {
 
         if (dist < maxDist) {
           const factor = Math.exp(-Math.pow(dist / (mouseRadius * 0.65), 2));
-          const wavePhase = (dist / gridSpacing - flowTime / gridSpacing);
+          const wavePhase = dist / gridSpacing - flowTime / gridSpacing;
           const flowWave = Math.sin(wavePhase * Math.PI * 2);
           const flowAmt = flowWave * 7.5 * factor;
-          
+
           const Z = factor * mouseZMax;
           const scale = focalLength / (focalLength + Z);
-          
+
           const rx = dx + (dx / (dist + 0.1)) * flowAmt;
           const ry = dy + (dy / (dist + 0.1)) * flowAmt;
-          
+
           x = mx + rx * scale;
           y = my + ry * scale;
-          totalAlphaMult *= (scale * 1.05);
+          totalAlphaMult *= scale * 1.05;
         }
       }
 
@@ -176,7 +185,7 @@ export default function WarpedGridBackground() {
       // Update Planet Positions based on DOM section scroll positions
       const updatedCoords = PLANETS.map((planet, i) => {
         const prev = planetCoordsRef.current[i];
-        
+
         // Target X
         const contentWidth = 920;
         let tx = planet.alignLeft
@@ -205,7 +214,14 @@ export default function WarpedGridBackground() {
 
       // 1. Draw Mouse Glow
       if (mActive) {
-        const gradient = ctx.createRadialGradient(mx, my, 0, mx, my, mouseRadius);
+        const gradient = ctx.createRadialGradient(
+          mx,
+          my,
+          0,
+          mx,
+          my,
+          mouseRadius,
+        );
         gradient.addColorStop(0, colors.mouseGlow);
         gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
         ctx.fillStyle = gradient;
@@ -220,7 +236,14 @@ export default function WarpedGridBackground() {
         ctx.save();
         ctx.globalAlpha = isMobile ? 0.35 : 1.0;
 
-        const gradient = ctx.createRadialGradient(coords.x, coords.y, 0, coords.x, coords.y, glowRadius);
+        const gradient = ctx.createRadialGradient(
+          coords.x,
+          coords.y,
+          0,
+          coords.x,
+          coords.y,
+          glowRadius,
+        );
         gradient.addColorStop(0, colors.planetGlow);
         gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
         ctx.fillStyle = gradient;
@@ -229,22 +252,32 @@ export default function WarpedGridBackground() {
       });
 
       // Split base color for alpha manipulation
-      const baseGridColorParts = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(colors.gridColor);
-      const rgbPrefix = baseGridColorParts ? `${baseGridColorParts[1]}, ${baseGridColorParts[2]}, ${baseGridColorParts[3]}` : "148, 163, 184";
-      const baseAlpha = baseGridColorParts ? Number.parseFloat(colors.gridColor.replace(/[^,]+$/, "")) : 0.05;
+      const baseGridColorParts = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(
+        colors.gridColor,
+      );
+      const rgbPrefix = baseGridColorParts
+        ? `${baseGridColorParts[1]}, ${baseGridColorParts[2]}, ${baseGridColorParts[3]}`
+        : "148, 163, 184";
+      const baseAlpha = baseGridColorParts
+        ? Number.parseFloat(colors.gridColor.replace(/[^,]+$/, ""))
+        : 0.05;
 
       // 3. Draw Vertical Grid Lines
       ctx.lineWidth = 1;
-      
+
       // Draw grid slightly extended beyond borders to handle warping corners
       const borderMargin = 120;
       for (let x = -borderMargin; x < width + borderMargin; x += gridSpacing) {
         ctx.beginPath();
         let first = true;
 
-        for (let y = -borderMargin; y < height + borderMargin; y += segmentLength) {
+        for (
+          let y = -borderMargin;
+          y < height + borderMargin;
+          y += segmentLength
+        ) {
           const warped = getWarpedPoint(x, y, mx, my, mActive, updatedCoords);
-          
+
           if (first) {
             ctx.moveTo(warped.x, warped.y);
             first = false;
@@ -264,9 +297,13 @@ export default function WarpedGridBackground() {
         ctx.beginPath();
         let first = true;
 
-        for (let x = -borderMargin; x < width + borderMargin; x += segmentLength) {
+        for (
+          let x = -borderMargin;
+          x < width + borderMargin;
+          x += segmentLength
+        ) {
           const warped = getWarpedPoint(x, y, mx, my, mActive, updatedCoords);
-          
+
           if (first) {
             ctx.moveTo(warped.x, warped.y);
             first = false;
@@ -283,14 +320,22 @@ export default function WarpedGridBackground() {
       // 5. Draw 3D Procedural Toy Planets
       PLANETS.forEach((planet, i) => {
         const coords = updatedCoords[i];
-        
+
         ctx.save();
         ctx.globalAlpha = isMobile ? 0.25 : 1.0;
 
         // Orbital ring
         ctx.beginPath();
-        ctx.arc(coords.x, coords.y, planet.gravityRadius * 0.45, 0, Math.PI * 2);
-        ctx.strokeStyle = colors.isDark ? "rgba(255, 255, 255, 0.015)" : "rgba(0, 0, 0, 0.015)";
+        ctx.arc(
+          coords.x,
+          coords.y,
+          planet.gravityRadius * 0.45,
+          0,
+          Math.PI * 2,
+        );
+        ctx.strokeStyle = colors.isDark
+          ? "rgba(255, 255, 255, 0.015)"
+          : "rgba(0, 0, 0, 0.015)";
         ctx.lineWidth = 1;
         ctx.stroke();
 
@@ -303,7 +348,11 @@ export default function WarpedGridBackground() {
           ctx.font = "bold 9px 'Geist Variable', sans-serif";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
-          ctx.fillText(planet.name.toUpperCase(), coords.x, coords.y + planet.radius + 15);
+          ctx.fillText(
+            planet.name.toUpperCase(),
+            coords.x,
+            coords.y + planet.radius + 15,
+          );
         }
 
         ctx.restore();

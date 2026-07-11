@@ -1,9 +1,9 @@
-import { ArrowUpRight, Download, Mail, Contact } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getResumeAsset, getUiContent, useLocale } from "@/i18n"
-import { shouldInvertIcon, getIconUrl } from "@/lib/utils"
-import { usePostHog } from "@posthog/react"
+import { ArrowUpRight, Download, Mail, Contact } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getResumeAsset, getUiContent, useLocale } from "@/i18n";
+import { shouldInvertIcon, getIconUrl } from "@/lib/utils";
+import { usePostHog } from "@posthog/react";
 
 const contacts = [
   {
@@ -24,21 +24,21 @@ const contacts = [
     href: "mailto:mathieu.waharte@gmail.com",
     icon: "mail",
   },
-]
+];
 
 function ContactIcon({
   label,
   icon,
 }: Readonly<{
-  label: string
-  icon: string
+  label: string;
+  icon: string;
 }>) {
   if (icon === "mail") {
-    return <Mail className="size-5 text-muted-foreground" aria-hidden="true" />
+    return <Mail className="size-5 text-muted-foreground" aria-hidden="true" />;
   }
 
-  const src = getIconUrl(icon)
-  const invertClass = shouldInvertIcon(icon || label) ? "dark:invert" : ""
+  const src = getIconUrl(icon);
+  const invertClass = shouldInvertIcon(icon || label) ? "dark:invert" : "";
 
   return (
     <img
@@ -50,14 +50,14 @@ function ContactIcon({
       className={`size-5 object-contain ${invertClass}`}
       aria-hidden="true"
     />
-  )
+  );
 }
 
 export default function ContactSection() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  const resumeAsset = getResumeAsset(locale)
-  const posthog = usePostHog()
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
+  const resumeAsset = getResumeAsset(locale);
+  const posthog = usePostHog();
 
   return (
     <section id="contact" className="w-full py-8 md:py-10">
@@ -75,8 +75,16 @@ export default function ContactSection() {
                 key={item.label}
                 href={item.href}
                 target={item.href.startsWith("mailto:") ? undefined : "_blank"}
-                rel={item.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                onClick={() => posthog.capture('contact_link_clicked', { platform: item.icon })}
+                rel={
+                  item.href.startsWith("mailto:")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+                onClick={() =>
+                  posthog.capture("contact_link_clicked", {
+                    platform: item.icon,
+                  })
+                }
                 className={[
                   "group flex items-center justify-between gap-4 border-border px-5 py-5 transition-colors hover:bg-muted/30 md:px-6",
                   "border-b",
@@ -110,7 +118,9 @@ export default function ContactSection() {
             <Button asChild className="rounded-md">
               <a
                 href="mailto:mathieu.waharte@gmail.com"
-                onClick={() => posthog.capture('contact_link_clicked', { platform: 'email' })}
+                onClick={() =>
+                  posthog.capture("contact_link_clicked", { platform: "email" })
+                }
               >
                 <Mail className="size-4" />
                 {content.contact.emailCta}
@@ -121,7 +131,7 @@ export default function ContactSection() {
               <a
                 href={resumeAsset}
                 download
-                onClick={() => posthog.capture('resume_downloaded', { locale })}
+                onClick={() => posthog.capture("resume_downloaded", { locale })}
               >
                 <Download className="size-4" />
                 {content.contact.resumeCta}
@@ -132,7 +142,7 @@ export default function ContactSection() {
               <a
                 href="/assets/mathieu-waharte.vcf"
                 download="mathieu-waharte.vcf"
-                onClick={() => posthog.capture('vcard_downloaded')}
+                onClick={() => posthog.capture("vcard_downloaded")}
               >
                 <Contact className="size-4" />
                 {content.contact.vcardCta}
@@ -142,5 +152,5 @@ export default function ContactSection() {
         </CardContent>
       </Card>
     </section>
-  )
+  );
 }

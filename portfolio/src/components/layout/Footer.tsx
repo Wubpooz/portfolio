@@ -1,16 +1,25 @@
-import "./Footer.css"
-import { getUiContent, useLocale } from "@/i18n"
-import { Link } from "react-router-dom"
+import "./Footer.css";
+import { getUiContent, useLocale } from "@/i18n";
+import { Link } from "react-router-dom";
 
 export default function FooterSection() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
 
   return (
     <footer className="footer mt-auto">
-      <nav className="footer-nav" aria-label={locale === "fr" ? "Navigation de pied de page" : "Footer navigation"}>
-        <Link to="/" className="footer-link">{content.nav.home}</Link>
-        <Link to="/projects" className="footer-link">{content.nav.projects}</Link>
+      <nav
+        className="footer-nav"
+        aria-label={
+          locale === "fr" ? "Navigation de pied de page" : "Footer navigation"
+        }
+      >
+        <Link to="/" className="footer-link">
+          {content.nav.home}
+        </Link>
+        <Link to="/projects" className="footer-link">
+          {content.nav.projects}
+        </Link>
         {/* <Link to="/blog" className="footer-link">{content.nav.blog}</Link> */}
       </nav>
 
@@ -38,5 +47,5 @@ export default function FooterSection() {
         <p className="footer-copy">{content.footer.copyright}</p>
       </div>
     </footer>
-  )
+  );
 }

@@ -1,29 +1,27 @@
-import { useEffect } from "react"
-import { Download, ExternalLink } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { getResumeAsset, getUiContent, useLocale } from "@/i18n"
-import BackLink from "@/components/shared/BackLink"
+import { useEffect } from "react";
+import { Download, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { getResumeAsset, getUiContent, useLocale } from "@/i18n";
+import BackLink from "@/components/shared/BackLink";
 
 // A4 dimensions: 210mm × 297mm → aspect ratio ≈ 1 : 1.4142
 // At 96 DPI: 794px wide × 1123px tall
-const A4_WIDTH_PX = 794
-const A4_HEIGHT_PX = 1123
+const A4_WIDTH_PX = 794;
+const A4_HEIGHT_PX = 1123;
 
 export default function ResumePage() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  const resumeAsset = getResumeAsset(locale)
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
+  const resumeAsset = getResumeAsset(locale);
 
   useEffect(() => {
-    document.title = `${content.resume.title} | Mathieu Waharte`
-  }, [content.resume.title])
+    document.title = `${content.resume.title} | Mathieu Waharte`;
+  }, [content.resume.title]);
 
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-8 md:px-6 md:py-10">
       <div>
-        <BackLink to="/">
-          {content.resume.backHome}
-        </BackLink>
+        <BackLink to="/">{content.resume.backHome}</BackLink>
       </div>
 
       <header className="flex flex-col gap-4 border-b border-border pb-4 md:flex-row md:items-end md:justify-between">
@@ -38,14 +36,23 @@ export default function ResumePage() {
 
         <div className="flex flex-wrap gap-3">
           <Button asChild className="rounded-md">
-            <a href={resumeAsset} download className="inline-flex items-center gap-2">
+            <a
+              href={resumeAsset}
+              download
+              className="inline-flex items-center gap-2"
+            >
               <Download className="size-4" />
               {content.resume.download}
             </a>
           </Button>
 
           <Button asChild variant="secondary" className="rounded-md">
-            <a href={resumeAsset} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
+            <a
+              href={resumeAsset}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2"
+            >
               <ExternalLink className="size-4" />
               {content.resume.openInNewTab}
             </a>
@@ -68,5 +75,5 @@ export default function ResumePage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

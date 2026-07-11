@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, use } from "react";
 
 export type BackgroundType = "none" | "grid" | "flow" | "dots";
 
@@ -63,18 +63,18 @@ interface BackgroundContextType {
 
 export const BackgroundContext = createContext<BackgroundContextType>({
   activeBackground: "none",
-  setActiveBackground: () => {},
+  setActiveBackground: () => { /* empty */ },
 });
 
-export const useBackground = () => useContext(BackgroundContext);
+export const useBackground = () => use(BackgroundContext);
 
 function hexToRgba(hex: string, alpha: number): string {
   if (hex.startsWith("rgba")) return hex;
   const cleanHex = hex.replace("#", "");
-  const r = parseInt(cleanHex.substring(0, 2), 16);
-  const g = parseInt(cleanHex.substring(2, 4), 16);
-  const b = parseInt(cleanHex.substring(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  const r = Number.parseInt(cleanHex.substring(0, 2), 16);
+  const g = Number.parseInt(cleanHex.substring(2, 4), 16);
+  const b = Number.parseInt(cleanHex.substring(4, 6), 16);
+  return `rgba(${r.toString()}, ${g.toString()}, ${b.toString()}, ${alpha.toString()})`;
 }
 
 // Real 3D Procedural Planet Renderer inspired by Sebastian Lague's Unity graphics
@@ -92,7 +92,7 @@ export function draw3DPlanet(
   // 1. Establish global Light Source at top-left of viewport (0, 0)
   const lx = cx - 0;
   const ly = cy - 0;
-  const lightDist = Math.sqrt(lx * lx + ly * ly);
+  const lightDist = Math.hypot(lx, ly);
   const ldx = lx / lightDist; // Light direction vector
   const ldy = ly / lightDist;
 
@@ -108,7 +108,7 @@ export function draw3DPlanet(
   const sinM = Math.sin(moonAngle);
   const rawMoonX = cosM * moonOrbitX;
   const rawMoonY = sinM * moonOrbitY;
-  
+
   // Rotate orbit coordinates for slanted inclination
   const mx = cx + (rawMoonX * Math.cos(moonRotAngle) - rawMoonY * Math.sin(moonRotAngle));
   const my = cy + (rawMoonX * Math.sin(moonRotAngle) + rawMoonY * Math.cos(moonRotAngle));
@@ -147,7 +147,7 @@ export function draw3DPlanet(
   const ax = cx - ldx * r * 0.12;
   const ay = cy - ldy * r * 0.12;
   const atmoGlow = ctx.createRadialGradient(ax, ay, r * 0.8, ax, ay, atmosphereRadius);
-  
+
   // Atmosphere color adapts to planet base theme
   const atmoColor = landColor;
   atmoGlow.addColorStop(0, hexToRgba(atmoColor, 0.22)); // Convert hex to rgba
@@ -188,7 +188,7 @@ export function draw3DPlanet(
     ctx.strokeStyle = ringColor;
     ctx.lineWidth = 3.5;
     ctx.stroke();
-    
+
     // Outer division ring (A Ring)
     ctx.beginPath();
     ctx.ellipse(cx, cy, r * 2.6, r * 0.58, moonRotAngle, Math.PI, Math.PI * 2);
@@ -256,7 +256,7 @@ export function draw3DPlanet(
     ];
     craters.forEach((crater) => {
       // Loop crater wrapping coordinates
-      let x = cx + ((crater.ox + rotationOffset + r * 2) % (r * 4)) - r * 2;
+      const x = cx + ((crater.ox + rotationOffset + r * 2) % (r * 4)) - r * 2;
       const y = cy + crater.oy;
 
       // Draw shadow background inside crater
@@ -303,7 +303,7 @@ export function draw3DPlanet(
 
     // Great Red Spot (Jupiter compiler giant)
     if (planet.name === "Compilers") {
-      let spotX = cx + ((rotationOffset + r * 2) % (r * 4)) - r * 2;
+      const spotX = cx + ((rotationOffset + r * 2) % (r * 4)) - r * 2;
       // Draw concentric spot details
       ctx.beginPath();
       ctx.ellipse(spotX, cy + r * 0.15, r * 0.38, r * 0.25, 0.08, 0, Math.PI * 2);
@@ -334,7 +334,7 @@ export function draw3DPlanet(
     // Project shadow along light angle vector
     const shadowX = cx + cosM * r * 0.85 + ldx * r * 0.2;
     const shadowY = cy + sinM * r * 0.22 + ldy * r * 0.1;
-    
+
     ctx.beginPath();
     ctx.arc(shadowX, shadowY, 2.0, 0, Math.PI * 2);
     ctx.fillStyle = "rgba(0, 0, 0, 0.5)"; // Soft fuzzy moon shadow

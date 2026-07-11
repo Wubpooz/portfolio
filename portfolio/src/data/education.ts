@@ -1,5 +1,5 @@
-import type { Locale } from "@/i18n"
-import type { EducationEntry } from "./types"
+import type { Locale } from "@/i18n";
+import type { EducationEntry } from "./types";
 
 const educationsByLocale: Record<Locale, EducationEntry[]> = {
   en: [
@@ -269,5 +269,5 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
 }
 
 export function getEducations(locale: Locale): EducationEntry[] {
-  return educationsByLocale[locale]
-}
+  return educationsByLocale[locale];
+};

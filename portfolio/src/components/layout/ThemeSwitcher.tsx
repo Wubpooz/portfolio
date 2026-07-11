@@ -2,7 +2,7 @@ import { Monitor, Moon, Sun } from "lucide-react"
 import type { Theme } from "@/hooks/useTheme"
 import { getUiContent, useLocale } from "@/i18n"
 
-const OPTIONS: Array<{ value: Theme; Icon: typeof Sun }> = [
+const OPTIONS: Readonly<{ value: Theme; Icon: typeof Sun }>[] = [
   { value: "light", Icon: Sun },
   { value: "dark", Icon: Moon },
   { value: "system", Icon: Monitor },
@@ -12,12 +12,11 @@ export default function ThemeSwitcher({
   theme,
   setTheme,
   variant = "default",
-}: {
+}: Readonly<{
   theme: Theme
   setTheme: (theme: Theme) => void
   variant?: "default" | "mobile"
-  compact?: boolean
-}) {
+}>) {
   const { locale } = useLocale()
   const content = getUiContent(locale)
   const isMobile = variant === "mobile"
@@ -33,7 +32,7 @@ export default function ThemeSwitcher({
         className="absolute top-1 bottom-1 rounded-sm bg-muted border border-border transition-all duration-200 ease-out"
         style={{
           width: isMobile ? "40px" : "32px",
-          left: `calc(4px + ${activeIndex} * ${isMobile ? "44px" : "36px"})`,
+          left: `calc(4px + ${activeIndex.toString()} * ${isMobile ? "44px" : "36px"})`,
         }}
       />
 
@@ -50,7 +49,7 @@ export default function ThemeSwitcher({
           <button
             key={value}
             type="button"
-            onClick={() => setTheme(value)}
+            onClick={() => { setTheme(value); }}
             className={`relative z-10 inline-flex items-center justify-center rounded-sm transition-colors ${
               isMobile ? "w-10 h-10" : "w-8 h-8"
             } ${

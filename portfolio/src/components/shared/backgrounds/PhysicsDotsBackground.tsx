@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 
 interface Particle {
-  x: number;  // Page-space X
-  y: number;  // Page-space Y
+  x: number; // Page-space X
+  y: number; // Page-space Y
   vx: number; // Page-space velocity X
   vy: number; // Page-space velocity Y
   radius: number;
@@ -43,7 +43,7 @@ export default function PhysicsDotsBackground() {
     let cachedDocHeight = Math.max(
       document.body.scrollHeight,
       document.documentElement.scrollHeight,
-      window.innerHeight
+      window.innerHeight,
     );
 
     // Calculate particle count proportional to document size (Increased density)
@@ -78,7 +78,7 @@ export default function PhysicsDotsBackground() {
       const newDocHeight = Math.max(
         document.body.scrollHeight,
         document.documentElement.scrollHeight,
-        window.innerHeight
+        window.innerHeight,
       );
 
       canvas.width = newWidth;
@@ -108,8 +108,12 @@ export default function PhysicsDotsBackground() {
 
     // Cache theme colors - re-read only when theme class changes, not every frame.
     let colors = getThemeColors();
-    const themeObserver = new MutationObserver(() => { colors = getThemeColors(); });
-    themeObserver.observe(document.documentElement, { attributeFilter: ["class"] });
+    const themeObserver = new MutationObserver(() => {
+      colors = getThemeColors();
+    });
+    themeObserver.observe(document.documentElement, {
+      attributeFilter: ["class"],
+    });
 
     function getThemeColors() {
       const isDark = document.documentElement.classList.contains("dark");
@@ -118,7 +122,9 @@ export default function PhysicsDotsBackground() {
         lineColor: isDark ? "255, 255, 255" : "0, 0, 0",
         activeLineColor: isDark ? "179, 179, 241" : "99, 102, 241",
         cursorColor: isDark ? "#ffffff" : "#6366f1",
-        cursorRingColor: isDark ? "rgba(255, 255, 255, 0.25)" : "rgba(99, 102, 241, 0.3)",
+        cursorRingColor: isDark
+          ? "rgba(255, 255, 255, 0.25)"
+          : "rgba(99, 102, 241, 0.3)",
       };
     }
 
@@ -161,7 +167,7 @@ export default function PhysicsDotsBackground() {
         p.vy *= 0.94;
 
         // Speed boundaries
-        const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        const speed = Math.hypot(p.vx, p.vy);
         const minSpeed = 0.15;
         const maxSpeed = 1.4;
         if (speed < minSpeed) {
@@ -177,10 +183,22 @@ export default function PhysicsDotsBackground() {
         p.y += p.vy;
 
         // Boundaries
-        if (p.x < 0) { p.x = 0; p.vx = -p.vx; }
-        if (p.x > width) { p.x = width; p.vx = -p.vx; }
-        if (p.y < 0) { p.y = 0; p.vy = -p.vy; }
-        if (p.y > cachedDocHeight) { p.y = cachedDocHeight; p.vy = -p.vy; }
+        if (p.x < 0) {
+          p.x = 0;
+          p.vx = -p.vx;
+        }
+        if (p.x > width) {
+          p.x = width;
+          p.vx = -p.vx;
+        }
+        if (p.y < 0) {
+          p.y = 0;
+          p.vy = -p.vy;
+        }
+        if (p.y > cachedDocHeight) {
+          p.y = cachedDocHeight;
+          p.vy = -p.vy;
+        }
       }
 
       // 2. Filter visible particles

@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 const INVERT_ICONS = [
@@ -58,35 +58,35 @@ export function getIconUrl(iconName: string): string {
 }
 
 export function parseCertDate(dateStr: string): number {
-  const match = /^(\d{2})\.(\d{4})$/.exec(dateStr)
+  const match = new RegExp(/^(\d{2})\.(\d{4})$/).exec(dateStr);
   if (match) {
-    const month = Number(match[1])
-    const year = Number(match[2])
-    return year * 12 + month
+    const month = Number(match[1]);
+    const year = Number(match[2]);
+    return year * 12 + month;
   }
   if (/^\d{4}$/.test(dateStr)) {
-    const year = Number(dateStr)
-    return year * 12 + 6
+    const year = Number(dateStr);
+    return year * 12 + 6;
   }
-  return 0
+  return 0;
 }
 
-const monthsEn = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
-const monthsFr = ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"]
+const monthsEn = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+const monthsFr = ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"];
 
 export function parseProjectPeriod(period: string): number {
-  const p = period.toLowerCase()
-  const years = p.match(/\b(20\d{2})\b/g)
-  if (!years) return 0
-  const maxYear = Math.max(...years.map(Number))
+  const p = period.toLowerCase();
+  const years = p.match(/\b(20\d{2})\b/g);
+  if (!years) return 0;
+  const maxYear = Math.max(...years.map(Number));
 
-  let monthIdx = 0
+  let monthIdx = 0;
   monthsEn.forEach((m, idx) => {
-    if (p.includes(m)) monthIdx = idx + 1
-  })
+    if (p.includes(m)) monthIdx = idx + 1;
+  });
   monthsFr.forEach((m, idx) => {
-    if (p.includes(m)) monthIdx = idx + 1
-  })
+    if (p.includes(m)) monthIdx = idx + 1;
+  });
 
-  return maxYear * 12 + monthIdx
+  return maxYear * 12 + monthIdx;
 }

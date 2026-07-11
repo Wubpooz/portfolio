@@ -1,6 +1,3 @@
 export default function AwardsSection() {
-  return (
-    <section>
-    </section>
-  );
+  return <section></section>;
 }
