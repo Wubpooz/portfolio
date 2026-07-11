@@ -4,10 +4,11 @@ import type { CertificationItem } from "../../data/certifications"
 import { certifications } from "../../data/certifications"
 import { Button } from "@/components/ui/button"
 import { getUiContent, useLocale } from "@/i18n"
-import { shouldInvertIcon } from "@/lib/utils"
+import { shouldInvertIcon, parseCertDate } from "@/lib/utils"
+import { usePostHog } from "@posthog/react"
 
 function formatCertificationDate(locale: string, value: string) {
-  const match = RegExp(/^(\d{2})\.(\d{4})$/).exec(value)
+  const match = new RegExp(/^(\d{2})\.(\d{4})$/).exec(value)
 
   if (match) {
     const month = Number(match[1])
@@ -52,7 +53,7 @@ function CertificationIcon({
         loading="lazy"
         className={`size-7 object-contain ${invertClass}`}
         aria-hidden="true"
-        onError={() => setError(true)}
+        onError={() => { setError(true); }}
       />
     )
   }
@@ -136,21 +137,66 @@ export default function CertificationsSection() {
   const { locale } = useLocale()
   const content = getUiContent(locale)
   const [expanded, setExpanded] = useState(false)
+  const [sortBy, setSortBy] = useState<"recency" | "relevance">("recency")
+  const posthog = usePostHog()
+
+  const sortedCertifications = useMemo(() => {
+    return [...certifications].sort((a, b) => {
+      if (sortBy === "relevance") {
+        const scoreA = a.relevance ?? 0;
+        const scoreB = b.relevance ?? 0;
+        if (scoreB !== scoreA) {
+          return scoreB - scoreA;
+        }
+      }
+      return parseCertDate(b.date) - parseCertDate(a.date)
+    })
+  }, [sortBy])
 
   const visibleCertifications = useMemo(() => {
-    return expanded ? certifications : certifications.slice(0, 6)
-  }, [expanded])
+    return expanded ? sortedCertifications : sortedCertifications.slice(0, 6)
+  }, [sortedCertifications, expanded])
+
+  const handleSortChange = (mode: "recency" | "relevance") => {
+    setSortBy(mode)
+    posthog.capture("certifications_sort_applied", { sort_by: mode })
+  }
 
   return (
     <section id="certifications" className="w-full py-8 md:py-10">
       <div className="overflow-hidden border border-border bg-card">
-        <div className="border-b border-border px-4 py-4 md:px-6">
+        <div className="flex flex-col gap-4 border-b border-border px-4 py-4 sm:flex-row sm:items-center sm:justify-between md:px-6">
           <h2 className="flex items-center gap-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
             {content.sections.certifications}
             <span className="text-lg font-normal text-muted-foreground">
               ({certifications.length})
             </span>
           </h2>
+
+          <div className="flex items-center rounded-md border border-border bg-card p-1 self-start sm:self-auto">
+            <button
+              type="button"
+              onClick={() => { handleSortChange("recency"); }}
+              className={`rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
+                sortBy === "recency"
+                  ? "bg-muted text-foreground font-semibold"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {content.projectsPage.sortRecent}
+            </button>
+            <button
+              type="button"
+              onClick={() => { handleSortChange("relevance"); }}
+              className={`rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
+                sortBy === "relevance"
+                  ? "bg-muted text-foreground font-semibold"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {content.projectsPage.sortRelevance}
+            </button>
+          </div>
         </div>
 
         <div>
