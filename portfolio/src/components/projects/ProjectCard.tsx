@@ -88,7 +88,13 @@ function TechPillIcon({
   return null
 }
 
-export default function ProjectCard({ project }: Readonly<{ project: ProjectItem }>) {
+export default function ProjectCard({
+  project,
+  viewMode = "card",
+}: Readonly<{
+  project: ProjectItem
+  viewMode?: "card" | "list"
+}>) {
   const { locale } = useLocale()
   const content = getUiContent(locale)
   const posthog = usePostHog()
@@ -105,6 +111,155 @@ export default function ProjectCard({ project }: Readonly<{ project: ProjectItem
   const liveLink = project.links.find((l) => l.labelKey === "live")
   const sourceLink = project.links.find((l) => l.labelKey === "source")
   const readMoreLink = project.links.find((l) => l.labelKey === "caseStudy")
+
+  if (viewMode === "list") {
+    return (
+      <div className="group flex flex-col md:flex-row w-full h-full overflow-hidden bg-card transition-colors hover:bg-muted/10">
+        <Link
+          to={`/projects/${project.slug}`}
+          onClick={() => posthog.capture("project_card_clicked", { project_title: project.title, project_slug: project.slug })}
+          className="relative aspect-video md:aspect-auto md:w-72 lg:w-96 shrink-0 overflow-hidden border-b md:border-b-0 md:border-r border-border"
+        >
+          <img
+            src={project.image.replace(/\.webp$/, "-sm.webp")}
+            srcSet={`${project.image.replace(/\.webp$/, "-sm.webp")} 600w, ${project.image} 1200w`}
+            sizes="(max-width: 768px) 100vw, 384px"
+            alt={project.imageAlt}
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
+            width={600}
+            height={338}
+          />
+        </Link>
+
+        <div className="flex flex-1 flex-col justify-between min-w-0">
+          <Link
+            to={`/projects/${project.slug}`}
+            onClick={() => posthog.capture("project_card_clicked", { project_title: project.title, project_slug: project.slug })}
+            className="flex flex-1 flex-col text-foreground hover:no-underline p-6 pb-0"
+          >
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h3 className="text-2xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                    {project.title}
+                  </h3>
+                  <Badge variant="outline" className="rounded-none px-2.5 py-1 font-normal text-muted-foreground shrink-0">
+                    {statusLabel}
+                  </Badge>
+                </div>
+                <p className="text-base leading-7 text-muted-foreground">
+                  {project.subtitle}
+                </p>
+                <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
+                  {project.organization} · {project.period}
+                </p>
+              </div>
+
+              <ul className="list-disc space-y-1.5 pl-5 text-sm leading-6 text-muted-foreground max-md:hidden">
+                {project.highlights.slice(0, 2).map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+
+              <div className="flex flex-wrap gap-2">
+                {visibleStack.map((tech) => {
+                  const meta = techIconMap[tech]
+
+                  return (
+                    <Badge
+                      key={tech}
+                      variant="secondary"
+                      className="rounded-none px-2.5 py-1 font-normal"
+                    >
+                      <span className="inline-flex items-center gap-1.5">
+                        <TechPillIcon
+                          name={tech}
+                          icon={meta?.icon}
+                          iconUrl={meta?.iconUrl}
+                        />
+                        <span>{tech}</span>
+                      </span>
+                    </Badge>
+                  )
+                })}
+
+                {remaining > 0 ? (
+                  <Badge
+                    variant="outline"
+                    className="rounded-none px-2.5 py-1 font-normal text-muted-foreground"
+                  >
+                    +{remaining} {content.project.moreSuffix}
+                  </Badge>
+                ) : null}
+              </div>
+            </div>
+          </Link>
+
+          <div className="flex flex-col p-6 pt-4">
+            <Separator className="mb-4" />
+
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center gap-3">
+                {liveLink ? (
+                  <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
+                    <a
+                      href={liveLink.href}
+                      onClick={() => posthog.capture('project_live_link_clicked', { project_title: project.title, project_slug: project.slug })}
+                      className="inline-flex items-center gap-2"
+                    >
+                      <Globe className="size-4 shrink-0" />
+                      <span>{content.project.live}</span>
+                    </a>
+                  </Button>
+                ) : null}
+
+                {sourceLink ? (
+                  <Button asChild variant="outline" size="sm" className="h-9 rounded-md">
+                    <a
+                      href={sourceLink.href}
+                      onClick={() => posthog.capture('project_source_link_clicked', { project_title: project.title, project_slug: project.slug })}
+                      className="inline-flex items-center gap-2"
+                    >
+                      <img
+                        src="https://cdn.simpleicons.org/github"
+                        alt="GitHub"
+                        width={16}
+                        height={16}
+                        loading="lazy"
+                        className={`size-4 shrink-0 object-contain ${shouldInvertIcon("github") ? "dark:invert" : ""}`}
+                        aria-hidden="true"
+                      />
+                      <span>{content.project.source}</span>
+                    </a>
+                  </Button>
+                ) : null}
+              </div>
+
+              {readMoreLink ? (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="h-9 shrink-0 rounded-md px-0 hover:bg-transparent hover:text-foreground/70"
+                >
+                  <a
+                    href={readMoreLink.href}
+                    onClick={() => posthog.capture('project_case_study_clicked', { project_title: project.title, project_slug: project.slug })}
+                    className="inline-flex items-center gap-2 text-foreground"
+                  >
+                    <BookOpen className="size-4 shrink-0" />
+                    <span>{content.project.caseStudy}</span>
+                    <ArrowRight className="size-4 shrink-0" />
+                  </a>
+                </Button>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="group flex h-full flex-col overflow-hidden bg-card transition-colors hover:bg-muted/10">
