@@ -11,7 +11,6 @@ import FooterSection from "@/components/layout/Footer";
 import Home from "./pages/Home";
 import Seo from "./components/Seo";
 import { PhysicsDotsBackground } from "./components/shared/backgrounds";
-import { useTheme } from "./hooks/useTheme";
 
 // Background management with context
 // function ActiveBackground() {
@@ -43,7 +42,6 @@ const NotFoundPage = lazy(() => import("./pages/NotFound"));
 
 function App() {
   const location = useLocation();
-  const { resolvedTheme } = useTheme();
 
   return (
     <div className="relative flex min-h-screen flex-col bg-background text-foreground">
@@ -53,10 +51,7 @@ function App() {
         style={{
           backgroundImage:
             "url('/assets/cd86dd58-db19-4bbd-8196-4f19aaea0ede.webp')",
-          filter:
-            resolvedTheme === "light"
-              ? "brightness(1.2) opacity(0.1);"
-              : "brightness(0.2) opacity(0.12)",
+          filter: "brightness(1.2) opacity(0.1)"
         }}
       />
       {location.pathname === "/" ? <PhysicsDotsBackground /> : null}
