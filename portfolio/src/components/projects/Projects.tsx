@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react"
 import { useMemo } from "react"
+import { Link } from "react-router-dom"
 import { getProjects } from "@/data/projects"
 import ProjectCard from "./ProjectCard"
 import { getUiContent, useLocale } from "@/i18n"
@@ -14,11 +15,17 @@ export default function ProjectsSection() {
     <section id="projects" className="w-full py-8 md:py-10">
       <div className="overflow-hidden border border-border bg-card">
         <div className="border-b border-border px-4 py-5 md:px-6">
-          <h2 className="flex items-center gap-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-            {content.sections.projects}
-            <span className="text-lg font-normal text-muted-foreground">
-              ({allProjects.length})
-            </span>
+          <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+            <Link
+              to="/projects"
+              className="group inline-flex items-center gap-2 hover:text-primary transition-colors cursor-pointer"
+            >
+              <span>{content.sections.projects}</span>
+              <span className="text-lg font-normal text-muted-foreground transition-colors group-hover:text-muted-foreground/80">
+                ({allProjects.length})
+              </span>
+              <ArrowRight className="size-5 text-muted-foreground opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-primary" />
+            </Link>
           </h2>
         </div>
 
