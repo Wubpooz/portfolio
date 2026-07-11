@@ -59,6 +59,22 @@ function CertificationIcon({
   }
 
   if (icon) {
+    if (icon.startsWith("/") || icon.includes(".") || icon.includes("/")) {
+      const localSrc = icon.startsWith("/") ? icon : `/${icon}`
+      return (
+        <img
+          src={localSrc}
+          alt={name}
+          width={28}
+          height={28}
+          loading="lazy"
+          className={`size-7 object-contain ${invertClass}`}
+          aria-hidden="true"
+          onError={() => { setError(true); }}
+        />
+      )
+    }
+
     if (icon === "anssi") {
       return <ShieldCheck className="size-7 text-primary" aria-hidden="true" />
     }

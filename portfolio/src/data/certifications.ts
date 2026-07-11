@@ -7,22 +7,18 @@ export interface CertificationItem {
   expiresAt?: string
   icon?: string
   iconUrl?: string
+  relevance: number
 }
 
-export const certifications: CertificationItem[] = [ //TODO: actual urls + order (either date or relevance, maybe give a button to sort it with a posthog signal)
+export const certifications: CertificationItem[] = [
   {
-    title: "MOOC SecNumAc in cybersecurity",
-    issuer: "ANSSI",
-    date: "2024",
-    href: "https://secnumacademie.gouv.fr/",
-    icon: "anssi", //TODO: actual icon
-  },
-  {
-    title: "Formation à la réglementation en santé et sécurité au travail (INRS)",
-    issuer: "INRS",
-    date: "2024",
-    href: "https://www.inrs.fr/",
-    icon: "inrs", //TODO: actual icon
+    title: "Model Context Protocol: Advanced Topics",
+    issuer: "Anthropic",
+    date: "06.2026",
+    href: "https://verify.skilljar.com/c/iv7bzfowztcd",
+    credentialId: "iv7bzfowztcd",
+    icon: "anthropic",
+    relevance: 100,
   },
   {
     title: "Certificate of completion: Teaching the AI Fluency Framework",
@@ -31,29 +27,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     href: "https://verify.skilljar.com/c/gde9e7ewhv9y",
     credentialId: "gde9e7ewhv9y",
     icon: "anthropic",
-  },
-  {
-    title: "Model Context Protocol: Advanced Topics",
-    issuer: "Anthropic",
-    date: "06.2026",
-    href: "https://verify.skilljar.com/c/iv7bzfowztcd",
-    credentialId: "iv7bzfowztcd",
-    icon: "anthropic",
-  },
-  {
-    title: "English CEFR C1 (Oral Expression/Comprehension, Written Expression/Comprehension)",
-    issuer: "ICIMS",
-    date: "04.2026",
-    expiresAt: "04.2028",
-    href: "https://media.licdn.com/dms/image/v2/D4E2DAQGn13t1AfawUA/profile-treasury-document-images_1280/B4EZ3kS7ZMJUAU-/1/1777651662679?e=1784764800&v=beta&t=Zm7TRXJ86j4Gz-fho1Z1ivMO1VorTmR8DU2rXk7jRZs", //TODO
-    icon: "languages", //TODO: actual icon
-  },
-  {
-    title: "Label Handimanagement",
-    issuer: "Companieros",
-    date: "04.2026",
-    href: "https://media.licdn.com/dms/image/v2/D4E2DAQFO__00vpclig/profile-treasury-document-images_1280/B4EZ3kTbM4KQAU-/1/1777651793060?e=1784764800&v=beta&t=koyYjuW7Hj_qoi3C4HvgnsR4PkoYoLm3ggEk-kh4lAU", //TODO
-    icon: "accessibility", //TODO: actual icon
+    relevance: 95,
   },
   {
     title: "CodinGame Certification - C++",
@@ -62,6 +36,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     href: "https://www.codingame.com/certification/4isuVQxdBt0f6EeZSGGX7g",
     credentialId: "4isuVQxdBt0f6EeZSGGX7g",
     icon: "codingame",
+    relevance: 45,
   },
   {
     title: "CodinGame Certification - C",
@@ -70,6 +45,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     href: "https://www.codingame.com/certification/FnAMCXuWq6tzj9GdI8ZCXg",
     credentialId: "FnAMCXuWq6tzj9GdI8ZCXg",
     icon: "codingame",
+    relevance: 10,
   },
   {
     title: "CodinGame Certification - Java",
@@ -78,6 +54,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     href: "https://www.codingame.com/certification/J8fLMAvLu6vkfCC1mnq8ig",
     credentialId: "J8fLMAvLu6vkfCC1mnq8ig",
     icon: "codingame",
+    relevance: 40,
   },
   {
     title: "CodinGame Certification - Python 3",
@@ -86,6 +63,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     href: "https://www.codingame.com/certification/EYJHy-VFr9Gp7pLGDgOFzA",
     credentialId: "EYJHy-VFr9Gp7pLGDgOFzA",
     icon: "codingame",
+    relevance: 68,
   },
   {
     title: "CodinGame Certification - TypeScript",
@@ -94,13 +72,32 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     href: "https://www.codingame.com/certification/WzftG4Du4dwFm5bQvLTpcw",
     credentialId: "WzftG4Du4dwFm5bQvLTpcw",
     icon: "codingame",
+    relevance: 70,
+  },
+  {
+    title: "English CEFR C1 (Oral Expression/Comprehension, Written Expression/Comprehension)",
+    issuer: "ICIMS",
+    date: "04.2026",
+    expiresAt: "04.2028",
+    href: "https://media.licdn.com/dms/image/v2/D4E2DAQGn13t1AfawUA/profile-treasury-document-images_1280/B4EZ3kS7ZMJUAU-/1/1777651662679?e=1784764800&v=beta&t=Zm7TRXJ86j4Gz-fho1Z1ivMO1VorTmR8DU2rXk7jRZs",
+    icon: "/icons/icims.png",
+    relevance: 5,
+  },
+  {
+    title: "Label Handimanagement",
+    issuer: "Companieros",
+    date: "04.2026",
+    href: "https://media.licdn.com/dms/image/v2/D4E2DAQFO__00vpclig/profile-treasury-document-images_1280/B4EZ3kTbM4KQAU-/1/1777651793060?e=1784764800&v=beta&t=koyYjuW7Hj_qoi3C4HvgnsR4PkoYoLm3ggEk-kh4lAU",
+    icon: "/icons/companieros.svg",
+    relevance: 4,
   },
   {
     title: "Microsoft Security Essentials Professional Certificate by Microsoft and LinkedIn",
     issuer: "Microsoft",
     date: "12.2025",
     href: "https://www.linkedin.com/learning/certificates/3dbde0d64466e8577cc9ed11faa69619f071d273d49b5d66b96f81b03bcca26a",
-    icon: "microsoft",
+    icon: "/icons/Microsoft_logo.svg",
+    relevance: 90,
   },
   {
     title: "Docker Foundations Professional Certificate",
@@ -108,6 +105,16 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "11.2025",
     href: "https://www.linkedin.com/learning/certificates/8ac043dd8c98e7f4285192c1ca6b9c962178efbc499568ed953b452fbf814947/",
     icon: "docker",
+    relevance: 80,
+  },
+  {
+    title: "Test of English for International Communication (TOEIC) - 990, C1",
+    issuer: "ETS",
+    date: "10.2025",
+    href: "https://media.licdn.com/dms/image/v2/D4E2DAQFyYh8odcLrVA/profile-treasury-document-cover-images_1280/B4EZncwdumKkAw-/0/1760345317944?e=1784300400&v=beta&t=9mhtMIUxkHi7ecBmzZw5h5rtoZLF24QrTDoRHZI7MhE",
+    credentialId: "5940728016",
+    icon: "/icons/ets.svg",
+    relevance: 5,
   },
   {
     title: "OWASP API Security Top 10",
@@ -115,15 +122,24 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "10.2025",
     href: "https://www.credly.com/badges/d6e20a74-9895-417e-b476-e3edf206e7fc/public_url",
     credentialId: "d6e20a74-9895-417e-b476-e3edf206e7fc",
-    icon: "owasp", //TODO: actual icon
+    icon: "/icons/apisec_university.png",
+    relevance: 85,
   },
   {
-    title: "Test of English for International Communication (TOEIC) - 990, C1",
-    issuer: "ETS",
-    date: "10.2025",
-    href: "https://media.licdn.com/dms/image/v2/D4E2DAQFyYh8odcLrVA/profile-treasury-document-cover-images_1280/B4EZncwdumKkAw-/0/1760345317944?e=1784300400&v=beta&t=9mhtMIUxkHi7ecBmzZw5h5rtoZLF24QrTDoRHZI7MhE", //TODO
-    credentialId: "5940728016",
-    icon: "languages", //TODO: actual icon
+    title: "MOOC SecNumAc in cybersecurity",
+    issuer: "ANSSI",
+    date: "2024",
+    href: "https://secnumacademie.gouv.fr/",
+    icon: "/icons/anssi.png",
+    relevance: 50,
+  },
+  {
+    title: "Formation à la réglementation en santé et sécurité au travail (INRS)",
+    issuer: "INRS",
+    date: "2024",
+    href: "https://www.inrs.fr/",
+    icon: "/icons/INRS.svg",
+    relevance: 3,
   },
   {
     title: "L'essentiel de Node.js",
@@ -131,6 +147,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "09.2024",
     href: "https://www.linkedin.com/learning/certificates/de2c4937b3b5bdf8180ae0b0a178abe01f038819f456901bc5826024b8651b8c/",
     icon: "linkedin",
+    relevance: 65,
   },
   {
     title: "Gérer des talents très performants ou à haut potentiel",
@@ -138,6 +155,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "03.2024",
     href: "https://www.linkedin.com/learning/certificates/39c09e99d3a8ccee1fee4bd151098660ff9735584f33767a39bcfbeac949cd72/",
     icon: "linkedin",
+    relevance: 2,
   },
   {
     title: "Découvrir les design patterns",
@@ -145,6 +163,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "02.2024",
     href: "https://www.linkedin.com/learning/certificates/e6e70caed9d0088ce09baece364d8756b11656aa37ac0eb8a0ad2d7208c80019/",
     icon: "linkedin",
+    relevance: 35,
   },
   {
     title: "Software Design: Modeling with UML",
@@ -152,6 +171,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "01.2024",
     href: "https://www.linkedin.com/learning/certificates/9311c8fe207cba1f623286a30aa8cb190dbfa92a4801375bea6e46bee440797d/",
     icon: "linkedin",
+    relevance: 30,
   },
   {
     title: "Devenir développeur / développeuse web full-stack",
@@ -159,6 +179,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "01.2024",
     href: "https://www.linkedin.com/learning/certificates/60c395010105e508b85c3829ff68df180fa4e418fafa323624e0134aa73b5b4e/",
     icon: "linkedin",
+    relevance: 75,
   },
   {
     title: "L'essentiel d'Angular",
@@ -166,6 +187,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "01.2024",
     href: "https://www.linkedin.com/learning/certificates/5c0f7f1d23f35a03d11ee3ba815104414a6cf039be998918422e1549bf30043c/",
     icon: "linkedin",
+    relevance: 60,
   },
   {
     title: "Practical Test-Driven Development for Java Programmers",
@@ -173,13 +195,15 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "01.2024",
     href: "https://www.linkedin.com/learning/certificates/ff351d99cd475b053cde33ad5dda180507ce01e3a93f6411ab6af5c603ca56f4/",
     icon: "linkedin",
+    relevance: 55,
   },
   {
     title: "Cascading Style Sheets (CSS)",
     issuer: "LinkedIn",
     date: "11.2022",
     href: "https://www.linkedin.com/skill-assessments/Cascading%20Style%20Sheets%20(CSS)/report/",
-    icon: "css3", //TODO: actual icon
+    icon: "linkedin", // or css ?
+    relevance: 20,
   },
   {
     title: "OOP paradigm",
@@ -187,6 +211,7 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "11.2022",
     href: "https://www.linkedin.com/skill-assessments/Object-Oriented%20Programming%20(OOP)/report/",
     icon: "linkedin",
+    relevance: 25,
   },
   {
     title: "C langage",
@@ -194,12 +219,14 @@ export const certifications: CertificationItem[] = [ //TODO: actual urls + order
     date: "06.2022",
     href: "https://www.linkedin.com/skill-assessments/C%20(langage%20de%20programmation)/report/#",
     icon: "linkedin",
+    relevance: 15,
   },
   {
     title: "MOOC RIGHTS, SEX & EDUCATION",
     issuer: "Com'Santé sexuelle",
     date: "05.2021",
     href: "https://santesexuelle-droitshumains.org/mooc-rights-sex-and-education/",
-    icon: "heart", //TODO: actual icon
+    icon: "/icons/com_sante_sexuelle.png",
+    relevance: 1,
   },
 ]
