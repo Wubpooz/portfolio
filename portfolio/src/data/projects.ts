@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n"
 
-export type ProjectLinkKey = "live" | "source" | "caseStudy" | "demo" | "dataset" | "search"
+export type ProjectLinkKey = "live" | "source" | "details" | "demo" | "dataset" | "search"
 
 export type ProjectStatus = "completed" | "in-progress" | "won"
 
@@ -24,6 +24,7 @@ export interface ProjectItem {
   stack: string[]
   links: ProjectLink[]
   featured?: boolean
+  relevance: number
 }
 
 const cover = (seed: string) =>
@@ -33,13 +34,16 @@ const datasetUrl = "https://huggingface.co/datasets/Bluefir/hetus-time-use"
 const maltaRepo = "https://github.com/Wubpooz/Malta-TTS"
 const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/" // XTTS demo (broken bcs of librosa)
 const streamlitSearch = "https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/" // Paper Relevance Dashboard
+const escampeUrl = "https://escampe.vercel.app/" // Escampe web
+const watchlistUrl = "https://watchlist-service.vercel.app/landing?redirect=/" // Watchlist web
 
-const addCaseStudy = (slug: string) => `/projects/${slug}`
+const addDetails = (slug: string) => `/projects/${slug}`;
 
 const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featured
   en: [
     {
       slug: "how-europe-spends-its-time",
+      relevance: 75,
       title: "How Europe Spends Its Time",
       subtitle: "Turning messy European time-use surveys into a clear visual narrative.",
       summary:
@@ -57,12 +61,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       stack: ["Python", "pandas", "Data Visualization", "Accessibility", "Hugging Face"],
       links: [
         { labelKey: "live", href: datasetUrl },
-        { labelKey: "caseStudy", href: addCaseStudy("how-europe-spends-its-time") },
+        { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
       ],
       featured: true,
     },
     {
       slug: "deloitte-google-cloud-hackathon",
+      relevance: 85,
       title: "Deloitte x Google Cloud Hackathon",
       subtitle: "Award-winning multi-agent system for campaign automation.",
       summary:
@@ -79,12 +84,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("deloitte-google-cloud-hackathon") },
+        { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
       featured: true,
     },
     {
       slug: "xtts-finetuning",
+      relevance: 100,
       title: "XTTS Finetuning",
       subtitle: "Speech synthesis research and Maltese language support.",
       summary:
@@ -120,12 +126,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
             ar: "أداة البحث عن الأوراق"
           }
         },
-        { labelKey: "caseStudy", href: addCaseStudy("xtts-finetuning") },
+        { labelKey: "details", href: addDetails("xtts-finetuning") },
       ],
       featured: true,
     },
     {
       slug: "quizine",
+      relevance: 65,
       title: "Quizine",
       subtitle: "Real-time multiplayer quiz platform with WebSockets.",
       summary:
@@ -142,12 +149,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("quizine") },
+        { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
     },
     {
       slug: "magnus-carlos",
+      relevance: 55,
       title: "Magnus Carlos",
       subtitle: "3D scientific simulation of the Magnus effect.",
       summary:
@@ -164,11 +172,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["C", "SDL2", "3D Simulation", "Agile", "Visualization"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("magnus-carlos") },
+        { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
     },
     {
       slug: "nyxen",
+      relevance: 50,
       title: "Nyxen",
       subtitle: "Single-page experience with an interactive 3D model.",
       summary:
@@ -185,33 +194,99 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["CSS", "SPA Routing", "3D", "Animation", "Git"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("nyxen") },
+        { labelKey: "details", href: addDetails("nyxen") },
+      ],
+    },
+    {
+      slug: "house-finder",
+      relevance: 45,
+      title: "House Finder",
+      subtitle: "Data modeling and CLI tool.",
+      summary:
+        "Designed database models to structure housing attributes and connectivity, and developed a CLI tool to rank properties based on custom criteria.",
+      organization: "Polytech Paris-Saclay",
+      period: "2023",
+      status: "completed",
+      image: cover("house-finder"),
+      imageAlt: "House Finder preview",
+      highlights: [
+        "Designed data models to structure housing connectivity and attributes.",
+        "Developed a Java CLI tool to rank properties using custom criteria.",
+      ],
+      stack: ["Java", "Open Data", "CLI"],
+      links: [
+        { labelKey: "details", href: addDetails("house-finder") },
+      ],
+    },
+    {
+      slug: "escape-the-mummy",
+      relevance: 35,
+      title: "Escape the Mummy",
+      subtitle: "3D maze game in Processing and GLSL.",
+      summary:
+        "Developed a 3D maze game where the player must escape a mummy in a procedurally generated desert and pyramid, implementing custom shaders in GLSL.",
+      organization: "Université Paris-Saclay",
+      period: "2022",
+      status: "completed",
+      image: cover("escape-the-mummy"),
+      imageAlt: "Escape the Mummy preview",
+      highlights: [
+        "Developed a 3D maze game with Processing and GLSL shaders.",
+        "Implemented procedural generation for the desert and pyramid.",
+        "Created game loop, camera controls, and mummy AI.",
+      ],
+      stack: ["Processing", "GLSL", "3D Game"],
+      links: [
+        { labelKey: "details", href: addDetails("escape-the-mummy") },
+      ],
+    },
+    {
+      slug: "cli-messaging",
+      relevance: 30,
+      title: "CLI Messaging",
+      subtitle: "TCP/IP socket messaging apps in C.",
+      summary:
+        "Created client-server messaging applications in C using TCP/IP sockets, supporting multiple client connections and custom communication protocols.",
+      organization: "Université Paris-Saclay",
+      period: "2022",
+      status: "completed",
+      image: cover("cli-messaging"),
+      imageAlt: "CLI Messaging preview",
+      highlights: [
+        "Developed client-server messaging applications in C using TCP/IP sockets.",
+        "Implemented multi-client connection management.",
+        "Designed a command-line interface for messaging.",
+      ],
+      stack: ["C", "TCP-IP", "CLI"],
+      links: [
+        { labelKey: "details", href: addDetails("cli-messaging") },
       ],
     },
   ],
   fr: [
     { //TODO redo
       slug: "vireli",
+      relevance: 90,
       title: "Vireli",
       subtitle: "Application web progressive (PWA).",
       summary:
-        "Développement d'une application web progressive (PWA) avec Angular 21 et Capacitor.",
+        "Développement d'une application web progressive (PWA) avec Angular 21 et Capacitor, s'appuyant sur Hono et Bun pour les API back-end.",
       organization: "Polytech Paris-Saclay",
       period: "2026",
       status: "completed",
       image: cover("vireli"),
-      imageAlt: "Vireli preview",
+      imageAlt: "Aperçu de Vireli PWA",
       highlights: [
-        "Lead developer for a progressive web application.",
-        "Full-stack development with Bun, Hono, and Zod.",
-        "Integration with Postman and OpenAPI.",
+        "Développeur principal d'une application web progressive.",
+        "Développement full-stack avec Bun, Hono et Zod.",
+        "Intégration avec Postman et OpenAPI.",
       ],
       stack: ["PWA", "Angular", "Capacitor", "Bun", "Hono", "Zod", "Prisma", "BetterAuth", "Postman", "OpenAPI"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("vireli") },
+        { labelKey: "details", href: addDetails("vireli") },
       ],
     },
-    { //TODO redo
+    {
       slug: "minimax-resnet",
       title: "Band aware dual perspective ResNet for board game evaluation",
       subtitle: "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau.",
@@ -229,11 +304,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["Python", "TensorFlow", "Minimax", "ResNet", "ML"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("minimax-resnet") },
+        { labelKey: "live", href: escampeUrl },
+        { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
     },
     {
       slug: "how-europe-spends-its-time",
+      relevance: 75,
       title: "How Europe Spends Its Time",
       subtitle: "Transformer des enquêtes européennes brouillonnes en récit visuel.",
       summary:
@@ -253,12 +330,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       stack: ["Python", "pandas", "Visualisation", "Accessibilité", "Hugging Face"], // TODO Big Data, Data Viz, Data Analysis, Datasets, Python
       links: [
         { labelKey: "live", href: datasetUrl },
-        { labelKey: "caseStudy", href: addCaseStudy("how-europe-spends-its-time") },
+        { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
       ],
       featured: true,
     },
     {
       slug: "deloitte-google-cloud-hackathon",
+      relevance: 85,
       title: "Hackathon Deloitte x Google Cloud, Lauréat",
       subtitle: "Système multi-agent lauréat pour automatiser les campagnes marketing.",
       summary:
@@ -277,12 +355,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI"], // TODO google cloud, Agent Development Kit, cloud computing, A2A
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("deloitte-google-cloud-hackathon") },
+        { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
       featured: true,
     },
     {
       slug: "xtts-finetuning",
+      relevance: 100,
       title: "XTTS Finetuning",
       subtitle: "Recherche en synthèse vocale et support du maltais.",
       summary:
@@ -304,12 +383,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         { labelKey: "source", href: maltaRepo },
         { labelKey: "live", href: streamlitDemo },
         { labelKey: "demo", href: streamlitSearch },
-        { labelKey: "caseStudy", href: addCaseStudy("xtts-finetuning") },
+        { labelKey: "details", href: addDetails("xtts-finetuning") },
       ],
       featured: true,
     },
     {
       slug: "quizine",
+      relevance: 65,
       title: "Quizine",
       subtitle: "Plateforme de quiz multijoueur en temps réel avec WebSockets.",
       summary:
@@ -329,14 +409,15 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma"], // TODO Angular, TypeScript, ExpressJS, WebSocket, Tailwind CSS, Figma, Vercel, Supabase, Redis, Git, HTML, Gestion humaine, Express.js, Node.js, Agile, REST
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("quizine") },
+        { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
     },
-    { //TODO
+    {
       slug: "compilateur-c-java",
+      relevance: 70,
       title: "Compilateur de C",
-      subtitle: "Compilateur de C écris en Java.",
+      subtitle: "Compilateur de C écrit en Java.",
       summary:
         "Développement d'un compilateur de C en Java, avec gestion des erreurs, compilation et boucles.",
       organization: "Polytech Paris-Saclay",
@@ -350,11 +431,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["C", "Java", "Compilateur"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("compilateur-c-java") },
+        { labelKey: "details", href: addDetails("compilateur-c-java") },
       ],
     },
-    { //TODO
+    {
       slug: "jeux-entreprise",
+      relevance: 60,
       title: "Jeux d'entreprise",
       subtitle: "Pilotage d'une entreprise fictive.",
       summary:
@@ -369,11 +451,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["Gestion", "Stratégie", "Finance"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("jeux-entreprise") },
+        { labelKey: "details", href: addDetails("jeux-entreprise") },
       ],
     },
     {
       slug: "magnus-carlos",
+      relevance: 55,
       title: "Magnus Carlos",
       subtitle: "Simulation scientifique 3D de l’effet Magnus.",
       summary:
@@ -393,11 +476,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualisation"], // TODO Modélisation Physique, C++, gestion humaine, management
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("magnus-carlos") },
+        { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
     },
     {
       slug: "nyxen",
+      relevance: 50,
       title: "Nyxen",
       subtitle: "Expérience single-page avec modèle 3D interactif.",
       summary:
@@ -414,11 +498,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["CSS", "SPA Routing", "3D", "Animation", "Git"], // TODO Angular, ThreeJs, HTML, Typescript, Javascript, Agile, front-end
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("nyxen") },
+        { labelKey: "details", href: addDetails("nyxen") },
       ],
     },
-    { //TODO
+    {
       slug: "house-finder",
+      relevance: 45,
       title: "House finder",
       subtitle: "Conception de modèles de données et outil CLI.",
       summary:
@@ -434,11 +519,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["Java", "Données OpenSource", "CLI"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("house-finder") },
+        { labelKey: "details", href: addDetails("house-finder") },
       ],
     },
-    { //TODO
+    {
       slug: "escape-the-mummy",
+      relevance: 35,
       title: "Escape the mummy",
       subtitle: "Jeu de labyrinthe 3D en Processing et GLSL.",
       summary:
@@ -455,11 +541,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["Processing", "GLSL", "Jeu 3D"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("escape-the-mummy") },
+        { labelKey: "details", href: addDetails("escape-the-mummy") },
       ],
     },
-    { //TODO
+    {
       slug: "cli-messaging",
+      relevance: 30,
       title: "CLI Messaging",
       subtitle: "Applications de messagerie TCP-IP en C.",
       summary:
@@ -476,13 +563,36 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["C", "TCP-IP", "CLI"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("cli-messaging") },
+        { labelKey: "details", href: addDetails("cli-messaging") },
+      ],
+    },
+    {
+      slug: "logihub",
+      relevance: 25,
+      title: "LogiHub",
+      subtitle: "Bibliothèque de jeux en ligne hébergeant des jeux p5.js.",
+      summary:
+        "Première bibliothèque de jeux en ligne hébergeant des jeux p5.js personnalisés, développée au lycée. Comprend des classiques comme Pong, Space Invaders, Reaction Time et Number Test.",
+      organization: "Lycée de l'Essouriau",
+      period: "2019",
+      status: "completed",
+      image: cover("logihub"),
+      imageAlt: "Aperçu de LogiHub",
+      highlights: [
+        "Développement de plusieurs jeux rétro personnalisés en p5.js (Pong, Space Invaders, Reaction Time).",
+        "Création d'une plateforme d'hébergement statique HTML/CSS pour les jeux jouables en ligne.",
+      ],
+      stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
+      links: [
+        { labelKey: "live", href: "http://mwaharte.free.fr/test/feuille_html_principale.html" },
+        { labelKey: "details", href: addDetails("logihub") },
       ],
     }
   ],
   ar: [
     {
       slug: "how-europe-spends-its-time",
+      relevance: 75,
       title: "How Europe Spends Its Time",
       subtitle: "تحويل استبيانات استخدام الوقت الأوروبية المبعثرة إلى سرد بصري واضح.",
       summary:
@@ -500,12 +610,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       stack: ["Python", "pandas", "تصور البيانات", "إتاحة الوصول", "Hugging Face"],
       links: [
         { labelKey: "live", href: datasetUrl },
-        { labelKey: "caseStudy", href: addCaseStudy("how-europe-spends-its-time") },
+        { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
       ],
       featured: true,
     },
     {
       slug: "deloitte-google-cloud-hackathon",
+      relevance: 85,
       title: "Hackathon Deloitte x Google Cloud",
       subtitle: "نظام متعدد الوكلاء فائز لأتمتة الحملات التسويقية.",
       summary:
@@ -522,12 +633,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("deloitte-google-cloud-hackathon") },
+        { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
       featured: true,
     },
     {
       slug: "xtts-finetuning",
+      relevance: 100,
       title: "XTTS Finetuning",
       subtitle: "بحث في توليد الكلام ودعم اللغة المالطية.",
       summary:
@@ -547,12 +659,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         { labelKey: "source", href: maltaRepo },
         { labelKey: "live", href: streamlitDemo },
         { labelKey: "demo", href: streamlitSearch },
-        { labelKey: "caseStudy", href: addCaseStudy("xtts-finetuning") },
+        { labelKey: "details", href: addDetails("xtts-finetuning") },
       ],
       featured: true,
     },
     {
       slug: "quizine",
+      relevance: 65,
       title: "Quizine",
       subtitle: "منصة مسابقات متعددة اللاعبين في الوقت الحقيقي مع WebSockets.",
       summary:
@@ -569,12 +682,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("quizine") },
+        { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
     },
     {
       slug: "magnus-carlos",
+      relevance: 55,
       title: "Magnus Carlos",
       subtitle: "محاكاة علمية ثلاثية الأبعاد لتأثير Magnus.",
       summary:
@@ -591,11 +705,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualization"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("magnus-carlos") },
+        { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
     },
     {
       slug: "nyxen",
+      relevance: 50,
       title: "Nyxen",
       subtitle: "تجربة صفحة واحدة مع نموذج ثلاثي الأبعاد تفاعلي.",
       summary:
@@ -612,7 +727,72 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       ],
       stack: ["CSS", "SPA Routing", "3D", "Animation", "Git"],
       links: [
-        { labelKey: "caseStudy", href: addCaseStudy("nyxen") },
+        { labelKey: "details", href: addDetails("nyxen") },
+      ],
+    },
+    {
+      slug: "house-finder",
+      relevance: 45,
+      title: "مكتشف السكن",
+      subtitle: "تصميم نماذج البيانات وأداة CLI.",
+      summary:
+        "تصميم نماذج بيانات لهيكلة سمات السكن والاتصال، وتطوير أداة CLI لتصنيف العقارات بناءً على معايير مخصصة.",
+      organization: "Polytech Paris-Saclay",
+      period: "2023",
+      status: "completed",
+      image: cover("house-finder"),
+      imageAlt: "معاينة مكتشف السكن",
+      highlights: [
+        "تصميم نماذج البيانات لهيكلة سمات السكن واتصالاته.",
+        "تطوير أداة CLI بلغة Java لتصنيف العقارات وفق معايير مخصصة.",
+      ],
+      stack: ["Java", "Open Data", "CLI"],
+      links: [
+        { labelKey: "details", href: addDetails("house-finder") },
+      ],
+    },
+    {
+      slug: "escape-the-mummy",
+      relevance: 35,
+      title: "الهروب من المومياء",
+      subtitle: "لعبة متاهة ثلاثية الأبعاد باستخدام Processing و GLSL.",
+      summary:
+        "تطوير لعبة متاهة ثلاثية الأبعاد يتعين فيها على اللاعب الهروب من المومياء في صحراء وهرم تم توليدهما إجرائيًا، مع تظليل مخصص في GLSL.",
+      organization: "Université Paris-Saclay",
+      period: "2022",
+      status: "completed",
+      image: cover("escape-the-mummy"),
+      imageAlt: "معاينة الهروب من المومياء",
+      highlights: [
+        "تطوير لعبة متاهة ثلاثية الأبعاد باستخدام Processing ومظللات GLSL.",
+        "تطبيق التوليد الإجرائي للصحراء والهرم.",
+        "إنشاء حلقة اللعبة، والتحكم في الكاميرا، وذكاء اصطناعي للمومياء.",
+      ],
+      stack: ["Processing", "GLSL", "Jeu 3D"],
+      links: [
+        { labelKey: "details", href: addDetails("escape-the-mummy") },
+      ],
+    },
+    {
+      slug: "cli-messaging",
+      relevance: 30,
+      title: "مراسلة CLI",
+      subtitle: "تطبيقات مراسلة عبر مقابس TCP/IP بلغة C.",
+      summary:
+        "إنشاء تطبيقات مراسلة للعميل والخادم بلغة C باستخدام مقابس TCP/IP، مع دعم اتصالات متعددة للعملاء وبروتوكولات اتصال مخصصة.",
+      organization: "Université Paris-Saclay",
+      period: "2022",
+      status: "completed",
+      image: cover("cli-messaging"),
+      imageAlt: "معاينة مراسلة CLI",
+      highlights: [
+        "تطوير تطبيقات مراسلة خادم وعميل بلغة C باستخدام مقابس TCP/IP.",
+        "إدارة اتصالات متعددة العملاء.",
+        "تصميم واجهة سطر أوامر للمراسلة.",
+      ],
+      stack: ["C", "TCP-IP", "CLI"],
+      links: [
+        { labelKey: "details", href: addDetails("cli-messaging") },
       ],
     },
   ],
@@ -625,4 +805,3 @@ export function getProjects(locale: Locale): ProjectItem[] {
 export function getProjectBySlug(locale: Locale, slug: string) {
   return getProjects(locale).find((project) => project.slug === slug)
 }
-
