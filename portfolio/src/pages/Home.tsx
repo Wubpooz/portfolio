@@ -4,6 +4,7 @@ import EducationSection from "@/components/education/Education";
 import SkillsSection from "@/components/skills/Skills";
 import ProjectsSection from "@/components/projects/Projects";
 import CertificationSection from "@/components/certification/Certification";
+import LanguagesAndInterestsSection from "@/components/languages-interests/LanguagesAndInterests";
 import AwardsSection from "@/components/awards/Awards";
 import ContactSection from "@/components/contact/Contact";
 import { TOCMinimap } from "@/components/shared/TOCMinimap";
@@ -20,6 +21,7 @@ export default function Home() {
     { title: content.sections.skillsTitle, url: "#skills", depth: 2 },
     { title: content.sections.projects, url: "#projects", depth: 2 },
     { title: content.sections.certifications, url: "#certifications", depth: 2 },
+    { title: content.sections.languagesAndInterests, url: "#languages-interests", depth: 2 },
     { title: content.sections.contactTitle, url: "#contact", depth: 2 },
   ];
 
@@ -39,6 +41,7 @@ export default function Home() {
         <SkillsSection />
         <ProjectsSection />
         <CertificationSection />
+        <LanguagesAndInterestsSection />
         <AwardsSection />
         <ContactSection />
       </div>

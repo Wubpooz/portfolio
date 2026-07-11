@@ -24,6 +24,7 @@ export interface UiContent {
     skillsDescription: string
     projects: string
     certifications: string
+    languagesAndInterests: string
     contactTitle: string
   }
   project: {
@@ -129,6 +130,7 @@ export const uiContent: Record<Locale, UiContent> = {
       skillsDescription: "The languages, frameworks, protocols, and scientific methods I use to design full-stack solutions and AI architectures.",
       projects: "Projects",
       certifications: "Certifications",
+      languagesAndInterests: "Languages & Interests",
       contactTitle: "Let’s connect",
     },
     project: {
@@ -232,6 +234,7 @@ export const uiContent: Record<Locale, UiContent> = {
       skillsDescription: "L'ensemble des technologies, protocoles et approches scientifiques que j'utilise pour concevoir des solutions fullstack et des architectures IA.",
       projects: "Projets",
       certifications: "Certifications",
+      languagesAndInterests: "Langues & Intérêts",
       contactTitle: "Restons en contact",
     },
     project: {
@@ -335,6 +338,7 @@ export const uiContent: Record<Locale, UiContent> = {
       skillsDescription: "اللغات والأطر والبروتوكولات والأساليب العلمية التي أستخدمها لتصميم حلول full-stack وهندسات الذكاء الاصطناعي.",
       projects: "المشاريع",
       certifications: "الشهادات",
+      languagesAndInterests: "اللغات والاهتمامات",
       contactTitle: "لنَبقَ على تواصل",
     },
     project: {
