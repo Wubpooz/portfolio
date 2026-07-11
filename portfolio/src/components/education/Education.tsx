@@ -31,6 +31,7 @@ export default function EducationSection() {
               dateRange={`${edu.startDate} - ${edu.endDate}`}
               description={edu.description}
               tags={edu.tags}
+              logo={edu.logo}
             />
           ))}
         </Accordion>

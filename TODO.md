@@ -115,16 +115,16 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - description
   - tags
 - [ ] Hero description
-- [ ] Add the missing skills
-- [ ] Add the missing projects
-- [ ] Add the missing certifications
+- [x] Add the missing skills
+- [x] Add the missing projects
+- [x] Add the missing certifications
 - [ ] profile picture
 - [ ] banner picture
-- [ ] certifications icons
+- [x] certifications icons
 - [ ] favicon
-- [ ] School & experience logos
-- [ ] Add interests: RO, crypto, traitement image/signal ondellettes, IA, bioinfo, Cheerleading, Photographie, Equitation
-- [ ] Section Langues:
+- [x] School & experience logos
+- [x] Add interests: RO, crypto, traitement image/signal ondellettes, IA, bioinfo, Cheerleading, Photographie, Equitation
+- [x] Section Langues:
   - Allemand: Capacité professionnelle limitée
   - Anglais: Capacité professionnelle fonctionnelle (Score Duolingo 130 - May 2026, Test of English for International Communication (TOEIC) - 990, C1, English CEFR C1 (Oral Expression/Comprehension, Written Expression/Comprehension) - ICIMS)
   - Arabe: Notions de base

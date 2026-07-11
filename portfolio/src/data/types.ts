@@ -7,6 +7,7 @@ export interface ExperienceEntry {
   endDate: string         // "Présent" ou "Août 2025"
   description?: string[]   // liste de bullet points
   tags?: string[]           // technologies
+  logo?: string
 }
 
 export interface EducationEntry {
@@ -18,4 +19,5 @@ export interface EducationEntry {
   endDate: string
   description?: string[]
   tags?: string[]
+  logo?: string
 }

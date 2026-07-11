@@ -31,6 +31,7 @@ export default function ExperienceSection() {
               dateRange={`${exp.startDate} - ${exp.endDate}`}
               description={exp.description}
               tags={exp.tags}
+              logo={exp.logo}
             />
           ))}
         </Accordion>
