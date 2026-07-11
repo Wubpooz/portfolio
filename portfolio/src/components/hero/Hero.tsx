@@ -64,9 +64,8 @@ export default function HeroSection() {
       <Card className="overflow-hidden rounded-none border-border bg-card shadow-none pt-0">
         <div className="relative h-44 border-b border-border sm:h-56 md:h-72">
           <img
-            src="/assets/hero-banner.webp"
-            srcSet="/assets/hero-banner-sm.webp 500w, /assets/hero-banner.webp 1000w"
-            sizes="(max-width: 640px) 500px, 1000px"
+            src="/assets/loss_landscape_montains.png"
+            //TODO srcSet, sizes, lazy loading
             alt={content.hero.backgroundAlt}
             className="h-full w-full object-cover object-center md:object-top"
             width={1000}
