@@ -4,7 +4,7 @@ import type { CertificationItem } from "../../data/certifications"
 import { certifications } from "../../data/certifications"
 import { Button } from "@/components/ui/button"
 import { getUiContent, useLocale } from "@/i18n"
-import { shouldInvertIcon, parseCertDate } from "@/lib/utils"
+import { shouldInvertIcon, parseCertDate, getIconUrl } from "@/lib/utils"
 import { usePostHog } from "@posthog/react"
 
 function formatCertificationDate(locale: string, value: string) {
@@ -88,7 +88,7 @@ function CertificationIcon({
       return <Heart className="size-7 text-rose-500" aria-hidden="true" />
     }
 
-    const src = icon === "linkedin" ? "/icons/linkedin.svg" : `https://cdn.simpleicons.org/${icon}`
+    const src = getIconUrl(icon)
     return (
       <img
         src={src}

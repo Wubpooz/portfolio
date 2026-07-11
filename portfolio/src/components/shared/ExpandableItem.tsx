@@ -1,11 +1,13 @@
 import { Atom, Briefcase, GraduationCap } from 'lucide-react'
-import { shouldInvertIcon } from '@/lib/utils'
+import { shouldInvertIcon, getIconUrl } from '@/lib/utils'
 import TagPills from './TagPills'
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+
+import { Link } from 'react-router-dom'
 
 const renderTextWithLinks = (text: string) => {
   const regex = /\[([^\]]+)\]\(([^)]+)\)/g
@@ -20,17 +22,30 @@ const renderTextWithLinks = (text: string) => {
     }
     const linkText = match[1]
     const linkUrl = match[2]
+    const isInternal = linkUrl.startsWith("/")
+    
     parts.push(
-      <a
-        key={matchIndex}
-        href={linkUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(e) => { e.stopPropagation(); }}
-        className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
-      >
-        {linkText}
-      </a>
+      isInternal ? (
+        <Link
+          key={matchIndex}
+          to={linkUrl}
+          onClick={(e) => { e.stopPropagation(); }}
+          className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+        >
+          {linkText}
+        </Link>
+      ) : (
+        <a
+          key={matchIndex}
+          href={linkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => { e.stopPropagation(); }}
+          className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+        >
+          {linkText}
+        </a>
+      )
     )
     lastIndex = regex.lastIndex
   }
@@ -110,7 +125,7 @@ export default function ExpandableItem({
     return (
       <div className={containerClass}>
         <img
-          src={`https://cdn.simpleicons.org/${logo}`}
+          src={getIconUrl(logo)}
           alt={title}
           className={`max-h-full max-w-full object-contain ${invertClass}`}
           loading="lazy"

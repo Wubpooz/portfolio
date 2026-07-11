@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- System Trajectory Curve -->
+  <path d="M2 12C2 6.5 6.5 2 12 2C16.5 2 20 5.5 20 10C20 13.5 17.5 16 14 16C11.5 16 9.5 14 9.5 11.5C9.5 9.5 11 8 13 8C14.5 8 15.5 9 15.5 10" />
+  <!-- Convergence Attractor Node -->
+  <circle cx="15.5" cy="10" r="1" fill="currentColor" />
+</svg>

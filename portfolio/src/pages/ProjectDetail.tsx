@@ -34,10 +34,10 @@ function ProjectLinksSection({
     dataset: 5,
   }
 
-  // Filter out caseStudy links since we are already on the details page
+  // Filter out details links since we are already on the details page
   // Sort the links based on the priority order
   const displayLinks = project.links
-    .filter((link) => link.labelKey !== "caseStudy")
+    .filter((link) => link.labelKey !== "details")
     .sort((a, b) => {
       const priorityA = priorityOrder[a.labelKey] ?? 100
       const priorityB = priorityOrder[b.labelKey] ?? 100

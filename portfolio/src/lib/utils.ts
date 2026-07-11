@@ -17,13 +17,44 @@ const INVERT_ICONS = [
   "mcp",
   "model_context_protocol",
   "anthropic",
-  "claude"
+  "claude",
+  "express",
+  "bun",
+  "expo",
+  "prisma",
+  "linux",
+  "bash"
 ];
 
 export function shouldInvertIcon(slugOrName?: string) {
   if (!slugOrName) return false;
+  const localInverts = ["ode.svg", "graph.svg", "data-viz.svg"];
+  if (localInverts.some(file => slugOrName.endsWith(file))) {
+    return true;
+  }
+  if (slugOrName.startsWith("http://") || slugOrName.startsWith("https://") || slugOrName.startsWith("/") || slugOrName.includes("/") || slugOrName.includes(".")) {
+    return false;
+  }
   const lower = slugOrName.toLowerCase();
+  if (lower === "javascript") {
+    return false;
+  }
   return INVERT_ICONS.some(icon => lower.includes(icon));
+}
+
+export function getIconUrl(iconName: string): string {
+  if (!iconName) return "";
+  if (iconName.startsWith("http://") || iconName.startsWith("https://")) {
+    return iconName;
+  }
+  if (iconName.startsWith("/") || iconName.includes("/") || iconName.includes(".")) {
+    return iconName.startsWith("/") ? iconName : `/${iconName}`;
+  }
+  if (iconName === "linkedin") return "/icons/linkedin.svg";
+  if (shouldInvertIcon(iconName)) {
+    return `https://cdn.simpleicons.org/${iconName}/000`;
+  }
+  return `https://cdn.simpleicons.org/${iconName}`;
 }
 
 export function parseCertDate(dateStr: string): number {

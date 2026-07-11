@@ -2,7 +2,7 @@ import { ArrowUpRight, Download, Mail, Contact } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getResumeAsset, getUiContent, useLocale } from "@/i18n"
-import { shouldInvertIcon } from "@/lib/utils"
+import { shouldInvertIcon, getIconUrl } from "@/lib/utils"
 import { usePostHog } from "@posthog/react"
 
 const contacts = [
@@ -37,7 +37,7 @@ function ContactIcon({
     return <Mail className="size-5 text-muted-foreground" aria-hidden="true" />
   }
 
-  const src = icon === "linkedin" ? "/icons/linkedin.svg" : `https://cdn.simpleicons.org/${icon}`
+  const src = getIconUrl(icon)
   const invertClass = shouldInvertIcon(icon || label) ? "dark:invert" : ""
 
   return (

@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { getUiContent, useLocale } from "@/i18n"
-import { shouldInvertIcon } from "@/lib/utils"
+import { shouldInvertIcon, getIconUrl } from "@/lib/utils"
 import { usePostHog } from "@posthog/react"
 
 const MAX_VISIBLE_STACK = 6
@@ -74,7 +74,7 @@ function TechPillIcon({
   if (icon) {
     return (
       <img
-        src={`https://cdn.simpleicons.org/${icon}`}
+        src={getIconUrl(icon)}
         alt={name}
         width={14}
         height={14}
@@ -110,7 +110,7 @@ export default function ProjectCard({
 
   const liveLink = project.links.find((l) => l.labelKey === "live")
   const sourceLink = project.links.find((l) => l.labelKey === "source")
-  const readMoreLink = project.links.find((l) => l.labelKey === "caseStudy")
+  const readMoreLink = project.links.find((l) => l.labelKey === "details")
 
   if (viewMode === "list") {
     return (
@@ -249,7 +249,7 @@ export default function ProjectCard({
                     className="inline-flex items-center gap-2 text-foreground"
                   >
                     <BookOpen className="size-4 shrink-0" />
-                    <span>{content.project.caseStudy}</span>
+                    <span>{content.project.details}</span>
                     <ArrowRight className="size-4 shrink-0" />
                   </a>
                 </Button>
@@ -396,7 +396,7 @@ export default function ProjectCard({
                   className="inline-flex items-center gap-2 text-foreground"
                 >
                   <BookOpen className="size-4 shrink-0" />
-                  <span>{content.project.caseStudy}</span>
+                  <span>{content.project.details}</span>
                   <ArrowRight className="size-4 shrink-0" />
                 </a>
               </Button>

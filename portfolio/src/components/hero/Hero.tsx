@@ -2,7 +2,7 @@ import { ArrowDown, Contact, ExternalLink, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getUiContent, useLocale } from "@/i18n";
-import { shouldInvertIcon } from "@/lib/utils";
+import { shouldInvertIcon, getIconUrl } from "@/lib/utils";
 import { usePostHog } from "@posthog/react";
 import { Link } from "react-router-dom";
 
@@ -38,10 +38,7 @@ function QuickLinkIcon({
     return <Mail className="size-4 text-muted-foreground" aria-hidden="true" />;
   }
 
-  const src =
-    icon === "linkedin"
-      ? "/icons/linkedin.svg"
-      : `https://cdn.simpleicons.org/${icon}`;
+  const src = getIconUrl(icon);
   const invertClass = shouldInvertIcon(icon || label) ? "dark:invert" : "";
 
   return (

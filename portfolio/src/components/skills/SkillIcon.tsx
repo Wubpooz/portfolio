@@ -12,8 +12,19 @@ import {
   TestTube2,
   Shield,
   Workflow,
+  Blocks,
+  Shapes,
+  Bot,
+  BrainCircuit,
+  AudioLines,
+  Shrink,
+  NotebookPen,
+  Presentation,
+  ChartScatter,
+  Milestone,
+  DatabaseSearch
 } from "lucide-react"
-import { shouldInvertIcon } from "@/lib/utils"
+import { shouldInvertIcon, getIconUrl } from "@/lib/utils"
 
 interface SkillIconProps {
   name: string
@@ -47,8 +58,20 @@ const fallbackIcons: Record<
   security: Shield,
   cybersecurity: Shield,
   "distributed-algorithms": Network,
-  "graph-algorithms": GitBranch,
-  "supervised-learning": Workflow,
+  "supervised-learning": ChartScatter,
+  "oop": Blocks,
+  "distributed-systems": Network,
+  "design-patterns": Shapes,
+  "ai-agents": Bot,
+  "neural-network": BrainCircuit,
+  "model-training": SlidersHorizontal,
+  "TTS": AudioLines,
+  "big-data": Database,
+  "pca": Shrink,
+  "research": NotebookPen,
+  "communication": Presentation,
+  "data-analysis": DatabaseSearch,
+  "pm": Milestone
 }
 
 export default function SkillIcon({ name, icon, iconUrl }: Readonly<SkillIconProps>) {
@@ -76,7 +99,7 @@ export default function SkillIcon({ name, icon, iconUrl }: Readonly<SkillIconPro
   if (icon) {
     return (
       <img
-        src={`https://cdn.simpleicons.org/${icon}`}
+        src={getIconUrl(icon)}
         alt={name}
         width={36}
         height={36}

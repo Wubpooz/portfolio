@@ -29,7 +29,7 @@ export interface UiContent {
   project: {
     live: string
     source: string
-    caseStudy: string
+    details: string
     viewAll: string
     moreSuffix: string
   }
@@ -134,7 +134,7 @@ export const uiContent: Record<Locale, UiContent> = {
     project: {
       live: "Live",
       source: "Source",
-      caseStudy: "Details",
+      details: "Details",
       viewAll: "View all projects",
       moreSuffix: "more",
     },
@@ -237,7 +237,7 @@ export const uiContent: Record<Locale, UiContent> = {
     project: {
       live: "Démo",
       source: "Code",
-      caseStudy: "Détails",
+      details: "Détails",
       viewAll: "Voir tous les projets",
       moreSuffix: "autres",
     },
@@ -340,7 +340,7 @@ export const uiContent: Record<Locale, UiContent> = {
     project: {
       live: "مباشر",
       source: "المصدر",
-      caseStudy: "التفاصيل",
+      details: "التفاصيل",
       viewAll: "عرض كل المشاريع",
       moreSuffix: "إضافية",
     },
