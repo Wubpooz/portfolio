@@ -1,13 +1,13 @@
-import { useMemo } from "react"
-import { getExperiences } from "../../data/experiences"
-import ExpandableItem from '../shared/ExpandableItem';
-import { Accordion } from '@/components/ui/accordion';
-import { getUiContent, useLocale } from '@/i18n'
+import { useMemo } from "react";
+import { getExperiences } from "../../data/experiences";
+import ExpandableItem from "../shared/ExpandableItem";
+import { Accordion } from "@/components/ui/accordion";
+import { getUiContent, useLocale } from "@/i18n";
 
 export default function ExperienceSection() {
-  const { locale } = useLocale()
-  const content = getUiContent(locale)
-  const experiences = useMemo(() => getExperiences(locale), [locale])
+  const { locale } = useLocale();
+  const content = getUiContent(locale);
+  const experiences = useMemo(() => getExperiences(locale), [locale]);
 
   return (
     <section id="experience" className="w-full py-8 md:py-10">
@@ -28,7 +28,7 @@ export default function ExperienceSection() {
               value={exp.id}
               title={exp.role}
               subtitle={`${exp.company} · ${exp.location}`}
-              dateRange={`${exp.startDate} - ${exp.endDate}`}
+              dateRange={exp.startDate != exp.endDate ? `${exp.startDate} - ${exp.endDate}` : exp.startDate}
               description={exp.description}
               tags={exp.tags}
               logo={exp.logo}

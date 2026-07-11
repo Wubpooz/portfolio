@@ -29,10 +29,10 @@ const contacts = [
 function ContactIcon({
   label,
   icon,
-}: {
+}: Readonly<{
   label: string
   icon: string
-}) {
+}>) {
   if (icon === "mail") {
     return <Mail className="size-5 text-muted-foreground" aria-hidden="true" />
   }

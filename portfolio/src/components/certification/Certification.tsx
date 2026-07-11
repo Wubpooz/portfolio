@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import { ArrowUpRight, BadgeCheck, CalendarDays, ChevronDown, ShieldCheck, Languages, Accessibility, Heart } from "lucide-react"
+import { ArrowUpRight, BadgeCheck, CalendarDays, ChevronDown, ShieldCheck } from "lucide-react"
 import type { CertificationItem } from "../../data/certifications"
 import { certifications } from "../../data/certifications"
 import { Button } from "@/components/ui/button"
@@ -73,19 +73,6 @@ function CertificationIcon({
           onError={() => { setError(true); }}
         />
       )
-    }
-
-    if (icon === "anssi") {
-      return <ShieldCheck className="size-7 text-primary" aria-hidden="true" />
-    }
-    if (icon === "languages") {
-      return <Languages className="size-7 text-primary" aria-hidden="true" />
-    }
-    if (icon === "accessibility") {
-      return <Accessibility className="size-7 text-primary" aria-hidden="true" />
-    }
-    if (icon === "heart") {
-      return <Heart className="size-7 text-rose-500" aria-hidden="true" />
     }
 
     const src = getIconUrl(icon)

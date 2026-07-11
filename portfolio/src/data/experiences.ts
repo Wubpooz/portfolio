@@ -41,7 +41,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       company: "[Centre for Nanosciences and Nanotechnology](https://www.c2n.universite-paris-saclay.fr/en/laboratory/presentation/)",
       location: "Orsay, France",
       startDate: "2016",
-      endDate: "2019",
+      endDate: "2016",
       logo: "/icons/apprenti_chercheur.png",
       description: [
         "Study of spatial and diametrical distribution of AuGe nanowires"
@@ -53,8 +53,8 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       role: "Short Internship (9th Grade)",
       company: "[Synchrotron SOLEIL](https://www.synchrotron-soleil.fr)",
       location: "Orsay, France",
-      startDate: "2019",
-      endDate: "2020",
+      startDate: "2016",
+      endDate: "2016",
       logo: "/icons/synchrotron_logo_chatgpt.png",
       description: [
         "Beam control and alignment, coloration and UV image processing, and introduction to mass spectrometry and circular dichroism."
@@ -101,7 +101,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       company: "[Centre de Nanosciences et de Nanotechnologies](https://www.c2n.universite-paris-saclay.fr/fr/laboratoire/presentation/)",
       location: "Orsay, France",
       startDate: "2016",
-      endDate: "2019",
+      endDate: "2016",
       logo: "/icons/apprenti_chercheur.png",
       description: [
         "Étude de la distribution spatiale et diamétrale de nanofils AuGe"
@@ -113,8 +113,8 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       role: "Stage de 3ème",
       company: "[Synchrotron SOLEIL](https://www.synchrotron-soleil.fr)",
       location: "Orsay, France",
-      startDate: "2019",
-      endDate: "2020",
+      startDate: "2016",
+      endDate: "2016",
       logo: "/icons/synchrotron_logo_chatgpt.png",
       description: [
         "Contrôle et alignement de faisceaux de lumière, coloration et traitement d’images UV et découverte de la spectrométrie de masse et du dichroïsme circulaire."
@@ -161,7 +161,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       company: "[مركز علوم النانو والتكنولوجيا النانوية](https://www.c2n.universite-paris-saclay.fr/en/laboratory/presentation/)",
       location: "أورسيه، فرنسا",
       startDate: "2016",
-      endDate: "2019",
+      endDate: "2016",
       logo: "/icons/apprenti_chercheur.png",
       description: [
         "دراسة التوزيع المكاني والقطري لأسلاك AuGe النانوية"
@@ -173,8 +173,8 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       role: "تدريب قصير (الصف التاسع)",
       company: "[Synchrotron SOLEIL](https://www.synchrotron-soleil.fr)",
       location: "أورسيه، فرنسا",
-      startDate: "2019",
-      endDate: "2020",
+      startDate: "2016",
+      endDate: "2016",
       logo: "/icons/synchrotron_logo_chatgpt.png",
       description: [
         "التحكم في حزم الضوء ومحاذاتها، التلوين ومعالجة صور الأشعة فوق البنفسجية، والتعرف على مطيافية الكتلة والثنائية اللون الدائرية."
