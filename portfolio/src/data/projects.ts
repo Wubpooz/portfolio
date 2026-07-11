@@ -32,15 +32,83 @@ const cover = (seed: string) =>
 
 const datasetUrl = "https://huggingface.co/datasets/Bluefir/hetus-time-use"
 const maltaRepo = "https://github.com/Wubpooz/Malta-TTS"
-const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/" // XTTS demo (broken bcs of librosa)
+const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/" // XTTS demo
 const streamlitSearch = "https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/" // Paper Relevance Dashboard
 const escampeUrl = "https://escampe.vercel.app/" // Escampe web
 const watchlistUrl = "https://watchlist-service.vercel.app/landing?redirect=/" // Watchlist web
 
 const addDetails = (slug: string) => `/projects/${slug}`;
 
-const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featured
+const projectsByLocale: Record<Locale, ProjectItem[]> = {
   en: [
+    {
+      slug: "watchlist-service",
+      relevance: 95,
+      title: "Media Watchlist Service",
+      subtitle: "Full-stack media catalog and shared collections platform.",
+      summary:
+        "Designed and implemented a collaborative media watchlist platform featuring granular role-based access control, PostgreSQL data persistency via Prisma ORM, session-based authentication via Better Auth, and an integrated Model Context Protocol (MCP) server.",
+      organization: "Polytech Paris-Saclay",
+      period: "2026",
+      status: "completed",
+      image: cover("watchlist-service"),
+      imageAlt: "Media Watchlist Service preview",
+      highlights: [
+        "Collaborative collections with OWNER, COLLABORATOR, and READER roles.",
+        "Integrated Model Context Protocol (MCP) server for collections and media tools.",
+        "Comprehensive CI/CD pipeline with Vitest, backend mock requests, and automated deployment.",
+      ],
+      stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Supabase", "MCP", "Docker", "GitHub Actions"],
+      links: [
+        { labelKey: "live", href: watchlistUrl },
+        { labelKey: "details", href: addDetails("watchlist-service") },
+      ],
+    },
+    {
+      slug: "vireli",
+      relevance: 90,
+      title: "Vireli",
+      subtitle: "Progressive Web Application (PWA).",
+      summary:
+        "Developed a progressive web application (PWA) with Angular 21 and Capacitor, utilizing Hono and Bun for back-end APIs.",
+      organization: "Polytech Paris-Saclay",
+      period: "2026",
+      status: "completed",
+      image: cover("vireli"),
+      imageAlt: "Vireli PWA preview",
+      highlights: [
+        "Lead developer for a progressive web application.",
+        "Full-stack development with Bun, Hono, and Zod.",
+        "Integration with Postman and OpenAPI.",
+      ],
+      stack: ["PWA", "Angular", "Capacitor", "Bun", "Hono", "Zod", "Prisma", "BetterAuth", "Postman", "OpenAPI"],
+      links: [
+        { labelKey: "details", href: addDetails("vireli") },
+      ],
+    },
+    {
+      slug: "minimax-resnet",
+      relevance: 80,
+      title: "ResNet Board Game Evaluator",
+      subtitle: "Custom ResNet model for position evaluation in a board game.",
+      summary:
+        "Optimized a ResNet model for evaluating board game positions, implementing the Minimax algorithm with alpha-beta pruning.",
+      organization: "Polytech Paris-Saclay",
+      period: "Mar 2026",
+      status: "completed",
+      image: cover("minimax-resnet"),
+      imageAlt: "Minimax ResNet preview",
+      highlights: [
+        "Optimized a ResNet for evaluating positions in a board game.",
+        "Implemented the Minimax algorithm with alpha-beta pruning.",
+        "Developed a custom neural network for position evaluation.",
+      ],
+      stack: ["Python", "TensorFlow", "Minimax", "ResNet", "ML"],
+      links: [
+        { labelKey: "live", href: escampeUrl },
+        { labelKey: "details", href: addDetails("minimax-resnet") },
+      ],
+    },
     {
       slug: "how-europe-spends-its-time",
       relevance: 75,
@@ -58,7 +126,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "Accessible, keyboard-navigable web experience with interactive data visualizations.",
         "Published as a Hugging Face dataset for broader reuse.",
       ],
-      stack: ["Python", "pandas", "Data Visualization", "Accessibility", "Hugging Face"],
+      stack: ["Python", "pandas", "Data Visualization", "Accessibility", "Hugging Face", "Big Data", "Data Analysis", "Datasets"],
       links: [
         { labelKey: "live", href: datasetUrl },
         { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
@@ -82,7 +150,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "Native Cloud integration: BigQuery, Gemini, Imagen, Cloud Run, and Vertex AI Agent Engine.",
         "Won the hackathon.",
       ],
-      stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI"],
+      stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI", "Google Cloud", "Agent Development Kit (ADK)", "Cloud Computing", "A2A"],
       links: [
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
@@ -105,7 +173,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "XTTS fine-tuning and inference on Google Colab using PyTorch and GPT-2.",
         "Maltese support added without regression.",
       ],
-      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face"],
+      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face", "Machine Learning", "Model Training"],
       links: [
         { labelKey: "source", href: maltaRepo },
         {
@@ -147,11 +215,55 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "Angular frontend with routing, AuthGuard, notifications, and API contract.",
         "Documented from Figma mockups to continuous deployment.",
       ],
-      stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma"],
+      stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
       links: [
         { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
+    },
+    {
+      slug: "compilateur-c-java",
+      relevance: 70,
+      title: "C Compiler",
+      subtitle: "C compiler written in Java.",
+      summary:
+        "Developed a C compiler in Java with error handling, code generation, and loops support.",
+      organization: "Polytech Paris-Saclay",
+      period: "2024 – 2025",
+      status: "completed",
+      image: cover("compilateur-c-java"),
+      imageAlt: "C Compiler preview",
+      highlights: [
+        "Developed a C compiler in Java.",
+        "Implemented lexical, syntactic, and semantic analysis.",
+        "Supports code generation, variables, loops, and error handling.",
+      ],
+      stack: ["C", "Java", "Compiler", "ANTLR"],
+      links: [
+        { labelKey: "details", href: addDetails("compilateur-c-java") },
+      ],
+    },
+    {
+      slug: "jeux-entreprise",
+      relevance: 60,
+      title: "Business Simulation Games",
+      subtitle: "Management of a fictitious company.",
+      summary:
+        "Led a team in a competitive business game simulation, managing strategies, financial decisions, and operations of a mock company.",
+      organization: "Polytech Paris-Saclay",
+      period: "2025",
+      status: "completed",
+      image: cover("jeux-entreprise"),
+      imageAlt: "Business Simulation Games preview",
+      highlights: [
+        "Managed strategy, finance, and operations of a mock company.",
+        "Analyzed market trends and competitive landscape.",
+        "Coordinated with a multidisciplinary team.",
+      ],
+      stack: ["Management", "Strategy", "Finance"],
+      links: [
+        { labelKey: "details", href: addDetails("jeux-entreprise") },
+      ],
     },
     {
       slug: "magnus-carlos",
@@ -170,7 +282,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "Used SDL2 for visualization with textures, cameras, and rotations.",
         "Led the work in a team of six students.",
       ],
-      stack: ["C", "SDL2", "3D Simulation", "Agile", "Visualization"],
+      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualization", "C++", "Physics Modeling", "Project Management"],
       links: [
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
@@ -192,7 +304,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "Interactive and animated 3D model in the main section.",
         "Strong focus on UI direction and interaction polish.",
       ],
-      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git"],
+      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git", "Angular", "Three.js", "HTML", "TypeScript", "JavaScript", "Agile", "Frontend"],
       links: [
         { labelKey: "details", href: addDetails("nyxen") },
       ],
@@ -262,9 +374,54 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
     },
+    {
+      slug: "logihub",
+      relevance: 25,
+      title: "LogiHub",
+      subtitle: "Web library hosting custom p5.js games.",
+      summary:
+        "First online game library hosting custom p5.js games, developed during high school. Features classics like Pong, Space Invaders, Reaction Time, and Number Test.",
+      organization: "Lycée de l'Essouriau",
+      period: "2019",
+      status: "completed",
+      image: cover("logihub"),
+      imageAlt: "LogiHub preview",
+      highlights: [
+        "Developed multiple custom retro games in p5.js (Pong, Space Invaders, Reaction Time).",
+        "Built a static HTML/CSS hosting platform for web-playable games.",
+      ],
+      stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
+      links: [
+        { labelKey: "live", href: "http://mwaharte.free.fr/test/feuille_html_principale.html" },
+        { labelKey: "details", href: addDetails("logihub") },
+      ],
+    }
   ],
   fr: [
-    { //TODO redo
+    {
+      slug: "watchlist-service",
+      relevance: 95,
+      title: "Service de Watchlist Média",
+      subtitle: "Plateforme de catalogue média et de collections partagées (Architecture Orientée Services).",
+      summary:
+        "Conception et implémentation d'une plateforme collaborative de watchlist média comprenant un contrôle d'accès granulaire basé sur les rôles, la persistance des données PostgreSQL via l'ORM Prisma, l'authentification de session via Better Auth, et un serveur Model Context Protocol (MCP) intégré.",
+      organization: "Polytech Paris-Saclay",
+      period: "2026",
+      status: "completed",
+      image: cover("watchlist-service"),
+      imageAlt: "Aperçu du Service de Watchlist Média",
+      highlights: [
+        "Collections collaboratives avec des rôles PROPRIÉTAIRE, COLLABORATEUR et LECTEUR.",
+        "Serveur Model Context Protocol (MCP) intégré pour les outils de collections et de médias.",
+        "Pipeline CI/CD complet avec Vitest, requêtes mockées pour le back-end et déploiement automatisé.",
+      ],
+      stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Supabase", "MCP", "Docker", "GitHub Actions"],
+      links: [
+        { labelKey: "live", href: watchlistUrl },
+        { labelKey: "details", href: addDetails("watchlist-service") },
+      ],
+    },
+    {
       slug: "vireli",
       relevance: 90,
       title: "Vireli",
@@ -288,18 +445,19 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
     },
     {
       slug: "minimax-resnet",
-      title: "Band aware dual perspective ResNet for board game evaluation",
+      relevance: 80,
+      title: "Evaluateur de Jeu de Plateau ResNet",
       subtitle: "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau.",
       summary:
-        "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau.",
+        "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau, implémentant l'algorithme Minimax avec élagage alpha-bêta.",
       organization: "Polytech Paris-Saclay",
-      period: "march 2026",
+      period: "mars 2026",
       status: "completed",
       image: cover("minimax-resnet"),
-      imageAlt: "Minimax ResNet preview",
+      imageAlt: "Aperçu de Minimax ResNet",
       highlights: [
         "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau.",
-        "Implémentation du algorithme Minimax avec élagage alpha-bêta.",
+        "Implémentation de l'algorithme Minimax avec élagage alpha-bêta.",
         "Développement d'un réseau de neurones personnalisé pour l'évaluation des positions.",
       ],
       stack: ["Python", "TensorFlow", "Minimax", "ResNet", "ML"],
@@ -327,7 +485,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "Application web accessible et navigable au clavier avec visualisations interactives.",
         "Publié sous forme de dataset Hugging Face.",
       ],
-      stack: ["Python", "pandas", "Visualisation", "Accessibilité", "Hugging Face"], // TODO Big Data, Data Viz, Data Analysis, Datasets, Python
+      stack: ["Python", "pandas", "Visualisation", "Accessibilité", "Hugging Face", "Big Data", "Data Analysis", "Datasets"],
       links: [
         { labelKey: "live", href: datasetUrl },
         { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
@@ -353,7 +511,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "Intégration Cloud native : BigQuery, Gemini, Imagen, Cloud Run et Vertex AI Agent Engine.",
         "Lauréat du hackathon.",
       ],
-      stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI"], // TODO google cloud, Agent Development Kit, cloud computing, A2A
+      stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI", "Google Cloud", "Agent Development Kit (ADK)", "Cloud Computing", "A2A"],
       links: [
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
@@ -365,7 +523,6 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       title: "XTTS Finetuning",
       subtitle: "Recherche en synthèse vocale et support du maltais.",
       summary:
-      // TODO review
         "Revue de l’état de l’art en TTS, création d’une application Streamlit pour accélérer la recherche de papiers, puis fine-tuning de XTTS sur Google Colab avec PyTorch et GPT-2 pour ajouter le maltais sans régression.",
       organization: "L-Università ta' Malta (University of Malta)",
       period: "juin 2025 – août 2025",
@@ -373,12 +530,11 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
       image: cover("xtts-finetuning"),
       imageAlt: "Aperçu du projet XTTS Finetuning",
       highlights: [
-        // TODO review
         "Revue de l’état de l’art en TTS avec un outil de recherche de papiers sous Streamlit.",
         "Fine-tuning et inférence de XTTS sur Google Colab avec PyTorch et GPT-2.",
         "Support du maltais ajouté sans régression.",
       ],
-      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face"], // TODO Apprentissage automatique, LLM training
+      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face", "Apprentissage automatique", "Model Training"],
       links: [
         { labelKey: "source", href: maltaRepo },
         { labelKey: "live", href: streamlitDemo },
@@ -407,7 +563,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "Frontend Angular modulaire avec routing, AuthGuard, notifications et contrat API.",
         "Du mockup Figma au déploiement continu.",
       ],
-      stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma"], // TODO Angular, TypeScript, ExpressJS, WebSocket, Tailwind CSS, Figma, Vercel, Supabase, Redis, Git, HTML, Gestion humaine, Express.js, Node.js, Agile, REST
+      stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
       links: [
         { labelKey: "details", href: addDetails("quizine") },
       ],
@@ -474,7 +630,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "Visualisation avec SDL2 : textures, caméras et rotations.",
         "Pilotage d’une équipe de six étudiants.",
       ],
-      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualisation"], // TODO Modélisation Physique, C++, gestion humaine, management
+      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualisation", "C++", "Physique Modélisation", "Gestion de projet"],
       links: [
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
@@ -496,7 +652,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "Intégration d’un modèle 3D interactif et animé.",
         "Fort accent sur la direction artistique et les interactions.",
       ],
-      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git"], // TODO Angular, ThreeJs, HTML, Typescript, Javascript, Agile, front-end
+      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git", "Angular", "Three.js", "HTML", "TypeScript", "JavaScript", "Agile", "Frontend"],
       links: [
         { labelKey: "details", href: addDetails("nyxen") },
       ],
@@ -591,6 +747,74 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
   ],
   ar: [
     {
+      slug: "watchlist-service",
+      relevance: 95,
+      title: "خدمة قائمة المراقبة الإعلامية",
+      subtitle: "منصة لإدارة كتالوج الوسائط والمجموعات المشتركة (هندسة موجهة نحو الخدمات).",
+      summary:
+        "تصميم وتطوير منصة تعاونية لقوائم المراقبة الإعلامية تتميز بـ تحكم دقيق في الوصول على أساس الأدوار، وحفظ البيانات في قاعدة PostgreSQL عبر Prisma ORM، وإدارة الجلسات باستخدام Better Auth، بالإضافة إلى خادم مدمج لـ بروتوكول سياق النموذج (MCP).",
+      organization: "Polytech Paris-Saclay",
+      period: "2026",
+      status: "completed",
+      image: cover("watchlist-service"),
+      imageAlt: "معاينة خدمة قائمة المراقبة الإعلامية",
+      highlights: [
+        "مجموعات تعاونية مع أدوار مالك (OWNER)، ومشارك (COLLABORATOR)، وقارئ (READER).",
+        "خادم بروتوكول سياق النموذج (MCP) مدمج لأدوات المجموعات والوسائط.",
+        "خط أنابيب CI/CD شامل مع Vitest، واختبارات تكامل للخدمات الخلفية، ونشر مؤتمت.",
+      ],
+      stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Supabase", "MCP", "Docker", "GitHub Actions"],
+      links: [
+        { labelKey: "live", href: watchlistUrl },
+        { labelKey: "details", href: addDetails("watchlist-service") },
+      ],
+    },
+    {
+      slug: "vireli",
+      relevance: 90,
+      title: "Vireli",
+      subtitle: "تطبيق ويب تقدمي (PWA).",
+      summary:
+        "تطوير تطبيق ويب تقدمي (PWA) باستخدام Angular 21 و Capacitor، بالاعتماد على Hono و Bun لواجهات برمجة التطبيقات الخلفية.",
+      organization: "Polytech Paris-Saclay",
+      period: "2026",
+      status: "completed",
+      image: cover("vireli"),
+      imageAlt: "معاينة تطبيق Vireli PWA",
+      highlights: [
+        "المطور الرئيسي لتطبيق ويب تقدمي.",
+        "تطوير كامل (Full-stack) باستخدام Bun و Hono و Zod.",
+        "التكامل مع Postman و OpenAPI.",
+      ],
+      stack: ["PWA", "Angular", "Capacitor", "Bun", "Hono", "Zod", "Prisma", "BetterAuth", "Postman", "OpenAPI"],
+      links: [
+        { labelKey: "details", href: addDetails("vireli") },
+      ],
+    },
+    {
+      slug: "minimax-resnet",
+      relevance: 80,
+      title: "مقيّم ألعاب لوحية ResNet",
+      subtitle: "تحسين نموذج ResNet لتقييم الوضعيات في لعبة لوحية.",
+      summary:
+        "تحسين نموذج ResNet لتقييم الوضعيات في لعبة لوحية، مع تطبيق خوارزمية Minimax وتقليم ألفا-بيتا.",
+      organization: "Polytech Paris-Saclay",
+      period: "مارس 2026",
+      status: "completed",
+      image: cover("minimax-resnet"),
+      imageAlt: "معاينة Minimax ResNet",
+      highlights: [
+        "تحسين نموذج ResNet لتقييم الوضعيات في لعبة لوحية.",
+        "تطبيق خوارزمية Minimax مع تقليم ألفا-بيتا.",
+        "تطوير شبكة عصبية مخصصة لتقييم الوضعيات.",
+      ],
+      stack: ["Python", "TensorFlow", "Minimax", "ResNet", "ML"],
+      links: [
+        { labelKey: "live", href: escampeUrl },
+        { labelKey: "details", href: addDetails("minimax-resnet") },
+      ],
+    },
+    {
       slug: "how-europe-spends-its-time",
       relevance: 75,
       title: "How Europe Spends Its Time",
@@ -607,7 +831,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "تجربة ويب سهلة الوصول وقابلة للتنقل بلوحة المفاتيح مع تصورات بيانات تفاعلية.",
         "نُشر كمجموعة بيانات على Hugging Face لإعادة الاستخدام على نطاق أوسع.",
       ],
-      stack: ["Python", "pandas", "تصور البيانات", "إتاحة الوصول", "Hugging Face"],
+      stack: ["Python", "pandas", "تصور البيانات", "إتاحة الوصول", "Hugging Face", "Big Data", "Data Analysis", "Datasets"],
       links: [
         { labelKey: "live", href: datasetUrl },
         { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
@@ -631,7 +855,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "تكامل سحابي أصيل: BigQuery وGemini وImagen وCloud Run وVertex AI Agent Engine.",
         "فاز الهاكاثون.",
       ],
-      stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI"],
+      stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI", "Google Cloud", "Agent Development Kit (ADK)", "Cloud Computing", "A2A"],
       links: [
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
@@ -654,7 +878,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "fine-tuning واستدلال XTTS على Google Colab باستخدام PyTorch وGPT-2.",
         "إضافة دعم المالطية دون تراجع في الأداء.",
       ],
-      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face"],
+      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face", "Machine Learning", "Model Training"],
       links: [
         { labelKey: "source", href: maltaRepo },
         { labelKey: "live", href: streamlitDemo },
@@ -680,11 +904,55 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "واجهة Angular مرنة مع routing وAuthGuard وإشعارات وعقد API.",
         "توثيق متكامل من نماذج Figma حتى النشر المستمر.",
       ],
-      stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma"],
+      stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
       links: [
         { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
+    },
+    {
+      slug: "compilateur-c-java",
+      relevance: 70,
+      title: "مترجم لغة C",
+      subtitle: "مترجم لغة C مكتوب بلغة Java.",
+      summary:
+        "تطوير مترجم للغة C بلغة Java، مع إدارة الأخطاء، التوليد، ودعم الحلقات التكرارية.",
+      organization: "Polytech Paris-Saclay",
+      period: "2024 – 2025",
+      status: "completed",
+      image: cover("compilateur-c-java"),
+      imageAlt: "معاينة مترجم لغة C",
+      highlights: [
+        "تطوير مترجم للغة C بلغة Java.",
+        "تطبيق التحليل المعجمي والنحوي والدلالي.",
+        "دعم توليد التعليمات البرمجية، المتغيرات، الحلقات، وإدارة الأخطاء.",
+      ],
+      stack: ["C", "Java", "Compiler"],
+      links: [
+        { labelKey: "details", href: addDetails("compilateur-c-java") },
+      ],
+    },
+    {
+      slug: "jeux-entreprise",
+      relevance: 60,
+      title: "ألعاب محاكاة الأعمال",
+      subtitle: "إدارة شركة وهمية.",
+      summary:
+        "قيادة شركة وهمية في إطار لعبة محاكاة إدارة الأعمال المنافسة، مع إدارة القرارات المالية والاستراتيجية والتشغيلية.",
+      organization: "Polytech Paris-Saclay",
+      period: "2025",
+      status: "completed",
+      image: cover("jeux-entreprise"),
+      imageAlt: "معاينة ألعاب محاكاة الأعمال",
+      highlights: [
+        "إدارة الاستراتيجية والتمويل والعمليات لشركة وهمية.",
+        "تحليل اتجاهات السوق والمنافسة.",
+        "التنسيق مع فريق متعدد التخصصات.",
+      ],
+      stack: ["Management", "Strategy", "Finance"],
+      links: [
+        { labelKey: "details", href: addDetails("jeux-entreprise") },
+      ],
     },
     {
       slug: "magnus-carlos",
@@ -703,7 +971,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "تصور باستخدام SDL2: الخامات والكاميرات والدورانات.",
         "قيادة العمل ضمن فريق من ستة طلاب.",
       ],
-      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualization"],
+      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualization", "C++", "Physics Modeling", "Project Management"],
       links: [
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
@@ -725,7 +993,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         "إدماج نموذج ثلاثي الأبعاد تفاعلي ومتحرك.",
         "تركيز قوي على التوجيه البصري ودقة التفاعل.",
       ],
-      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git"],
+      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git", "Angular", "Three.js", "HTML", "TypeScript", "JavaScript", "Agile", "Frontend"],
       links: [
         { labelKey: "details", href: addDetails("nyxen") },
       ],
@@ -795,6 +1063,28 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = { //TODO pick the featur
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
     },
+    {
+      slug: "logihub",
+      relevance: 25,
+      title: "LogiHub",
+      subtitle: "مكتبة ألعاب على الإنترنت تستضيف ألعاب p5.js مخصصة.",
+      summary:
+        "أول مكتبة ألعاب على الإنترنت تستضيف ألعاب p5.js مخصصة، تم تطويرها خلال المدرسة الثانوية. تتميز بألعاب كلاسيكية مثل Pong و Space Invaders و Reaction Time و Number Test.",
+      organization: "Lycée de l'Essouriau",
+      period: "2019",
+      status: "completed",
+      image: cover("logihub"),
+      imageAlt: "معاينة LogiHub",
+      highlights: [
+        "تطوير العديد من الألعاب الكلاسيكية المخصصة باستخدام p5.js (بونغ، غزاة الفضاء، زمن رد الفعل).",
+        "بناء منصة استضافة ثابتة HTML/CSS للألعاب القابلة للعب على الويب.",
+      ],
+      stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
+      links: [
+        { labelKey: "live", href: "http://mwaharte.free.fr/test/feuille_html_principale.html" },
+        { labelKey: "details", href: addDetails("logihub") },
+      ],
+    }
   ],
 }
 

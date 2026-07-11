@@ -110,7 +110,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [x] Express fluency in each technology in a good way
   - [x] heart next to the best ?
   - [x] dots from 1 to 5 ?
-- [ ] Project details
+- [ ] Review Project details
   - picture
   - description
   - tags
@@ -122,8 +122,8 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] banner picture
 - [x] certifications icons
 - [ ] favicon
-- [ ] certification relevance
-- [ ] project relevance & featured
+- [x] certification relevance
+- [x] project relevance & featured
 - [ ] google cloud + deloitte icons to Hackathon
 - [x] School & experience logos
 - [x] Add interests: RO, crypto, traitement image/signal ondellettes, IA, bioinfo, Cheerleading, Photographie, Equitation
