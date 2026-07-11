@@ -7,6 +7,41 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 
+const renderTextWithLinks = (text: string) => {
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g
+  const parts = []
+  let lastIndex = 0
+  let match
+
+  while ((match = regex.exec(text)) !== null) {
+    const matchIndex = match.index
+    if (matchIndex > lastIndex) {
+      parts.push(text.substring(lastIndex, matchIndex))
+    }
+    const linkText = match[1]
+    const linkUrl = match[2]
+    parts.push(
+      <a
+        key={matchIndex}
+        href={linkUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => { e.stopPropagation(); }}
+        className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+      >
+        {linkText}
+      </a>
+    )
+    lastIndex = regex.lastIndex
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex))
+  }
+
+  return parts.length > 0 ? parts : text
+}
+
 interface ExpandableItemProps {
   value: string
   title: string
@@ -25,7 +60,7 @@ export default function ExpandableItem({
   description,
   tags,
   logo,
-}: ExpandableItemProps) {
+}: Readonly<ExpandableItemProps>) {
   const hasContent = description && description.length > 0
 
   const renderLogo = () => {
@@ -96,7 +131,7 @@ export default function ExpandableItem({
             {title}
           </h3>
           <p className="text-sm wrap-break-words text-muted-foreground mt-1">
-            {subtitle}
+            {renderTextWithLinks(subtitle)}
           </p>
         </div>
 
@@ -106,6 +141,7 @@ export default function ExpandableItem({
       </div>
     </div>
   )
+
 
   return (
     <AccordionItem
@@ -122,13 +158,13 @@ export default function ExpandableItem({
             {headerContent}
           </div>
         )}
-
+ 
         {tags?.length ? (
           <div className="pb-3">
             <TagPills tags={tags} />
           </div>
         ) : null}
-
+ 
         {description?.length ? (
           <AccordionContent className="pb-5">
             <ul className="space-y-2">
@@ -140,7 +176,7 @@ export default function ExpandableItem({
                   <span
                     className="absolute left-0 top-2 h-1 w-1 rounded-full bg-primary"
                   />
-                  {line}
+                  {renderTextWithLinks(line)}
                 </li>
               ))}
             </ul>
