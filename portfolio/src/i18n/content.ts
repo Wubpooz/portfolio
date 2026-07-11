@@ -60,6 +60,10 @@ export interface UiContent {
     openLive: string
     openDemo: string
     openDataset: string
+    viewCard: string
+    viewList: string
+    sortRecent: string
+    sortRelevance: string
   }
   certifications: {
     showMore: string
@@ -161,6 +165,10 @@ export const uiContent: Record<Locale, UiContent> = {
       openLive: "Live demo",
       openDemo: "Demo",
       openDataset: "Dataset",
+      viewCard: "Grid view",
+      viewList: "List view",
+      sortRecent: "Recent",
+      sortRelevance: "Relevance",
     },
     certifications: {
       showMore: "Show more",
@@ -260,6 +268,10 @@ export const uiContent: Record<Locale, UiContent> = {
       openLive: "Démo live",
       openDemo: "Démo",
       openDataset: "Dataset",
+      viewCard: "Vue grille",
+      viewList: "Vue liste",
+      sortRecent: "Récent",
+      sortRelevance: "Pertinence",
     },
     certifications: {
       showMore: "Voir plus",
@@ -359,6 +371,10 @@ export const uiContent: Record<Locale, UiContent> = {
       openLive: "عرض مباشر",
       openDemo: "عرض توضيحي",
       openDataset: "مجموعة البيانات",
+      viewCard: "عرض شبكي",
+      viewList: "عرض قائمة",
+      sortRecent: "الأحدث",
+      sortRelevance: "الأهمية",
     },
     certifications: {
       showMore: "عرض المزيد",
