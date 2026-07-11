@@ -14,7 +14,8 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       description: [
         "Engineering curriculum accredited by the CTI (Commission des Titres d'Ingénieur, [RNCP 40952](https://www.francecompetences.fr/recherche/rncp/40952/)).",
         "Key coursework: Advanced C++ & GPU (CUDA), High Performance Computing (MPI, OpenMP, SIMD), Distributed Algorithms and Systems, Operations Research (Simplex, OLNE, Branch & Bound, Genetic Algorithms), Quantum Computing (myqlm/qat), Cybersecurity, Numerical Methods, NLP (Transformers, Fine-tuning, PEFT, LoRA, RAG, MCP), Databases (PostgreSQL, MySQL, SPARQL), Compiler Design, Software Quality, Networking and Systems.",
-        "Training in management, project management, and business strategies."
+        "Training in management, project management, and business strategies.",
+        "Projects completed: [Media Watchlist Service](/projects/watchlist-service), [Vireli](/projects/vireli), [ResNet Board Game Evaluator](/projects/minimax-resnet), [How Europe Spends Its Time](/projects/how-europe-spends-its-time), [Quizine](/projects/quizine), [C Compiler](/projects/compilateur-c-java), [Business Simulation Games](/projects/jeux-entreprise), [Magnus Carlos](/projects/magnus-carlos), [Nyxen](/projects/nyxen), [House Finder](/projects/house-finder)."
       ],
       tags: ["Advanced C++", "HPC", "Distributed Algorithms", "Graph Theory", "SVD", "ODE/PDE", "Quantum Computing", "Databases", "NLP", "Cybersecurity"],
     },
@@ -28,7 +29,8 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       logo: "/icons/logo-ups.svg",
       description: [
         "In-depth theoretical and practical computer science curriculum ([Program details](https://ecole-universitaire-paris-saclay.fr/formation/licence/informatique/l2-informatique)).",
-        "Key coursework: Object-Oriented Programming (Java/C++), Functional Programming (OCaml), Data Structures & Databases, Data Analysis (pandas, scikit-learn), Linux, Computability & Complexity."
+        "Key coursework: Object-Oriented Programming (Java/C++), Functional Programming (OCaml), Data Structures & Databases, Data Analysis (pandas, scikit-learn), Linux, Computability & Complexity.",
+        "Projects completed: [Escape the Mummy](/projects/escape-the-mummy), [CLI Messaging](/projects/cli-messaging)."
       ],
       tags: ["Supervised Learning", "OOP", "Functional Programming", "Logic", "Computability", "Linux", "Databases"],
     },
@@ -54,6 +56,9 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       startDate: "2016",
       endDate: "2019",
       logo: "/icons/logo_essouriau.jpg",
+      description: [
+        "First website created in high school: [LogiHub](/projects/logihub), an online game library hosting custom p5.js games (Reaction time, Pong, Space Invaders)."
+      ],
       tags: ["Java", "HTML", "Cascading Style Sheets (CSS)", "Problem Solving"],
     },
     {
@@ -78,9 +83,9 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       description: [
         "Titre d'ingénieur Informatique et Ingénierie Mathématique diplômé (accrédité CTI, [RNCP 40952](https://www.francecompetences.fr/recherche/rncp/40952/)).",
         "Enseignements clés : C++ Avancé & GPU (CUDA), Calcul Haute Performance (MPI, OpenMP, SIMD), Algorithmes et Systèmes Distribués, Recherche Opérationnelle (Simplexe, OLNE, Branch & Bound, Algorithmes Génétiques), Informatique Quantique (myqlm/qat), Cybersécurité, Méthodes Numériques, NLP (Transformers, Fine-tuning, PEFT, LoRA, RAG, MCP), Bases de données (PostgreSQL, MySQL, SPARQL), Compilation, Qualité Logicielle, Réseaux et Systèmes.",
-        "Formation au management, gestion de projet et stratégies d'entreprises."
+        "Formation au management, gestion de projet et stratégies d'entreprises.",
+        "Projets réalisés : [Service de Watchlist Média](/projects/watchlist-service), [Vireli](/projects/vireli), [Évaluateur de Jeu ResNet](/projects/minimax-resnet), [How Europe Spends Its Time](/projects/how-europe-spends-its-time), [Quizine](/projects/quizine), [Compilateur de C](/projects/compilateur-c-java), [Jeux d'entreprise](/projects/jeux-entreprise), [Magnus Carlos](/projects/magnus-carlos), [Nyxen](/projects/nyxen), [House finder](/projects/house-finder)."
       ],
-      //TODO section with the projects done there with links (internals)
       tags: ["C++ Avancé", "HPC", "Algorithmes Distribués", "Théorie des Graphes", "SVD", "ODE/PDE", "Informatique Quantique", "Bases de données", "NLP", "Cybersécurité"],
       // Détails (don't delete) :
       // - algo distrib (leader election, consensus with Byzantine nodes & crashes)
@@ -150,7 +155,8 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       logo: "/icons/logo-ups.svg",
       description: [
         "Formation approfondie en informatique théorique et pratique ([Détails du programme](https://ecole-universitaire-paris-saclay.fr/formation/licence/informatique/l2-informatique)).",
-        "Compétences clés : Programmation orientée objet (Java/C++), Programmation fonctionnelle (OCaml), Structures de données et bases de données, Analyse de données (pandas, scikit-learn), Linux, Calculabilité et complexité."
+        "Compétences clés : Programmation orientée objet (Java/C++), Programmation fonctionnelle (OCaml), Structures de données et bases de données, Analyse de données (pandas, scikit-learn), Linux, Calculabilité et complexité.",
+        "Projets réalisés : [Escape the Mummy](/projects/escape-the-mummy), [CLI Messaging](/projects/cli-messaging)."
       ],
       tags: ["Apprentissage Supervisé", "POO", "Programmation Fonctionnelle", "Logique", "Calculabilité", "Linux", "Bases de données"],
     },
@@ -176,6 +182,9 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       startDate: "2016",
       endDate: "2019",
       logo: "/icons/logo_essouriau.jpg",
+      description: [
+        "Premier site web créé au lycée : [LogiHub](/projects/logihub), une bibliothèque de jeux en ligne hébergeant des jeux p5.js personnalisés (temps de réaction, Pong, Space Invaders)."
+      ],
       tags: ["Java", "HTML", "Cascading Style Sheets (CSS)", "Résolution de problèmes"],
     },
     {
@@ -200,7 +209,8 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       description: [
         "شهادة مهندس معتمدة من CTI (المسجلة في [RNCP 40952](https://www.francecompetences.fr/recherche/rncp/40952/)).",
         "المساقات الرئيسية: C++ المتقدمة وحوسبة البطاقات الرسومية (CUDA)، الحوسبة عالية الأداء (MPI, OpenMP, SIMD)، الخوارزميات والأنظمة الموزعة، بحوث العمليات (السمبلكس، OLNE، التفريع والحد، الخوارزميات الجينية)، الحوسبة الكمومية (myqlm/qat)، الأمن السيبراني، الطرق العددية، معالجة اللغة الطبيعية (Transformers, Fine-tuning, PEFT, LoRA, RAG, MCP)، قواعد البيانات (PostgreSQL, MySQL, SPARQL)، تصميم المترجمات، جودة البرمجيات، الشبكات والأنظمة.",
-        "التدريب على الإدارة، وإدارة المشاريع، واستراتيجيات الشركات."
+        "التدريب على الإدارة، وإدارة المشاريع، واستراتيجيات الشركات.",
+        "المشاريع المنجزة: [خدمة قائمة المراقبة الإعلامية](/projects/watchlist-service)، [Vireli](/projects/vireli)، [مقيّم ألعاب لوحية ResNet](/projects/minimax-resnet)، [How Europe Spends Its Time](/projects/how-europe-spends-its-time)، [Quizine](/projects/quizine)، [مترجم لغة C](/projects/compilateur-c-java)، [ألعاب محاكاة الأعمال](/projects/jeux-entreprise)، [Magnus Carlos](/projects/magnus-carlos)، [Nyxen](/projects/nyxen)، [House Finder](/projects/house-finder)."
       ],
       tags: ["C++ متقدم", "الحوسبة عالية الأداء", "الخوارزميات الموزعة", "نظرية الرسوم البيانية", "تحليل القيم المفردة", "معادلات تفاضلية عادية وجزئية", "الحوسبة الكمومية", "قواعد البيانات", "معالجة اللغة الطبيعية", "الأمن السيبراني"],
     },
@@ -214,7 +224,8 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       logo: "/icons/logo-ups.svg",
       description: [
         "دراسة متعمقة في علوم الحاسوب النظرية والعملية ([تفاصيل البرنامج](https://ecole-universitaire-paris-saclay.fr/formation/licence/informatique/l2-informatique)).",
-        "المهارات الأساسية: البرمجة كائنية التوجه (Java/C++)، البرمجة الوظيفية (OCaml)، هياكل البيانات وقواعد البيانات، تحليل البيانات (pandas، scikit-learn)، لينكس، وقابلية الحساب والتعقيد."
+        "المهارات الأساسية: البرمجة كائنية التوجه (Java/C++)، البرمجة الوظيفية (OCaml)، هياكل البيانات وقواعد البيانات، تحليل البيانات (pandas، scikit-learn)، لينكس، وقابلية الحساب والتعقيد.",
+        "المشاريع المنجزة: [Escape the Mummy](/projects/escape-the-mummy)، [CLI Messaging](/projects/cli-messaging)."
       ],
       tags: ["التعلم الخاضع للإشراف", "البرمجة كائنية التوجه", "البرمجة الوظيفية", "المنطق", "قابلية الحساب", "لينكس", "قواعد البيانات"],
     },
@@ -240,6 +251,9 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       startDate: "2016",
       endDate: "2019",
       logo: "/icons/logo_essouriau.jpg",
+      description: [
+        "أول موقع إلكتروني تم إنشاؤه في المدرسة الثانوية: [LogiHub](/projects/logihub)، وهو مكتبة ألعاب على الإنترنت تستضيف ألعاب p5.js مخصصة (زمن رد الفعل، بونغ، غزاة الفضاء)."
+      ],
       tags: ["Java", "HTML", "Cascading Style Sheets (CSS)", "حل المشكلات"],
     },
     {
