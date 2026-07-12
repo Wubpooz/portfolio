@@ -14,27 +14,11 @@ const MAX_VISIBLE_STACK = 6;
 export function TechPillIcon({
   name,
   icon,
-  iconUrl,
 }: Readonly<{
   name: string;
   icon?: string;
-  iconUrl?: string;
 }>) {
   const invertClass = shouldInvertIcon(icon ?? name) ? "dark:invert" : "";
-
-  if (iconUrl) {
-    return (
-      <img
-        src={iconUrl}
-        alt={name}
-        width={14}
-        height={14}
-        loading="lazy"
-        className={`size-3.5 shrink-0 object-contain ${invertClass}`}
-        aria-hidden="true"
-      />
-    );
-  }
 
   if (icon && fallbackIcons[icon]) {
     const Icon = fallbackIcons[icon];
@@ -158,8 +142,7 @@ export default function ProjectCard({
                       <span className="inline-flex items-center gap-1.5">
                         <TechPillIcon
                           name={tech}
-                          icon={meta?.icon}
-                          iconUrl={meta?.iconUrl}
+                          icon={meta}
                         />
                         <span>{tech}</span>
                       </span>
@@ -336,8 +319,7 @@ export default function ProjectCard({
                     <span className="inline-flex items-center gap-1.5">
                       <TechPillIcon
                         name={tech}
-                        icon={meta?.icon}
-                        iconUrl={meta?.iconUrl}
+                        icon={meta}
                       />
                       <span>{tech}</span>
                     </span>

@@ -27,7 +27,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       location: "Malta",
       startDate: "June 2025",
       endDate: "August 2025",
-      logo: "/icons/UM.svg",
+      logo: "um",
       description: [
         "Conducted a state-of-the-art review in Text-to-Speech (TTS) and developed an accelerated scientific paper retrieval application with a ranking system and filters.",
         "Formatted data, fine-tuned, and ran inference for the [XTTS](https://arxiv.org/abs/2406.04904) model on Google Colab (PyTorch & GPT-2) to add Maltese language support without regressions on other languages.",
@@ -42,7 +42,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       location: "Orsay, France",
       startDate: "2016",
       endDate: "2016",
-      logo: "/icons/apprenti_chercheur.png",
+      logo: "apprenti-chercheur",
       description: [
         "Study of spatial and diametrical distribution of AuGe nanowires"
       ],
@@ -55,7 +55,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       location: "Orsay, France",
       startDate: "2016",
       endDate: "2016",
-      logo: "/icons/synchrotron_logo_chatgpt.png",
+      logo: "synchrotron",
       description: [
         "Beam control and alignment, coloration and UV image processing, and introduction to mass spectrometry and circular dichroism."
       ],
@@ -72,6 +72,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       endDate: "Présent",
       logo: "dassaultsystemes",
       description: [
+        //TODO add mistral ai and more details for dassautl
         "Conception et développement full-stack (front end et back end) des applications scientifiques [Scientific Notebook](https://www.3ds.com/products/biovia/scientific-notebook) et [Reaction Planner](https://blog.3ds.com/brands/biovia/retrosynthetic-analysis-made-easy-with-biovia-reaction-planner/), en environnement Agile (Angular, Java, TypeScript, Python, SPARQL).",
         "Documentation et formation des équipes sur les fonctionnalités livrées, les nouvelles technologies, les bonnes pratiques de développement et les design patterns.",
         "Pilotage et développement d'une file de calcul distribuée (de la spécification à la production) en coordonnant les équipes Dev/PM/QA/UX, augmenting la fiabilité de 40 à 100% de notre API de calcul de la synthétisabilité, même en charge.",
@@ -87,7 +88,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       location: "Malte",
       startDate: "Juin 2025",
       endDate: "Août 2025",
-      logo: "/icons/UM.svg",
+      logo: "um",
       description: [
         "Réalisation d'une revue de l'état de l'art en synthèse vocale (TTS) et développement d'une application de recherche accélérée d'articles scientifiques avec système de classement et filtres.",
         "Formatage des données, entraînement par fine-tuning et inférence du modèle [XTTS](https://arxiv.org/abs/2406.04904) sur Google Colab (PyTorch & GPT-2) pour y ajouter la langue maltaise sans régression sur les autres langues.",
@@ -102,7 +103,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       location: "Orsay, France",
       startDate: "2016",
       endDate: "2016",
-      logo: "/icons/apprenti_chercheur.png",
+      logo: "apprenti-chercheur",
       description: [
         "Étude de la distribution spatiale et diamétrale de nanofils AuGe"
       ],
@@ -115,7 +116,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       location: "Orsay, France",
       startDate: "2016",
       endDate: "2016",
-      logo: "/icons/synchrotron_logo_chatgpt.png",
+      logo: "synchrotron",
       description: [
         "Contrôle et alignement de faisceaux de lumière, coloration et traitement d’images UV et découverte de la spectrométrie de masse et du dichroïsme circulaire."
       ],
@@ -147,7 +148,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       location: "مالطا",
       startDate: "يونيو 2025",
       endDate: "أغسطس 2025",
-      logo: "/icons/UM.svg",
+      logo: "um",
       description: [
         "إجراء مراجعة لأحدث التقنيات في مجال تحويل النص إلى كلام (TTS) وتطوير تطبيق بحث لتسريع العثور على الأوراق العلمية مع نظام ترتيب وتصنيف وفلاتر.",
         "تهيئة البيانات وتدريب نموذج [XTTS](https://arxiv.org/abs/2406.04904) (Fine-tuning) وتشغيل الاستدلال على Google Colab (PyTorch و GPT-2) لإضافة دعم اللغة المالطية دون تراجعات في اللغات الأخرى.",
@@ -162,7 +163,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       location: "أورسيه، فرنسا",
       startDate: "2016",
       endDate: "2016",
-      logo: "/icons/apprenti_chercheur.png",
+      logo: "apprenti-chercheur",
       description: [
         "دراسة التوزيع المكاني والقطري لأسلاك AuGe النانوية"
       ],
@@ -175,7 +176,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       location: "أورسيه، فرنسا",
       startDate: "2016",
       endDate: "2016",
-      logo: "/icons/synchrotron_logo_chatgpt.png",
+      logo: "synchrotron",
       description: [
         "التحكم في حزم الضوء ومحاذاتها، التلوين ومعالجة صور الأشعة فوق البنفسجية، والتعرف على مطيافية الكتلة والثنائية اللون الدائرية."
       ],

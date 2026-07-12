@@ -10,7 +10,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "Orsay, France",
       startDate: "2023",
       endDate: "Present",
-      logo: "/icons/Logo_Polytech.svg",
+      logo: "polytech",
       description: [
         "Engineering curriculum accredited by the CTI (Commission des Titres d'Ingénieur, [RNCP 40952](https://www.francecompetences.fr/recherche/rncp/40952/)).",
         "Key coursework: Advanced C++ & GPU (CUDA), High Performance Computing (MPI, OpenMP, SIMD), Distributed Algorithms and Systems, Operations Research (Simplex, OLNE, Branch & Bound, Genetic Algorithms), Quantum Computing (myqlm/qat), Cybersecurity, Numerical Methods, NLP (Transformers, Fine-tuning, PEFT, LoRA, RAG, MCP), Databases (PostgreSQL, MySQL, SPARQL), Compiler Design, Software Quality, Networking and Systems.",
@@ -26,7 +26,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "Orsay, France",
       startDate: "2021",
       endDate: "2023",
-      logo: "/icons/logo-ups.svg",
+      logo: "ups",
       description: [
         "In-depth theoretical and practical computer science curriculum ([Program details](https://ecole-universitaire-paris-saclay.fr/formation/licence/informatique/l2-informatique)).",
         "Key coursework: Object-Oriented Programming (Java/C++), Functional Programming (OCaml), Data Structures & Databases, Data Analysis (pandas, scikit-learn), Linux, Computability & Complexity.",
@@ -41,7 +41,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "Les Ulis, France",
       startDate: "2019",
       endDate: "2021",
-      logo: "/icons/logo_essouriau.jpg",
+      logo: "essouriau",
       description: [
         "Classes Préparatoires aux Grandes Écoles (CPGE) in PSI (Physics & Engineering Sciences) in close partnership with Université Paris-Saclay ([CPGE details](https://lyceedelessouriau.fr/index.php/enseignement-superieur/la-cpge-pcsi-psi/)).",
         "Intensive two-year curriculum in Mathematics, Physics, Chemistry, and Engineering Sciences, focusing on modeling and solving complex problems."
@@ -55,7 +55,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "Les Ulis, France",
       startDate: "2016",
       endDate: "2019",
-      logo: "/icons/logo_essouriau.jpg",
+      logo: "essouriau",
       description: [
         "First website created in high school: [LogiHub](/projects/logihub), an online game library hosting custom p5.js games (Reaction time, Pong, Space Invaders)."
       ],
@@ -68,7 +68,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "Les Ulis, France",
       startDate: "2012",
       endDate: "2016",
-      logo: "/icons/logo-guyonnerie.png",
+      logo: "guyonnerie",
     },
   ],
   fr: [
@@ -79,7 +79,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "Orsay, France",
       startDate: "2023",
       endDate: "Présent",
-      logo: "/icons/Logo_Polytech.svg",
+      logo: "polytech",
       description: [
         "Titre d'ingénieur Informatique et Ingénierie Mathématique diplômé (accrédité CTI, [RNCP 40952](https://www.francecompetences.fr/recherche/rncp/40952/)).",
         "Enseignements clés : C++ Avancé & GPU (CUDA), Calcul Haute Performance (MPI, OpenMP, SIMD), Algorithmes et Systèmes Distribués, Recherche Opérationnelle (Simplexe, OLNE, Branch & Bound, Algorithmes Génétiques), Informatique Quantique (myqlm/qat), Cybersécurité, Méthodes Numériques, NLP (Transformers, Fine-tuning, PEFT, LoRA, RAG, MCP), Bases de données (PostgreSQL, MySQL, SPARQL), Compilation, Qualité Logicielle, Réseaux et Systèmes.",
@@ -152,7 +152,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "Orsay, France",
       startDate: "2021",
       endDate: "2023",
-      logo: "/icons/logo-ups.svg",
+      logo: "ups",
       description: [
         "Formation approfondie en informatique théorique et pratique ([Détails du programme](https://ecole-universitaire-paris-saclay.fr/formation/licence/informatique/l2-informatique)).",
         "Compétences clés : Programmation orientée objet (Java/C++), Programmation fonctionnelle (OCaml), Structures de données et bases de données, Analyse de données (pandas, scikit-learn), Linux, Calculabilité et complexité.",
@@ -167,7 +167,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "Les Ulis, France",
       startDate: "2019",
       endDate: "2021",
-      logo: "/icons/logo_essouriau.jpg",
+      logo: "essouriau",
       description: [
         "Classes Préparatoires aux Grandes Écoles (CPGE) en filière PSI (Physique et Sciences de l'Ingénieur), en partenariat avec l'Université Paris-Saclay ([Détails de la CPGE](https://lyceedelessouriau.fr/index.php/enseignement-superieur/la-cpge-pcsi-psi/)).",
         "Formation intensive de deux ans en Mathématiques, Physique, Chimie et Sciences de l'ingénieur, axée sur la modélisation et la résolution de problèmes complexes."
@@ -181,7 +181,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "Les Ulis, France",
       startDate: "2016",
       endDate: "2019",
-      logo: "/icons/logo_essouriau.jpg",
+      logo: "essouriau",
       description: [
         "Premier site web créé au lycée : [LogiHub](/projects/logihub), une bibliothèque de jeux en ligne hébergeant des jeux p5.js personnalisés (temps de réaction, Pong, Space Invaders)."
       ],
@@ -194,7 +194,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "Les Ulis, France",
       startDate: "2012",
       endDate: "2016",
-      logo: "/icons/logo-guyonnerie.png",
+      logo: "guyonnerie",
     }
   ],
   ar: [
@@ -205,7 +205,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "أورسيه، فرنسا",
       startDate: "2023",
       endDate: "حاليًا",
-      logo: "/icons/Logo_Polytech.svg",
+      logo: "polytech",
       description: [
         "شهادة مهندس معتمدة من CTI (المسجلة في [RNCP 40952](https://www.francecompetences.fr/recherche/rncp/40952/)).",
         "المساقات الرئيسية: C++ المتقدمة وحوسبة البطاقات الرسومية (CUDA)، الحوسبة عالية الأداء (MPI, OpenMP, SIMD)، الخوارزميات والأنظمة الموزعة، بحوث العمليات (السمبلكس، OLNE، التفريع والحد، الخوارزميات الجينية)، الحوسبة الكمومية (myqlm/qat)، الأمن السيبراني، الطرق العددية، معالجة اللغة الطبيعية (Transformers, Fine-tuning, PEFT, LoRA, RAG, MCP)، قواعد البيانات (PostgreSQL, MySQL, SPARQL)، تصميم المترجمات، جودة البرمجيات، الشبكات والأنظمة.",
@@ -221,7 +221,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "أورسيه، فرنسا",
       startDate: "2021",
       endDate: "2023",
-      logo: "/icons/logo-ups.svg",
+      logo: "ups",
       description: [
         "دراسة متعمقة في علوم الحاسوب النظرية والعملية ([تفاصيل البرنامج](https://ecole-universitaire-paris-saclay.fr/formation/licence/informatique/l2-informatique)).",
         "المهارات الأساسية: البرمجة كائنية التوجه (Java/C++)، البرمجة الوظيفية (OCaml)، هياكل البيانات وقواعد البيانات، تحليل البيانات (pandas، scikit-learn)، لينكس، وقابلية الحساب والتعقيد.",
@@ -236,7 +236,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "لي ألز، فرنسا",
       startDate: "2019",
       endDate: "2021",
-      logo: "/icons/logo_essouriau.jpg",
+      logo: "essouriau",
       description: [
         "الأقسام التحضيرية للمدارس الكبرى (CPGE) في تخصص الفيزياء وعلوم الهندسة (PSI) بالشراكة مع جامعة باريس-ساكلي ([تفاصيل الأقسام التحضيرية](https://lyceedelessouriau.fr/index.php/enseignement-superieur/la-cpge-pcsi-psi/)).",
         "برنامج مكثف لمدة سنتين في الرياضيات، الفيزياء، الكيمياء، وعلوم الهندسة، مع التركيز على النمذجة وحل المشكلات المعقدة."
@@ -250,7 +250,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "لي ألز، فرنسا",
       startDate: "2016",
       endDate: "2019",
-      logo: "/icons/logo_essouriau.jpg",
+      logo: "essouriau",
       description: [
         "أول موقع إلكتروني تم إنشاؤه في المدرسة الثانوية: [LogiHub](/projects/logihub)، وهو مكتبة ألعاب على الإنترنت تستضيف ألعاب p5.js مخصصة (زمن رد الفعل، بونغ، غزاة الفضاء)."
       ],
@@ -263,7 +263,7 @@ const educationsByLocale: Record<Locale, EducationEntry[]> = {
       location: "لي ألز، فرنسا",
       startDate: "2012",
       endDate: "2016",
-      logo: "/icons/logo-guyonnerie.png",
+      logo: "guyonnerie",
     },
   ],
 }

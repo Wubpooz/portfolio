@@ -45,17 +45,69 @@ export function shouldInvertIcon(slugOrName?: string) {
   return INVERT_ICONS.some(icon => lower.includes(icon));
 }
 
+const CUSTOM_ICON_URLS: Record<string, string> = {
+  java: "https://upload.wikimedia.org/wikipedia/fr/2/2e/Java_Logo.svg",
+  sql: "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg",
+  sparql: "https://cygri.github.io/rdf-logos/svg/sparql.svg",
+  processing: "https://camo.githubusercontent.com/8df70a42f70a84f0d563c02d0483ceb01532efd8cf9074313425ee16a56d222d/68747470733a2f2f70726f63657373696e672e6f72672f66617669636f6e2e737667",
+  myqlm: "/icons/myqlm.svg",
+  mips: "https://assets.exercism.org/tracks/mips.svg",
+  matlab: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Matlab_Logo.png/1280px-Matlab_Logo.png",
+  hono: "https://upload.wikimedia.org/wikipedia/commons/6/60/Hono-logo.svg",
+  mcp: "https://upload.wikimedia.org/wikipedia/commons/f/fe/Model_Context_Protocol_logo.svg",
+  a2a: "https://raw.githubusercontent.com/a2aproject/A2A/refs/heads/main/docs/assets/a2a_logo/icon/color/SVG/a2a_icon_color.svg",
+  postgresql: "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg",
+  rdf: "https://cygri.github.io/rdf-logos/svg/no-text.svg",
+  ssh: "https://upload.wikimedia.org/wikipedia/en/6/65/OpenSSH_logo.png",
+  kathara: "https://avatars.githubusercontent.com/u/42912149",
+  pact: "https://raw.githubusercontent.com/pact-foundation/pact-logo/master/media/link.svg",
+  karma: "/icons/Karma.svg",
+  framac: "/icons/frama-c.png",
+  graph: "/icons/graph.svg",
+  mpi: "https://raw.githubusercontent.com/mpi-forum/mpi-forum.github.io/master/images/mpi-forum-icon.jpg",
+  openmp: "https://upload.wikimedia.org/wikipedia/commons/4/40/OpenMP_logo.svg",
+  ode: "/icons/ode.svg",
+  sdl2: "https://upload.wikimedia.org/wikipedia/commons/1/16/Simple_DirectMedia_Layer%2C_Logo.svg",
+  solidworks: "/icons/solidworks.png",
+  antigravity: "/icons/antigravity.png",
+  glsl: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opengl.svg",
+  openjdk: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openjdk.svg",
+  opengl: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opengl.svg",
+  "data-viz": "/icons/data-viz.svg",
+  "google-adk": "/icons/agent-development-kit.png",
+  "google adk": "/icons/agent-development-kit.png",
+  um: "/icons/UM.svg",
+  "apprenti-chercheur": "/icons/apprenti_chercheur.png",
+  synchrotron: "/icons/synchrotron_logo_chatgpt.png",
+  polytech: "/icons/Logo_Polytech.svg",
+  ups: "/icons/logo-ups.svg",
+  essouriau: "/icons/logo_essouriau.jpg",
+  guyonnerie: "/icons/logo-guyonnerie.png",
+  linkedin: "/icons/linkedin.svg",
+};
+
 export function getIconUrl(iconName: string): string {
   if (!iconName) return "";
+
+  const lower = iconName.toLowerCase();
+  
+  // 1. Check custom URLs first
+  if (CUSTOM_ICON_URLS[lower]) {
+    return CUSTOM_ICON_URLS[lower];
+  }
+
+  // 2. Check if it's already an absolute/relative path or URL
   if (iconName.startsWith("http://") || iconName.startsWith("https://")) {
     return iconName;
   }
   if (iconName.startsWith("/") || iconName.includes("/") || iconName.includes(".")) {
     return iconName.startsWith("/") ? iconName : `/${iconName}`;
   }
-  if (iconName === "linkedin") return "/icons/linkedin.svg";
 
-  const slug = iconName;
+  let slug = iconName.toLowerCase();
+  if (slug === "css3") {
+    slug = "css";
+  }
 
   if (shouldInvertIcon(slug)) {
     return `https://cdn.simpleicons.org/${slug}/000`;
@@ -97,12 +149,7 @@ export function parseProjectPeriod(period: string): number {
   return maxYear * 12 + monthIdx;
 }
 
-interface TechIconMeta {
-  icon?: string;
-  iconUrl?: string;
-}
-
-const techIconMap: Partial<Record<string, TechIconMeta>> = {
+const techIconMap: Partial<Record<string, { icon: string }>> = {
   "Next.js": { icon: "nextdotjs" },
   TypeScript: { icon: "typescript" },
   "Tailwind CSS": { icon: "tailwindcss" },
@@ -151,22 +198,16 @@ const techIconMap: Partial<Record<string, TechIconMeta>> = {
   ANTLR: { icon: "antlr" },
   "Three.js": { icon: "threedotjs" },
   "p5.js": { icon: "p5dotjs" },
-  Java: {
-    iconUrl:
-      "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openjdk.svg",
-  },
-  GLSL: {
-    iconUrl:
-      "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opengl.svg",
-  },
+  Java: { icon: "java" },
+  GLSL: { icon: "opengl" },
 };
 
 // Helper to look up a tech in the skills database across all categories and locales
-export function findSkillIcon(techName: string): { icon?: string; iconUrl?: string } | undefined {
+export function findSkillIcon(techName: string): string | undefined {
   // First, check our hardcoded map
   const mapped = techIconMap[techName];
-  if (mapped?.icon || mapped?.iconUrl) {
-    return mapped;
+  if (mapped?.icon) {
+    return mapped.icon;
   }
 
   const locales: ("en" | "fr" | "ar")[] = ["en", "fr", "ar"];
@@ -178,11 +219,8 @@ export function findSkillIcon(techName: string): { icon?: string; iconUrl?: stri
       for (const cat of categories) {
         for (const item of cat.items) {
           if (item.name.toLowerCase() === techName.toLowerCase()) {
-            if (item.icon || item.iconUrl) {
-              return {
-                icon: item.icon,
-                iconUrl: item.iconUrl
-              };
+            if (item.icon) {
+              return item.icon;
             }
           }
         }
@@ -203,11 +241,8 @@ export function findSkillIcon(techName: string): { icon?: string; iconUrl?: stri
           const targetName = techName.toLowerCase();
           if (itemName.length > 2 && targetName.length > 2) {
             if (itemName.includes(targetName) || targetName.includes(itemName)) {
-              if (item.icon || item.iconUrl) {
-                return {
-                  icon: item.icon,
-                  iconUrl: item.iconUrl
-                };
+              if (item.icon) {
+                return item.icon;
               }
             }
           }

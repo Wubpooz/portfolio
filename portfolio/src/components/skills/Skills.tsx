@@ -94,7 +94,6 @@ export default function SkillsSection() {
                         <SkillIcon
                           name={skill.name}
                           icon={skill.icon}
-                          iconUrl={skill.iconUrl}
                         />
 
                         <div className="space-y-1">

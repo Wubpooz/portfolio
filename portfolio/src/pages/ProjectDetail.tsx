@@ -296,8 +296,7 @@ export default function ProjectDetailPage() {
                     <span className="inline-flex items-center gap-1.5">
                       <TechPillIcon
                         name={tech}
-                        icon={meta?.icon}
-                        iconUrl={meta?.iconUrl}
+                        icon={meta}
                       />
                       <span>{tech}</span>
                     </span>

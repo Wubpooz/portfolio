@@ -39,11 +39,9 @@ function formatCertificationDate(locale: string, value: string) {
 function CertificationIcon({
   name,
   icon,
-  iconUrl,
 }: Readonly<{
   name: string;
   icon?: string;
-  iconUrl?: string;
 }>) {
   const [error, setError] = useState(false);
   const invertClass = shouldInvertIcon(icon ?? name) ? "dark:invert" : "";
@@ -54,46 +52,10 @@ function CertificationIcon({
     );
   }
 
-  if (iconUrl) {
-    return (
-      <img
-        src={iconUrl}
-        alt={name}
-        width={28}
-        height={28}
-        loading="lazy"
-        className={`size-7 object-contain ${invertClass}`}
-        aria-hidden="true"
-        onError={() => {
-          setError(true);
-        }}
-      />
-    );
-  }
-
   if (icon) {
-    if (icon.startsWith("/") || icon.includes(".") || icon.includes("/")) {
-      const localSrc = icon.startsWith("/") ? icon : `/${icon}`;
-      return (
-        <img
-          src={localSrc}
-          alt={name}
-          width={28}
-          height={28}
-          loading="lazy"
-          className={`size-7 object-contain ${invertClass}`}
-          aria-hidden="true"
-          onError={() => {
-            setError(true);
-          }}
-        />
-      );
-    }
-
-    const src = getIconUrl(icon);
     return (
       <img
-        src={src}
+        src={getIconUrl(icon)}
         alt={name}
         width={28}
         height={28}
@@ -127,7 +89,6 @@ function CertificationRow({ item }: Readonly<{ item: CertificationItem }>) {
         <CertificationIcon
           name={item.title}
           icon={item.icon}
-          iconUrl={item.iconUrl}
         />
       </div>
 

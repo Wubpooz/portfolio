@@ -88,19 +88,6 @@ export default function ExpandableItem({
     const containerClass =
       "flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-border bg-background md:h-11 md:w-11 overflow-hidden p-1.5";
 
-    // If it's a URL/path
-    if (logo.startsWith("http") || logo.startsWith("/")) {
-      return (
-        <div className={containerClass}>
-          <img
-            src={logo}
-            alt={title}
-            className="max-h-full max-w-full object-contain"
-            loading="lazy"
-          />
-        </div>
-      );
-    }
 
     // Special Lucide icons
     if (logo === "atom" || logo === "Atom") {
