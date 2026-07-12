@@ -1,6 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" fill="none">
-  <rect width="180" height="180" rx="40" fill="#111111"/>
-  <rect x="16" y="16" width="148" height="148" rx="32" fill="#1A1A1A" stroke="#2A2A2A"/>
-  <path d="M45 40h45l-26 32h26l-26 32h26l-26 32h-34l26-32H40l26-32H40l5-32Z" fill="#8B5CF6"/>
-  <path d="M105 40h30l-20 28h20l-20 28h20l-20 32h-30l20-28h-20l20-28h-20l20-32Z" fill="#EDE9FE"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="15" fill="#11101A"/>
+
+  <g
+    fill="none"
+    stroke="#C4B5FD"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+  
+    <!-- Matrix brackets -->
+    <path d="M11 15H7v34h4"/>
+    <path d="M53 15h4v34h-4"/>
+
+    <!-- MW -->
+    <path d="M16 43V22l7 14 7-14v21" stroke-width="4" />
+    <path d="M30 22l0 21 7-13 5 13 9-21" stroke-width="4" />
+  </g>
 </svg>

@@ -119,9 +119,9 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [x] Add the missing projects
 - [x] Add the missing certifications
 - [ ] profile picture
-- [ ] banner picture
+- [x] banner picture
 - [x] certifications icons
-- [ ] favicon
+- [x] favicon
 - [x] certification relevance
 - [x] project relevance & featured
 - [ ] google cloud + deloitte icons to Hackathon
