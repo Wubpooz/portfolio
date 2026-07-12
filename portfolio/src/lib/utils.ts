@@ -23,7 +23,9 @@ const INVERT_ICONS = [
   "expo",
   "prisma",
   "linux",
-  "bash"
+  "bash",
+  "posthog",
+  "betterauth"
 ];
 
 export function shouldInvertIcon(slugOrName?: string) {

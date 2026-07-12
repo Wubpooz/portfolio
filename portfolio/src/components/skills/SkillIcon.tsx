@@ -23,6 +23,12 @@ import {
   ChartScatter,
   Milestone,
   DatabaseSearch,
+  ChevronsLeftRightEllipsis,
+  BetweenVerticalStart,
+  KeyRound,
+  Regex,
+  SquareFunction,
+  Sigma,
 } from "lucide-react";
 import { shouldInvertIcon, getIconUrl } from "@/lib/utils";
 
@@ -72,6 +78,13 @@ const fallbackIcons: Record<
   communication: Presentation,
   "data-analysis": DatabaseSearch,
   pm: Milestone,
+  "networking": ChevronsLeftRightEllipsis,
+  "distributed-consensus": Network,
+  "dynamic-programming": BetweenVerticalStart,
+  "cryptography": KeyRound,
+  "regex": Regex,
+  "compiler-design": SquareFunction,
+  "formal-languages": Sigma
 };
 
 export default function SkillIcon({
