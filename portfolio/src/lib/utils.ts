@@ -53,10 +53,13 @@ export function getIconUrl(iconName: string): string {
     return iconName.startsWith("/") ? iconName : `/${iconName}`;
   }
   if (iconName === "linkedin") return "/icons/linkedin.svg";
-  if (shouldInvertIcon(iconName)) {
-    return `https://cdn.simpleicons.org/${iconName}/000`;
+
+  const slug = iconName;
+
+  if (shouldInvertIcon(slug)) {
+    return `https://cdn.simpleicons.org/${slug}/000`;
   }
-  return `https://cdn.simpleicons.org/${iconName}`;
+  return `https://cdn.simpleicons.org/${slug}`;
 }
 
 export function parseCertDate(dateStr: string): number {
