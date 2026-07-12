@@ -5,51 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getUiContent, useLocale } from "@/i18n";
-import { shouldInvertIcon, getIconUrl } from "@/lib/utils";
+import { shouldInvertIcon, getIconUrl, findSkillIcon } from "@/lib/utils";
 import { usePostHog } from "@posthog/react";
+import { fallbackIcons } from "../skills/SkillIcon";
 
 const MAX_VISIBLE_STACK = 6;
 
-interface TechIconMeta {
-  icon?: string;
-  iconUrl?: string;
-}
-
-const techIconMap: Partial<Record<string, TechIconMeta>> = {
-  "Next.js": { icon: "nextdotjs" },
-  TypeScript: { icon: "typescript" },
-  "Tailwind CSS": { icon: "tailwindcss" },
-  Vercel: { icon: "vercel" },
-  React: { icon: "react" },
-  "React Native": { icon: "react" },
-  Expo: { icon: "expo" },
-  "Node.js": { icon: "nodedotjs" },
-  Express: { icon: "express" },
-  "Express.js": { icon: "express" },
-  PostgreSQL: { icon: "postgresql" },
-  Prisma: { icon: "prisma" },
-  Drizzle: { icon: "drizzle" },
-  Docker: { icon: "docker" },
-  GraphQL: { icon: "graphql" },
-  MongoDB: { icon: "mongodb" },
-  Python: { icon: "python" },
-  HTML: { icon: "html5" },
-  CSS: { icon: "css" },
-  CSS3: { icon: "css" },
-  JavaScript: { icon: "javascript" },
-  "C++": { icon: "cplusplus" },
-  CUDA: { icon: "nvidia" },
-  Java: {
-    iconUrl:
-      "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openjdk.svg",
-  },
-  GLSL: {
-    iconUrl:
-      "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opengl.svg",
-  },
-};
-
-function TechPillIcon({
+export function TechPillIcon({
   name,
   icon,
   iconUrl,
@@ -72,6 +34,11 @@ function TechPillIcon({
         aria-hidden="true"
       />
     );
+  }
+
+  if (icon && fallbackIcons[icon]) {
+    const Icon = fallbackIcons[icon];
+    return <Icon className="size-3.5 shrink-0 opacity-80" aria-hidden="true" />;
   }
 
   if (icon) {
@@ -117,7 +84,7 @@ export default function ProjectCard({
 
   if (viewMode === "list") {
     return (
-      <div className="group flex flex-col md:flex-row w-full h-full overflow-hidden bg-card transition-colors hover:bg-muted/10">
+      <div className="group flex flex-col md:flex-row w-full h-full overflow-hidden bg-card transition-colors hover:bg-muted/50 dark:hover:bg-muted">
         <Link
           to={`/projects/${project.slug}`}
           onClick={() =>
@@ -180,7 +147,7 @@ export default function ProjectCard({
 
               <div className="flex flex-wrap gap-2">
                 {visibleStack.map((tech) => {
-                  const meta = techIconMap[tech];
+                  const meta = findSkillIcon(tech);
 
                   return (
                     <Badge
@@ -303,7 +270,7 @@ export default function ProjectCard({
   }
 
   return (
-    <div className="group flex h-full flex-col overflow-hidden bg-card transition-colors hover:bg-muted/10">
+    <div className="group flex h-full flex-col overflow-hidden bg-card border border-border/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 hover:bg-muted/50 dark:hover:bg-muted">
       <Link
         to={`/projects/${project.slug}`}
         onClick={() =>
@@ -358,7 +325,7 @@ export default function ProjectCard({
 
             <div className="flex flex-wrap gap-2">
               {visibleStack.map((tech) => {
-                const meta = techIconMap[tech];
+                const meta = findSkillIcon(tech);
 
                 return (
                   <Badge

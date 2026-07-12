@@ -14,6 +14,8 @@ import { Badge } from "@/components/ui/badge";
 import { getProjectBySlug } from "@/data/projects";
 import { getUiContent, useLocale } from "@/i18n";
 import { usePostHog } from "@posthog/react";
+import { TechPillIcon } from "@/components/projects/ProjectCard";
+import { findSkillIcon } from "@/lib/utils";
 
 function statusToLabel(
   content: ReturnType<typeof getUiContent>,
@@ -283,15 +285,25 @@ export default function ProjectDetailPage() {
               {content.projectsPage.technologies}
             </h2>
             <div className="flex flex-wrap gap-2">
-              {project.stack.map((tech) => (
-                <Badge
-                  key={tech}
-                  variant="secondary"
-                  className="rounded-none px-2.5 py-1 font-normal"
-                >
-                  {tech}
-                </Badge>
-              ))}
+              {project.stack.map((tech) => {
+                const meta = findSkillIcon(tech);
+                return (
+                  <Badge
+                    key={tech}
+                    variant="secondary"
+                    className="rounded-none px-2.5 py-1 font-normal"
+                  >
+                    <span className="inline-flex items-center gap-1.5">
+                      <TechPillIcon
+                        name={tech}
+                        icon={meta?.icon}
+                        iconUrl={meta?.iconUrl}
+                      />
+                      <span>{tech}</span>
+                    </span>
+                  </Badge>
+                );
+              })}
             </div>
           </section>
         </aside>

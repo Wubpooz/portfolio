@@ -38,7 +38,7 @@ interface SkillIconProps {
   iconUrl?: string;
 }
 
-const fallbackIcons: Record<
+export const fallbackIcons: Record<
   string,
   React.ComponentType<{ size?: number; className?: string }>
 > = {
