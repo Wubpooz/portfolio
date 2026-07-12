@@ -122,6 +122,7 @@ export default function Seo() {
     upsertMeta("twitter:image", ogImage);
     upsertLink("canonical", canonical);
     upsertLink("alternate", "/llms.txt", "text/markdown");
+    upsertLink("sitemap", `${SITE_URL}/sitemap.xml`, "application/xml");
 
     // Add hreflang alternate links for SEO
     const getLangUrl = (l: string) => {
