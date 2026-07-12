@@ -55,6 +55,13 @@ ${xmlEntries}
 
   fs.writeFileSync(SITEMAP_PATH, sitemapXml, 'utf8');
   console.log(`Sitemap successfully written to ${SITEMAP_PATH}`);
+
+  const DIST_DIR = path.join(__dirname, '../dist');
+  if (fs.existsSync(DIST_DIR)) {
+    const distSitemapPath = path.join(DIST_DIR, 'sitemap.xml');
+    fs.writeFileSync(distSitemapPath, sitemapXml, 'utf8');
+    console.log(`Sitemap successfully written to ${distSitemapPath}`);
+  }
 } catch (error) {
   console.error('Failed to generate sitemap:', error);
   process.exit(1);
