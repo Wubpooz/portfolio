@@ -85,34 +85,40 @@ const languagesByLocale: Record<Locale, LanguageEntry[]> = {
 
 const interestsByLocale: Record<Locale, InterestEntry[]> = {
   en: [
-    { name: "Operations Research (OR)", icon: "Network" },
+    { name: "Category Theory", icon: "ArrowRightLeft" },
+    { name: "Topology", icon: "Torus" },
     { name: "Cryptography", icon: "Lock" },
-    { name: "Image & Signal (Wavelets)", icon: "Waves" },
+    { name: "Image & Signal Processing (Wavelets)", icon: "Waves" },
     { name: "Artificial Intelligence (AI)", icon: "Brain" },
     { name: "Bioinformatics", icon: "Dna" },
-    { name: "Cheerleading", icon: "Sparkles" },
+    { name: "Cheerleading", icon: "PersonStanding" },
     { name: "Photography", icon: "Camera" },
-    { name: "Horse Riding", icon: "Award" }
+    { name: "Horse Riding", icon: "Award" },
+    { name: "Fencing", icon: "Swords" }
   ],
   fr: [
-    { name: "Recherche Opérationnelle (RO)", icon: "Network" },
+    { name: "Théorie des Catégories", icon: "ArrowRightLeft" },
+    { name: "Topologie", icon: "Torus" },
     { name: "Cryptographie", icon: "Lock" },
     { name: "Traitement d'Image / Signal (Ondelettes)", icon: "Waves" },
     { name: "Intelligence Artificielle (IA)", icon: "Brain" },
     { name: "Bioinformatique", icon: "Dna" },
-    { name: "Cheerleading", icon: "Sparkles" },
+    { name: "Cheerleading", icon: "PersonStanding" },
     { name: "Photographie", icon: "Camera" },
-    { name: "Équitation", icon: "Award" }
+    { name: "Équitation", icon: "Award" },
+    { name: "Escrime", icon: "Swords" }
   ],
   ar: [
-    { name: "بحوث العمليات (RO)", icon: "Network" },
+    { name: "نظرية الفئات", icon: "ArrowRightLeft" },
+    { name: "طوبولوجيا", icon: "Torus" },
     { name: "علم التعمية (Crypto)", icon: "Lock" },
     { name: "معالجة الصور والإشارات (المويجات)", icon: "Waves" },
     { name: "الذكاء الاصطناعي (IA)", icon: "Brain" },
     { name: "المعلوماتية الحيوية", icon: "Dna" },
-    { name: "المشجعات (Cheerleading)", icon: "Sparkles" },
+    { name: "المشجعات (Cheerleading)", icon: "PersonStanding" },
     { name: "التصوير الفوتوغرافي", icon: "Camera" },
-    { name: "الفروسية", icon: "Award" }
+    { name: "الفروسية", icon: "Award" },
+    { name: "المبارزة", icon: "Swords" }
   ]
 };
 

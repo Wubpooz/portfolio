@@ -173,6 +173,7 @@ export default function LanguagesAndInterestsSection() {
             </h3>
 
             <motion.div
+              key={locale}
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -183,12 +184,12 @@ export default function LanguagesAndInterestsSection() {
                 <motion.div
                   key={interest.name}
                   variants={itemVariants}
-                  className="flex items-center gap-3.5 rounded-xl border border-border/60 bg-muted/5 p-3.5 cursor-default"
+                  className="flex items-center gap-2.5 rounded-xl border border-border/60 bg-muted/5 p-3 cursor-default min-w-0"
                 >
                   <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20">
                     <InterestIcon name={interest.icon} />
                   </div>
-                  <span className="text-sm font-medium text-foreground leading-snug">
+                  <span className="text-sm font-medium text-foreground leading-snug min-w-0 wrap-break-word hyphens-auto">
                     {interest.name}
                   </span>
                 </motion.div>
