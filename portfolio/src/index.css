@@ -233,3 +233,12 @@
   opacity: 0;
   animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+img[src*="pwalogo.svg"] {
+  content: url("https://raw.githubusercontent.com/webmaxru/progressive-web-apps-logo/refs/heads/master/pwalogo.svg");
+}
+
+.dark img[src*="pwalogo.svg"] {
+  content: url("https://raw.githubusercontent.com/webmaxru/progressive-web-apps-logo/refs/heads/master/pwalogo-inverse.svg");
+}
+

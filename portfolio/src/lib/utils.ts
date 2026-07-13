@@ -87,6 +87,8 @@ const CUSTOM_ICON_URLS: Record<string, string> = {
   guyonnerie: "/icons/logo-guyonnerie.png",
   deloitte: "/icons/deloitte.jpeg",
   linkedin: "/icons/linkedin.svg",
+  progressivewebapp: "/icons/pwalogo.svg",
+  pwa: "/icons/pwalogo.svg",
 };
 
 export function getIconUrl(iconName: string): string {
