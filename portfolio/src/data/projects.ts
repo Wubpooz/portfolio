@@ -25,6 +25,7 @@ export interface ProjectItem {
   links: ProjectLink[];
   featured?: boolean;
   relevance: number;
+  logos?: string[];
 };
 
 const cover = (seed: string) => `/assets/projects/${seed}.webp`;
@@ -79,6 +80,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "vireli",
@@ -103,6 +105,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
         { labelKey: "details", href: addDetails("vireli") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "minimax-resnet",
@@ -129,6 +132,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/app5-ai-game-project" },
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "how-europe-spends-its-time",
@@ -155,6 +159,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
       ],
       featured: true,
+      logos: ["polytech"],
     },
     {
       slug: "vibehealth",
@@ -179,6 +184,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/VibeHealth/" },
         { labelKey: "details", href: addDetails("vibehealth") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "deloitte-google-cloud-hackathon",
@@ -202,6 +208,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
       featured: true,
+      logos: ["deloitte", "googlecloud"],
     },
     {
       slug: "xtts-finetuning",
@@ -228,6 +235,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("xtts-finetuning") },
       ],
       featured: true,
+      logos: ["um"],
     },
     {
       slug: "quizine",
@@ -253,6 +261,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
+      logos: ["polytech"],
     },
     {
       slug: "compilateur-c-java",
@@ -277,6 +286,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/app4-compilation" },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "jeux-entreprise",
@@ -299,6 +309,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "details", href: addDetails("jeux-entreprise") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "magnus-carlos",
@@ -323,6 +334,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/MagnusCarlos" },
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "nyxen",
@@ -346,6 +358,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "live", href: "https://github.com/Wubpooz/APP3_Projet_Web" },
         { labelKey: "details", href: addDetails("nyxen") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "house-finder",
@@ -367,6 +380,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "details", href: addDetails("house-finder") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "escape-the-mummy",
@@ -390,6 +404,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/IGSD-projet" },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
       ],
+      logos: ["ups"],
     },
     {
       slug: "cli-messaging",
@@ -413,6 +428,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Rezo" },
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
+      logos: ["ups"],
     },
     {
       slug: "logihub",
@@ -436,6 +452,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Site-ISN-2019" },
         { labelKey: "details", href: addDetails("logihub") },
       ],
+      logos: ["essouriau"],
     }
   ],
   fr: [
@@ -462,6 +479,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "vireli",
@@ -486,6 +504,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
         { labelKey: "details", href: addDetails("vireli") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "minimax-resnet",
@@ -512,6 +531,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/app5-ai-game-project" },
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "how-europe-spends-its-time",
@@ -538,6 +558,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
       ],
       featured: true,
+      logos: ["polytech"],
     },
     {
       slug: "vibehealth",
@@ -562,6 +583,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/VibeHealth/" },
         { labelKey: "details", href: addDetails("vibehealth") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "deloitte-google-cloud-hackathon",
@@ -585,6 +607,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
       featured: true,
+      logos: ["deloitte", "googlecloud"],
     },
     {
       slug: "xtts-finetuning",
@@ -611,6 +634,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("xtts-finetuning") },
       ],
       featured: true,
+      logos: ["um"],
     },
     {
       slug: "quizine",
@@ -636,6 +660,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
+      logos: ["polytech"],
     },
     {
       slug: "compilateur-c-java",
@@ -660,6 +685,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/app4-compilation" },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "jeux-entreprise",
@@ -682,6 +708,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "details", href: addDetails("jeux-entreprise") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "magnus-carlos",
@@ -706,6 +733,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/MagnusCarlos" },
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "nyxen",
@@ -729,6 +757,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "live", href: "https://github.com/Wubpooz/APP3_Projet_Web" },
         { labelKey: "details", href: addDetails("nyxen") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "house-finder",
@@ -750,6 +779,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "details", href: addDetails("house-finder") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "escape-the-mummy",
@@ -773,6 +803,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/IGSD-projet" },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
       ],
+      logos: ["ups"],
     },
     {
       slug: "cli-messaging",
@@ -796,6 +827,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Rezo" },
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
+      logos: ["ups"],
     },
     {
       slug: "logihub",
@@ -819,6 +851,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Site-ISN-2019" },
         { labelKey: "details", href: addDetails("logihub") },
       ],
+      logos: ["essouriau"],
     }
   ],
   ar: [
@@ -845,6 +878,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "vireli",
@@ -869,6 +903,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
         { labelKey: "details", href: addDetails("vireli") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "minimax-resnet",
@@ -895,6 +930,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/app5-ai-game-project" },
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "how-europe-spends-its-time",
@@ -921,6 +957,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
       ],
       featured: true,
+      logos: ["polytech"],
     },
     {
       slug: "vibehealth",
@@ -945,6 +982,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/VibeHealth/" },
         { labelKey: "details", href: addDetails("vibehealth") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "deloitte-google-cloud-hackathon",
@@ -968,6 +1006,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
       featured: true,
+      logos: ["deloitte", "googlecloud"],
     },
     {
       slug: "xtts-finetuning",
@@ -994,6 +1033,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("xtts-finetuning") },
       ],
       featured: true,
+      logos: ["um"],
     },
     {
       slug: "quizine",
@@ -1019,6 +1059,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
+      logos: ["polytech"],
     },
     {
       slug: "compilateur-c-java",
@@ -1043,6 +1084,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/app4-compilation" },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "jeux-entreprise",
@@ -1065,6 +1107,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "details", href: addDetails("jeux-entreprise") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "magnus-carlos",
@@ -1072,7 +1115,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "Magnus Carlos",
       subtitle: "محاكاة علمية ثلاثية الأبعاد لتأثير Magnus.",
       summary:
-        "إدارة مشروع محاكاة علمية ثلاثية الأبعاد مع فريق من ستة طلاب باستخدام منهجية Agile، وتطبيق التصور البصري باستخدام مكتبة SDL2 (الخامات، الكاميرات، الدورانات)." ,
+        "إدارة مشروع محاكاة علمية ثلاثية الأبعاد مع فريق من ستة طلاب باستخدام منهجية Agile، وتطبيق التصور البصري باستخدام مكتبة SDL2 (الخامات، الكاميرات، الدورانات).",
       organization: "Polytech Paris-Saclay",
       period: "سبتمبر 2024 – ديسمبر 2024",
       status: "completed",
@@ -1082,13 +1125,14 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "محاكاة علمية لتأثير Magnus مع مراعاة السرعة، والمسار، وشكل الجسم، والاحتكاك.",
         "تصور مرئي باستخدام SDL2: الخامات (الكرة، اللاعبين، المرمى، الأرض)، الكاميرات، والدورانات.",
         "حساب مسبق لسيناريوهات تدخل فيها الكرة المرمى بتأثير Magnus، وسيناريوهات الفشل بدونه، من زوايا كاميرا متعددة.",
-        "قيادة فريق مكون من ستة طلاب في بيئة عمل Agile."
+        "قيادة فريق مكون من ستة طلاب في بيئة عمل Agile.",
       ],
       stack: ["C++", "SDL2", "Simulation 3D", "Agile", "Visualization", "Physics Modeling", "Project Management"],
       links: [
         { labelKey: "source", href: "https://github.com/Wubpooz/MagnusCarlos" },
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "nyxen",
@@ -1103,7 +1147,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("nyxen"),
       imageAlt: "معاينة Nyxen",
       highlights: [
-        "تصميم لوحة الألوان ومسارات المستخدمين والتوجيه في تطبيق الصفحة الواحدة (SPA Routing)." ,
+        "تصميم لوحة الألوان ومسارات المستخدمين والتوجيه في تطبيق الصفحة الواحدة (SPA Routing).",
         "دمج نموذج ثلاثي الأبعاد تفاعلي ومتحرك.",
         "تركيز قوي على التوجيه الفني والتفاعل الفني.",
       ],
@@ -1112,6 +1156,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "live", href: "https://github.com/Wubpooz/APP3_Projet_Web" },
         { labelKey: "details", href: addDetails("nyxen") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "house-finder",
@@ -1133,6 +1178,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "details", href: addDetails("house-finder") },
       ],
+      logos: ["polytech"],
     },
     {
       slug: "escape-the-mummy",
@@ -1156,6 +1202,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/IGSD-projet" },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
       ],
+      logos: ["ups"],
     },
     {
       slug: "cli-messaging",
@@ -1179,6 +1226,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Rezo" },
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
+      logos: ["ups"],
     },
     {
       slug: "logihub",
@@ -1202,6 +1250,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Site-ISN-2019" },
         { labelKey: "details", href: addDetails("logihub") },
       ],
+      logos: ["essouriau"],
     }
   ]
 };

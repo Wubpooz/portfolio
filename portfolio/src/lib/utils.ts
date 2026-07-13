@@ -12,7 +12,7 @@ const INVERT_ICONS = [
   "three.js",
   "threedotjs",
   "angular",
-  "java",
+  // "java",
   "openjdk",
   "pact",
   "mcp",
@@ -83,6 +83,7 @@ const CUSTOM_ICON_URLS: Record<string, string> = {
   ups: "/icons/logo-ups.svg",
   essouriau: "/icons/logo_essouriau.jpg",
   guyonnerie: "/icons/logo-guyonnerie.png",
+  deloitte: "/icons/deloitte.jpeg",
   linkedin: "/icons/linkedin.svg",
 };
 
@@ -225,8 +226,8 @@ export function findSkillIcon(techName: string): string | undefined {
           }
         }
       }
-    } catch (e) {
-      // Ignore
+    } catch {
+      console.warn(`Error while searching for skill icon for "${techName}" in locale "${loc}"`);
     }
   }
 
@@ -248,8 +249,8 @@ export function findSkillIcon(techName: string): string | undefined {
           }
         }
       }
-    } catch (e) {
-      // Ignore
+    } catch {
+      console.warn(`Error while searching for skill icon for "${techName}" in locale "${loc}"`);
     }
   }
 

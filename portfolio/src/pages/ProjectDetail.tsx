@@ -16,7 +16,7 @@ import { getProjectBySlug } from "@/data/projects";
 import { getUiContent, useLocale } from "@/i18n";
 import { usePostHog } from "@posthog/react";
 import { TechPillIcon } from "@/components/projects/ProjectCard";
-import { findSkillIcon } from "@/lib/utils";
+import { findSkillIcon, shouldInvertIcon, getIconUrl } from "@/lib/utils";
 
 function statusToLabel(
   content: ReturnType<typeof getUiContent>,
@@ -240,13 +240,32 @@ export default function ProjectDetailPage() {
             </p>
 
             <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                  {content.projectsPage.organization}
-                </p>
-                <p className="mt-1 text-sm text-foreground">
-                  {project.organization}
-                </p>
+              <div className="flex items-start gap-3">
+                {project.logos && project.logos.length > 0 && (
+                  <div className="flex gap-1.5 mt-1 shrink-0 select-none">
+                    {project.logos.map((logo) => {
+                      const invertClass = shouldInvertIcon(logo) ? "dark:invert" : "";
+                      return (
+                        <div key={logo} className="flex size-9 items-center justify-center rounded-md border border-border bg-background p-1.5 overflow-hidden">
+                          <img
+                            src={getIconUrl(logo)}
+                            alt={logo}
+                            className={`max-h-full max-w-full object-contain ${invertClass}`}
+                            loading="lazy"
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+                <div>
+                  <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                    {content.projectsPage.organization}
+                  </p>
+                  <p className="mt-1 text-sm text-foreground">
+                    {project.organization}
+                  </p>
+                </div>
               </div>
 
               <div>

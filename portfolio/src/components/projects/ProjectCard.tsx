@@ -118,9 +118,29 @@ export default function ProjectCard({
                 <p className="text-base leading-7 text-muted-foreground">
                   {project.subtitle}
                 </p>
-                <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
-                  {project.organization} · {project.period}
-                </p>
+                <div className="flex flex-wrap items-center gap-1.5 text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
+                  <span>{project.organization}</span>
+                  {/* Optional logos */}
+                  {/* {project.logos && project.logos.length > 0 && (
+                    <span className="inline-flex items-center gap-1 select-none">
+                      {project.logos.map((logo) => {
+                        const invertClass = shouldInvertIcon(logo) ? "dark:invert" : "";
+                        return (
+                          <img
+                            key={logo}
+                            src={getIconUrl(logo)}
+                            alt={logo}
+                            width={14}
+                            height={14}
+                            loading="lazy"
+                            className={`size-3.5 object-contain ${invertClass}`}
+                          />
+                        );
+                      })}
+                    </span>
+                  )} */}
+                  <span>· {project.period}</span>
+                </div>
               </div>
 
               <ul className="list-disc space-y-1.5 pl-5 text-sm leading-6 text-muted-foreground max-md:hidden">
@@ -286,9 +306,29 @@ export default function ProjectCard({
               <p className="text-base leading-7 text-muted-foreground">
                 {project.subtitle}
               </p>
-              <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
-                {project.organization} · {project.period}
-              </p>
+              <div className="flex flex-wrap items-center gap-1.5 text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
+               {/* Optional logos */}
+                {/* {project.logos && project.logos.length > 0 && (
+                  <span className="inline-flex items-center gap-1 select-none">
+                    {project.logos.map((logo) => {
+                      const invertClass = shouldInvertIcon(logo) ? "dark:invert" : "";
+                      return (
+                        <img
+                          key={logo}
+                          src={getIconUrl(logo)}
+                          alt={logo}
+                          width={14}
+                          height={14}
+                          loading="lazy"
+                          className={`size-3.5 object-contain ${invertClass}`}
+                        />
+                      );
+                    })}
+                  </span>
+                )} */}
+                <span>{project.organization}</span>
+                <span>· {project.period}</span>
+              </div>
             </div>
 
             <div className="flex flex-wrap gap-2">
