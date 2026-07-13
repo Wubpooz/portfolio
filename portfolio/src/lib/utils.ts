@@ -89,6 +89,9 @@ const CUSTOM_ICON_URLS: Record<string, string> = {
   linkedin: "/icons/linkedin.svg",
   progressivewebapp: "/icons/pwalogo.svg",
   pwa: "/icons/pwalogo.svg",
+  googlecloudrun: "/icons/Cloud_Run.svg",
+  cloudrun: "/icons/Cloud_Run.svg",
+  "cloud run": "/icons/Cloud_Run.svg",
 };
 
 export function getIconUrl(iconName: string): string {
@@ -205,6 +208,9 @@ const techIconMap: Partial<Record<string, { icon: string }>> = {
   "p5.js": { icon: "p5dotjs" },
   Java: { icon: "java" },
   GLSL: { icon: "opengl" },
+  UDP: { icon: "networking" },
+  "TCP-IP": { icon: "networking" },
+  "TCP/IP": { icon: "networking" },
 };
 
 // Helper to look up a tech in the skills database across all categories and locales
