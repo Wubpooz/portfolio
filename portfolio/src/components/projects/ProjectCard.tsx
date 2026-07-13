@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getUiContent, useLocale } from "@/i18n";
-import { shouldInvertIcon, getIconUrl, findSkillIcon } from "@/lib/utils";
+import { shouldInvertIcon, getIconUrl, findSkillIcon, renderTextWithLinks } from "@/lib/utils";
 import { usePostHog } from "@posthog/react";
 import { fallbackIcons } from "../skills/SkillIcon";
 
@@ -119,7 +119,7 @@ export default function ProjectCard({
                   {project.subtitle}
                 </p>
                 <div className="flex flex-wrap items-center gap-1.5 text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
-                  <span>{project.organization}</span>
+                  <span>{renderTextWithLinks(project.organization)}</span>
                   {/* Optional logos */}
                   {/* {project.logos && project.logos.length > 0 && (
                     <span className="inline-flex items-center gap-1 select-none">
@@ -326,7 +326,7 @@ export default function ProjectCard({
                     })}
                   </span>
                 )} */}
-                <span>{project.organization}</span>
+                <span>{renderTextWithLinks(project.organization)}</span>
                 <span>· {project.period}</span>
               </div>
             </div>

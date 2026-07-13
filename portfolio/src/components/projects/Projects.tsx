@@ -4,13 +4,19 @@ import { Link } from "react-router-dom";
 import { getProjects } from "@/data/projects";
 import ProjectCard from "./ProjectCard";
 import { getUiContent, useLocale } from "@/i18n";
+import { parseProjectPeriod } from "@/lib/utils";
 
 export default function ProjectsSection() {
   const { locale } = useLocale();
   const content = getUiContent(locale);
   const allProjects = useMemo(() => getProjects(locale), [locale]);
   const projects = useMemo(
-    () => allProjects.filter((project) => project.featured),
+    () => allProjects.filter((project) => project.featured).sort((a, b) => {
+      if(a.relevance === undefined) return 1;
+      if(b.relevance === undefined) return -1;
+      if(a.relevance === b.relevance) return parseProjectPeriod(b.period) - parseProjectPeriod(a.period);
+      return b.relevance - a.relevance;
+    }),
     [allProjects],
   );
 

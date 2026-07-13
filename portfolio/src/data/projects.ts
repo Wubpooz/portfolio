@@ -47,10 +47,7 @@ const visualisationApp5Repo = "https://github.com/Wubpooz/visualisation-app5";
 const addDetails = (slug: string) => `/projects/${slug}`;
 
 // TODO add covers
-// TODO check relevance
-// TODO select featured projects
-// TODO check periods & organizations
-//TODO google cloud + deloitte icons to Hackathon
+
 // TODO https://gitlab.dsi.universite-paris-saclay.fr/mathieu.waharte/projet-pogl/-/tree/master?ref_type=heads
 // TODO file:///C:/Users/mathi/Desktop/WAHARTE_Ubik_Pizza_Challenge.pdf
 
@@ -59,13 +56,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
   en: [
     {
       slug: "watchlist-service",
-      relevance: 95,
+      relevance: 88,
       title: "Media Watchlist Service",
       subtitle: "Media catalog and shared collections platform (Service-Oriented Architecture).",
       summary:
         "Design and implementation of a collaborative media watchlist platform featuring granular role-based access control, PostgreSQL data persistence via Prisma ORM, session-based authentication via Better Auth, and an integrated Model Context Protocol (MCP) server.",
-      organization: "Polytech Paris-Saclay",
-      period: "2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "May 2026",
       status: "completed",
       image: cover("watchlist-service"),
       imageAlt: "Media Watchlist Service preview",
@@ -80,17 +77,18 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
+      featured: true,
       logos: ["polytech"],
     },
     {
       slug: "vireli",
-      relevance: 90,
+      relevance: 74,
       title: "Vireli",
       subtitle: "Progressive Web Application (PWA) for web decarbonization.",
       summary:
         "Design and implementation of a progressive eco-responsibility application featuring a periodic carbon footprint questionnaire, real-time collaborative group management, session-based authentication via Better Auth, and PostgreSQL data persistence via Prisma ORM within a Bun and Hono monorepo.",
-      organization: "Polytech Paris-Saclay",
-      period: "2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "January - May 2026",
       status: "completed",
       image: cover("vireli"),
       imageAlt: "Vireli PWA preview",
@@ -109,13 +107,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "minimax-resnet",
-      relevance: 80,
+      relevance: 98,
       title: "AI Engine & ResNet Evaluator (Escampe Game)",
       subtitle: "Design of an optimized Negamax Alpha-Beta engine and a residual network for position evaluation.",
       summary:
         "End-to-end creation of a board game AI engine (Java) optimized with bitboards and Negamax Alpha-Beta search, coupled with a Siamese residual network (PyTorch, 730k parameters) trained via minimax bootstrapping on 3 million positions.",
-      organization: "Polytech Paris-Saclay",
-      period: "Mar 2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "March - May 2026",
       status: "completed",
       image: cover("minimax-resnet"),
       imageAlt: "Escampe AI and BandDPER model preview",
@@ -133,6 +131,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
       logos: ["polytech"],
+      featured: true,
     },
     {
       slug: "how-europe-spends-its-time",
@@ -141,8 +140,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Turning European time-use surveys into a visual narrative.",
       summary:
         "Resolved severe codification drift across 20 years of European time-use surveys with robust mapping pipelines in Python. Analyzed data with Hugging Face to extract a visual narrative, and designed an accessible web application with interactive charts to present it.",
-      organization: "Polytech Paris-Saclay",
-      period: "Mar 2026 – Apr 2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "April 2026",
       status: "completed",
       image: cover("how-europe-spends-its-time"),
       imageAlt: "How Europe Spends Its Time preview",
@@ -158,8 +157,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: visualisationApp5Repo },
         { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
       ],
-      featured: true,
       logos: ["polytech"],
+      featured: true,
     },
     {
       slug: "vibehealth",
@@ -168,8 +167,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Health tracking web application.",
       summary:
         "Development of a comprehensive medical application combining lifestyle tracking, vital signs monitoring, a first-aid guide, and practitioner search. The application is bilingual, strongly typed, and offline-first for critical flows.",
-      organization: "Polytech Paris-Saclay",
-      period: "2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "November-December 2025",
       status: "completed",
       image: cover("vibehealth"),
       imageAlt: "VibeHealth preview",
@@ -188,13 +187,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "deloitte-google-cloud-hackathon",
-      relevance: 85,
+      relevance: 89,
       title: "Deloitte x Google Cloud Hackathon, Winner",
       subtitle: "Winning multi-agent system to automate marketing campaigns.",
       summary:
         "Creation of a distributed multi-agent system with ADK and MCP to automate marketing campaign generation, with orchestration via A2A and integration of BigQuery, Gemini, Imagen, Cloud Run, and Vertex AI Agent Engine.",
-      organization: "Deloitte & Google Cloud",
-      period: "Nov 2025",
+      organization: "[Deloitte](https://www.deloitte.com/) & [Google Cloud](https://cloud.google.com/)",
+      period: "November 2025",
       status: "won",
       image: cover("deloitte-google-cloud-hackathon"),
       imageAlt: "Deloitte x Google Cloud Hackathon preview",
@@ -207,7 +206,6 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
-      featured: true,
       logos: ["deloitte", "googlecloud"],
     },
     {
@@ -217,8 +215,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Speech synthesis research.",
       summary:
         "State-of-the-art review in TTS, creation of a Streamlit application to accelerate research paper discovery, and fine-tuning of XTTS on Google Colab with PyTorch and GPT-2 to add Maltese support without regression.",
-      organization: "L-Università ta' Malta (University of Malta)",
-      period: "Jun 2025 – Aug 2025",
+      organization: "[Department of Artificial Intelligence - L-Università ta' Malta (University of Malta)](https://www.um.edu.mt/ict/ai/)",
+      period: "June - August 2025",
       status: "completed",
       image: cover("xtts-finetuning"),
       imageAlt: "XTTS Finetuning project preview",
@@ -244,8 +242,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Real-time multiplayer quiz platform with WebSockets.",
       summary:
         "Design of a real-time quiz architecture capable of handling 50 players per room, a modular Angular frontend, and session management with Redis, Vercel, and Supabase.",
-      organization: "Polytech Paris-Saclay",
-      period: "Jan 2025 – May 2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "February - May 2025",
       status: "completed",
       image: cover("quizine"),
       imageAlt: "Quizine preview",
@@ -260,7 +258,6 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/quizine_front" },
         { labelKey: "details", href: addDetails("quizine") },
       ],
-      featured: true,
       logos: ["polytech"],
     },
     {
@@ -270,8 +267,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "C compiler written in Java.",
       summary:
         "Development of a C compiler in Java, featuring optimizations, error highlighting, and support for loops, functions, pointers, lists, scopes, variables, send/recv, and malloc.",
-      organization: "Polytech Paris-Saclay",
-      period: "2024 – 2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "September - December 2024",
       status: "completed",
       image: cover("compilateur-c-java"),
       imageAlt: "C Compiler project preview",
@@ -290,13 +287,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "jeux-entreprise",
-      relevance: 20,
+      relevance: 10,
       title: "Business Simulation Games",
       subtitle: "Management of a fictitious company.",
       summary:
         "Management of a fictitious company as part of a competitive business simulation game.",
-      organization: "Polytech Paris-Saclay",
-      period: "2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "January 2025",
       status: "completed",
       image: cover("jeux-entreprise"),
       imageAlt: "Business Simulation Games project preview",
@@ -313,13 +310,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "magnus-carlos",
-      relevance: 55,
+      relevance: 75,
       title: "Magnus Carlos",
       subtitle: "3D scientific simulation of the Magnus effect.",
       summary:
         "Management of a 3D scientific simulation project with a team of six students using Agile methodologies, and implementation of the visualization using SDL2 (textures, cameras, rotations).",
-      organization: "Polytech Paris-Saclay",
-      period: "Sep 2024 – Dec 2024",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "September - December 2024",
       status: "completed",
       image: cover("magnus-carlos"),
       imageAlt: "Magnus Carlos preview",
@@ -338,13 +335,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "nyxen",
-      relevance: 50,
+      relevance: 40,
       title: "Nyxen",
       subtitle: "Single-page experience with an interactive 3D model.",
       summary:
         "Design of a cosmetic e-commerce SPA. From palette and user journey design to the integration of an animated 3D model in the main section.",
-      organization: "Polytech Paris-Saclay",
-      period: "2023 – 2024",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "November 2023 - February 2024",
       status: "completed",
       image: cover("nyxen"),
       imageAlt: "Nyxen preview",
@@ -362,13 +359,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "house-finder",
-      relevance: 45,
+      relevance: 30,
       title: "House Finder",
       subtitle: "Data modeling and CLI tool.",
       summary:
         "Design of data models to structure housing attributes and connectivity, and development of a CLI tool to rank properties based on custom criteria.",
-      organization: "Polytech Paris-Saclay",
-      period: "2023",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "October 2023",
       status: "completed",
       image: cover("house-finder"),
       imageAlt: "House Finder preview",
@@ -389,8 +386,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "3D maze game in Processing and GLSL.",
       summary:
         "Development of a 3D maze game where the player must escape a mummy after entering a pyramid in a procedurally generated desert.",
-      organization: "Université Paris-Saclay",
-      period: "2022",
+      organization: "[Université Paris-Saclay](https://www.universite-paris-saclay.fr)",
+      period: "April - June 2022",
       status: "completed",
       image: cover("escape-the-mummy"),
       imageAlt: "Escape the Mummy preview",
@@ -408,13 +405,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "cli-messaging",
-      relevance: 30,
+      relevance: 23,
       title: "CLI Messaging",
       subtitle: "TCP/IP messaging applications in C.",
       summary:
         "Development of client and server messaging applications in UDP and TCP/IP with a command-line interface.",
-      organization: "Université Paris-Saclay",
-      period: "2022",
+      organization: "[Université Paris-Saclay](https://www.universite-paris-saclay.fr)",
+      period: "October 2022",
       status: "completed",
       image: cover("cli-messaging"),
       imageAlt: "CLI Messaging preview",
@@ -432,12 +429,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "logihub",
-      relevance: 25,
+      relevance: 10,
       title: "LogiHub",
       subtitle: "Online library hosting custom p5.js games.",
       summary:
         "First online game library hosting custom p5.js games, developed during high school. Features classics like Pong, Space Invaders, Reaction Time, and Number Test.",
-      organization: "Lycée de l'Essouriau",
+      organization: "[Lycée de l'Essouriau](https://lyceedelessouriau.fr)",
       period: "2019",
       status: "completed",
       image: cover("logihub"),
@@ -458,13 +455,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
   fr: [
     {
       slug: "watchlist-service",
-      relevance: 95,
+      relevance: 88,
       title: "Service de Watchlist Média",
       subtitle: "Plateforme de catalogue média et de collections partagées (Architecture Orientée Services).",
       summary:
         "Conception et implémentation d'une plateforme collaborative de watchlist média comprenant un contrôle d'accès granulaire basé sur les rôles, la persistance des données PostgreSQL via l'ORM Prisma, l'authentification de session via Better Auth, et un serveur Model Context Protocol (MCP) intégré.",
-      organization: "Polytech Paris-Saclay",
-      period: "2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Mai 2026",
       status: "completed",
       image: cover("watchlist-service"),
       imageAlt: "Aperçu du Service de Watchlist Média",
@@ -479,17 +476,18 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
+      featured: true,
       logos: ["polytech"],
     },
     {
       slug: "vireli",
-      relevance: 90,
+      relevance: 74,
       title: "Vireli",
       subtitle: "Application de décarbonation web progressive (PWA).",
       summary:
         "Conception et implémentation d'une application progressive d'éco-responsabilité comprenant un questionnaire d'empreinte carbone périodique, la gestion de groupes collaboratifs en temps réel, l'authentification de session via Better Auth, et la persistance des données PostgreSQL via l'ORM Prisma au sein d'un monorepo Bun et Hono.",
-      organization: "Polytech Paris-Saclay",
-      period: "2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Janvier - Mai 2026",
       status: "completed",
       image: cover("vireli"),
       imageAlt: "Aperçu de Vireli PWA",
@@ -508,13 +506,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "minimax-resnet",
-      relevance: 80,
+      relevance: 98,
       title: "Moteur d'IA & Évaluateur ResNet (Jeu d'Escampe)",
       subtitle: "Conception d'un moteur Negamax Alpha-Bêta optimisé et d'un réseau résiduel pour l'évaluation de positions.",
       summary:
         "Création complète d'un moteur d'IA de jeu de plateau (Java) optimisé par bitboards et Negamax Alpha-Bêta, couplé à un réseau résiduel siamois (PyTorch, 730k paramètres) entraîné par bootstrapping minimax sur 3 millions de positions.",
-      organization: "Polytech Paris-Saclay",
-      period: "mars 2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Mars - Mai 2026",
       status: "completed",
       image: cover("minimax-resnet"),
       imageAlt: "Aperçu de l'IA d'Escampe et du modèle BandDPER",
@@ -532,6 +530,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
       logos: ["polytech"],
+      featured: true,
     },
     {
       slug: "how-europe-spends-its-time",
@@ -540,8 +539,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Transformer des enquêtes européennes sur l’usage du temps en récit visuel.",
       summary:
         "A résolu une forte dérive de codification sur 20 ans d’enquêtes européennes sur l’usage du temps grâce à des pipelines de mapping robustes en Python. Analysé les données avec Hugging Face afin d'en extraire un narratif visuel, puis a conçu une application web accessible avec graphiques interactifs pour la transmettre.",
-      organization: "Polytech Paris-Saclay",
-      period: "mars 2026 – avr. 2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Avril 2026",
       status: "completed",
       image: cover("how-europe-spends-its-time"),
       imageAlt: "Aperçu de How Europe Spends Its Time",
@@ -567,8 +566,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Application web de suivi de santé.",
       summary:
         "Développement d'une application médicale complète, combinant du suivi du style de vie, des signaux vitaux, un référentiel de premier secours et la recherche de praticiens. L'application est bilingue, avec un fort typage et une approche offline-first pour les flux critiques.",
-      organization: "Polytech Paris-Saclay",
-      period: "2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Novembre - Décembre 2025",
       status: "completed",
       image: cover("vibehealth"),
       imageAlt: "Aperçu de VibeHealth",
@@ -587,13 +586,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "deloitte-google-cloud-hackathon",
-      relevance: 85,
+      relevance: 89,
       title: "Hackathon Deloitte x Google Cloud, Lauréat",
       subtitle: "Système multi-agent lauréat pour automatiser les campagnes marketing.",
       summary:
         "Création d’un système distribué multi-agent avec ADK et MCP pour automatiser la génération de campagnes marketing, orchestration via A2A et intégration de BigQuery, Gemini, Imagen, Cloud Run et Vertex AI Agent Engine.",
-      organization: "Deloitte & Google Cloud",
-      period: "nov. 2025",
+      organization: "[Deloitte](https://www.deloitte.com/) & [Google Cloud](https://cloud.google.com/)",
+      period: "Novembre 2025",
       status: "won",
       image: cover("deloitte-google-cloud-hackathon"),
       imageAlt: "Aperçu du hackathon Deloitte x Google Cloud",
@@ -606,7 +605,6 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
-      featured: true,
       logos: ["deloitte", "googlecloud"],
     },
     {
@@ -616,8 +614,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Recherche en synthèse vocale.",
       summary:
         "Revue de l’état de l’art en TTS, création d’une application Streamlit pour accélérer la recherche de papiers, puis fine-tuning de XTTS sur Google Colab avec PyTorch et GPT-2 pour ajouter le maltais sans régression.",
-      organization: "L-Università ta' Malta (University of Malta)",
-      period: "juin 2025 – août 2025",
+      organization: "[Département d'Intelligence Artificielle - L-Università ta' Malta (Université de Malte)](https://www.um.edu.mt/ict/ai/)",
+      period: "Juin - Août 2025",
       status: "completed",
       image: cover("xtts-finetuning"),
       imageAlt: "Aperçu du projet XTTS Finetuning",
@@ -643,8 +641,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Plateforme de quiz temps réel avec WebSockets.",
       summary:
         "Conception d’une architecture de quiz temps réel capable de gérer 50 joueurs par salle, frontend Angular modulaire et gestion des sessions avec Redis, Vercel et Supabase.",
-      organization: "Polytech Paris-Saclay",
-      period: "janv. 2025 – mai 2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Février - Mai 2025",
       status: "completed",
       image: cover("quizine"),
       imageAlt: "Aperçu de Quizine",
@@ -659,7 +657,6 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/quizine_front" },
         { labelKey: "details", href: addDetails("quizine") },
       ],
-      featured: true,
       logos: ["polytech"],
     },
     {
@@ -669,8 +666,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Compilateur de C écrit en Java.",
       summary:
         "Développement d'un compilateur de C en Java, avec optimisationsn, soulignage des erreurs et support pour les boucles, fonctions, pointeurs, listes, scope, variables, send/recv et malloc.",
-      organization: "Polytech Paris-Saclay",
-      period: "2024 – 2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Septembre - Décembre 2024",
       status: "completed",
       image: cover("compilateur-c-java"),
       imageAlt: "Aperçu du projet Compilateur de C",
@@ -689,13 +686,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "jeux-entreprise",
-      relevance: 20,
+      relevance: 10,
       title: "Jeux d'entreprise",
       subtitle: "Pilotage d'une entreprise fictive.",
       summary:
         "Pilotage d'une entreprise fictive dans le cadre d'un jeu d'entreprise.",
-      organization: "Polytech Paris-Saclay",
-      period: "2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Janvier 2025",
       status: "completed",
       image: cover("jeux-entreprise"),
       imageAlt: "Aperçu du projet Jeux d'entreprise",
@@ -712,13 +709,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "magnus-carlos",
-      relevance: 55,
+      relevance: 75,
       title: "Magnus Carlos",
       subtitle: "Simulation scientifique 3D de l’effet Magnus.",
       summary:
         "Gestion d’un projet de simulation scientifique 3D avec une équipe de six étudiants en Agile, et implémentation de la visualisation avec SDL2 (textures, caméras, rotations).",
-      organization: "Polytech Paris-Saclay",
-      period: "sept. 2024 – déc. 2024",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Septembre - Décembre 2024",
       status: "completed",
       image: cover("magnus-carlos"),
       imageAlt: "Aperçu de Magnus Carlos",
@@ -737,13 +734,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "nyxen",
-      relevance: 50,
+      relevance: 40,
       title: "Nyxen",
       subtitle: "Expérience single-page avec modèle 3D interactif.",
       summary:
         "Conception d'un eshop cosmétique SPA. De la conception de la palette et des parcours utilisateurs à l'intégration d’un modèle 3D animé dans la section principale.",
-      organization: "Polytech Paris-Saclay",
-      period: "2023 – 2024",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Novembre 2023 - Février 2024",
       status: "completed",
       image: cover("nyxen"),
       imageAlt: "Aperçu de Nyxen",
@@ -761,13 +758,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "house-finder",
-      relevance: 45,
+      relevance: 30,
       title: "House finder",
       subtitle: "Conception de modèles de données et outil CLI.",
       summary:
         "Conception des modèles de données pour structurer la connectivité et les attributs des logements, et développement d’un outil CLI pour classer les biens selon des critères personnalisés.",
-      organization: "Polytech Paris-Saclay",
-      period: "2023",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Octobre 2023",
       status: "completed",
       image: cover("house-finder"),
       imageAlt: "Aperçu de House finder",
@@ -788,8 +785,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Jeu de labyrinthe 3D en Processing et GLSL.",
       summary:
         "Développement d’un jeu de labyrinthe 3D où il faut échapper à une momie après être entré dans une pyramide sur un désert généré procéduralement.",
-      organization: "Université Paris-Saclay",
-      period: "2022",
+      organization: "[Université Paris-Saclay](https://www.universite-paris-saclay.fr)",
+      period: "Avril - Juin 2022",
       status: "completed",
       image: cover("escape-the-mummy"),
       imageAlt: "Aperçu de Escape the mummy",
@@ -807,13 +804,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "cli-messaging",
-      relevance: 30,
+      relevance: 23,
       title: "CLI Messaging",
       subtitle: "Applications de messagerie TCP-IP en C.",
       summary:
         "Développement d’applications de messagerie serveur et client en UDP et TCP-IP avec interface en ligne de commande.",
-      organization: "Université Paris-Saclay",
-      period: "2022",
+      organization: "[Université Paris-Saclay](https://www.universite-paris-saclay.fr)",
+      period: "Octobre 2022",
       status: "completed",
       image: cover("cli-messaging"),
       imageAlt: "Aperçu de CLI Messaging",
@@ -836,7 +833,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "Bibliothèque de jeux en ligne hébergeant des jeux p5.js.",
       summary:
         "Première bibliothèque de jeux en ligne hébergeant des jeux p5.js personnalisés, développée au lycée. Comprend des classiques comme Pong, Space Invaders, Reaction Time et Number Test.",
-      organization: "Lycée de l'Essouriau",
+      organization: "[Lycée de l'Essouriau](https://lyceedelessouriau.fr)",
       period: "2019",
       status: "completed",
       image: cover("logihub"),
@@ -857,13 +854,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
   ar: [
     {
       slug: "watchlist-service",
-      relevance: 95,
+      relevance: 88,
       title: "خدمة قائمة المراقبة الإعلامية",
       subtitle: "منصة لإدارة كتالوج الوسائط والمجموعات المشتركة (هندسة موجهة نحو الخدمات).",
       summary:
         "تصميم وتطوير منصة تعاونية لقوائم المراقبة الإعلامية تتميز بـ تحكم دقيق في الوصول على أساس الأدوار، وحفظ البيانات في قاعدة PostgreSQL عبر Prisma ORM، وإدارة الجلسات باستخدام Better Auth، بالإضافة إلى خادم مدمج لـ بروتوكول سياق النموذج (MCP).",
-      organization: "Polytech Paris-Saclay",
-      period: "2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "مايو 2026",
       status: "completed",
       image: cover("watchlist-service"),
       imageAlt: "معاينة خدمة قائمة المراقبة الإعلامية",
@@ -878,17 +875,18 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
+      featured: true,
       logos: ["polytech"],
     },
     {
       slug: "vireli",
-      relevance: 90,
+      relevance: 74,
       title: "Vireli",
       subtitle: "تطبيق ويب تقدمي (PWA) للحد من الانبعاثات الكربونية.",
       summary:
         "تصميم وتطوير تطبيق ويب تقدمي للمسؤولية البيئية يتميز باستبيان دوري للبصمة الكربونية، وإدارة المجموعات التعاونية في الوقت الحقيقي، وإدارة الجلسات باستخدام Better Auth، وحفظ البيانات في قاعدة PostgreSQL عبر Prisma ORM ضمن monorepo يعتمد على Bun وHono.",
-      organization: "Polytech Paris-Saclay",
-      period: "2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "يناير - مايو 2026",
       status: "completed",
       image: cover("vireli"),
       imageAlt: "معاينة تطبيق Vireli PWA",
@@ -907,13 +905,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "minimax-resnet",
-      relevance: 80,
+      relevance: 98,
       title: "محرك ذكاء اصطناعي ومقيّم ResNet (لعبة إسكامبي)",
       subtitle: "تصميم محرك Negamax Alpha-Beta محسن وشبكة متبقية لتقييم الوضعيات.",
       summary:
         "تطوير شامل لمحرك ذكاء اصطناعي للعبة لوحية (بلغة Java) محسن باستخدام لوحات البت (bitboards) وبحث Negamax Alpha-Beta، متصل بشبكة متبقية سيامية (PyTorch، بـ 730 ألف معلمة) تم تدريبها عبر تمهيد المينيمكس (minimax bootstrapping) على 3 ملايين وضعية.",
-      organization: "Polytech Paris-Saclay",
-      period: "مارس 2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "مارس - مايو 2026",
       status: "completed",
       image: cover("minimax-resnet"),
       imageAlt: "معاينة ذكاء إسكامبي الاصطناعي ونموذج BandDPER",
@@ -926,11 +924,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       stack: ["PyTorch", "Java", "Minimax", "ResNet", "Python"],
       links: [
         { labelKey: "live", href: escampeUrl },
-        { labelKey: "paper", href: "https://github.com/Wubpooz/app5-ai-game-project/blob/main/BandDPER.pdf", label: { en: "Research Paper", fr: "Rapport de recherche", ar: "ورقة البحث العلمية" } },
+        { labelKey: "paper", href: "https://github.com/Wubpooz/app5-ai-game-project/blob/main/BandDPER.pdf", label: { en: "Research Paper", fr: "Research Paper", ar: "ورقة البحث العلمية" } },
         { labelKey: "source", href: "https://github.com/Wubpooz/app5-ai-game-project" },
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
       logos: ["polytech"],
+      featured: true,
     },
     {
       slug: "how-europe-spends-its-time",
@@ -939,8 +938,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "تحويل استقصاءات استخدام الوقت الأوروبية إلى سرد بصري.",
       summary:
         "حُلَّت مشكلة انحراف الترميز الشديد عبر 20 عامًا من استقصاءات استخدام الوقت الأوروبية باستخدام خطوط أنابيب مطابقة متينة في Python. جرى تحليل البيانات باستخدام Hugging Face لاستخلاص سرد بصري، ثم تصميم تطبيق ويب سهل الوصول ورسوم بيانية تفاعلية لعرضها.",
-      organization: "Polytech Paris-Saclay",
-      period: "مارس 2026 – أبريل 2026",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "أبريل 2026",
       status: "completed",
       image: cover("how-europe-spends-its-time"),
       imageAlt: "معاينة How Europe Spends Its Time",
@@ -966,8 +965,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "تطبيق ويب لتتبع الصحة.",
       summary:
         "تطوير تطبيق طبي متكامل يجمع بين تتبع نمط الحياة ومراقبة المؤشرات الحيوية ودليل الإسعافات الأولية والبحث عن ممارسي الرعاية الصحية. التطبيق ثنائي اللغة ومكتوب بنوعية صارمة (strongly typed) ومصمم للعمل أولاً دون اتصال بالإنترنت (offline-first) للمسارات الحرجة.",
-      organization: "Polytech Paris-Saclay",
-      period: "2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "نوفمبر - ديسمبر 2025",
       status: "completed",
       image: cover("vibehealth"),
       imageAlt: "معاينة تطبيق VibeHealth",
@@ -986,12 +985,12 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "deloitte-google-cloud-hackathon",
-      relevance: 85,
+      relevance: 89,
       title: "هاكاثون Deloitte x Google Cloud، الفائز",
       subtitle: "نظام متعدد الوكلاء حائز على جائزة لأتمتة الحملات التسويقية.",
       summary:
         "إنشاء نظام موزع متعدد الوكلاء باستخدام ADK وMCP لأتمتة توليد الحملات التسويقية، مع تنسيق عبر A2A ودمج BigQuery وGemini وImagen وCloud Run وVertex AI Agent Engine.",
-      organization: "Deloitte & Google Cloud",
+      organization: "[Deloitte](https://www.deloitte.com/) و [Google Cloud](https://cloud.google.com/)",
       period: "نوفمبر 2025",
       status: "won",
       image: cover("deloitte-google-cloud-hackathon"),
@@ -1005,7 +1004,6 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
-      featured: true,
       logos: ["deloitte", "googlecloud"],
     },
     {
@@ -1015,8 +1013,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "بحث في توليد الكلام (Speech Synthesis).",
       summary:
         "مراجعة لأحدث التقنيات في مجال توليد الكلام (TTS)، وإنشاء تطبيق Streamlit لتسريع البحث عن الأوراق العلمية، ثم ضبط الدقة (fine-tuning) لنموذج XTTS على Google Colab باستخدام PyTorch وGPT-2 لإضافة اللغة المالطية دون تراجع.",
-      organization: "L-Università ta' Malta (University of Malta)",
-      period: "يونيو 2025 – أغسطس 2025",
+      organization: "[قسم الذكاء الاصطناعي - L-Università ta' Malta (University of Malta)](https://www.um.edu.mt/ict/ai/)",
+      period: "يونيو - أغسطس 2025",
       status: "completed",
       image: cover("xtts-finetuning"),
       imageAlt: "معاينة مشروع XTTS Finetuning",
@@ -1028,7 +1026,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       stack: ["PyTorch", "GPT-2", "XTTS", "Streamlit", "Git", "Hugging Face", "Machine Learning", "Model Training"],
       links: [
         { labelKey: "live", href: streamlitSearch, label: { en: "Paper Discovery Tool", fr: "Outil de recherche d'articles", ar: "أداة البحث عن الأوراق" } },
-        { labelKey: "demo", href: streamlitDemo, label: { en: "Maltese TTS Demo", fr: "Synthèse vocale maltaise", ar: "عرض توليد الكلام المالطي" } },
+        { labelKey: "demo", href: streamlitDemo, label: { en: "Maltese TTS Demo", fr: "Synthèse vocale مالتا", ar: "عرض توليد الكلام المالطي" } },
         { labelKey: "source", href: maltaRepo },
         { labelKey: "details", href: addDetails("xtts-finetuning") },
       ],
@@ -1042,8 +1040,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "منصة مسابقة في الوقت الحقيقي مع WebSockets.",
       summary:
         "تصميم بنية مسابقات في الوقت الحقيقي قادرة على إدارة 50 لاعباً في الغرفة الواحدة، مع واجهة Angular تفاعلية وإدارة جلسات باستخدام Redis وVercel وSupabase.",
-      organization: "Polytech Paris-Saclay",
-      period: "يناير 2025 – مايو 2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "فبراير - مايو 2025",
       status: "completed",
       image: cover("quizine"),
       imageAlt: "معاينة Quizine",
@@ -1058,7 +1056,6 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "source", href: "https://github.com/Wubpooz/quizine_front" },
         { labelKey: "details", href: addDetails("quizine") },
       ],
-      featured: true,
       logos: ["polytech"],
     },
     {
@@ -1068,8 +1065,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "مترجم لغة C مكتوب بلغة Java.",
       summary:
         "تطوير مترجم للغة C بلغة Java، يتميز بالتحسينات وإبراز الأخطاء ودعم الحلقات والوظائف والمؤشرات والقوائم والمجال (scope) والمتغيرات وsend/recv وmalloc.",
-      organization: "Polytech Paris-Saclay",
-      period: "2024 – 2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "سبتمبر - ديسمبر 2024",
       status: "completed",
       image: cover("compilateur-c-java"),
       imageAlt: "معاينة مشروع مترجم لغة C",
@@ -1088,13 +1085,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "jeux-entreprise",
-      relevance: 20,
+      relevance: 10,
       title: "ألعاب محاكاة الأعمال",
       subtitle: "قيادة وإدارة شركة وهمية.",
       summary:
         "إدارة شركة وهمية في إطار لعبة محاكاة وتنافس لإدارة الأعمال.",
-      organization: "Polytech Paris-Saclay",
-      period: "2025",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "يناير 2025",
       status: "completed",
       image: cover("jeux-entreprise"),
       imageAlt: "معاينة مشروع ألعاب محاكاة الأعمال",
@@ -1111,13 +1108,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "magnus-carlos",
-      relevance: 55,
+      relevance: 75,
       title: "Magnus Carlos",
       subtitle: "محاكاة علمية ثلاثية الأبعاد لتأثير Magnus.",
       summary:
         "إدارة مشروع محاكاة علمية ثلاثية الأبعاد مع فريق من ستة طلاب باستخدام منهجية Agile، وتطبيق التصور البصري باستخدام مكتبة SDL2 (الخامات، الكاميرات، الدورانات).",
-      organization: "Polytech Paris-Saclay",
-      period: "سبتمبر 2024 – ديسمبر 2024",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "سبتمبر - ديسمبر 2024",
       status: "completed",
       image: cover("magnus-carlos"),
       imageAlt: "معاينة Magnus Carlos",
@@ -1136,19 +1133,19 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "nyxen",
-      relevance: 50,
+      relevance: 40,
       title: "Nyxen",
       subtitle: "تجربة صفحة واحدة مع نموذج ثلاثي الأبعاد تفاعلي.",
       summary:
         "تصميم متجر إلكتروني لمستحضرات التجميل بصيغة تطبيق الصفحة الواحدة (SPA). من تصميم الألوان والمسارات والربط إلى دمج نموذج ثلاثي الأبعاد متحرك في القسم الرئيسي.",
-      organization: "Polytech Paris-Saclay",
-      period: "2023 – 2024",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "نوفمبر 2023 - فبراير 2024",
       status: "completed",
       image: cover("nyxen"),
       imageAlt: "معاينة Nyxen",
       highlights: [
         "تصميم لوحة الألوان ومسارات المستخدمين والتوجيه في تطبيق الصفحة الواحدة (SPA Routing).",
-        "دمج نموذج ثلاثي الأبعاد تفاعلي ومتحرك.",
+        "دمج نموذج ثلاثي الأبعاد interactif ومتحرك.",
         "تركيز قوي على التوجيه الفني والتفاعل الفني.",
       ],
       stack: ["Angular", "Three.js", "TypeScript", "JavaScript", "HTML", "CSS", "SPA Routing", "3D", "Animation", "Git", "Agile", "Frontend"],
@@ -1160,13 +1157,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "house-finder",
-      relevance: 45,
+      relevance: 30,
       title: "مكتشف السكن (House Finder)",
       subtitle: "نمذجة البيانات وأداة واجهة سطر الأوامر (CLI).",
       summary:
         "تصميم نماذج البيانات لهيكلة سمات السكن والاتصالية، وتطوير أداة CLI لتصنيف العقارات وفق معايير مخصصة.",
-      organization: "Polytech Paris-Saclay",
-      period: "2023",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "أكتوبر 2023",
       status: "completed",
       image: cover("house-finder"),
       imageAlt: "معاينة مكتشف السكن",
@@ -1187,8 +1184,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "لعبة متاهة ثلاثية الأبعاد باستخدام Processing و GLSL.",
       summary:
         "تطوير لعبة متاهة ثلاثية الأبعاد حيث يتعين على اللاعب الهروب من المومياء بعد دخول الهرم في صحراء تم إنشاؤها إجرائياً.",
-      organization: "Université Paris-Saclay",
-      period: "2022",
+      organization: "[Université Paris-Saclay](https://www.universite-paris-saclay.fr)",
+      period: "أبريل - يونيو 2022",
       status: "completed",
       image: cover("escape-the-mummy"),
       imageAlt: "معاينة الهروب من المومياء",
@@ -1206,13 +1203,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     },
     {
       slug: "cli-messaging",
-      relevance: 30,
+      relevance: 23,
       title: "مراسلة واجهة سطر الأوامر (CLI Messaging)",
       subtitle: "تطبيقات مراسلة باستخدام TCP/IP بلغة C.",
       summary:
         "تطوير تطبيقات مراسلة للعميل والخادم عبر بروتوكولات UDP وTCP/IP مع واجهة برمجية تعتمد على سطر الأوامر.",
-      organization: "Université Paris-Saclay",
-      period: "2022",
+      organization: "[Université Paris-Saclay](https://www.universite-paris-saclay.fr)",
+      period: "أكتوبر 2022",
       status: "completed",
       image: cover("cli-messaging"),
       imageAlt: "معاينة مراسلة واجهة سطر الأوامر",
@@ -1235,7 +1232,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       subtitle: "مكتبة ألعاب على الإنترنت تستضيف ألعاب p5.js.",
       summary:
         "أول مكتبة ألعاب على الإنترنت تستضيف ألعاب p5.js مخصصة تم تطويرها في المدرسة الثانوية. تشتمل على ألعاب كلاسيكية مثل Pong وSpace Invaders وReaction Time وNumber Test.",
-      organization: "Lycée de l'Essouriau",
+      organization: "[Lycée de l'Essouriau](https://lyceedelessouriau.fr)",
       period: "2019",
       status: "completed",
       image: cover("logihub"),

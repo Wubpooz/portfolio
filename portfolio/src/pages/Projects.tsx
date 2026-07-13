@@ -21,9 +21,7 @@ export default function ProjectsPage() {
     const saved = localStorage.getItem("projects-view-mode");
     return (saved as "card" | "list") || "card";
   });
-  const [sortBy, setSortBy] = useState<"recency_featured" | "relevance">(
-    "recency_featured",
-  );
+  const [sortBy, setSortBy] = useState<"recency" | "relevance">("relevance");
   const posthog = usePostHog();
 
   const handleViewModeChange = (mode: "card" | "list") => {
@@ -32,7 +30,7 @@ export default function ProjectsPage() {
     posthog.capture("projects_view_mode_changed", { view_mode: mode });
   };
 
-  const handleSortChange = (sort: "recency_featured" | "relevance") => {
+  const handleSortChange = (sort: "recency" | "relevance") => {
     setSortBy(sort);
     posthog.capture("projects_sort_applied", { sort_by: sort });
   };
@@ -157,17 +155,6 @@ export default function ProjectsPage() {
             <div className="flex items-center rounded-md border border-border bg-card p-1">
               <button
                 type="button"
-                onClick={() => handleSortChange("recency_featured")}
-                className={`rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
-                  sortBy === "recency_featured"
-                    ? "bg-muted text-foreground font-semibold"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {content.projectsPage.sortRecent}
-              </button>
-              <button
-                type="button"
                 onClick={() => handleSortChange("relevance")}
                 className={`rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
                   sortBy === "relevance"
@@ -176,6 +163,17 @@ export default function ProjectsPage() {
                 }`}
               >
                 {content.projectsPage.sortRelevance}
+              </button>
+              <button
+                type="button"
+                onClick={() => handleSortChange("recency")}
+                className={`rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
+                  sortBy === "recency"
+                    ? "bg-muted text-foreground font-semibold"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {content.projectsPage.sortRecent}
               </button>
             </div>
 

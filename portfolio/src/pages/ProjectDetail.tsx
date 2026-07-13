@@ -16,7 +16,7 @@ import { getProjectBySlug } from "@/data/projects";
 import { getUiContent, useLocale } from "@/i18n";
 import { usePostHog } from "@posthog/react";
 import { TechPillIcon } from "@/components/projects/ProjectCard";
-import { findSkillIcon, shouldInvertIcon, getIconUrl } from "@/lib/utils";
+import { findSkillIcon, shouldInvertIcon, getIconUrl, renderTextWithLinks } from "@/lib/utils";
 
 function statusToLabel(
   content: ReturnType<typeof getUiContent>,
@@ -263,7 +263,7 @@ export default function ProjectDetailPage() {
                     {content.projectsPage.organization}
                   </p>
                   <p className="mt-1 text-sm text-foreground">
-                    {project.organization}
+                    {renderTextWithLinks(project.organization)}
                   </p>
                 </div>
               </div>

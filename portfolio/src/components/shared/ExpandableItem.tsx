@@ -1,5 +1,5 @@
 import { Atom, Briefcase, GraduationCap } from "lucide-react";
-import { shouldInvertIcon, getIconUrl } from "@/lib/utils";
+import { shouldInvertIcon, getIconUrl, renderTextWithLinks } from "@/lib/utils";
 import TagPills from "./TagPills";
 import {
   AccordionContent,
@@ -7,59 +7,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { Link } from "react-router-dom";
-
-const renderTextWithLinks = (text: string) => {
-  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
-  const parts = [];
-  let lastIndex = 0;
-  let match;
-
-  while ((match = regex.exec(text)) !== null) {
-    const matchIndex = match.index;
-    if (matchIndex > lastIndex) {
-      parts.push(text.substring(lastIndex, matchIndex));
-    }
-    const linkText = match[1];
-    const linkUrl = match[2];
-    const isInternal = linkUrl.startsWith("/");
-
-    parts.push(
-      isInternal ? (
-        <Link
-          key={matchIndex}
-          to={linkUrl}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
-        >
-          {linkText}
-        </Link>
-      ) : (
-        <a
-          key={matchIndex}
-          href={linkUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
-        >
-          {linkText}
-        </a>
-      ),
-    );
-    lastIndex = regex.lastIndex;
-  }
-
-  if (lastIndex < text.length) {
-    parts.push(text.substring(lastIndex));
-  }
-
-  return parts.length > 0 ? parts : text;
-};
 
 interface ExpandableItemProps {
   value: string;

@@ -1,5 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import React from "react";
+import { Link } from "react-router-dom";
 import { getSkillCategories } from "@/data/skills";
 
 export function cn(...inputs: ClassValue[]) {
@@ -255,4 +257,58 @@ export function findSkillIcon(techName: string): string | undefined {
   }
 
   return undefined;
+}
+
+export function renderTextWithLinks(text: string): React.ReactNode {
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    const matchIndex = match.index;
+    if (matchIndex > lastIndex) {
+      parts.push(text.substring(lastIndex, matchIndex));
+    }
+    const linkText = match[1];
+    const linkUrl = match[2];
+    const isInternal = linkUrl.startsWith("/");
+
+    parts.push(
+      isInternal
+        ? React.createElement(
+            Link,
+            {
+              key: matchIndex,
+              to: linkUrl,
+              onClick: (e: React.MouseEvent) => {
+                e.stopPropagation();
+              },
+              className: "text-primary underline underline-offset-4 hover:text-primary/80 transition-colors",
+            },
+            linkText
+          )
+        : React.createElement(
+            "a",
+            {
+              key: matchIndex,
+              href: linkUrl,
+              target: "_blank",
+              rel: "noopener noreferrer",
+              onClick: (e: React.MouseEvent) => {
+                e.stopPropagation();
+              },
+              className: "text-primary underline underline-offset-4 hover:text-primary/80 transition-colors",
+            },
+            linkText
+          )
+    );
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
 }
