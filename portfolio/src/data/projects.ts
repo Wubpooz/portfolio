@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n";
 
-export type ProjectLinkKey = "live" | "source" | "details" | "demo" | "dataset" | "search";
+export type ProjectLinkKey = "live" | "source" | "details" | "demo" | "dataset" | "search" | "paper";
 
 export type ProjectStatus = "completed" | "in-progress" | "won";
 
@@ -29,14 +29,30 @@ export interface ProjectItem {
 
 const cover = (seed: string) => `/assets/projects/${seed}.webp`;
 
-const datasetUrl = "https://huggingface.co/datasets/Bluefir/hetus-time-use";
-const maltaRepo = "https://github.com/Wubpooz/Malta-TTS";
-const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/"; // XTTS demo
-const streamlitSearch = "https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/"; // Paper Relevance Dashboard
-const escampeUrl = "https://escampe.vercel.app/"; // Escampe web
+
 const watchlistUrl = "https://watchlist-service.vercel.app/landing?redirect=/"; // Watchlist web
 
+const escampeUrl = "https://escampe.vercel.app/"; // Escampe web
+
+const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/"; // XTTS demo
+const streamlitSearch = "https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/"; // Paper Relevance Dashboard
+const maltaRepo = "https://github.com/Wubpooz/Malta-TTS";
+
+const visualisationApp5Url = "https://wubpooz.github.io/visualisation-app5/";
+const datasetUrl = "https://huggingface.co/datasets/Bluefir/hetus-time-use";
+const visualisationApp5Repo = "https://github.com/Wubpooz/visualisation-app5";
+
+
 const addDetails = (slug: string) => `/projects/${slug}`;
+
+// TODO add covers
+// TODO check relevance
+// TODO select featured projects
+// TODO check periods & organizations
+//TODO google cloud + deloitte icons to Hackathon
+// TODO https://gitlab.dsi.universite-paris-saclay.fr/mathieu.waharte/projet-pogl/-/tree/master?ref_type=heads
+// TODO file:///C:/Users/mathi/Desktop/WAHARTE_Ubik_Pizza_Challenge.pdf
+
 
 const projectsByLocale: Record<Locale, ProjectItem[]> = {
   en: [
@@ -44,22 +60,23 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "watchlist-service",
       relevance: 95,
       title: "Media Watchlist Service",
-      subtitle: "Full-stack media catalog and shared collections platform.",
+      subtitle: "Media catalog and shared collections platform (Service-Oriented Architecture).",
       summary:
-        "Designed and implemented a collaborative media watchlist platform featuring granular role-based access control, PostgreSQL data persistency via Prisma ORM, session-based authentication via Better Auth, and an integrated Model Context Protocol (MCP) server.",
+        "Design and implementation of a collaborative media watchlist platform featuring granular role-based access control, PostgreSQL data persistence via Prisma ORM, session-based authentication via Better Auth, and an integrated Model Context Protocol (MCP) server.",
       organization: "Polytech Paris-Saclay",
       period: "2026",
       status: "completed",
       image: cover("watchlist-service"),
       imageAlt: "Media Watchlist Service preview",
       highlights: [
-        "Collaborative collections with OWNER, COLLABORATOR, and READER roles.",
+        "Collaborative collections with granular roles, images, ratings, invitations, and statistics. Sorting and filtering of collections and media.",
         "Integrated Model Context Protocol (MCP) server for collections and media tools.",
         "Comprehensive CI/CD pipeline with Vitest, backend mock requests, and automated deployment.",
       ],
-      stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Supabase", "MCP", "Docker", "GitHub Actions"],
+      stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Vercel", "Supabase", "MCP", "Docker", "GitHub Actions"],
       links: [
         { labelKey: "live", href: watchlistUrl },
+        { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
     },
@@ -67,44 +84,49 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "vireli",
       relevance: 90,
       title: "Vireli",
-      subtitle: "Progressive Web Application (PWA).",
+      subtitle: "Progressive Web Application (PWA) for web decarbonization.",
       summary:
-        "Developed a progressive web application (PWA) with Angular 21 and Capacitor, utilizing Hono and Bun for back-end APIs.",
+        "Design and implementation of a progressive eco-responsibility application featuring a periodic carbon footprint questionnaire, real-time collaborative group management, session-based authentication via Better Auth, and PostgreSQL data persistence via Prisma ORM within a Bun and Hono monorepo.",
       organization: "Polytech Paris-Saclay",
       period: "2026",
       status: "completed",
       image: cover("vireli"),
       imageAlt: "Vireli PWA preview",
       highlights: [
-        "Lead developer for a progressive web application.",
-        "Full-stack development with Bun, Hono, and Zod.",
-        "Integration with Postman and OpenAPI.",
+        "Collaborative mutual-aid groups with real-time messaging, invitations, granular role management, and collective goals. Carbon footprint tracking with temporal progress charts.",
+        "Bun workspaces monorepo architecture with strict type sharing, automated audit logs via PostgreSQL triggers, and a GDPR-compliant deletion flow via anonymization.",
+        "Continuous deployment (CI/CD) pipeline via Coolify orchestrator, multi-service Docker containerization (Nginx, Bun, Redis), and digital accessibility audit validated at 9.95/10.",
       ],
-      stack: ["PWA", "Angular", "Capacitor", "Bun", "Hono", "Zod", "Prisma", "BetterAuth", "Postman", "OpenAPI"],
+      stack: ["Angular", "Ionic", "PWA", "Capacitor", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Redis", "Docker", "Coolify", "Zod", "OpenAPI", "Postman", "Monorepo"],
       links: [
+        { labelKey: "live", href: "https://vireli.kerboul.me/" },
+        // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
         { labelKey: "details", href: addDetails("vireli") },
       ],
     },
     {
       slug: "minimax-resnet",
       relevance: 80,
-      title: "ResNet Board Game Evaluator",
-      subtitle: "Custom ResNet model for position evaluation in a board game.",
+      title: "AI Engine & ResNet Evaluator (Escampe Game)",
+      subtitle: "Design of an optimized Negamax Alpha-Beta engine and a residual network for position evaluation.",
       summary:
-        "Optimized a ResNet model for evaluating board game positions, implementing the Minimax algorithm with alpha-beta pruning.",
+        "End-to-end creation of a board game AI engine (Java) optimized with bitboards and Negamax Alpha-Beta search, coupled with a Siamese residual network (PyTorch, 730k parameters) trained via minimax bootstrapping on 3 million positions.",
       organization: "Polytech Paris-Saclay",
       period: "Mar 2026",
       status: "completed",
       image: cover("minimax-resnet"),
-      imageAlt: "Minimax ResNet preview",
+      imageAlt: "Escampe AI and BandDPER model preview",
       highlights: [
-        "Optimized a ResNet for evaluating positions in a board game.",
-        "Implemented the Minimax algorithm with alpha-beta pruning.",
-        "Developed a custom neural network for position evaluation.",
+        "Design of BandDPER, a Siamese ResNet with shared weights, relative unicorn-based spatial encoding (HalfKP-like), and direct bypass for forced passes.",
+        "Development of a Negamax search engine with Alpha-Beta pruning, Killer/History Heuristics, and Iterative Deepening.",
+        "Low-level optimization using hybrid Bitboards and Make-Unmake to maximize evaluation throughput (nodes/sec) without Garbage Collector overhead.",
+        "Generation of a 3-million-position dataset through self-play and parallel minimax bootstrapping at depth 7, trained with PyTorch and hosted on Hugging Face.",
       ],
-      stack: ["Python", "TensorFlow", "Minimax", "ResNet", "ML"],
+      stack: ["PyTorch", "Java", "Minimax", "ResNet", "Python"],
       links: [
         { labelKey: "live", href: escampeUrl },
+        { labelKey: "paper", href: "https://github.com/Wubpooz/app5-ai-game-project/blob/main/BandDPER.pdf", label: { en: "Research Paper", fr: "Rapport de recherche", ar: "ورقة البحث العلمية" } },
+        { labelKey: "source", href: "https://github.com/Wubpooz/app5-ai-game-project" },
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
     },
@@ -112,42 +134,68 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "how-europe-spends-its-time",
       relevance: 75,
       title: "How Europe Spends Its Time",
-      subtitle: "Turning messy European time-use surveys into a clear visual narrative.",
+      subtitle: "Turning European time-use surveys into a visual narrative.",
       summary:
-        "Resolved severe codification drift across 20 years of European time-use surveys with resilient Python mapping pipelines, then designed an accessible web app with custom interactive charts for a Hugging Face dataset.",
+        "Resolved severe codification drift across 20 years of European time-use surveys with robust mapping pipelines in Python. Analyzed data with Hugging Face to extract a visual narrative, and designed an accessible web application with interactive charts to present it.",
       organization: "Polytech Paris-Saclay",
       period: "Mar 2026 – Apr 2026",
       status: "completed",
       image: cover("how-europe-spends-its-time"),
       imageAlt: "How Europe Spends Its Time preview",
       highlights: [
-        "Robust data mapping pipelines in Python and pandas to correct codification drift.",
-        "Accessible, keyboard-navigable web experience with interactive data visualizations.",
-        "Published as a Hugging Face dataset for broader reuse.",
+        "Robust mapping pipelines in Python and pandas to correct codification drift and analyze the data.",
+        "Accessible and keyboard-navigable web experience with interactive visualizations.",
+        "Published as a Hugging Face dataset.",
       ],
-      stack: ["Python", "pandas", "Data Visualization", "Accessibility", "Hugging Face", "Big Data", "Data Analysis", "Datasets"],
+      stack: ["Python", "pandas", "Hugging Face", "Big Data", "Data Analysis", "Data Visualization", "Accessibility", "Datasets"],
       links: [
-        { labelKey: "live", href: datasetUrl },
+        { labelKey: "live", href: visualisationApp5Url },
+        { labelKey: "dataset", href: datasetUrl },
+        { labelKey: "source", href: visualisationApp5Repo },
         { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
       ],
       featured: true,
     },
     {
+      slug: "vibehealth",
+      relevance: 20,
+      title: "VibeHealth",
+      subtitle: "Health tracking web application.",
+      summary:
+        "Development of a comprehensive medical application combining lifestyle tracking, vital signs monitoring, a first-aid guide, and practitioner search. The application is bilingual, strongly typed, and offline-first for critical flows.",
+      organization: "Polytech Paris-Saclay",
+      period: "2025",
+      status: "completed",
+      image: cover("vibehealth"),
+      imageAlt: "VibeHealth preview",
+      highlights: [
+        "Monitoring of vital signs and lifestyle (activity, nutrition, hydration, sleep) with reminders and trend analysis.",
+        "Tracking of medications, vaccines, and health check-ups with reminders. Menstrual cycle and pregnancy tracking.",
+        "Markdown rendering for guides and articles. Pollen tracking and practitioner search with API integration.",
+        "Mood tracking and journaling (rich text + images), workouts (plans, suggestions), relaxation, and focus assistance.",
+      ],
+      stack: ["Angular", "Bun", "Hono", "PostgreSQL", "Prisma", "BetterAuth", "PWA", "Zod", "i18n", "Health Tech", "Antigravity", "Github Copilot", "Agentic Coding"],
+      links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/VibeHealth/" },
+        { labelKey: "details", href: addDetails("vibehealth") },
+      ],
+    },
+    {
       slug: "deloitte-google-cloud-hackathon",
       relevance: 85,
-      title: "Deloitte x Google Cloud Hackathon",
-      subtitle: "Award-winning multi-agent system for campaign automation.",
+      title: "Deloitte x Google Cloud Hackathon, Winner",
+      subtitle: "Winning multi-agent system to automate marketing campaigns.",
       summary:
-        "Built a distributed multi-agent system with ADK and MCP to automate marketing campaign creation, orchestrating specialized agents via A2A and integrating BigQuery, Gemini, Imagen, Cloud Run, and Vertex AI Agent Engine.",
-      organization: "Deloitte x Google Cloud",
+        "Creation of a distributed multi-agent system with ADK and MCP to automate marketing campaign generation, with orchestration via A2A and integration of BigQuery, Gemini, Imagen, Cloud Run, and Vertex AI Agent Engine.",
+      organization: "Deloitte & Google Cloud",
       period: "Nov 2025",
       status: "won",
       image: cover("deloitte-google-cloud-hackathon"),
       imageAlt: "Deloitte x Google Cloud Hackathon preview",
       highlights: [
-        "Multi-agent distributed system using ADK, MCP, and A2A orchestration.",
-        "Native Cloud integration: BigQuery, Gemini, Imagen, Cloud Run, and Vertex AI Agent Engine.",
-        "Won the hackathon.",
+        "Developed a distributed multi-agent system with ADK, MCP, and A2A orchestration to automate the creation of marketing campaigns.",
+        "Cloud-native integration: BigQuery (demographic queries), Gemini, Imagen, Cloud Run, and Vertex AI Agent Engine.",
+        "Hackathon winner.",
       ],
       stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI", "Google Cloud", "Agent Development Kit (ADK)", "Cloud Computing", "A2A"],
       links: [
@@ -159,40 +207,24 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "xtts-finetuning",
       relevance: 100,
       title: "XTTS Finetuning",
-      subtitle: "Speech synthesis research and Maltese language support.",
+      subtitle: "Speech synthesis research.",
       summary:
-        "Reviewed the state of the art in TTS, built a Streamlit app for faster paper discovery, and fine-tuned XTTS on Google Colab with PyTorch and GPT-2 to add Maltese without regressions.",
+        "State-of-the-art review in TTS, creation of a Streamlit application to accelerate research paper discovery, and fine-tuning of XTTS on Google Colab with PyTorch and GPT-2 to add Maltese support without regression.",
       organization: "L-Università ta' Malta (University of Malta)",
       period: "Jun 2025 – Aug 2025",
       status: "completed",
       image: cover("xtts-finetuning"),
-      imageAlt: "XTTS Finetuning preview",
+      imageAlt: "XTTS Finetuning project preview",
       highlights: [
-        "State-of-the-art review in TTS with a paper retrieval tool in Streamlit.",
-        "XTTS fine-tuning and inference on Google Colab using PyTorch and GPT-2.",
-        "Maltese support added without regression.",
+        "State-of-the-art review in TTS with a paper retrieval tool in Streamlit. XTTS model selected for its performance, modular architecture, knowledge of Italian, Arabic, English, and French, and its handling of code-switching, which adapts very well to Maltese.",
+        "Fine-tuning and inference of the GPT-2 component of the XTTS model on Google Colab using PyTorch. The model allows adding a new language by training only the GPT-2 part, which significantly reduces training costs and prevents regressions.",
+        "Numerous training and optimization strategies to improve the quality of Maltese speech synthesis, but limited time to implement hybrid training (mixing Maltese and original languages).",
       ],
-      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face", "Machine Learning", "Model Training"],
+      stack: ["PyTorch", "GPT-2", "XTTS", "Streamlit", "Git", "Hugging Face", "Machine Learning", "Model Training"],
       links: [
+        { labelKey: "live", href: streamlitSearch, label: { en: "Paper Discovery Tool", fr: "Outil de recherche d'articles", ar: "أداة البحث عن الأوراق" } },
+        { labelKey: "demo", href: streamlitDemo, label: { en: "Maltese TTS Demo", fr: "Synthèse vocale maltaise", ar: "عرض توليد الكلام المالطي" } },
         { labelKey: "source", href: maltaRepo },
-        {
-          labelKey: "live",
-          href: streamlitDemo,
-          label: {
-            en: "Maltese TTS Demo",
-            fr: "Synthèse vocale maltaise",
-            ar: "عرض توليد الكلام المالطي"
-          }
-        },
-        {
-          labelKey: "search",
-          href: streamlitSearch,
-          label: {
-            en: "Paper Discovery Tool",
-            fr: "Outil de recherche d'articles",
-            ar: "أداة البحث عن الأوراق"
-          }
-        },
         { labelKey: "details", href: addDetails("xtts-finetuning") },
       ],
       featured: true,
@@ -203,19 +235,21 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "Quizine",
       subtitle: "Real-time multiplayer quiz platform with WebSockets.",
       summary:
-        "Designed a robust real-time quiz architecture handling 50 players per room, built a modular Angular frontend, and integrated Redis-backed session management with deployment on Vercel and Supabase.",
+        "Design of a real-time quiz architecture capable of handling 50 players per room, a modular Angular frontend, and session management with Redis, Vercel, and Supabase.",
       organization: "Polytech Paris-Saclay",
       period: "Jan 2025 – May 2025",
       status: "completed",
       image: cover("quizine"),
       imageAlt: "Quizine preview",
       highlights: [
-        "WebSockets-based architecture for synchronized gameplay and reconnect handling.",
-        "Angular frontend with routing, AuthGuard, notifications, and API contract.",
-        "Documented from Figma mockups to continuous deployment.",
+        "WebSockets architecture to synchronize questions, scores, and reconnections.",
+        "Modular Angular frontend with routing, AuthGuard, notifications, and API contract.",
+        "Complete project documentation, from Figma mockups to continuous deployment (Vercel, Supabase).",
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
       links: [
+        { labelKey: "live", href: "https://quizine-front.vercel.app/landing" },
+        { labelKey: "source", href: "https://github.com/Wubpooz/quizine_front" },
         { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
@@ -226,38 +260,40 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "C Compiler",
       subtitle: "C compiler written in Java.",
       summary:
-        "Developed a C compiler in Java with error handling, code generation, and loops support.",
+        "Development of a C compiler in Java, featuring optimizations, error highlighting, and support for loops, functions, pointers, lists, scopes, variables, send/recv, and malloc.",
       organization: "Polytech Paris-Saclay",
       period: "2024 – 2025",
       status: "completed",
       image: cover("compilateur-c-java"),
-      imageAlt: "C Compiler preview",
+      imageAlt: "C Compiler project preview",
       highlights: [
-        "Developed a C compiler in Java.",
-        "Implemented lexical, syntactic, and semantic analysis.",
-        "Supports code generation, variables, loops, and error handling.",
+        "Development of a C compiler in Java from lexer to code generation.",
+        "Support for loops, functions, pointers, lists, scopes, variables, send/recv, and malloc (with a standard library).",
+        "Error highlighting, with clear errors for each compilation step (lexer, grammar, semantics, code generation).",
+        "Optimization of arithmetic calculations during compilation.",
       ],
-      stack: ["C", "Java", "Compiler", "ANTLR"],
+      stack: ["Java", "Compiler", "Error Handling"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/app4-compilation" },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
       ],
     },
     {
       slug: "jeux-entreprise",
-      relevance: 60,
+      relevance: 20,
       title: "Business Simulation Games",
       subtitle: "Management of a fictitious company.",
       summary:
-        "Led a team in a competitive business game simulation, managing strategies, financial decisions, and operations of a mock company.",
+        "Management of a fictitious company as part of a competitive business simulation game.",
       organization: "Polytech Paris-Saclay",
       period: "2025",
       status: "completed",
       image: cover("jeux-entreprise"),
-      imageAlt: "Business Simulation Games preview",
+      imageAlt: "Business Simulation Games project preview",
       highlights: [
-        "Managed strategy, finance, and operations of a mock company.",
-        "Analyzed market trends and competitive landscape.",
-        "Coordinated with a multidisciplinary team.",
+        "Management of a fictitious company.",
+        "Handling of strategy, finance, HR, marketing, and operations.",
+        "Analysis of market trends and competition, and management of risks, pricing, and production quantities.",
       ],
       stack: ["Management", "Strategy", "Finance"],
       links: [
@@ -270,19 +306,21 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "Magnus Carlos",
       subtitle: "3D scientific simulation of the Magnus effect.",
       summary:
-        "Managed a 3D scientific simulation project with a six-person team using Agile practices, and implemented the effect’s visualization with SDL2 textures, cameras, and rotations.",
+        "Management of a 3D scientific simulation project with a team of six students using Agile methodologies, and implementation of the visualization using SDL2 (textures, cameras, rotations).",
       organization: "Polytech Paris-Saclay",
       period: "Sep 2024 – Dec 2024",
       status: "completed",
       image: cover("magnus-carlos"),
       imageAlt: "Magnus Carlos preview",
       highlights: [
-        "Managed a 3D scientific simulation project on the Magnus effect.",
-        "Used SDL2 for visualization with textures, cameras, and rotations.",
-        "Led the work in a team of six students.",
+        "Scientific simulation of the Magnus effect, taking into account velocity, trajectory, object shape, and friction.",
+        "SDL2 visualization: textures (ball, players, goals, ground), cameras, and rotations.",
+        "Pre-computation of scenarios where the ball enters the goal with the Magnus effect, and misses without the effect, viewed from multiple camera angles.",
+        "Leadership of a team of six students in an Agile environment.",
       ],
-      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualization", "C++", "Physics Modeling", "Project Management"],
+      stack: ["C++", "SDL2", "3D Simulation", "Agile", "Visualization", "Physics Modeling", "Project Management"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/MagnusCarlos" },
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
     },
@@ -292,19 +330,20 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "Nyxen",
       subtitle: "Single-page experience with an interactive 3D model.",
       summary:
-        "Designed the layout, palette, flows, and SPA routing for a modern web experience while integrating an animated 3D model into the main section.",
+        "Design of a cosmetic e-commerce SPA. From palette and user journey design to the integration of an animated 3D model in the main section.",
       organization: "Polytech Paris-Saclay",
       period: "2023 – 2024",
       status: "completed",
       image: cover("nyxen"),
       imageAlt: "Nyxen preview",
       highlights: [
-        "Layout, color palette, user flows, and SPA routing design.",
-        "Interactive and animated 3D model in the main section.",
-        "Strong focus on UI direction and interaction polish.",
+        "Design of the palette, user journeys, and SPA routing.",
+        "Integration of an interactive and animated 3D model.",
+        "Strong focus on art direction and interaction polish.",
       ],
-      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git", "Angular", "Three.js", "HTML", "TypeScript", "JavaScript", "Agile", "Frontend"],
+      stack: ["Angular", "Three.js", "TypeScript", "JavaScript", "HTML", "CSS", "SPA Routing", "3D", "Animation", "Git", "Agile", "Frontend"],
       links: [
+        { labelKey: "live", href: "https://github.com/Wubpooz/APP3_Projet_Web" },
         { labelKey: "details", href: addDetails("nyxen") },
       ],
     },
@@ -314,17 +353,17 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "House Finder",
       subtitle: "Data modeling and CLI tool.",
       summary:
-        "Designed database models to structure housing attributes and connectivity, and developed a CLI tool to rank properties based on custom criteria.",
+        "Design of data models to structure housing attributes and connectivity, and development of a CLI tool to rank properties based on custom criteria.",
       organization: "Polytech Paris-Saclay",
       period: "2023",
       status: "completed",
       image: cover("house-finder"),
       imageAlt: "House Finder preview",
       highlights: [
-        "Designed data models to structure housing connectivity and attributes.",
-        "Developed a Java CLI tool to rank properties using custom criteria.",
+        "Development of a CLI tool to rank properties based on custom criteria.",
+        "Design of data models to structure housing attributes and connectivity.",
       ],
-      stack: ["Java", "Open Data", "CLI"],
+      stack: ["Java", "Open Data", "Dataset", "CLI"],
       links: [
         { labelKey: "details", href: addDetails("house-finder") },
       ],
@@ -335,19 +374,20 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "Escape the Mummy",
       subtitle: "3D maze game in Processing and GLSL.",
       summary:
-        "Developed a 3D maze game where the player must escape a mummy in a procedurally generated desert and pyramid, implementing custom shaders in GLSL.",
+        "Development of a 3D maze game where the player must escape a mummy after entering a pyramid in a procedurally generated desert.",
       organization: "Université Paris-Saclay",
       period: "2022",
       status: "completed",
       image: cover("escape-the-mummy"),
       imageAlt: "Escape the Mummy preview",
       highlights: [
-        "Developed a 3D maze game with Processing and GLSL shaders.",
-        "Implemented procedural generation for the desert and pyramid.",
-        "Created game loop, camera controls, and mummy AI.",
+        "Development of a 3D maze game using Processing and GLSL shaders.",
+        "Procedural generation of a desert and a pyramid.",
+        "Gameplay mechanic where the player must escape a mummy.",
       ],
-      stack: ["Processing", "GLSL", "3D Game"],
+      stack: ["Processing", "GLSL", "Shader", "3D Game"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/IGSD-projet" },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
       ],
     },
@@ -355,21 +395,22 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "cli-messaging",
       relevance: 30,
       title: "CLI Messaging",
-      subtitle: "TCP/IP socket messaging apps in C.",
+      subtitle: "TCP/IP messaging applications in C.",
       summary:
-        "Created client-server messaging applications in C using TCP/IP sockets, supporting multiple client connections and custom communication protocols.",
+        "Development of client and server messaging applications in UDP and TCP/IP with a command-line interface.",
       organization: "Université Paris-Saclay",
       period: "2022",
       status: "completed",
       image: cover("cli-messaging"),
       imageAlt: "CLI Messaging preview",
       highlights: [
-        "Developed client-server messaging applications in C using TCP/IP sockets.",
-        "Implemented multi-client connection management.",
-        "Designed a command-line interface for messaging.",
+        "Development of client and server messaging applications in UDP and TCP/IP.",
+        "Command-line interface (CLI) for communication.",
+        "Management of connections and messages between clients and server.",
       ],
-      stack: ["C", "TCP-IP", "CLI"],
+      stack: ["C", "UDP", "TCP-IP", "CLI"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/Rezo" },
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
     },
@@ -377,7 +418,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "logihub",
       relevance: 25,
       title: "LogiHub",
-      subtitle: "Web library hosting custom p5.js games.",
+      subtitle: "Online library hosting custom p5.js games.",
       summary:
         "First online game library hosting custom p5.js games, developed during high school. Features classics like Pong, Space Invaders, Reaction Time, and Number Test.",
       organization: "Lycée de l'Essouriau",
@@ -386,12 +427,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("logihub"),
       imageAlt: "LogiHub preview",
       highlights: [
-        "Developed multiple custom retro games in p5.js (Pong, Space Invaders, Reaction Time).",
-        "Built a static HTML/CSS hosting platform for web-playable games.",
+        "Development of several custom retro games in p5.js (Pong, Space Invaders, Reaction Time).",
+        "Creation of a static HTML/CSS hosting platform for web-playable games.",
       ],
       stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
       links: [
         { labelKey: "live", href: "http://mwaharte.free.fr/test/feuille_html_principale.html" },
+        { labelKey: "source", href: "https://github.com/Wubpooz/Site-ISN-2019" },
         { labelKey: "details", href: addDetails("logihub") },
       ],
     }
@@ -410,13 +452,14 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("watchlist-service"),
       imageAlt: "Aperçu du Service de Watchlist Média",
       highlights: [
-        "Collections collaboratives avec des rôles PROPRIÉTAIRE, COLLABORATEUR et LECTEUR.",
+        "Collections collaboratives avec des rôles granulaires, images, des notes, invitations et statistiques. Tri et filtrage des collections et des médias.",
         "Serveur Model Context Protocol (MCP) intégré pour les outils de collections et de médias.",
         "Pipeline CI/CD complet avec Vitest, requêtes mockées pour le back-end et déploiement automatisé.",
       ],
-      stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Supabase", "MCP", "Docker", "GitHub Actions"],
+      stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Vercel", "Supabase", "MCP", "Docker", "GitHub Actions"],
       links: [
         { labelKey: "live", href: watchlistUrl },
+        { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
     },
@@ -424,44 +467,49 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "vireli",
       relevance: 90,
       title: "Vireli",
-      subtitle: "Application web progressive (PWA).",
+      subtitle: "Application de décarbonation web progressive (PWA).",
       summary:
-        "Développement d'une application web progressive (PWA) avec Angular 21 et Capacitor, s'appuyant sur Hono et Bun pour les API back-end.",
+        "Conception et implémentation d'une application progressive d'éco-responsabilité comprenant un questionnaire d'empreinte carbone périodique, la gestion de groupes collaboratifs en temps réel, l'authentification de session via Better Auth, et la persistance des données PostgreSQL via l'ORM Prisma au sein d'un monorepo Bun et Hono.",
       organization: "Polytech Paris-Saclay",
       period: "2026",
       status: "completed",
       image: cover("vireli"),
       imageAlt: "Aperçu de Vireli PWA",
       highlights: [
-        "Développeur principal d'une application web progressive.",
-        "Développement full-stack avec Bun, Hono et Zod.",
-        "Intégration avec Postman et OpenAPI.",
+        "Groupes d'entraide collaboratifs avec messagerie en temps réel, invitations, gestion de rôles granulaires et objectifs collectifs. Suivi d'empreinte avec graphiques d'avancement temporels.",
+        "Architecture monorepo Bun workspaces avec partage de types stricts, logs d'audit automatisés via triggers PostgreSQL, et architecture de suppression conforme RGPD par anonymisation.",
+        "Pipeline de déploiement continu (CI/CD) via l'orchestrateur Coolify, conteneurisation Docker multi-services (Nginx, Bun, Redis) et audit d'accessibilité numérique validé à 9.95/10.",
       ],
-      stack: ["PWA", "Angular", "Capacitor", "Bun", "Hono", "Zod", "Prisma", "BetterAuth", "Postman", "OpenAPI"],
+      stack: ["Angular", "Ionic", "PWA", "Capacitor", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Redis", "Docker", "Coolify", "Zod", "OpenAPI", "Postman", "Monorepo"],
       links: [
+        { labelKey: "live", href: "https://vireli.kerboul.me/" },
+        // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
         { labelKey: "details", href: addDetails("vireli") },
       ],
     },
     {
       slug: "minimax-resnet",
       relevance: 80,
-      title: "Evaluateur de Jeu de Plateau ResNet",
-      subtitle: "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau.",
+      title: "Moteur d'IA & Évaluateur ResNet (Jeu d'Escampe)",
+      subtitle: "Conception d'un moteur Negamax Alpha-Bêta optimisé et d'un réseau résiduel pour l'évaluation de positions.",
       summary:
-        "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau, implémentant l'algorithme Minimax avec élagage alpha-bêta.",
+        "Création complète d'un moteur d'IA de jeu de plateau (Java) optimisé par bitboards et Negamax Alpha-Bêta, couplé à un réseau résiduel siamois (PyTorch, 730k paramètres) entraîné par bootstrapping minimax sur 3 millions de positions.",
       organization: "Polytech Paris-Saclay",
       period: "mars 2026",
       status: "completed",
       image: cover("minimax-resnet"),
-      imageAlt: "Aperçu de Minimax ResNet",
+      imageAlt: "Aperçu de l'IA d'Escampe et du modèle BandDPER",
       highlights: [
-        "Optimisation d'un ResNet pour l'évaluation de positions dans un jeu de plateau.",
-        "Implémentation de l'algorithme Minimax avec élagage alpha-bêta.",
-        "Développement d'un réseau de neurones personnalisé pour l'évaluation des positions.",
+        "Conception de BandDPER, un ResNet siamois à poids partagés avec encodage spatial relatif à la licorne (type HalfKP) et bypass direct pour les passes forcées.",
+        "Développement d'un moteur de recherche Negamax avec élagage Alpha-Bêta, Killer/History Heuristics et Approfondissement Itératif (Iterative Deepening).",
+        "Optimisation bas niveau avec Bitboards hybrides et Make-Unmake pour maximiser le débit d'évaluation (noeud/sec) sans overhead du Garbage Collector.",
+        "Génération d'un dataset de 3 millions de positions par self-play et bootstrapping minimax parallèle à profondeur 7, entraîné sous PyTorch et hébergé sur Hugging Face.",
       ],
-      stack: ["Python", "TensorFlow", "Minimax", "ResNet", "ML"],
+      stack: ["PyTorch", "Java", "Minimax", "ResNet", "Python"],
       links: [
         { labelKey: "live", href: escampeUrl },
+        { labelKey: "paper", href: "https://github.com/Wubpooz/app5-ai-game-project/blob/main/BandDPER.pdf", label: { en: "Research Paper", fr: "Rapport de recherche", ar: "ورقة البحث العلمية" } },
+        { labelKey: "source", href: "https://github.com/Wubpooz/app5-ai-game-project" },
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
     },
@@ -469,27 +517,51 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "how-europe-spends-its-time",
       relevance: 75,
       title: "How Europe Spends Its Time",
-      subtitle: "Transformer des enquêtes européennes brouillonnes en récit visuel.",
+      subtitle: "Transformer des enquêtes européennes sur l’usage du temps en récit visuel.",
       summary:
-        "A résolu une forte dérive de codification sur 20 ans d’enquêtes européennes sur l’usage du temps grâce à des pipelines de mapping robustes en Python, puis a conçu une application web accessible avec graphiques interactifs pour un dataset Hugging Face.",
+        "A résolu une forte dérive de codification sur 20 ans d’enquêtes européennes sur l’usage du temps grâce à des pipelines de mapping robustes en Python. Analysé les données avec Hugging Face afin d'en extraire un narratif visuel, puis a conçu une application web accessible avec graphiques interactifs pour la transmettre.",
       organization: "Polytech Paris-Saclay",
       period: "mars 2026 – avr. 2026",
       status: "completed",
       image: cover("how-europe-spends-its-time"),
       imageAlt: "Aperçu de How Europe Spends Its Time",
       highlights: [
-        // TODO Conçu et déployé une \href{https://wubpooz.github.io/visualisation-app5/}{application web accessible et navigable au clavier} en utilisant des graphiques interactifs personnalisés pour transformer le \href{https://huggingface.co/datasets/Bluefir/hetus-time-use}{jeu de données Hugging Face} en une narration visuelle intuitive.
-        // TODO Résolu une dérive majeure de codification sur 20 ans des enquêtes européennes d'usage du temps, souvent hétérogènes, en développant des pipelines robustes de mise en correspondance des données en \textbf{Python} (pandas).
-        "Pipelines de mapping robustes en Python et pandas pour corriger la dérive de codification.",
+        "Pipelines de mapping robustes en Python et pandas pour corriger la dérive de codification et analyser les données.",
         "Application web accessible et navigable au clavier avec visualisations interactives.",
         "Publié sous forme de dataset Hugging Face.",
       ],
-      stack: ["Python", "pandas", "Visualisation", "Accessibilité", "Hugging Face", "Big Data", "Data Analysis", "Datasets"],
+      stack: ["Python", "pandas", "Hugging Face", "Big Data", "Data Analysis", "Visualisation", "Accessibilité", "Datasets"],
       links: [
-        { labelKey: "live", href: datasetUrl },
+        { labelKey: "live", href: visualisationApp5Url },
+        { labelKey: "dataset", href: datasetUrl },
+        { labelKey: "source", href: visualisationApp5Repo },
         { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
       ],
       featured: true,
+    },
+    {
+      slug: "vibehealth",
+      relevance: 20,
+      title: "VibeHealth",
+      subtitle: "Application web de suivi de santé.",
+      summary:
+        "Développement d'une application médicale complète, combinant du suivi du style de vie, des signaux vitaux, un référentiel de premier secours et la recherche de praticiens. L'application est bilingue, avec un fort typage et une approche offline-first pour les flux critiques.",
+      organization: "Polytech Paris-Saclay",
+      period: "2025",
+      status: "completed",
+      image: cover("vibehealth"),
+      imageAlt: "Aperçu de VibeHealth",
+      highlights: [
+        "Suivi des signaux vitaux, du style de vie (activité, alimentation, hydration, sommeil) avec rappels et analyse des tendances.",
+        "Suivi des médicaments, des vaccins et des contrôles de santé avec rappels. Suivi du cycle menstruel et de la grossesse.",
+        "Rendu de guides et d'articles en markdown. Suivi du pollen et recherche de praticiens avec intégration d'API.",
+        "suivi de l'humeur et journalisation (texte enrichi + images), entraînements (plans, suggestions), relaxation, aide à la concentration.",
+      ],
+      stack: ["Angular", "Bun", "Hono", "PostgreSQL", "Prisma", "BetterAuth", "PWA", "Zod", "i18n", "Health Tech", "Antigravity", "Github Copilot", "Agentic Coding"],
+      links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/VibeHealth/" },
+        { labelKey: "details", href: addDetails("vibehealth") },
+      ],
     },
     {
       slug: "deloitte-google-cloud-hackathon",
@@ -504,10 +576,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("deloitte-google-cloud-hackathon"),
       imageAlt: "Aperçu du hackathon Deloitte x Google Cloud",
       highlights: [
-        // TODO Développé un \textbf{système multi-agents distribué} utilisant \textbf{ADK} et le protocole \textbf{MCP} pour automatiser la création de campagnes marketing. Orchestration des agents spécialisés communiquant via le protocole A2A.
-        // TODO Intégré des services Cloud natifs pour réaliser des requêtes démographiques via BigQuery, générer du contenu multimodal avec Gemini et Imagen, et déployer sur Cloud Run et Vertex AI Agent Engine.
-        "Système multi-agent distribué avec ADK, MCP et orchestration A2A.",
-        "Intégration Cloud native : BigQuery, Gemini, Imagen, Cloud Run et Vertex AI Agent Engine.",
+        "Dévelopé un système multi-agent distribué avec ADK, MCP et orchestration A2A afin de automatiser la création de campagnes marketing.",
+        "Intégration Cloud native : BigQuery (requêtes démographiques), Gemini, Imagen, Cloud Run et Vertex AI Agent Engine.",
         "Lauréat du hackathon.",
       ],
       stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI", "Google Cloud", "Agent Development Kit (ADK)", "Cloud Computing", "A2A"],
@@ -520,7 +590,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "xtts-finetuning",
       relevance: 100,
       title: "XTTS Finetuning",
-      subtitle: "Recherche en synthèse vocale et support du maltais.",
+      subtitle: "Recherche en synthèse vocale.",
       summary:
         "Revue de l’état de l’art en TTS, création d’une application Streamlit pour accélérer la recherche de papiers, puis fine-tuning de XTTS sur Google Colab avec PyTorch et GPT-2 pour ajouter le maltais sans régression.",
       organization: "L-Università ta' Malta (University of Malta)",
@@ -529,15 +599,15 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("xtts-finetuning"),
       imageAlt: "Aperçu du projet XTTS Finetuning",
       highlights: [
-        "Revue de l’état de l’art en TTS avec un outil de recherche de papiers sous Streamlit.",
-        "Fine-tuning et inférence de XTTS sur Google Colab avec PyTorch et GPT-2.",
-        "Support du maltais ajouté sans régression.",
+        "Revue de l’état de l’art en TTS avec un outil de recherche de papiers sous Streamlit. Choix du modèle XTTS pour ses performances, son architecture modulaire et sa connaissance de l'italien, de l'arabe, de l'anglais et du français et sa gestion du code-switching, qui s'adaptent très bien au maltais.",
+        "Fine-tuning et inférence de la partie GPT-2 du modèle XTTS sur Google Colab avec PyTorch. Le modèle permettant d'ajouter une nouvelle langue en entraînant uniquement la partie GPT-2, ce qui réduit considérablement le coût de l'entraînement et permet d'éviter les régressions.",
+        "Nombreuses stratégies d'entraînement et d'optimisation pour améliorer la qualité de la synthèse vocale maltaise, mais manque de temps pour implémenter un entraînement hybride (mixe de maltais et des langues originales).",
       ],
-      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face", "Apprentissage automatique", "Model Training"],
+      stack: ["PyTorch", "GPT-2", "XTTS", "Streamlit", "Git", "Hugging Face", "Apprentissage automatique", "Model Training"],
       links: [
+        { labelKey: "live", href: streamlitSearch, label: { en: "Paper Discovery Tool", fr: "Outil de recherche d'articles", ar: "أداة البحث عن الأوراق" } },
+        { labelKey: "demo", href: streamlitDemo, label: { en: "Maltese TTS Demo", fr: "Synthèse vocale maltaise", ar: "عرض توليد الكلام المالطي" } },
         { labelKey: "source", href: maltaRepo },
-        { labelKey: "live", href: streamlitDemo },
-        { labelKey: "demo", href: streamlitSearch },
         { labelKey: "details", href: addDetails("xtts-finetuning") },
       ],
       featured: true,
@@ -546,7 +616,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "quizine",
       relevance: 65,
       title: "Quizine",
-      subtitle: "Plateforme de quiz multijoueur en temps réel avec WebSockets.",
+      subtitle: "Plateforme de quiz temps réel avec WebSockets.",
       summary:
         "Conception d’une architecture de quiz temps réel capable de gérer 50 joueurs par salle, frontend Angular modulaire et gestion des sessions avec Redis, Vercel et Supabase.",
       organization: "Polytech Paris-Saclay",
@@ -555,15 +625,14 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("quizine"),
       imageAlt: "Aperçu de Quizine",
       highlights: [
-        // TODO
-        // Conçu une architecture de quiz en temps réel, robuste, via WebSockets pour gérer \textbf{50 joueurs} par salle (questions synchronisées, tableau des scores partagé, gestion des connexions/reconnexions). Frontend Angular \textbf{modulaire} (routing, AuthGuard, notifications, contrat d’API). Mocks locaux et \textbf{session utilisateur Redis}. + et responsive avec Tailwind CSS
-        // Organisé et planifié le cycle de vie complet du projet, des maquettes \href{https://www.figma.com/design/aIMeyjUQSQoAYLZoIbqEE4/Quiz-app?node-id=0-1&t=oOwVkBpXpddyvPUO-1}{Figma} au déploiement continu (Vercel, Supabase), incluant la gestion des tâches, la documentation et la coordination des parties prenantes.
         "Architecture WebSockets pour synchroniser les questions, les scores et les reconnexions.",
         "Frontend Angular modulaire avec routing, AuthGuard, notifications et contrat API.",
-        "Du mockup Figma au déploiement continu.",
+        "Documentation complète du projet, des maquettes Figma au déploiement continu (Vercel, Supabase).",
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
       links: [
+        { labelKey: "live", href: "https://quizine-front.vercel.app/landing" },
+        { labelKey: "source", href: "https://github.com/Wubpooz/quizine_front" },
         { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
@@ -574,24 +643,27 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "Compilateur de C",
       subtitle: "Compilateur de C écrit en Java.",
       summary:
-        "Développement d'un compilateur de C en Java, avec gestion des erreurs, compilation et boucles.",
+        "Développement d'un compilateur de C en Java, avec optimisationsn, soulignage des erreurs et support pour les boucles, fonctions, pointeurs, listes, scope, variables, send/recv et malloc.",
       organization: "Polytech Paris-Saclay",
       period: "2024 – 2025",
       status: "completed",
       image: cover("compilateur-c-java"),
       imageAlt: "Aperçu du projet Compilateur de C",
       highlights: [
-        "Développement d'un compilateur de C en Java.",
-        "Gestion des erreurs, compilation et boucles.",
+        "Développement d'un compilateur de C en Java du lexer à la génération de code.",
+        "Support des boucles, fonctions, pointeurs, listes, scope, variables, send/recv, malloc (avec une librairie standard).",
+        "Soulignage des erreurs, erreurs claires par étape de la compilation (lexer, grammaire, sémantique, génération de code).",
+        "Optimisation des calculs arithmétiques à la compilation.",
       ],
-      stack: ["C", "Java", "Compilateur"],
+      stack: ["Java", "Compilateur", "Gestion d'erreurs"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/app4-compilation" },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
       ],
     },
     {
       slug: "jeux-entreprise",
-      relevance: 60,
+      relevance: 20,
       title: "Jeux d'entreprise",
       subtitle: "Pilotage d'une entreprise fictive.",
       summary:
@@ -603,6 +675,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       imageAlt: "Aperçu du projet Jeux d'entreprise",
       highlights: [
         "Pilotage d'une entreprise fictive.",
+        "Gestion de la stratégie, des finances, du personnel, du marketing et des opérations.",
+        "Analyse des tendances du marché et de la concurrence et gestion de risques, des prix et des quantités.",
       ],
       stack: ["Gestion", "Stratégie", "Finance"],
       links: [
@@ -622,15 +696,14 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("magnus-carlos"),
       imageAlt: "Aperçu de Magnus Carlos",
       highlights: [
-        // TODO
-        // \textbf{Gestion Agile} d'un projet de simulation scientifique et rendu 3D de l’effet Magnus avec une équipe de 6 étudiants.
-        // Résolution numérique et implémentation en \textbf{C++} (visualisation temps réel avec \textbf{SDL2}) pour reproduire, modéliser et prédire dynamiquement le comportement d'un système physique complexe (trajectoires, fluides).
-        "Projet de simulation scientifique 3D sur l’effet Magnus.",
-        "Visualisation avec SDL2 : textures, caméras et rotations.",
-        "Pilotage d’une équipe de six étudiants.",
+        "Simulation scientifique de l’effet Magnus en prenant en compte la vitesse, la trajectoire, la forme de l'objet, les frottements.",
+        "Visualisation avec SDL2 : textures (ballon, joueurs, cages, sol), caméras et rotations.",
+        "Précalculs de scénarios où le ballon vas dans les cages avec l'effet Magnus, les loupes sans l'effet, sous plusieurs angles de caméra.",
+        "Pilotage d’une équipe de six étudiants dans un environnement Agile.",
       ],
-      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualisation", "C++", "Physique Modélisation", "Gestion de projet"],
+      stack: ["C++", "SDL2", "Simulation 3D", "Agile", "Visualisation", "Physique Modélisation", "Gestion de projet"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/MagnusCarlos" },
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
     },
@@ -640,19 +713,20 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "Nyxen",
       subtitle: "Expérience single-page avec modèle 3D interactif.",
       summary:
-        "Conception de la mise en page, de la palette, des parcours utilisateurs et du routing SPA, avec intégration d’un modèle 3D animé dans la section principale.",
+        "Conception d'un eshop cosmétique SPA. De la conception de la palette et des parcours utilisateurs à l'intégration d’un modèle 3D animé dans la section principale.",
       organization: "Polytech Paris-Saclay",
       period: "2023 – 2024",
       status: "completed",
       image: cover("nyxen"),
       imageAlt: "Aperçu de Nyxen",
       highlights: [
-        "Mise en page, palette de couleurs, parcours et routing SPA.",
+        "Conception de la palette, des parcours utilisateurs et du routing SPA.",
         "Intégration d’un modèle 3D interactif et animé.",
         "Fort accent sur la direction artistique et les interactions.",
       ],
-      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git", "Angular", "Three.js", "HTML", "TypeScript", "JavaScript", "Agile", "Frontend"],
+      stack: ["Angular", "Three.js", "TypeScript", "JavaScript", "HTML", "CSS", "SPA Routing", "3D", "Animation", "Git", "Agile", "Frontend"],
       links: [
+        { labelKey: "live", href: "https://github.com/Wubpooz/APP3_Projet_Web" },
         { labelKey: "details", href: addDetails("nyxen") },
       ],
     },
@@ -669,10 +743,10 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("house-finder"),
       imageAlt: "Aperçu de House finder",
       highlights: [
-        "Conception des modèles de données pour structurer la connectivité et les attributs des logements.",
         "Développement d’un outil CLI pour classer les biens selon des critères personnalisés.",
+        "Conception des modèles de données pour structurer la connectivité et les attributs des logements.",
       ],
-      stack: ["Java", "Données OpenSource", "CLI"],
+      stack: ["Java", "Données OpenSource", "Dataset", "CLI"],
       links: [
         { labelKey: "details", href: addDetails("house-finder") },
       ],
@@ -690,12 +764,13 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("escape-the-mummy"),
       imageAlt: "Aperçu de Escape the mummy",
       highlights: [
-        "Développement d’un jeu de labyrinthe 3D avec Processing et GLSL.",
+        "Développement d’un jeu de labyrinthe 3D avec Processing et des shader GLSL.",
         "Génération procédurale d’un désert et d’une pyramide.",
         "Mécanique de jeu où le joueur doit échapper à une momie.",
       ],
-      stack: ["Processing", "GLSL", "Jeu 3D"],
+      stack: ["Processing", "GLSL", "Shader", "Jeu 3D"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/IGSD-projet" },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
       ],
     },
@@ -705,19 +780,20 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "CLI Messaging",
       subtitle: "Applications de messagerie TCP-IP en C.",
       summary:
-        "Développement d’applications de messagerie serveur et client en TCP-IP avec interface en ligne de commande.",
+        "Développement d’applications de messagerie serveur et client en UDP et TCP-IP avec interface en ligne de commande.",
       organization: "Université Paris-Saclay",
       period: "2022",
       status: "completed",
       image: cover("cli-messaging"),
       imageAlt: "Aperçu de CLI Messaging",
       highlights: [
-        "Développement d’applications de messagerie serveur et client en TCP-IP.",
+        "Développement d’applications de messagerie serveur et client en UDP et TCP-IP.",
         "Interface en ligne de commande pour la communication.",
         "Gestion des connexions et des messages entre clients et serveur.",
       ],
-      stack: ["C", "TCP-IP", "CLI"],
+      stack: ["C", "UDP", "TCP-IP", "CLI"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/Rezo" },
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
     },
@@ -740,6 +816,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
       links: [
         { labelKey: "live", href: "http://mwaharte.free.fr/test/feuille_html_principale.html" },
+        { labelKey: "source", href: "https://github.com/Wubpooz/Site-ISN-2019" },
         { labelKey: "details", href: addDetails("logihub") },
       ],
     }
@@ -758,13 +835,14 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("watchlist-service"),
       imageAlt: "معاينة خدمة قائمة المراقبة الإعلامية",
       highlights: [
-        "مجموعات تعاونية مع أدوار مالك (OWNER)، ومشارك (COLLABORATOR)، وقارئ (READER).",
+        "مجموعات تعاونية مع أدوار دقيقة وصور وتقييمات ودعوات وإحصاءات. فرز وتصفية المجموعات والوسائط.",
         "خادم بروتوكول سياق النموذج (MCP) مدمج لأدوات المجموعات والوسائط.",
         "خط أنابيب CI/CD شامل مع Vitest، واختبارات تكامل للخدمات الخلفية، ونشر مؤتمت.",
       ],
-      stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Supabase", "MCP", "Docker", "GitHub Actions"],
+      stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Vercel", "Supabase", "MCP", "Docker", "GitHub Actions"],
       links: [
         { labelKey: "live", href: watchlistUrl },
+        { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
     },
@@ -772,44 +850,49 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "vireli",
       relevance: 90,
       title: "Vireli",
-      subtitle: "تطبيق ويب تقدمي (PWA).",
+      subtitle: "تطبيق ويب تقدمي (PWA) للحد من الانبعاثات الكربونية.",
       summary:
-        "تطوير تطبيق ويب تقدمي (PWA) باستخدام Angular 21 و Capacitor، بالاعتماد على Hono و Bun لواجهات برمجة التطبيقات الخلفية.",
+        "تصميم وتطوير تطبيق ويب تقدمي للمسؤولية البيئية يتميز باستبيان دوري للبصمة الكربونية، وإدارة المجموعات التعاونية في الوقت الحقيقي، وإدارة الجلسات باستخدام Better Auth، وحفظ البيانات في قاعدة PostgreSQL عبر Prisma ORM ضمن monorepo يعتمد على Bun وHono.",
       organization: "Polytech Paris-Saclay",
       period: "2026",
       status: "completed",
       image: cover("vireli"),
       imageAlt: "معاينة تطبيق Vireli PWA",
       highlights: [
-        "المطور الرئيسي لتطبيق ويب تقدمي.",
-        "تطوير كامل (Full-stack) باستخدام Bun و Hono و Zod.",
-        "التكامل مع Postman و OpenAPI.",
+        "مجموعات تعاونية للدعم المتبادل مع مراسلة فورية، ودعوات، وإدارة أدوار دقيقة، وأهداف جماعية. تتبع البصمة الكربونية مع رسوم بيانية للتقدم الزمني.",
+        "بنية monorepo لمساحات عمل Bun مع مشاركة صارمة للأنواع، وسجلات تدقيق مؤتمتة عبر triggers في PostgreSQL، وبنية حذف متوافقة مع GDPR عبر إخفاء الهوية.",
+        "خط أنابيب نشر مستمر (CI/CD) عبر أداة Coolify، وحاويات Docker متعددة الخدمات (Nginx, Bun, Redis)، وتدقيق إمكانية الوصول الرقمي الحائز على تقييم 9.95/10.",
       ],
-      stack: ["PWA", "Angular", "Capacitor", "Bun", "Hono", "Zod", "Prisma", "BetterAuth", "Postman", "OpenAPI"],
+      stack: ["Angular", "Ionic", "PWA", "Capacitor", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Redis", "Docker", "Coolify", "Zod", "OpenAPI", "Postman", "Monorepo"],
       links: [
+        { labelKey: "live", href: "https://vireli.kerboul.me/" },
+        // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
         { labelKey: "details", href: addDetails("vireli") },
       ],
     },
     {
       slug: "minimax-resnet",
       relevance: 80,
-      title: "مقيّم ألعاب لوحية ResNet",
-      subtitle: "تحسين نموذج ResNet لتقييم الوضعيات في لعبة لوحية.",
+      title: "محرك ذكاء اصطناعي ومقيّم ResNet (لعبة إسكامبي)",
+      subtitle: "تصميم محرك Negamax Alpha-Beta محسن وشبكة متبقية لتقييم الوضعيات.",
       summary:
-        "تحسين نموذج ResNet لتقييم الوضعيات في لعبة لوحية، مع تطبيق خوارزمية Minimax وتقليم ألفا-بيتا.",
+        "تطوير شامل لمحرك ذكاء اصطناعي للعبة لوحية (بلغة Java) محسن باستخدام لوحات البت (bitboards) وبحث Negamax Alpha-Beta، متصل بشبكة متبقية سيامية (PyTorch، بـ 730 ألف معلمة) تم تدريبها عبر تمهيد المينيمكس (minimax bootstrapping) على 3 ملايين وضعية.",
       organization: "Polytech Paris-Saclay",
       period: "مارس 2026",
       status: "completed",
       image: cover("minimax-resnet"),
-      imageAlt: "معاينة Minimax ResNet",
+      imageAlt: "معاينة ذكاء إسكامبي الاصطناعي ونموذج BandDPER",
       highlights: [
-        "تحسين نموذج ResNet لتقييم الوضعيات في لعبة لوحية.",
-        "تطبيق خوارزمية Minimax مع تقليم ألفا-بيتا.",
-        "تطوير شبكة عصبية مخصصة لتقييم الوضعيات.",
+        "تصميم BandDPER، وهو ResNet سيامي بأوزان مشتركة، مع ترميز مكاني نسبي قائم على وحيد القرن (unicorn) شبيه بـ HalfKP، ومسار التفافي مباشر للتمريرات القسرية.",
+        "تطوير محرك بحث Negamax مع تقليم Alpha-Beta، وKiller/History Heuristics، والتعميق التكراري (Iterative Deepening).",
+        "تحسين منخفض المستوى باستخدام Bitboards هجينة وMake-Unmake لزيادة إنتاجية التقييم (عقدة/ثانية) دون أعباء Garbage Collector.",
+        "إنشاء مجموعة بيانات من 3 ملايين وضعية من خلال اللعب الذاتي وتمهيد المينيمكس المتوازي بعمق 7، وتم تدريبها باستخدام PyTorch واستضافتها على Hugging Face.",
       ],
-      stack: ["Python", "TensorFlow", "Minimax", "ResNet", "ML"],
+      stack: ["PyTorch", "Java", "Minimax", "ResNet", "Python"],
       links: [
         { labelKey: "live", href: escampeUrl },
+        { labelKey: "paper", href: "https://github.com/Wubpooz/app5-ai-game-project/blob/main/BandDPER.pdf", label: { en: "Research Paper", fr: "Rapport de recherche", ar: "ورقة البحث العلمية" } },
+        { labelKey: "source", href: "https://github.com/Wubpooz/app5-ai-game-project" },
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
     },
@@ -817,42 +900,68 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "how-europe-spends-its-time",
       relevance: 75,
       title: "How Europe Spends Its Time",
-      subtitle: "تحويل استبيانات استخدام الوقت الأوروبية المبعثرة إلى سرد بصري واضح.",
+      subtitle: "تحويل استقصاءات استخدام الوقت الأوروبية إلى سرد بصري.",
       summary:
-        "حُلّت مشكلة انحراف الترميز الشديد عبر 20 عامًا من استبيانات استخدام الوقت الأوروبية باستخدام خطوط معالجة مرنة في Python، ثم صُممت واجهة ويب سهلة الوصول مع رسوم بيانية تفاعلية مخصصة لمجموعة بيانات Hugging Face.",
+        "حُلَّت مشكلة انحراف الترميز الشديد عبر 20 عامًا من استقصاءات استخدام الوقت الأوروبية باستخدام خطوط أنابيب مطابقة متينة في Python. جرى تحليل البيانات باستخدام Hugging Face لاستخلاص سرد بصري، ثم تصميم تطبيق ويب سهل الوصول ورسوم بيانية تفاعلية لعرضها.",
       organization: "Polytech Paris-Saclay",
       period: "مارس 2026 – أبريل 2026",
       status: "completed",
       image: cover("how-europe-spends-its-time"),
       imageAlt: "معاينة How Europe Spends Its Time",
       highlights: [
-        "خطوط معالجة بيانات قوية في Python وpandas لتصحيح انحراف الترميز.",
-        "تجربة ويب سهلة الوصول وقابلة للتنقل بلوحة المفاتيح مع تصورات بيانات تفاعلية.",
-        "نُشر كمجموعة بيانات على Hugging Face لإعادة الاستخدام على نطاق أوسع.",
+        "خطوط أنابيب مطابقة قوية في Python وpandas لتصحيح انحراف الترميز وتحليل البيانات.",
+        "تطبيق ويب سهل الوصول وقابل للتنقل بلوحة المفاتيح مع تصورات تفاعلية.",
+        "نُشر كمجموعة بيانات على Hugging Face.",
       ],
       stack: ["Python", "pandas", "تصور البيانات", "إتاحة الوصول", "Hugging Face", "Big Data", "Data Analysis", "Datasets"],
       links: [
-        { labelKey: "live", href: datasetUrl },
+        { labelKey: "live", href: visualisationApp5Url },
+        { labelKey: "dataset", href: datasetUrl },
+        { labelKey: "source", href: visualisationApp5Repo },
         { labelKey: "details", href: addDetails("how-europe-spends-its-time") },
       ],
       featured: true,
     },
     {
+      slug: "vibehealth",
+      relevance: 20,
+      title: "VibeHealth",
+      subtitle: "تطبيق ويب لتتبع الصحة.",
+      summary:
+        "تطوير تطبيق طبي متكامل يجمع بين تتبع نمط الحياة ومراقبة المؤشرات الحيوية ودليل الإسعافات الأولية والبحث عن ممارسي الرعاية الصحية. التطبيق ثنائي اللغة ومكتوب بنوعية صارمة (strongly typed) ومصمم للعمل أولاً دون اتصال بالإنترنت (offline-first) للمسارات الحرجة.",
+      organization: "Polytech Paris-Saclay",
+      period: "2025",
+      status: "completed",
+      image: cover("vibehealth"),
+      imageAlt: "معاينة تطبيق VibeHealth",
+      highlights: [
+        "مراقبة المؤشرات الحيوية ونمط الحياة (النشاط والتغذية والترطيب والنوم) مع تذكيرات وتحليل الاتجاهات.",
+        "تتبع الأدوية واللقاحات والفحوصات الطبية مع تذكيرات. تتبع الدورة الشهرية والحمل.",
+        "عرض الأدلة والمقالات بتنسيق markdown. تتبع مستويات اللقاح والبحث عن الأطباء مع دمج واجهات برمجة التطبيقات (API).",
+        "تتبع الحالة المزاجية والتدوين (نص منسق + صور) والتمارين الرياضية (خطط ومقترحات) والاسترخاء والمساعدة على التركيز.",
+      ],
+      stack: ["Angular", "Bun", "Hono", "PostgreSQL", "Prisma", "BetterAuth", "PWA", "Zod", "i18n", "Health Tech", "Antigravity", "Github Copilot", "Agentic Coding"],
+      links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/VibeHealth/" },
+        { labelKey: "details", href: addDetails("vibehealth") },
+      ],
+    },
+    {
       slug: "deloitte-google-cloud-hackathon",
       relevance: 85,
-      title: "Hackathon Deloitte x Google Cloud",
-      subtitle: "نظام متعدد الوكلاء فائز لأتمتة الحملات التسويقية.",
+      title: "هاكاثون Deloitte x Google Cloud، الفائز",
+      subtitle: "نظام متعدد الوكلاء حائز على جائزة لأتمتة الحملات التسويقية.",
       summary:
-        "بُني نظام موزع متعدد الوكلاء باستخدام ADK وMCP لأتمتة إنشاء الحملات التسويقية، مع تنسيق الوكلاء المتخصصين عبر A2A ودمج BigQuery وGemini وImagen وCloud Run وVertex AI Agent Engine.",
-      organization: "Deloitte x Google Cloud",
+        "إنشاء نظام موزع متعدد الوكلاء باستخدام ADK وMCP لأتمتة توليد الحملات التسويقية، مع تنسيق عبر A2A ودمج BigQuery وGemini وImagen وCloud Run وVertex AI Agent Engine.",
+      organization: "Deloitte & Google Cloud",
       period: "نوفمبر 2025",
       status: "won",
       image: cover("deloitte-google-cloud-hackathon"),
-      imageAlt: "معاينة Hackathon Deloitte x Google Cloud",
+      imageAlt: "معاينة هاكاثون Deloitte x Google Cloud",
       highlights: [
-        "نظام موزع متعدد الوكلاء باستخدام ADK وMCP وA2A.",
-        "تكامل سحابي أصيل: BigQuery وGemini وImagen وCloud Run وVertex AI Agent Engine.",
-        "فاز الهاكاثون.",
+        "تطوير نظام موزع متعدد الوكلاء باستخدام ADK وMCP وتنسيق A2A لأتمتة إنشاء الحملات التسويقية.",
+        "تكامل سحابي أصيل: BigQuery (استفسارات ديموغرافية)، وGemini، وImagen، وCloud Run، وVertex AI Agent Engine.",
+        "الفائز بالهاكاثون.",
       ],
       stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI", "Google Cloud", "Agent Development Kit (ADK)", "Cloud Computing", "A2A"],
       links: [
@@ -864,24 +973,24 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "xtts-finetuning",
       relevance: 100,
       title: "XTTS Finetuning",
-      subtitle: "بحث في توليد الكلام ودعم اللغة المالطية.",
+      subtitle: "بحث في توليد الكلام (Speech Synthesis).",
       summary:
-        "أُجريت مراجعة حديثة في مجال TTS، وطُوّر تطبيق Streamlit لتسريع اكتشاف الأوراق العلمية، ثم نُفذ fine-tuning لنموذج XTTS على Google Colab باستخدام PyTorch وGPT-2 لإضافة المالطية دون تراجع.",
+        "مراجعة لأحدث التقنيات في مجال توليد الكلام (TTS)، وإنشاء تطبيق Streamlit لتسريع البحث عن الأوراق العلمية، ثم ضبط الدقة (fine-tuning) لنموذج XTTS على Google Colab باستخدام PyTorch وGPT-2 لإضافة اللغة المالطية دون تراجع.",
       organization: "L-Università ta' Malta (University of Malta)",
       period: "يونيو 2025 – أغسطس 2025",
       status: "completed",
       image: cover("xtts-finetuning"),
-      imageAlt: "معاينة XTTS Finetuning",
+      imageAlt: "معاينة مشروع XTTS Finetuning",
       highlights: [
-        "مراجعة حديثة في TTS مع أداة للبحث في الأوراق العلمية عبر Streamlit.",
-        "fine-tuning واستدلال XTTS على Google Colab باستخدام PyTorch وGPT-2.",
-        "إضافة دعم المالطية دون تراجع في الأداء.",
+        "مراجعة أحدث التقنيات في TTS مع أداة للبحث عن الأوراق العلمية عبر Streamlit. اختيار نموذج XTTS لأدائه وبنيته الموديلية ومعرفته بالإيطالية والعربية والإنجليزية والفرنسية وإدارته للتناوب اللغوي (code-switching)، مما يتناسب تماماً مع المالطية.",
+        "ضبط الدقة (Fine-tuning) والاستدلال لقسم GPT-2 من نموذج XTTS على Google Colab باستخدام PyTorch. يسمح النموذج بإضافة لغة جديدة عبر تدريب قسم GPT-2 فقط، مما يقلل بشكل كبير من تكلفة التدريب ويمنع التراجعات.",
+        "استراتيجيات تدريب وتحسين متعددة لتحسين جودة توليد الكلام باللغة المالطية، مع ضيق الوقت لتنفيذ تدريب هجين (مزج بين المالطية واللغات الأصلية)."
       ],
-      stack: ["Git", "PyTorch", "GPT-2", "XTTS", "Streamlit", "Hugging Face", "Machine Learning", "Model Training"],
+      stack: ["PyTorch", "GPT-2", "XTTS", "Streamlit", "Git", "Hugging Face", "Machine Learning", "Model Training"],
       links: [
+        { labelKey: "live", href: streamlitSearch, label: { en: "Paper Discovery Tool", fr: "Outil de recherche d'articles", ar: "أداة البحث عن الأوراق" } },
+        { labelKey: "demo", href: streamlitDemo, label: { en: "Maltese TTS Demo", fr: "Synthèse vocale maltaise", ar: "عرض توليد الكلام المالطي" } },
         { labelKey: "source", href: maltaRepo },
-        { labelKey: "live", href: streamlitDemo },
-        { labelKey: "demo", href: streamlitSearch },
         { labelKey: "details", href: addDetails("xtts-finetuning") },
       ],
       featured: true,
@@ -890,21 +999,23 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "quizine",
       relevance: 65,
       title: "Quizine",
-      subtitle: "منصة مسابقات متعددة اللاعبين في الوقت الحقيقي مع WebSockets.",
+      subtitle: "منصة مسابقة في الوقت الحقيقي مع WebSockets.",
       summary:
-        "صُممت بنية متينة لمسابقات فورية قادرة على إدارة 50 لاعبًا لكل غرفة، مع واجهة Angular مرنة وإدارة جلسات مدعومة بـ Redis ونشر على Vercel وSupabase.",
+        "تصميم بنية مسابقات في الوقت الحقيقي قادرة على إدارة 50 لاعباً في الغرفة الواحدة، مع واجهة Angular تفاعلية وإدارة جلسات باستخدام Redis وVercel وSupabase.",
       organization: "Polytech Paris-Saclay",
       period: "يناير 2025 – مايو 2025",
       status: "completed",
       image: cover("quizine"),
       imageAlt: "معاينة Quizine",
       highlights: [
-        "بنية WebSockets لمزامنة اللعب ومعالجة إعادة الاتصال.",
-        "واجهة Angular مرنة مع routing وAuthGuard وإشعارات وعقد API.",
-        "توثيق متكامل من نماذج Figma حتى النشر المستمر.",
+        "بنية تعتمد على WebSockets لمزامنة الأسئلة والنتائج ومعالجة إعادة الاتصال.",
+        "واجهة Angular برمجية مرنة مع التوجيه (routing) وحارس المصادقة (AuthGuard) والإشعارات وعقد اتفاقية الواجهة البرمجية (API contract).",
+        "توثيق كامل للمشروع، بدءاً من تصاميم Figma التوضيحية وحتى النشر المستمر (Vercel, Supabase).",
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
       links: [
+        { labelKey: "live", href: "https://quizine-front.vercel.app/landing" },
+        { labelKey: "source", href: "https://github.com/Wubpooz/quizine_front" },
         { labelKey: "details", href: addDetails("quizine") },
       ],
       featured: true,
@@ -915,40 +1026,42 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "مترجم لغة C",
       subtitle: "مترجم لغة C مكتوب بلغة Java.",
       summary:
-        "تطوير مترجم للغة C بلغة Java، مع إدارة الأخطاء، التوليد، ودعم الحلقات التكرارية.",
+        "تطوير مترجم للغة C بلغة Java، يتميز بالتحسينات وإبراز الأخطاء ودعم الحلقات والوظائف والمؤشرات والقوائم والمجال (scope) والمتغيرات وsend/recv وmalloc.",
       organization: "Polytech Paris-Saclay",
       period: "2024 – 2025",
       status: "completed",
       image: cover("compilateur-c-java"),
-      imageAlt: "معاينة مترجم لغة C",
+      imageAlt: "معاينة مشروع مترجم لغة C",
       highlights: [
-        "تطوير مترجم للغة C بلغة Java.",
-        "تطبيق التحليل المعجمي والنحوي والدلالي.",
-        "دعم توليد التعليمات البرمجية، المتغيرات، الحلقات، وإدارة الأخطاء.",
+        "تطوير مترجم للغة C بلغة Java من المفسر المعجمي (lexer) وحتى توليد التعليمات البرمجية.",
+        "دعم الحلقات التكرارية، الوظائف، المؤشرات، القوائم، نطاق الرؤية (scope)، المتغيرات، send/recv، وmalloc (مع مكتبة قياسية).",
+        "إبراز الأخطاء، مع توضيح الأخطاء في كل مرحلة من مراحل الترجمة (المعجمية، القواعدية، الدلالية، توليد الكود).",
+        "تحسين العمليات الحسابية أثناء عملية الترجمة.",
       ],
-      stack: ["C", "Java", "Compiler"],
+      stack: ["Java", "مترجم", "إدارة الأخطاء"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/app4-compilation" },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
       ],
     },
     {
       slug: "jeux-entreprise",
-      relevance: 60,
+      relevance: 20,
       title: "ألعاب محاكاة الأعمال",
-      subtitle: "إدارة شركة وهمية.",
+      subtitle: "قيادة وإدارة شركة وهمية.",
       summary:
-        "قيادة شركة وهمية في إطار لعبة محاكاة إدارة الأعمال المنافسة، مع إدارة القرارات المالية والاستراتيجية والتشغيلية.",
+        "إدارة شركة وهمية في إطار لعبة محاكاة وتنافس لإدارة الأعمال.",
       organization: "Polytech Paris-Saclay",
       period: "2025",
       status: "completed",
       image: cover("jeux-entreprise"),
-      imageAlt: "معاينة ألعاب محاكاة الأعمال",
+      imageAlt: "معاينة مشروع ألعاب محاكاة الأعمال",
       highlights: [
-        "إدارة الاستراتيجية والتمويل والعمليات لشركة وهمية.",
-        "تحليل اتجاهات السوق والمنافسة.",
-        "التنسيق مع فريق متعدد التخصصات.",
+        "إدارة شركة وهمية.",
+        "إدارة الاستراتيجية، المالية، الموارد البشرية، التسويق، والعمليات.",
+        "تحليل اتجاهات السوق والمنافسة، وإدارة المخاطر والأسعار والكميات.",
       ],
-      stack: ["Management", "Strategy", "Finance"],
+      stack: ["الإدارة", "الاستراتيجية", "التمويل"],
       links: [
         { labelKey: "details", href: addDetails("jeux-entreprise") },
       ],
@@ -959,19 +1072,21 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "Magnus Carlos",
       subtitle: "محاكاة علمية ثلاثية الأبعاد لتأثير Magnus.",
       summary:
-        "أدرت مشروع محاكاة علمية ثلاثية الأبعاد ضمن فريق من ستة طلاب باستخدام منهجية Agile، وطبّقت تصور التأثير باستخدام SDL2 (الخامات والكاميرات والدورانات).",
+        "إدارة مشروع محاكاة علمية ثلاثية الأبعاد مع فريق من ستة طلاب باستخدام منهجية Agile، وتطبيق التصور البصري باستخدام مكتبة SDL2 (الخامات، الكاميرات، الدورانات)." ,
       organization: "Polytech Paris-Saclay",
       period: "سبتمبر 2024 – ديسمبر 2024",
       status: "completed",
       image: cover("magnus-carlos"),
       imageAlt: "معاينة Magnus Carlos",
       highlights: [
-        "مشروع محاكاة علمية ثلاثية الأبعاد لتأثير Magnus.",
-        "تصور باستخدام SDL2: الخامات والكاميرات والدورانات.",
-        "قيادة العمل ضمن فريق من ستة طلاب.",
+        "محاكاة علمية لتأثير Magnus مع مراعاة السرعة، والمسار، وشكل الجسم، والاحتكاك.",
+        "تصور مرئي باستخدام SDL2: الخامات (الكرة، اللاعبين، المرمى، الأرض)، الكاميرات، والدورانات.",
+        "حساب مسبق لسيناريوهات تدخل فيها الكرة المرمى بتأثير Magnus، وسيناريوهات الفشل بدونه، من زوايا كاميرا متعددة.",
+        "قيادة فريق مكون من ستة طلاب في بيئة عمل Agile."
       ],
-      stack: ["C", "SDL2", "Simulation 3D", "Agile", "Visualization", "C++", "Physics Modeling", "Project Management"],
+      stack: ["C++", "SDL2", "Simulation 3D", "Agile", "Visualization", "Physics Modeling", "Project Management"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/MagnusCarlos" },
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
     },
@@ -981,39 +1096,40 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       title: "Nyxen",
       subtitle: "تجربة صفحة واحدة مع نموذج ثلاثي الأبعاد تفاعلي.",
       summary:
-        "صُمم التخطيط ولوحة الألوان ومسارات الاستخدام وSPA routing لتجربة ويب عصرية، مع دمج نموذج ثلاثي الأبعاد متحرك في القسم الرئيسي.",
+        "تصميم متجر إلكتروني لمستحضرات التجميل بصيغة تطبيق الصفحة الواحدة (SPA). من تصميم الألوان والمسارات والربط إلى دمج نموذج ثلاثي الأبعاد متحرك في القسم الرئيسي.",
       organization: "Polytech Paris-Saclay",
       period: "2023 – 2024",
       status: "completed",
       image: cover("nyxen"),
       imageAlt: "معاينة Nyxen",
       highlights: [
-        "تصميم التخطيط ولوحة الألوان ومسارات المستخدم وSPA routing.",
-        "إدماج نموذج ثلاثي الأبعاد تفاعلي ومتحرك.",
-        "تركيز قوي على التوجيه البصري ودقة التفاعل.",
+        "تصميم لوحة الألوان ومسارات المستخدمين والتوجيه في تطبيق الصفحة الواحدة (SPA Routing)." ,
+        "دمج نموذج ثلاثي الأبعاد تفاعلي ومتحرك.",
+        "تركيز قوي على التوجيه الفني والتفاعل الفني.",
       ],
-      stack: ["CSS", "SPA Routing", "3D", "Animation", "Git", "Angular", "Three.js", "HTML", "TypeScript", "JavaScript", "Agile", "Frontend"],
+      stack: ["Angular", "Three.js", "TypeScript", "JavaScript", "HTML", "CSS", "SPA Routing", "3D", "Animation", "Git", "Agile", "Frontend"],
       links: [
+        { labelKey: "live", href: "https://github.com/Wubpooz/APP3_Projet_Web" },
         { labelKey: "details", href: addDetails("nyxen") },
       ],
     },
     {
       slug: "house-finder",
       relevance: 45,
-      title: "مكتشف السكن",
-      subtitle: "تصميم نماذج البيانات وأداة CLI.",
+      title: "مكتشف السكن (House Finder)",
+      subtitle: "نمذجة البيانات وأداة واجهة سطر الأوامر (CLI).",
       summary:
-        "تصميم نماذج بيانات لهيكلة سمات السكن والاتصال، وتطوير أداة CLI لتصنيف العقارات بناءً على معايير مخصصة.",
+        "تصميم نماذج البيانات لهيكلة سمات السكن والاتصالية، وتطوير أداة CLI لتصنيف العقارات وفق معايير مخصصة.",
       organization: "Polytech Paris-Saclay",
       period: "2023",
       status: "completed",
       image: cover("house-finder"),
       imageAlt: "معاينة مكتشف السكن",
       highlights: [
-        "تصميم نماذج البيانات لهيكلة سمات السكن واتصالاته.",
-        "تطوير أداة CLI بلغة Java لتصنيف العقارات وفق معايير مخصصة.",
+        "تطوير أداة CLI لتصنيف العقارات بناءً على معايير مخصصة.",
+        "تصميم نماذج البيانات لهيكلة سمات السكن والاتصالية.",
       ],
-      stack: ["Java", "Open Data", "CLI"],
+      stack: ["Java", "Open Data", "Dataset", "CLI"],
       links: [
         { labelKey: "details", href: addDetails("house-finder") },
       ],
@@ -1021,10 +1137,10 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
     {
       slug: "escape-the-mummy",
       relevance: 35,
-      title: "الهروب من المومياء",
+      title: "الهروب من المومياء (Escape the Mummy)",
       subtitle: "لعبة متاهة ثلاثية الأبعاد باستخدام Processing و GLSL.",
       summary:
-        "تطوير لعبة متاهة ثلاثية الأبعاد يتعين فيها على اللاعب الهروب من المومياء في صحراء وهرم تم توليدهما إجرائيًا، مع تظليل مخصص في GLSL.",
+        "تطوير لعبة متاهة ثلاثية الأبعاد حيث يتعين على اللاعب الهروب من المومياء بعد دخول الهرم في صحراء تم إنشاؤها إجرائياً.",
       organization: "Université Paris-Saclay",
       period: "2022",
       status: "completed",
@@ -1032,33 +1148,35 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       imageAlt: "معاينة الهروب من المومياء",
       highlights: [
         "تطوير لعبة متاهة ثلاثية الأبعاد باستخدام Processing ومظللات GLSL.",
-        "تطبيق التوليد الإجرائي للصحراء والهرم.",
-        "إنشاء حلقة اللعبة، والتحكم في الكاميرا، وذكاء اصطناعي للمومياء.",
+        "توليد إجرائي للصحراء والهرم.",
+        "آلية لعب تتطلب من اللاعب الهروب من مومياء ملاحِقة.",
       ],
-      stack: ["Processing", "GLSL", "Jeu 3D"],
+      stack: ["Processing", "GLSL", "Shader", "3D Game"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/IGSD-projet" },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
       ],
     },
     {
       slug: "cli-messaging",
       relevance: 30,
-      title: "مراسلة CLI",
-      subtitle: "تطبيقات مراسلة عبر مقابس TCP/IP بلغة C.",
+      title: "مراسلة واجهة سطر الأوامر (CLI Messaging)",
+      subtitle: "تطبيقات مراسلة باستخدام TCP/IP بلغة C.",
       summary:
-        "إنشاء تطبيقات مراسلة للعميل والخادم بلغة C باستخدام مقابس TCP/IP، مع دعم اتصالات متعددة للعملاء وبروتوكولات اتصال مخصصة.",
+        "تطوير تطبيقات مراسلة للعميل والخادم عبر بروتوكولات UDP وTCP/IP مع واجهة برمجية تعتمد على سطر الأوامر.",
       organization: "Université Paris-Saclay",
       period: "2022",
       status: "completed",
       image: cover("cli-messaging"),
-      imageAlt: "معاينة مراسلة CLI",
+      imageAlt: "معاينة مراسلة واجهة سطر الأوامر",
       highlights: [
-        "تطوير تطبيقات مراسلة خادم وعميل بلغة C باستخدام مقابس TCP/IP.",
-        "إدارة اتصالات متعددة العملاء.",
-        "تصميم واجهة سطر أوامر للمراسلة.",
+        "تطوير تطبيقات مراسلة للعميل والخادم باستخدام UDP وTCP/IP.",
+        "واجهة سطر أوامر للتواصل الفوري.",
+        "إدارة الاتصالات والرسائل بين العملاء والخادم.",
       ],
-      stack: ["C", "TCP-IP", "CLI"],
+      stack: ["C", "UDP", "TCP-IP", "CLI"],
       links: [
+        { labelKey: "source", href: "https://github.com/Wubpooz/Rezo" },
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
     },
@@ -1066,25 +1184,26 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       slug: "logihub",
       relevance: 25,
       title: "LogiHub",
-      subtitle: "مكتبة ألعاب على الإنترنت تستضيف ألعاب p5.js مخصصة.",
+      subtitle: "مكتبة ألعاب على الإنترنت تستضيف ألعاب p5.js.",
       summary:
-        "أول مكتبة ألعاب على الإنترنت تستضيف ألعاب p5.js مخصصة، تم تطويرها خلال المدرسة الثانوية. تتميز بألعاب كلاسيكية مثل Pong و Space Invaders و Reaction Time و Number Test.",
+        "أول مكتبة ألعاب على الإنترنت تستضيف ألعاب p5.js مخصصة تم تطويرها في المدرسة الثانوية. تشتمل على ألعاب كلاسيكية مثل Pong وSpace Invaders وReaction Time وNumber Test.",
       organization: "Lycée de l'Essouriau",
       period: "2019",
       status: "completed",
       image: cover("logihub"),
       imageAlt: "معاينة LogiHub",
       highlights: [
-        "تطوير العديد من الألعاب الكلاسيكية المخصصة باستخدام p5.js (بونغ، غزاة الفضاء، زمن رد الفعل).",
-        "بناء منصة استضافة ثابتة HTML/CSS للألعاب القابلة للعب على الويب.",
+        "تطوير العديد من الألعاب الكلاسيكية المخصصة باستخدام p5.js (Pong, Space Invaders, Reaction Time).",
+        "بناء منصة استضافة ثابتة باستخدام HTML/CSS للألعاب القابلة للعب على الويب.",
       ],
       stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
       links: [
         { labelKey: "live", href: "http://mwaharte.free.fr/test/feuille_html_principale.html" },
+        { labelKey: "source", href: "https://github.com/Wubpooz/Site-ISN-2019" },
         { labelKey: "details", href: addDetails("logihub") },
       ],
     }
-  ],
+  ]
 };
 
 export function getProjects(locale: Locale): ProjectItem[] {

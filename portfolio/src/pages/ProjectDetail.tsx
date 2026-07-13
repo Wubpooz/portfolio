@@ -7,6 +7,7 @@ import {
   Play,
   Search,
   Code2,
+  FileText,
 } from "lucide-react";
 import BackLink from "@/components/shared/BackLink";
 import { Button } from "@/components/ui/button";
@@ -41,9 +42,10 @@ function ProjectLinksSection({
   const priorityOrder: Record<string, number> = {
     live: 1,
     demo: 2,
-    search: 3,
-    source: 4,
+    paper: 3,
+    search: 4,
     dataset: 5,
+    source: 6,
   };
 
   // Filter out details links since we are already on the details page
@@ -93,6 +95,7 @@ function ProjectLinksSection({
           else if (link.labelKey === "dataset") LinkIcon = Database;
           else if (link.labelKey === "demo") LinkIcon = Play;
           else if (link.labelKey === "search") LinkIcon = Search;
+          else if (link.labelKey === "paper") LinkIcon = FileText;
 
           const isPrimary = link === primaryLink;
           const buttonVariant = isPrimary ? "default" : "outline";

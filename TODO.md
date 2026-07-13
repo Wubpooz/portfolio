@@ -110,21 +110,20 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [x] Express fluency in each technology in a good way
   - [x] heart next to the best ?
   - [x] dots from 1 to 5 ?
-- [ ] Review Project details
+- [x] Review Project details
   - picture
   - description
   - tags
-- [ ] Hero description
+- [x] Hero description
 - [x] Add the missing skills
 - [x] Add the missing projects
 - [x] Add the missing certifications
-- [ ] profile picture
+- [X] profile picture
 - [x] banner picture
 - [x] certifications icons
 - [x] favicon
 - [x] certification relevance
 - [x] project relevance & featured
-- [ ] google cloud + deloitte icons to Hackathon
 - [x] School & experience logos
 - [x] Add interests: RO, crypto, traitement image/signal ondellettes, IA, bioinfo, Cheerleading, Photographie, Equitation
 - [x] Section Langues:
@@ -146,10 +145,6 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [x] Projects links top on mobile
   - [x] Click on projects to open the project details page (currently it opens only on the details)
 
-
-[Paper Relevance Dashboard](https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/)
-[HETUS Visualisation App 5](https://wubpooz.github.io/visualisation-app5/)
-![alt text](1777673073293.jpg)
 
 ## Very Bonus
 - [ ] Preview projects on hover in home page

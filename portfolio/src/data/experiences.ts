@@ -72,7 +72,7 @@ const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
       endDate: "Présent",
       logo: "dassaultsystemes",
       description: [
-        //TODO add mistral ai and more details for dassautl
+        //TODO add mistral ai and more details
         "Conception et développement full-stack (front end et back end) des applications scientifiques [Scientific Notebook](https://www.3ds.com/products/biovia/scientific-notebook) et [Reaction Planner](https://blog.3ds.com/brands/biovia/retrosynthetic-analysis-made-easy-with-biovia-reaction-planner/), en environnement Agile (Angular, Java, TypeScript, Python, SPARQL).",
         "Documentation et formation des équipes sur les fonctionnalités livrées, les nouvelles technologies, les bonnes pratiques de développement et les design patterns.",
         "Pilotage et développement d'une file de calcul distribuée (de la spécification à la production) en coordonnant les équipes Dev/PM/QA/UX, augmenting la fiabilité de 40 à 100% de notre API de calcul de la synthétisabilité, même en charge.",

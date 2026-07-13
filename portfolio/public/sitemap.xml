@@ -76,6 +76,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://mw-portfolio-cfi.pages.dev/projects/vibehealth</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mw-portfolio-cfi.pages.dev/projects/vireli</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
