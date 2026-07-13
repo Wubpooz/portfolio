@@ -139,7 +139,7 @@ export default function ProjectCard({
                       })}
                     </span>
                   )} */}
-                  <span>· {project.period}</span>
+                  <span className="pt-2">{project.period}</span>
                 </div>
               </div>
 
@@ -327,7 +327,7 @@ export default function ProjectCard({
                   </span>
                 )} */}
                 <span>{renderTextWithLinks(project.organization)}</span>
-                <span>· {project.period}</span>
+                <span className="pt-2">{project.period}</span>
               </div>
             </div>
 

@@ -45,11 +45,9 @@ const visualisationApp5Repo = "https://github.com/Wubpooz/visualisation-app5";
 
 
 const addDetails = (slug: string) => `/projects/${slug}`;
-
-// TODO add covers
-
 // TODO https://gitlab.dsi.universite-paris-saclay.fr/mathieu.waharte/projet-pogl/-/tree/master?ref_type=heads
 // TODO file:///C:/Users/mathi/Desktop/WAHARTE_Ubik_Pizza_Challenge.pdf
+// TODO add shader projects from shadertoy !!!!
 
 
 const projectsByLocale: Record<Locale, ProjectItem[]> = {
@@ -395,6 +393,50 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Development of a 3D maze game using Processing and GLSL shaders.",
         "Procedural generation of a desert and a pyramid.",
         "Gameplay mechanic where the player must escape a mummy.",
+//TODO (don't delete)
+//         III. Pyramide et Lumi`ere (Mathieu)
+// Pyramide et D´esert
+// La pyramide est un cr´ee du bas vers le haut en dessinant un chaque cˆot´e du mur avec des QUADS. A chaque
+// fois que l’on monte on se d´ecale vers l’int´erieur de la pyramide ; cela donne une pyramide ”plate”, effet souhait´e car
+// plus agr´eable `a l’œil. En revanche, avec cette approche, il faut ajouter les jointures entre les murs et le sommet de la
+// pyramide `a part en usant de la flexibilit´e des QUADS.
+// Le d´esert est une mer de QUADS dont la hauteur seule varie suivant noise(i,j) similairement `a Minecraft. Pour
+// donner l’apparence que les ”blocs” sont reli´es on joint chaque QUAD avec son voisin de droite et derri`ere. Cela cr´ee
+// des probl`emes de bords mais ils sont n´egligeables puisque ne devraient pas ˆetre observables.
+// L’application de textures pour les deux fut tr`es naturelle.
+// Lumi`ere
+// Apr`es avoir pass´e des heures `a essayer de faire fonctionner les normales de Processing sans succ`es, j’ai d´ecid´e de
+// m’orienter vers les shaders malgr´e mon inexp´erience. J’ai donc pass´e beaucoup de temps `a mieux comprendre le
+// fonctionnement de ces derniers ainsi qu’apprendre OpenGL de mani`ere `a faire fonctionner correctement les lumi`eres.
+// Mes objectifs ´etaient : avoir un soleil qui ´eclaire la sc`ene mais pas l’int´erieur du labyrinthe, utiliser les normal maps
+// des textures, coloriser les murs du labyrinthe suivant leur position dans le model space (utiliser tint sur le PShape
+// n’´etant pas transmis au shader) et avoir une lampe torche, .
+// - Soleil : pour r´ealiser un soleil, il m’a fallu passer les coordonn´ees en model space de la source de lumi`ere au
+// fragmentShader, en d´eduire la direction du soleil relative `a la position actuelle et enfin calculer la couleur du
+// fragment.
+// Pour cela j’ai d’abord d´etermin´e la normale de chaque fragment suivant sa texture en utilisant leur normalMap ;
+// puis en ajoutant les contributions des composantes ambiantes, diffuse et sp´eculaires de cette lumi`ere, en prenant
+// en compte l’att´enuation de la lumi`ere.
+// - Couleur des murs : pour coloriser les murs du labyrinthe comme sur la mini-map pour aider le joueur a se rep´erer,
+// il me fallait trouver la position de chaque mur dans le labyrinthe (pour refaire le tint(25*i,25*i,255-10*i+10*j)).
+// Cela s’est av´er´e tr`es compliqu´e, la solution que j’ai trouv´ee a ´et´e de prendre la position en model space et la
+// normaliser de sorte `a ce que celle-ci corresponde aux i et j. Ensuite il m’a suffit de normaliser la couleur d’une
+// ´echelle [0-255] `a [0.0-1.0] et la passer au fragmentShader et teindre la couleur du fragment de la mˆeme mani`ere
+// que celle de la pyramide.
+// - Lampe torche : Celle-ci fut particuli`erement difficile et demandeuse niveau compr´ehension. En effet, il fallait :
+// nullifier l’effet du soleil dans le labyrinthe, avoir une source de lumi`ere qui suit la position ET rotation du joueur
+// et ait une att´enuation tr`es forte `a distance.
+// J’ai d’abord tent´e de cr´eer un raycaster pour empˆecher le soleil d’´eclairer tout le labyrinthe seulement pour
+// r´ealiser que je ne pouvais pas passer au shader un String[] contenant les murs (ce qui est n´ecessaire) de par
+// une limitation de Processing. J’ai donc abandonn´ee cette id´ee par manque de temps et aie pr´ef´er´e la solution
+// plus simple ”d’´eteindre” le soleil dans le labyrinthe uniquement.
+// Pour l’att´enuation, cela n’a ´et´e qu’une question de tester ce qu’il fonctionne bien.
+// Faire avancer la lumi`ere avec la position du joueur fut compliqu´e mais simple : transf´erer la position en view
+// space au fragmentShader et calculer la position de la lampe relativement `a ¸ca et la position du joueur (pass´ee
+// par Processing). En revanche pour la rotation, utiliser celle de Processing n’a pas fonctionn´e malgr´e de tr`es
+// nombreuses tentatives. De fait, j’ai tent´e beaucoup d’autres solutions (une matrice de rotation etc) mais sans
+// succ`es. Mais, par hasard, j’ai indiqu´e un vecteur particulier qui s’est av´er´e fonctionner du fait que la position de
+// la lampe change avec la rotation du joueur.
       ],
       stack: ["Processing", "GLSL", "Shader", "3D Game"],
       links: [
