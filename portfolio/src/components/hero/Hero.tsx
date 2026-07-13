@@ -80,7 +80,7 @@ export default function HeroSection() {
           <div className="-mt-14 mb-6 md:-mt-16">
             <div className="h-24 w-24 overflow-hidden border-4 border-card bg-muted shadow-sm md:h-32 md:w-32">
               <img
-                src="/assets/profile.webp"
+                src="/assets/profile.jpg"
                 alt={content.hero.portraitAlt}
                 className="h-full w-full object-cover"
                 width={256}
