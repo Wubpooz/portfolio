@@ -440,21 +440,6 @@ jobs:
           echo "=== Checking Frontend ==="
           curl -v http://localhost:3000/ || echo "Frontend not responding on port 3000"
 
-      # 1. Skipfish DAST scan
-      - name: Run Skipfish on Frontend
-        run: |
-          docker run --rm --network host \
-            -v ${{ github.workspace }}/skipfish-frontend:/output \
-            andremirt/skipfish:latest \
-            -o /output \
-            -S /dev/null \
-            -W /dev/null \
-            -Y \
-            -m 3 \
-            -I / \
-            http://localhost:3000/
-        continue-on-error: true
-
       # 2. OWASP ZAP Baseline Scan
       - name: Run OWASP ZAP Baseline Scan on Frontend
         run: |
@@ -485,17 +470,6 @@ jobs:
             -timeout 5
         continue-on-error: true
 
-      # 4. Parse Skipfish results
-      - name: Parse Skipfish results
-        if: always()
-        run: |
-          echo "=== Skipfish Frontend Results ==="
-          if [ -f skipfish-frontend/samples ]; then
-            echo "Frontend scan completed. Sample file found."
-          else
-            echo "Frontend scan may not have completed successfully"
-          fi
-        continue-on-error: true
 
       # 5. Aggregate DAST results
       - name: Aggregate DAST scan results
@@ -513,15 +487,6 @@ jobs:
             echo "" >> $GITHUB_STEP_SUMMARY
           fi
           
-          # Check Skipfish results
-          echo "### Skipfish Scan" >> $GITHUB_STEP_SUMMARY
-          if [ -d skipfish-frontend ]; then
-            echo "- Frontend scan completed - see HTML report in artifacts" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- Frontend scan: No results" >> $GITHUB_STEP_SUMMARY
-          fi
-          echo "" >> $GITHUB_STEP_SUMMARY
-          
           # Check Nikto results
           echo "### Nikto Scan" >> $GITHUB_STEP_SUMMARY
           if [ -f nikto-frontend-report.json ]; then
@@ -538,7 +503,6 @@ jobs:
         with:
           name: dast-scan-reports
           path: |
-            skipfish-frontend/
             zap-frontend-report.html
             zap-frontend-report.json
             zap-frontend-report.md
