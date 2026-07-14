@@ -248,7 +248,7 @@ jobs:
             -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts
             -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/coverage/**,**/*.spec.ts,**/*.test.ts
             -Dsonar.typescript.tsconfigPath=portfolio/tsconfig.json
-            with:
+
         continue-on-error: true
 
       # 12. Aggregate and evaluate results
