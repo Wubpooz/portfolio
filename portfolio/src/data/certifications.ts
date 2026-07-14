@@ -27,7 +27,7 @@ export const certifications: CertificationItem[] = [
     href: "https://verify.skilljar.com/c/gde9e7ewhv9y",
     credentialId: "gde9e7ewhv9y",
     icon: "anthropic",
-    relevance: 95,
+    relevance: 54,
   },
   {
     title: "CodinGame Certification - C++",
@@ -36,7 +36,7 @@ export const certifications: CertificationItem[] = [
     href: "https://www.codingame.com/certification/4isuVQxdBt0f6EeZSGGX7g",
     credentialId: "4isuVQxdBt0f6EeZSGGX7g",
     icon: "codingame",
-    relevance: 45,
+    relevance: 80,
   },
   {
     title: "CodinGame Certification - C",
@@ -81,7 +81,7 @@ export const certifications: CertificationItem[] = [
     expiresAt: "04.2028",
     href: "https://media.licdn.com/dms/image/v2/D4E2DAQGn13t1AfawUA/profile-treasury-document-images_1280/B4EZ3kS7ZMJUAU-/1/1777651662679?e=1784764800&v=beta&t=Zm7TRXJ86j4Gz-fho1Z1ivMO1VorTmR8DU2rXk7jRZs",
     icon: "/icons/icims.png",
-    relevance: 5,
+    relevance: 65,
   },
   {
     title: "Label Handimanagement",
@@ -89,7 +89,7 @@ export const certifications: CertificationItem[] = [
     date: "04.2026",
     href: "https://media.licdn.com/dms/image/v2/D4E2DAQFO__00vpclig/profile-treasury-document-images_1280/B4EZ3kTbM4KQAU-/1/1777651793060?e=1784764800&v=beta&t=koyYjuW7Hj_qoi3C4HvgnsR4PkoYoLm3ggEk-kh4lAU",
     icon: "/icons/companieros.svg",
-    relevance: 4,
+    relevance: 68,
   },
   {
     title: "Microsoft Security Essentials Professional Certificate by Microsoft and LinkedIn",
@@ -97,7 +97,7 @@ export const certifications: CertificationItem[] = [
     date: "12.2025",
     href: "https://www.linkedin.com/learning/certificates/3dbde0d64466e8577cc9ed11faa69619f071d273d49b5d66b96f81b03bcca26a",
     icon: "/icons/Microsoft_logo.svg",
-    relevance: 90,
+    relevance: 55,
   },
   {
     title: "Docker Foundations Professional Certificate",
@@ -114,7 +114,7 @@ export const certifications: CertificationItem[] = [
     href: "https://media.licdn.com/dms/image/v2/D4E2DAQFyYh8odcLrVA/profile-treasury-document-cover-images_1280/B4EZncwdumKkAw-/0/1760345317944?e=1784300400&v=beta&t=9mhtMIUxkHi7ecBmzZw5h5rtoZLF24QrTDoRHZI7MhE",
     credentialId: "5940728016",
     icon: "/icons/ets.svg",
-    relevance: 5,
+    relevance: 95,
   },
   {
     title: "OWASP API Security Top 10",
@@ -123,7 +123,7 @@ export const certifications: CertificationItem[] = [
     href: "https://www.credly.com/badges/d6e20a74-9895-417e-b476-e3edf206e7fc/public_url",
     credentialId: "d6e20a74-9895-417e-b476-e3edf206e7fc",
     icon: "/icons/apisec_university.png",
-    relevance: 85,
+    relevance: 55,
   },
   {
     title: "MOOC SecNumAc in cybersecurity",
@@ -131,7 +131,7 @@ export const certifications: CertificationItem[] = [
     date: "2024",
     href: "https://secnumacademie.gouv.fr/",
     icon: "/icons/anssi.png",
-    relevance: 50,
+    relevance: 67,
   },
   {
     title: "Formation à la réglementation en santé et sécurité au travail (INRS)",
@@ -147,7 +147,7 @@ export const certifications: CertificationItem[] = [
     date: "09.2024",
     href: "https://www.linkedin.com/learning/certificates/de2c4937b3b5bdf8180ae0b0a178abe01f038819f456901bc5826024b8651b8c/",
     icon: "linkedin",
-    relevance: 65,
+    relevance: 45,
   },
   {
     title: "Gérer des talents très performants ou à haut potentiel",
@@ -179,7 +179,7 @@ export const certifications: CertificationItem[] = [
     date: "01.2024",
     href: "https://www.linkedin.com/learning/certificates/60c395010105e508b85c3829ff68df180fa4e418fafa323624e0134aa73b5b4e/",
     icon: "linkedin",
-    relevance: 75,
+    relevance: 53,
   },
   {
     title: "L'essentiel d'Angular",
@@ -187,7 +187,7 @@ export const certifications: CertificationItem[] = [
     date: "01.2024",
     href: "https://www.linkedin.com/learning/certificates/5c0f7f1d23f35a03d11ee3ba815104414a6cf039be998918422e1549bf30043c/",
     icon: "linkedin",
-    relevance: 60,
+    relevance: 20,
   },
   {
     title: "Practical Test-Driven Development for Java Programmers",
@@ -195,7 +195,7 @@ export const certifications: CertificationItem[] = [
     date: "01.2024",
     href: "https://www.linkedin.com/learning/certificates/ff351d99cd475b053cde33ad5dda180507ce01e3a93f6411ab6af5c603ca56f4/",
     icon: "linkedin",
-    relevance: 55,
+    relevance: 35,
   },
   {
     title: "Cascading Style Sheets (CSS)",
@@ -203,7 +203,7 @@ export const certifications: CertificationItem[] = [
     date: "11.2022",
     href: "https://www.linkedin.com/skill-assessments/Cascading%20Style%20Sheets%20(CSS)/report/",
     icon: "linkedin", // or css ?
-    relevance: 20,
+    relevance: 2,
   },
   {
     title: "OOP paradigm",
@@ -211,7 +211,7 @@ export const certifications: CertificationItem[] = [
     date: "11.2022",
     href: "https://www.linkedin.com/skill-assessments/Object-Oriented%20Programming%20(OOP)/report/",
     icon: "linkedin",
-    relevance: 25,
+    relevance: 8,
   },
   {
     title: "C langage",
@@ -219,7 +219,7 @@ export const certifications: CertificationItem[] = [
     date: "06.2022",
     href: "https://www.linkedin.com/skill-assessments/C%20(langage%20de%20programmation)/report/#",
     icon: "linkedin",
-    relevance: 15,
+    relevance: 7,
   },
   {
     title: "MOOC RIGHTS, SEX & EDUCATION",

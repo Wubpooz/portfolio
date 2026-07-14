@@ -86,10 +86,7 @@ function CertificationRow({ item }: Readonly<{ item: CertificationItem }>) {
       className="group grid min-h-24 grid-cols-[56px_1fr_20px] items-center gap-4 border-t border-border px-4 py-4 transition-colors hover:bg-muted/30 md:grid-cols-[72px_1fr_20px] md:px-6"
     >
       <div className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background md:h-11 md:w-11">
-        <CertificationIcon
-          name={item.title}
-          icon={item.icon}
-        />
+        <CertificationIcon name={item.title} icon={item.icon} />
       </div>
 
       <div className="min-w-0">
@@ -133,7 +130,7 @@ export default function CertificationsSection() {
   const { locale } = useLocale();
   const content = getUiContent(locale);
   const [expanded, setExpanded] = useState(false);
-  const [sortBy, setSortBy] = useState<"recency" | "relevance">("recency");
+  const [sortBy, setSortBy] = useState<"recency" | "relevance">("relevance");
   const posthog = usePostHog();
 
   const sortedCertifications = useMemo(() => {
@@ -175,19 +172,6 @@ export default function CertificationsSection() {
             <button
               type="button"
               onClick={() => {
-                handleSortChange("recency");
-              }}
-              className={`rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
-                sortBy === "recency"
-                  ? "bg-muted text-foreground font-semibold"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {content.projectsPage.sortRecent}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
                 handleSortChange("relevance");
               }}
               className={`rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
@@ -197,6 +181,19 @@ export default function CertificationsSection() {
               }`}
             >
               {content.projectsPage.sortRelevance}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                handleSortChange("recency");
+              }}
+              className={`rounded-md px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
+                sortBy === "recency"
+                  ? "bg-muted text-foreground font-semibold"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {content.projectsPage.sortRecent}
             </button>
           </div>
         </div>
