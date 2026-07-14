@@ -75,18 +75,18 @@ jobs:
     container:
       image: semgrep/semgrep
     if: (github.actor != 'dependabot[bot]')
+    env:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7.0.0
 
       - name: Run Semgrep CI (AppSec Platform)
-        if: ${{ secrets.SEMGREP_APP_TOKEN != '' }}
+        if: ${{ env.SEMGREP_APP_TOKEN != '' }}
         run: semgrep ci
-        env:
-          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
 
       - name: Run Semgrep CE (Community Edition)
-        if: ${{ secrets.SEMGREP_APP_TOKEN == '' }}
+        if: ${{ env.SEMGREP_APP_TOKEN == '' }}
         run: |
           semgrep scan --config auto --config p/react --config p/typescript --config p/javascript --config p/security-audit --config p/secrets
 
@@ -95,6 +95,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: validate
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -181,11 +184,9 @@ jobs:
 
       # 6. Snyk security scan (runs only if SNYK_TOKEN secret is configured)
       - name: Run Snyk to check for vulnerabilities
-        if: ${{ secrets.SNYK_TOKEN != '' }}
+        if: ${{ env.SNYK_TOKEN != '' }}
         uses: snyk/actions/node@master
         continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --all-projects --json-file-output=snyk-results.json
 
@@ -234,11 +235,10 @@ jobs:
 
       # 11. SonarCloud Scan (resilient to missing SONAR_TOKEN, using latest sonarqube-scan-action)
       - name: SonarCloud Scan
-        if: ${{ secrets.SONAR_TOKEN != '' }}
+        if: ${{ env.SONAR_TOKEN != '' }}
         uses: SonarSource/sonarqube-scan-action@v8.2.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >-
             -Dsonar.organization=${{ github.repository_owner }}
