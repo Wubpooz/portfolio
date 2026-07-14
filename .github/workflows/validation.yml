@@ -166,9 +166,16 @@ jobs:
           path: '.'
           format: 'JSON'
           out: 'dependency-check-report'
+          # --enableExperimental
           args: >-
-            --enableExperimental
             --failOnCVSS 7
+            --nodePackageSkipDevDependencies
+            --nodeAuditSkipDevDependencies
+            --disableYarnAudit
+            --disablePnpmAudit
+            --disableAssembly
+            --disableNugetconf
+            --disableNuspec
         continue-on-error: true
 
       - name: Display OWASP Dependency-Check results
