@@ -60,8 +60,8 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
   - [x] GitHub link
   - [x] Development steps if they exists
   - [x] Status (in progress, completed, abandoned) ?
-  - [x] Search
-  - [x] Filters
+  - [x] Search (projects-only)
+- [x] Filters
   - [x] Page per project
 
 ## Phase 4 - SEO & Prod
@@ -122,7 +122,7 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [x] banner picture
 - [x] certifications icons
 - [x] favicon
-- [x] certification relevance
+- [ ] rank certifications by relevance
 - [x] project relevance & featured
 - [x] School & experience logos
 - [x] Add interests: RO, crypto, traitement image/signal ondellettes, IA, bioinfo, Cheerleading, Photographie, Equitation
@@ -151,6 +151,13 @@ Goal: Copy <https://vishalvoid.com/> or <https://github.com/ncdai/chanhdai.com> 
 - [ ] Licensing
 - [ ] DMCA Protection Certificate
 - [x] vCard integration
+- [ ] Global site-wide search (cross-page fulltext search)
+  - [ ] Support multi-language search (English, French, Arabic)
+  - [ ] Open target pages (resume, homepage, etc.) at the correct scroll position with matched word highlighting
+- [ ] Set up sync hook between CV repository and portfolio
+  - [ ] GitHub Actions workflow in CV repo triggered by `[sync]` in commit message
+  - [ ] Push latest PDFs to `portfolio/public/assets/` via PAT or Deploy Key
+
 
 
 ## Future

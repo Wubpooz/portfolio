@@ -78,11 +78,17 @@ const cliMessagingRepo = "https://github.com/Wubpooz/Rezo";
 const logihubUrl = "http://mwaharte.free.fr/test/feuille_html_principale.html";
 const logihubRepo = "https://github.com/Wubpooz/Site-ISN-2019";
 
+// Ubik Pizza Challenge
+const ubikPaper = "/assets/projects/WAHARTE_Ubik_Pizza_Challenge.pdf";
+
+// Shaders
+const shadersLive = "https://www.shadertoy.com/view/tfcBRH";
+
+// Desert Interdit (POGL)
+const poglRepo = "https://gitlab.dsi.universite-paris-saclay.fr/mathieu.waharte/projet-pogl/";
+
 
 const addDetails = (slug: string) => `/projects/${slug}`;
-// TODO https://gitlab.dsi.universite-paris-saclay.fr/mathieu.waharte/projet-pogl/-/tree/master?ref_type=heads
-// TODO file:///C:/Users/mathi/Desktop/WAHARTE_Ubik_Pizza_Challenge.pdf
-// TODO add shader projects from shadertoy !!!!
 
 
 const projectsByLocale: Record<Locale, ProjectItem[]> = {
@@ -242,6 +248,30 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       logos: ["deloitte", "googlecloud"],
     },
     {
+      slug: "shaders",
+      relevance: 66,
+      title: "Shaders",
+      subtitle: "Raymarched scene shader featuring glass sculptures, a carousel, and an animated floor.",
+      summary:
+        "Created a vibrant raymarched scene featuring realistic glass sculptures (with refraction), a decorative carousel, and an animated floor, showcasing refraction, chromatic dispersion, and procedural animation.",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "November 2025",
+      status: "completed",
+      image: cover("shaders"),
+      imageAlt: "Shader collection preview",
+      highlights: [
+        "Glass sculptures with realistic refraction and chromatic dispersion.",
+        "Decorative carousel and animated floor with rainbow tile patterns, disco ball reflections, and confetti sparkles.",
+        "Twinkling stars and shooting stars in the sky, with glowing rainbow text (reflected in the sculptures).",
+      ],
+      stack: ["GLSL", "Shadertoy", "Computer Graphics", "Raymarching", "Refraction", "Chromatic Dispersion", "Glass Shaders", "Procedural Animation"],
+      links: [
+        { labelKey: "live", href: shadersLive },
+        { labelKey: "details", href: addDetails("shaders") },
+      ],
+      logos: ["polytech"],
+    },
+    {
       slug: "xtts-finetuning",
       relevance: 100,
       title: "XTTS Finetuning",
@@ -315,6 +345,30 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "source", href: compilerRepo },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
+      ],
+      logos: ["polytech"],
+    },
+    {
+      slug: "ubik-pizza-challenge",
+      relevance: 68,
+      title: "Ubik Pizza Challenge",
+      subtitle: "White-box cybersecurity analysis and penetration testing of a pizza delivery application.",
+      summary:
+        "Conducted a white-box cybersecurity analysis and penetration testing on the Ubik Pizza application, identifying vulnerabilities and providing actionable recommendations to enhance security.",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "April 2026",
+      status: "completed",
+      image: cover("ubik-pizza-challenge"),
+      imageAlt: "Ubik Pizza Challenge preview",
+      highlights: [
+        "White-box security analysis and penetration testing on the Ubik Pizza application.",
+        "Identification of vulnerabilities (XSS, SQLi, CSRF, RCE) and mitigation recommendations.",
+        "Authored a detailed report documenting findings and remediation steps.",
+      ],
+      stack: ["Cybersecurity", "Penetration Testing", "White-box Analysis", "Security Assessment"],
+      links: [
+        { labelKey: "paper", href: ubikPaper },
+        { labelKey: "details", href: addDetails("ubik-pizza-challenge") },
       ],
       logos: ["polytech"],
     },
@@ -481,6 +535,30 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       logos: ["ups"],
     },
     {
+      slug: "pogl",
+      relevance: 18,
+      title: "Forbidden Desert",
+      subtitle: "Cooperative turn-based board game in Java.",
+      summary:
+        "Developed a cooperative turn-based board game in Java where players must explore a desert, collect parts, and build a flying machine to escape before the sandstorm becomes too intense.",
+      organization: "[Université Paris-Saclay](https://www.universite-paris-saclay.fr)",
+      period: "May 2022",
+      status: "completed",
+      image: cover("pogl"),
+      imageAlt: "Forbidden Desert preview",
+      highlights: [
+        "Developed a cooperative turn-based board game in Java featuring a graphical interface built using the Model-View-Controller (MVC) pattern.",
+        "Gameplay mechanics involving desert exploration, item collection, and building a flying machine.",
+        "Implemented win/loss conditions based on item collection, surviving the sandstorm, and managing water levels.",
+      ],
+      stack: ["Java", "Board Game", "Model-View-Controller", "Graphical Interface"],
+      links: [
+        { labelKey: "source", href: poglRepo },
+        { labelKey: "details", href: addDetails("pogl") },
+      ],
+      logos: ["ups"],
+    },
+    {
       slug: "cli-messaging",
       relevance: 23,
       title: "CLI Messaging",
@@ -610,6 +688,30 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       featured: true,
     },
     {
+      slug: "ubik-pizza-challenge",
+      relevance: 68,
+      title: "Ubik Pizza Challenge",
+      subtitle: "Analyse de cybersécurité en boîte blanche et tests d'intrusion d'une application de livraison de pizzas.",
+      summary:
+        "Conduite d'une analyse de cybersécurité en boîte blanche et de tests d'intrusion sur l'application Ubik Pizza, identification des vulnérabilités et recommandations exploitables pour améliorer la sécurité.",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Avril 2026",
+      status: "completed",
+      image: cover("ubik-pizza-challenge"),
+      imageAlt: "Aperçu du Ubik Pizza Challenge",
+      highlights: [
+        "Analyse de sécurité en boîte blanche et tests d'intrusion sur l'application Ubik Pizza.",
+        "Identification des vulnérabilités (XSS, SQLi, CSRF, RCE) et recommandations pour améliorer la sécurité.",
+        "Rédaction d'un rapport détaillé sur les résultats et les mesures correctives.",
+      ],
+      stack: ["Cybersecurity", "Penetration Testing", "White-box Analysis", "Security Assessment"],
+      links: [
+        { labelKey: "paper", href: ubikPaper },
+        { labelKey: "details", href: addDetails("ubik-pizza-challenge") },
+      ],
+      logos: ["polytech"],
+    },
+    {
       slug: "how-europe-spends-its-time",
       relevance: 75,
       title: "How Europe Spends Its Time",
@@ -683,6 +785,30 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
       logos: ["deloitte", "googlecloud"],
+    },
+    {
+      slug: "shaders",
+      relevance: 66,
+      title: "Shaders",
+      subtitle: "Shader de scène raymarchée avec des sculptures en verre, un carrousel et un sol animé.",
+      summary:
+        "Création d'une scène raymarchée vibrante avec des sculptures en verre réalistes (avec refraction), un carrousel décoratif et un sol animé, mettant en avant la réfraction, la dispersion chromatique et l'animation procédurale.",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "Novembre 2025",
+      status: "completed",
+      image: cover("shaders"),
+      imageAlt: "Aperçu de la collection de shaders",
+      highlights: [
+        "Sculptures en verre avec refraction réaliste et dispersion chromatique.",
+        "Carrousel décoratif et sol animé avec des motifs de carreaux arc-en-ciel, des reflets de boule disco et des étincelles de confettis.",
+        "Étoiles scintillantes et étoiles filantes dans le ciel, avec un texte arc-en-ciel scintillant (réfléchis dans les sculptures).",
+      ],
+      stack: ["GLSL", "Shadertoy", "Computer Graphics", "Raymarching", "Refraction", "Chromatic Dispersion", "Glass Shaders", "Procedural Animation"],
+      links: [
+        { labelKey: "live", href: shadersLive },
+        { labelKey: "details", href: addDetails("shaders") },
+      ],
+      logos: ["polytech"],
     },
     {
       slug: "xtts-finetuning",
@@ -876,6 +1002,30 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
+      ],
+      logos: ["ups"],
+    },
+    {
+      slug: "pogl",
+      relevance: 18,
+      title: "Desert Interdit",
+      subtitle: "Jeu de plateau tour par tour coopératif en Java.",
+      summary:
+        "Développement d’un jeu de plateau tour par tour coopératif en Java où les joueurs doivent explorer un désert, collecter des pièces et construire une machine volante pour s’échapper avant que la tempête de sable ne devienne trop intense.",
+      organization: "[Université Paris-Saclay](https://www.universite-paris-saclay.fr)",
+      period: "Mai 2022",
+      status: "completed",
+      image: cover("pogl"),
+      imageAlt: "Aperçu de Desert Interdit",
+      highlights: [
+        "Développement d’un jeu de plateau tour par tour coopératif en Java avec une interface graphique grâce au concept Model-View-Controller (MVC).",
+        "Mécanique de jeu impliquant l’exploration d’un désert, la collecte de pièces, la construction d’une machine volante.",
+        "Gestion des conditions de victoire et de défaite basées sur la collecte des pièces et la survie face à la tempête de sable et au manque d’eau.",
+      ],
+      stack: ["Java", "Jeu de plateau", "Model-View-Controller", "Interface graphique"],
+      links: [
+        { labelKey: "source", href: poglRepo },
+        { labelKey: "details", href: addDetails("pogl") },
       ],
       logos: ["ups"],
     },
@@ -1084,6 +1234,30 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       logos: ["deloitte", "googlecloud"],
     },
     {
+      slug: "shaders",
+      relevance: 66,
+      title: "المظللات (Shaders)",
+      subtitle: "مظلل مشهد ثلاثي الأبعاد بتقنية raymarching يتميز بمنحوتات زجاجية، كاروسيل، وأرضية متحركة.",
+      summary:
+        "إنشاء مشهد حيوي بتقنية raymarching يحتوي على منحوتات زجاجية واقعية (مع انكسار الضوء)، وكاروسيل مزخرف، وأرضية متحركة، مما يبرز الانكسار، التشتت اللوني، والرسوم المتحركة الإجرائية.",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "نوفمبر 2025",
+      status: "completed",
+      image: cover("shaders"),
+      imageAlt: "معاينة مجموعة المظللات",
+      highlights: [
+        "منحوتات زجاجية مع انكسار واقعي وتشتت لوني.",
+        "كاروسيل مزخرف وأرضية متحركة بنقوش بلاط قزحية، وانعكاسات كرة ديسكو، وشرارات قصاصات ملونة (confetti).",
+        "نجوم متلألئة وشهب في السماء، مع نص قزحي متوهج (ينعكس على المنحوتات).",
+      ],
+      stack: ["GLSL", "Shadertoy", "Computer Graphics", "Raymarching", "Refraction", "Chromatic Dispersion", "Glass Shaders", "Procedural Animation"],
+      links: [
+        { labelKey: "live", href: shadersLive },
+        { labelKey: "details", href: addDetails("shaders") },
+      ],
+      logos: ["polytech"],
+    },
+    {
       slug: "xtts-finetuning",
       relevance: 100,
       title: "XTTS Finetuning",
@@ -1157,6 +1331,30 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "source", href: compilerRepo },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
+      ],
+      logos: ["polytech"],
+    },
+    {
+      slug: "ubik-pizza-challenge",
+      relevance: 68,
+      title: "Ubik Pizza Challenge",
+      subtitle: "تحليل الأمن السيبراني بصيغة الصندوق الأبيض واختبار الاختراق لتطبيق توصيل البيتزا.",
+      summary:
+        "إجراء تحليل للأمن السيبراني بصيغة الصندوق الأبيض واختبارات اختراق على تطبيق Ubik Pizza، وتحديد الثغرات الأمنية وتقديم توصيات قابلة للتنفيذ لتعزيز الأمن.",
+      organization: "[Polytech Paris-Saclay](https://www.polytech.universite-paris-saclay.fr)",
+      period: "أبريل 2026",
+      status: "completed",
+      image: cover("ubik-pizza-challenge"),
+      imageAlt: "معاينة Ubik Pizza Challenge",
+      highlights: [
+        "تحليل أمني بصيغة الصندوق الأبيض واختبارات اختراق لتطبيق Ubik Pizza.",
+        "تحديد الثغرات الأمنية (XSS, SQLi, CSRF, RCE) وتوصيات للحد من مخاطرها.",
+        "صياغة تقرير مفصل يوثق النتائج والخطوات التصحيحية.",
+      ],
+      stack: ["Cybersecurity", "Penetration Testing", "White-box Analysis", "Security Assessment"],
+      links: [
+        { labelKey: "paper", href: ubikPaper },
+        { labelKey: "details", href: addDetails("ubik-pizza-challenge") },
       ],
       logos: ["polytech"],
     },
@@ -1275,6 +1473,30 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       links: [
         { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
+      ],
+      logos: ["ups"],
+    },
+    {
+      slug: "pogl",
+      relevance: 18,
+      title: "الصحراء المحرمة (Forbidden Desert)",
+      subtitle: "لعبة لوحية تعاونية متعاقبة الأدوار بلغة Java.",
+      summary:
+        "تتطلب اللعبة من اللاعبين استكشاف صحراء، وجمع الأجزاء، وبناء آلة طائرة للهروب قبل أن تشتد العاصفة الرملية.",
+      organization: "[Université Paris-Saclay](https://www.universite-paris-saclay.fr)",
+      period: "مايو 2022",
+      status: "completed",
+      image: cover("pogl"),
+      imageAlt: "معاينة الصحراء المحرمة",
+      highlights: [
+        "تطوير لعبة لوحية تعاونية متعاقبة الأدوار بلغة Java مع واجهة رسومية تعتمد على نمط التصميم (MVC).",
+        "آليات لعب تشمل استكشاف الصحراء، جمع القطع، وبناء آلة طائرة.",
+        "إدارة شروط الفوز والخسارة بناءً على جمع القطع، والبقاء على قيد الحياة في مواجهة العاصفة الرملية ونقص المياه.",
+      ],
+      stack: ["Java", "لعبة لوحية", "Model-View-Controller", "واجهة رسومية"],
+      links: [
+        { labelKey: "source", href: poglRepo },
+        { labelKey: "details", href: addDetails("pogl") },
       ],
       logos: ["ups"],
     },

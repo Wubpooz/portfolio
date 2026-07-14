@@ -71,7 +71,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://mw-portfolio-cfi.pages.dev/projects/pogl</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mw-portfolio-cfi.pages.dev/projects/quizine</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mw-portfolio-cfi.pages.dev/projects/shaders</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mw-portfolio-cfi.pages.dev/projects/ubik-pizza-challenge</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
