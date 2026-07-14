@@ -24,8 +24,19 @@ export default function BackLink({ to, children }: Readonly<BackLinkProps>) {
         typeof window.history.state.idx === "number" &&
         window.history.state.idx > 0
       ) {
-        e.preventDefault();
-        void navigate(-1);
+        let previousPath = null;
+        try {
+          previousPath = sessionStorage.getItem(
+            `history-path-${window.history.state.idx - 1}`
+          );
+        } catch (err) {
+          console.warn("Failed to read from sessionStorage", err);
+        }
+
+        if (previousPath === to) {
+          e.preventDefault();
+          void navigate(-1);
+        }
       }
     }
   };

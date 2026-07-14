@@ -43,6 +43,19 @@ const NotFoundPage = lazy(() => import("./pages/NotFound"));
 function App() {
   const location = useLocation();
 
+  useEffect(() => {
+    if (window.history.state && typeof window.history.state.idx === "number") {
+      try {
+        sessionStorage.setItem(
+          `history-path-${window.history.state.idx}`,
+          location.pathname
+        );
+      } catch (e) {
+        console.warn("Failed to write to sessionStorage", e);
+      }
+    }
+  }, [location]);
+
   return (
     <div className="relative flex min-h-screen flex-col bg-background text-foreground">
       {/* Background Image Watermark */}
