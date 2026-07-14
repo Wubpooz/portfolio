@@ -5,7 +5,7 @@ import { getUiContent, useLocale } from "@/i18n";
 
 const SITE_NAME = "Mathieu Waharte";
 const SITE_URL =
-  import.meta.env.VITE_SITE_URL as string ?? "https://mw-portfolio-cfi.pages.dev";
+  (import.meta.env.VITE_SITE_URL as string | undefined) ?? "https://mw-portfolio-cfi.pages.dev";
 
 function upsertMeta(name: string, content: string, property = false) {
   const selector = property

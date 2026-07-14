@@ -44,10 +44,11 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (window.history.state && typeof window.history.state.idx === "number") {
+    const historyState = window.history.state as { idx?: number } | null;
+    if (historyState && typeof historyState.idx === "number") {
       try {
         sessionStorage.setItem(
-          `history-path-${window.history.state.idx}`,
+          `history-path-${historyState.idx.toString()}`,
           location.pathname
         );
       } catch (e) {

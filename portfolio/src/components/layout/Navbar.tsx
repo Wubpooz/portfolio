@@ -20,7 +20,12 @@ export default function Navbar() {
   ];
 
   useEffect(() => {
-    setMobileMenuOpen(false);
+    const handle = requestAnimationFrame(() => {
+      setMobileMenuOpen(false);
+    });
+    return () => {
+      cancelAnimationFrame(handle);
+    };
   }, [location.pathname, location.hash]);
 
   return (
