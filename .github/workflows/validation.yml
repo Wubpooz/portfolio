@@ -241,13 +241,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: >-
-            -Dsonar.organization=${{ github.repository_owner }}
-            -Dsonar.projectKey=${{ github.repository_owner }}_${{ github.event.repository.name }}
+            -Dsonar.organization=wubpooz
+            -Dsonar.projectKey=Wubpooz_portfolio
             -Dsonar.sources=portfolio/src
             -Dsonar.tests=portfolio/src
             -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts
             -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/coverage/**,**/*.spec.ts,**/*.test.ts
             -Dsonar.typescript.tsconfigPath=portfolio/tsconfig.json
+            with:
         continue-on-error: true
 
       # 12. Aggregate and evaluate results
