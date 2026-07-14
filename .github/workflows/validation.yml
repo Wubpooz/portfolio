@@ -1,0 +1,554 @@
+name: Validation & Security Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  validate:
+    name: Build & Code Verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: portfolio/package-lock.json
+
+      - name: Install dependencies
+        working-directory: portfolio
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: portfolio
+        run: npm run lint
+
+      - name: Run Build
+        working-directory: portfolio
+        run: npm run build
+
+      - name: Validate Sitemap Generation
+        working-directory: portfolio
+        run: |
+          echo "=== Verifying Sitemap ==="
+          if [ -f public/sitemap.xml ] && [ -f dist/sitemap.xml ]; then
+            echo "✅ sitemap.xml exists in both public/ and dist/"
+            if grep -q "<?xml" dist/sitemap.xml && grep -q "<urlset" dist/sitemap.xml; then
+              echo "✅ sitemap.xml contains valid XML headers"
+            else
+              echo "❌ sitemap.xml is not valid XML"
+              exit 1
+            fi
+            URL_COUNT=$(grep -c "<url>" dist/sitemap.xml)
+            echo "📊 Number of URLs found in sitemap: $URL_COUNT"
+            if [ "$URL_COUNT" -gt 3 ]; then
+              echo "✅ sitemap.xml contains project URLs"
+            else
+              echo "❌ sitemap.xml does not contain project URLs"
+              exit 1
+            fi
+          else
+            echo "❌ sitemap.xml was not generated in public/ or dist/"
+            exit 1
+          fi
+
+  semgrep:
+    name: Semgrep Scan (SAST)
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    if: (github.actor != 'dependabot[bot]')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.0
+
+      - name: Run Semgrep CI (AppSec Platform)
+        if: ${{ secrets.SEMGREP_APP_TOKEN != '' }}
+        run: semgrep ci
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+
+      - name: Run Semgrep CE (Community Edition)
+        if: ${{ secrets.SEMGREP_APP_TOKEN == '' }}
+        run: |
+          semgrep scan --config auto --config p/react --config p/typescript --config p/javascript --config p/security-audit --config p/secrets
+
+  security-scan:
+    name: Security Scan (SAST)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: validate
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.0
+
+      # 1. CodeQL Analysis (v4 is the latest and recommended)
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: javascript-typescript
+          queries: security-extended,security-and-quality
+        continue-on-error: true
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:javascript-typescript"
+        continue-on-error: true
+
+      # 2. Trivy filesystem scan (v0.36.0 is the latest verified version)
+      - name: Run Trivy vulnerability scanner (filesystem)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          format: 'table'
+        continue-on-error: true
+
+      - name: Run Trivy vulnerability scanner (filesystem - JSON)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          format: 'json'
+          output: 'trivy-fs-results.json'
+        continue-on-error: true
+
+      # 3. Setup Node for npm audit & ESLint JSON
+      - name: Setup Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: portfolio/package-lock.json
+
+      - name: Install dependencies for audits
+        working-directory: portfolio
+        run: npm ci --legacy-peer-deps --no-optional --ignore-scripts
+
+      # 4. npm audit (production dependencies only)
+      - name: Frontend npm audit (production)
+        working-directory: portfolio
+        run: |
+          echo "=== npm audit (production dependencies only) ==="
+          npm audit --omit=dev 2>&1 | tee ../npm-audit-results.txt || true
+          npm audit --omit=dev --json > ../npm-audit-results.json 2>&1 || true
+        continue-on-error: true
+
+      # 5. OWASP Dependency-Check
+      - name: Run OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'portfolio'
+          path: '.'
+          format: 'JSON'
+          out: 'dependency-check-report'
+          args: >-
+            --enableExperimental
+            --failOnCVSS 7
+        continue-on-error: true
+
+      - name: Display OWASP Dependency-Check results
+        if: always()
+        run: |
+          echo "=== OWASP Dependency-Check Report ==="
+          if [ -f dependency-check-report/dependency-check-report.json ]; then
+            jq -r '.dependencies[]? | select(.vulnerabilities) | "\n📦 \(.fileName // "unknown")\n  Vulnerabilities:", (.vulnerabilities[]? | "  - [\(.severity // "UNKNOWN")] \(.name // "N/A"): \((.description // "")[0:100])...")' dependency-check-report/dependency-check-report.json || echo "No vulnerabilities or format issue"
+          else
+            echo "No OWASP report file found"
+          fi
+        continue-on-error: true
+
+      # 6. Snyk security scan (runs only if SNYK_TOKEN secret is configured)
+      - name: Run Snyk to check for vulnerabilities
+        if: ${{ secrets.SNYK_TOKEN != '' }}
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --all-projects --json-file-output=snyk-results.json
+
+      # 7. GitLeaks for secrets detection (v3 is the latest, Node 24 compliant version)
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+
+      # 9. ESLint security report
+      - name: Run ESLint security scan (JSON output)
+        working-directory: portfolio
+        run: |
+          echo "=== ESLint Scan ==="
+          npm run lint -- --format json --output-file ../eslint-results.json || true
+        continue-on-error: true
+
+      # 10. Bandit for Python (if Python files exist)
+      - name: Detect Python files
+        run: |
+          if find . -name "*.py" -not -path "*/node_modules/*" | grep -q .; then
+            echo "HAS_PYTHON=true" >> $GITHUB_ENV
+          else
+            echo "HAS_PYTHON=false" >> $GITHUB_ENV
+          fi
+
+      - name: Setup Python
+        if: env.HAS_PYTHON == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Bandit
+        if: env.HAS_PYTHON == 'true'
+        run: pip install bandit[toml]
+
+      - name: Run Bandit SAST scan
+        if: env.HAS_PYTHON == 'true'
+        run: |
+          echo "=== Bandit Python Security Scan ==="
+          bandit -r . -f json -o bandit-results.json -ll --exclude ./node_modules,./portfolio/node_modules || true
+          bandit -r . -ll --exclude ./node_modules,./portfolio/node_modules || true
+        continue-on-error: true
+
+      # 11. SonarCloud Scan (resilient to missing SONAR_TOKEN, using latest sonarqube-scan-action)
+      - name: SonarCloud Scan
+        if: ${{ secrets.SONAR_TOKEN != '' }}
+        uses: SonarSource/sonarqube-scan-action@v8.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >-
+            -Dsonar.organization=${{ github.repository_owner }}
+            -Dsonar.projectKey=${{ github.repository_owner }}_${{ github.event.repository.name }}
+            -Dsonar.sources=portfolio/src
+            -Dsonar.tests=portfolio/src
+            -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts
+            -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/coverage/**,**/*.spec.ts,**/*.test.ts
+            -Dsonar.typescript.tsconfigPath=portfolio/tsconfig.json
+        continue-on-error: true
+
+      # 12. Aggregate and evaluate results
+      - name: Aggregate security scan results
+        id: security-check
+        run: |
+          echo "## Security Scan Summary (SAST)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Static Analysis Tools" >> $GITHUB_STEP_SUMMARY
+          echo "- CodeQL: JavaScript/TypeScript semantic analysis" >> $GITHUB_STEP_SUMMARY
+          echo "- Trivy: Filesystem vulnerability scanning" >> $GITHUB_STEP_SUMMARY
+          echo "- Semgrep: Multi-language pattern matching (React rules included)" >> $GITHUB_STEP_SUMMARY
+          echo "- ESLint: Frontend code quality & security" >> $GITHUB_STEP_SUMMARY
+          echo "- Bandit: Python security issues scanner" >> $GITHUB_STEP_SUMMARY
+          echo "- Snyk: Dependency vulnerability scanning" >> $GITHUB_STEP_SUMMARY
+          echo "- Gitleaks: Secret detection" >> $GITHUB_STEP_SUMMARY
+          echo "- SonarCloud: Code quality & security hotspots" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          FAILED=0
+          VULNERABILITIES_DETAIL=""
+          
+          # Check Trivy results
+          if [ -f trivy-fs-results.json ]; then
+            TRIVY_HIGH=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity == "HIGH" or .Severity == "CRITICAL")] | length' trivy-fs-results.json 2>/dev/null || echo "0")
+            TRIVY_MEDIUM=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity == "MEDIUM")] | length' trivy-fs-results.json 2>/dev/null || echo "0")
+            echo "### Trivy Filesystem Scan" >> $GITHUB_STEP_SUMMARY
+            echo "- Critical/High: $TRIVY_HIGH" >> $GITHUB_STEP_SUMMARY
+            echo "- Medium: $TRIVY_MEDIUM" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            if [ "$TRIVY_HIGH" -gt 0 ]; then
+              echo "::error::Trivy found $TRIVY_HIGH high/critical vulnerabilities"
+              FAILED=1
+              VULNERABILITIES_DETAIL="${VULNERABILITIES_DETAIL}\n\n### 🔍 Trivy Vulnerabilities\n"
+              jq -r '.Results[]?.Vulnerabilities[]? | select(.Severity == "HIGH" or .Severity == "CRITICAL") | "- **[\(.Severity)] \(.VulnerabilityID)** in `\(.PkgName)@\(.InstalledVersion)`\n  - Title: \(.Title)\n  - Fixed in: \(.FixedVersion // "Not available")"' trivy-fs-results.json >> /tmp/trivy_details.txt 2>/dev/null || true
+              if [ -f /tmp/trivy_details.txt ]; then
+                VULNERABILITIES_DETAIL="${VULNERABILITIES_DETAIL}$(cat /tmp/trivy_details.txt)"
+              fi
+            fi
+          fi
+          
+          # Check npm audit results
+          if [ -f npm-audit-results.json ]; then
+            NPM_HIGH=$(jq '.metadata.vulnerabilities.high // 0' npm-audit-results.json 2>/dev/null || echo "0")
+            NPM_CRITICAL=$(jq '.metadata.vulnerabilities.critical // 0' npm-audit-results.json 2>/dev/null || echo "0")
+            NPM_MEDIUM=$(jq '.metadata.vulnerabilities.moderate // 0' npm-audit-results.json 2>/dev/null || echo "0")
+            echo "### npm audit (production)" >> $GITHUB_STEP_SUMMARY
+            echo "- Critical: $NPM_CRITICAL" >> $GITHUB_STEP_SUMMARY
+            echo "- High: $NPM_HIGH" >> $GITHUB_STEP_SUMMARY
+            echo "- Medium: $NPM_MEDIUM" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            TOTAL_NPM_HIGH=$((NPM_HIGH + NPM_CRITICAL))
+            if [ "$TOTAL_NPM_HIGH" -gt 0 ]; then
+              echo "::error::npm audit found $TOTAL_NPM_HIGH high/critical vulnerabilities in production dependencies"
+              FAILED=1
+              VULNERABILITIES_DETAIL="${VULNERABILITIES_DETAIL}\n\n### 📦 npm audit Vulnerabilities\n"
+              jq -r '.vulnerabilities | to_entries[] | select(.value.severity == "high" or .value.severity == "critical") | "- **[\(.value.severity | ascii_upcase)] \(.key)** via \(.value.via[0].name // .key)\n  - \(.value.via[0].title // "No title")\n  - Dependency: \(.value.via[0].dependency // "N/A")\n  - Range: \(.value.via[0].range // "N/A")"' npm-audit-results.json >> /tmp/npm_details.txt 2>/dev/null || true
+              if [ -f /tmp/npm_details.txt ]; then
+                VULNERABILITIES_DETAIL="${VULNERABILITIES_DETAIL}$(cat /tmp/npm_details.txt)"
+              fi
+            fi
+          fi
+          
+          # Check OWASP Dependency-Check results
+          if [ -f dependency-check-report/dependency-check-report.json ]; then
+            OWASP_HIGH=$(jq '[.dependencies[]?.vulnerabilities[]? | select(.severity == "HIGH" or .severity == "CRITICAL")] | length' dependency-check-report/dependency-check-report.json 2>/dev/null || echo "0")
+            OWASP_MEDIUM=$(jq '[.dependencies[]?.vulnerabilities[]? | select(.severity == "MEDIUM")] | length' dependency-check-report/dependency-check-report.json 2>/dev/null || echo "0")
+            echo "### OWASP Dependency-Check" >> $GITHUB_STEP_SUMMARY
+            echo "- Critical/High: $OWASP_HIGH" >> $GITHUB_STEP_SUMMARY
+            echo "- Medium: $OWASP_MEDIUM" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            if [ "$OWASP_HIGH" -gt 0 ]; then
+              echo "::error::OWASP Dependency-Check found $OWASP_HIGH high/critical vulnerabilities"
+              FAILED=1
+              VULNERABILITIES_DETAIL="${VULNERABILITIES_DETAIL}\n\n### 🛡️ OWASP Dependency-Check Vulnerabilities\n"
+              jq -r '.dependencies[]? | select(.vulnerabilities) | .vulnerabilities[] | select(.severity == "HIGH" or .severity == "CRITICAL") | "- **[\(.severity)] \(.name)** in `" + (.source // "unknown") + "`\n  - Description: \(.description[0:150])...\n  - CVSS Score: \(.cvssv3.baseScore // .cvssv2.score // "N/A")"' dependency-check-report/dependency-check-report.json >> /tmp/owasp_details.txt 2>/dev/null || true
+              if [ -f /tmp/owasp_details.txt ]; then
+                VULNERABILITIES_DETAIL="${VULNERABILITIES_DETAIL}$(cat /tmp/owasp_details.txt)"
+              fi
+            fi
+          fi
+          
+          # Check Snyk results
+          if [ -f snyk-results.json ]; then
+            SNYK_HIGH=$(jq '[.vulnerabilities[]? | select(.severity == "high" or .severity == "critical")] | length' snyk-results.json 2>/dev/null || echo "0")
+            SNYK_MEDIUM=$(jq '[.vulnerabilities[]? | select(.severity == "medium")] | length' snyk-results.json 2>/dev/null || echo "0")
+            echo "### Snyk Scan" >> $GITHUB_STEP_SUMMARY
+            echo "- Critical/High: $SNYK_HIGH" >> $GITHUB_STEP_SUMMARY
+            echo "- Medium: $SNYK_MEDIUM" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            if [ "$SNYK_HIGH" -gt 0 ]; then
+              echo "::error::Snyk found $SNYK_HIGH high/critical vulnerabilities"
+              FAILED=1
+            fi
+          fi
+          
+          # Check Bandit results
+          if [ -f bandit-results.json ]; then
+            BANDIT_HIGH=$(jq '[.results[]? | select(.issue_severity == "HIGH")] | length' bandit-results.json 2>/dev/null || echo "0")
+            BANDIT_MEDIUM=$(jq '[.results[]? | select(.issue_severity == "MEDIUM")] | length' bandit-results.json 2>/dev/null || echo "0")
+            echo "### Bandit Python Security Scan" >> $GITHUB_STEP_SUMMARY
+            echo "- High: $BANDIT_HIGH" >> $GITHUB_STEP_SUMMARY
+            echo "- Medium: $BANDIT_MEDIUM" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          # Check ESLint results
+          if [ -f eslint-results.json ]; then
+            ESLINT_ERRORS=$(jq '[.[]?.messages[]? | select(.severity == 2)] | length' eslint-results.json 2>/dev/null || echo "0")
+            echo "### ESLint Scan" >> $GITHUB_STEP_SUMMARY
+            echo "- Errors: $ESLINT_ERRORS" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "$FAILED" -eq 1 ]; then
+            echo "### ❌ Security scan FAILED - High/Critical vulnerabilities found" >> $GITHUB_STEP_SUMMARY
+            if [ -n "$VULNERABILITIES_DETAIL" ]; then
+              printf '%b\n' "$VULNERABILITIES_DETAIL" >> "$GITHUB_STEP_SUMMARY"
+            fi
+            echo "has_vulnerabilities=true" >> $GITHUB_OUTPUT
+          else
+            echo "### ✅ Security scan PASSED - No high/critical vulnerabilities found" >> $GITHUB_STEP_SUMMARY
+            echo "has_vulnerabilities=false" >> $GITHUB_OUTPUT
+          fi
+
+      # 13. Upload all scan artifacts
+      - name: Upload security scan artifacts
+        uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: security-scan-reports
+          path: |
+            trivy-fs-results.json
+            npm-audit-results.json
+            npm-audit-results.txt
+            dependency-check-report/
+            snyk-results.json
+            bandit-results.json
+            eslint-results.json
+          retention-days: 30
+
+      # 14. Fail the job if vulnerabilities were found
+      - name: Fail if vulnerabilities found
+        if: steps.security-check.outputs.has_vulnerabilities == 'true'
+        run: |
+          echo "════════════════════════════════════════════════════════════════"
+          echo "❌ SECURITY VULNERABILITIES DETECTED (SAST)"
+          echo "════════════════════════════════════════════════════════════════"
+          echo ""
+          echo "High or Critical severity vulnerabilities have been found by static analysis."
+          echo "Detailed reports are available in the workflow artifacts."
+          echo "════════════════════════════════════════════════════════════════"
+          exit 1
+
+  dast-scan:
+    name: DAST Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    needs: validate
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: portfolio/package-lock.json
+
+      - name: Install dependencies
+        working-directory: portfolio
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: portfolio
+        run: npm run build
+
+      - name: Serve frontend
+        run: |
+          npx serve -s portfolio/dist -l 3000 &
+          echo $! > frontend.pid
+          sleep 5
+
+      - name: Verify application is running
+        run: |
+          echo "=== Checking Frontend ==="
+          curl -v http://localhost:3000/ || echo "Frontend not responding on port 3000"
+
+      # 1. Skipfish DAST scan
+      - name: Run Skipfish on Frontend
+        run: |
+          docker run --rm --network host \
+            -v ${{ github.workspace }}/skipfish-frontend:/output \
+            andremirt/skipfish:latest \
+            -o /output \
+            -S /dev/null \
+            -W /dev/null \
+            -Y \
+            -m 3 \
+            -I / \
+            http://localhost:3000/
+        continue-on-error: true
+
+      # 2. OWASP ZAP Baseline Scan
+      - name: Run OWASP ZAP Baseline Scan on Frontend
+        run: |
+          docker run --rm --network host \
+            -v ${{ github.workspace }}:/zap/wrk/:rw \
+            -t ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py \
+            -t http://localhost:3000/ \
+            -r zap-frontend-report.html \
+            -J zap-frontend-report.json \
+            -w zap-frontend-report.md \
+            -a \
+            -j \
+            -l PASS \
+            -z "-config api.disablekey=true"
+        continue-on-error: true
+
+      # 3. Nikto web server scanner
+      - name: Run Nikto scan on Frontend
+        run: |
+          docker run --rm --network host \
+            -v ${{ github.workspace }}:/tmp \
+            secfigo/nikto:latest \
+            -h http://localhost:3000 \
+            -output /tmp/nikto-frontend-report.json \
+            -Format json \
+            -Tuning 123bde \
+            -timeout 5
+        continue-on-error: true
+
+      # 4. Parse Skipfish results
+      - name: Parse Skipfish results
+        if: always()
+        run: |
+          echo "=== Skipfish Frontend Results ==="
+          if [ -f skipfish-frontend/samples ]; then
+            echo "Frontend scan completed. Sample file found."
+          else
+            echo "Frontend scan may not have completed successfully"
+          fi
+        continue-on-error: true
+
+      # 5. Aggregate DAST results
+      - name: Aggregate DAST scan results
+        id: dast-check
+        if: always()
+        run: |
+          echo "## DAST Scan Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Check ZAP results
+          if [ -f zap-frontend-report.json ]; then
+            ZAP_FRONTEND_HIGH=$(jq '[.site[].alerts[]? | select(.riskcode == "3" or .riskcode == "2")] | length' zap-frontend-report.json 2>/dev/null || echo "0")
+            echo "### OWASP ZAP - Frontend" >> $GITHUB_STEP_SUMMARY
+            echo "- High/Medium alerts: $ZAP_FRONTEND_HIGH" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          # Check Skipfish results
+          echo "### Skipfish Scan" >> $GITHUB_STEP_SUMMARY
+          if [ -d skipfish-frontend ]; then
+            echo "- Frontend scan completed - see HTML report in artifacts" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- Frontend scan: No results" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Check Nikto results
+          echo "### Nikto Scan" >> $GITHUB_STEP_SUMMARY
+          if [ -f nikto-frontend-report.json ]; then
+            echo "- Frontend scan completed - see report in artifacts" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- Frontend scan: No results" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+      # 6. Upload DAST scan reports
+      - name: Upload DAST scan reports
+        uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: dast-scan-reports
+          path: |
+            skipfish-frontend/
+            zap-frontend-report.html
+            zap-frontend-report.json
+            zap-frontend-report.md
+            nikto-frontend-report.json
+          retention-days: 30
+
+      # 7. Cleanup
+      - name: Stop applications
+        if: always()
+        run: |
+          if [ -f frontend.pid ]; then
+            kill $(cat frontend.pid) 2>/dev/null || true
+          fi
+          pkill -f "serve" || true
