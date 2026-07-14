@@ -480,54 +480,11 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       imageAlt: "Escape the Mummy preview",
       highlights: [
         "Development of a 3D maze game using Processing and GLSL shaders.",
-        "Procedural generation of a desert and a pyramid.",
-        "Gameplay mechanic where the player must escape a mummy.",
-//TODO (don't delete)
-//         III. Pyramide et Lumi`ere (Mathieu)
-// Pyramide et D´esert
-// La pyramide est un cr´ee du bas vers le haut en dessinant un chaque cˆot´e du mur avec des QUADS. A chaque
-// fois que l’on monte on se d´ecale vers l’int´erieur de la pyramide ; cela donne une pyramide ”plate”, effet souhait´e car
-// plus agr´eable `a l’œil. En revanche, avec cette approche, il faut ajouter les jointures entre les murs et le sommet de la
-// pyramide `a part en usant de la flexibilit´e des QUADS.
-// Le d´esert est une mer de QUADS dont la hauteur seule varie suivant noise(i,j) similairement `a Minecraft. Pour
-// donner l’apparence que les ”blocs” sont reli´es on joint chaque QUAD avec son voisin de droite et derri`ere. Cela cr´ee
-// des probl`emes de bords mais ils sont n´egligeables puisque ne devraient pas ˆetre observables.
-// L’application de textures pour les deux fut tr`es naturelle.
-// Lumi`ere
-// Apr`es avoir pass´e des heures `a essayer de faire fonctionner les normales de Processing sans succ`es, j’ai d´ecid´e de
-// m’orienter vers les shaders malgr´e mon inexp´erience. J’ai donc pass´e beaucoup de temps `a mieux comprendre le
-// fonctionnement de ces derniers ainsi qu’apprendre OpenGL de mani`ere `a faire fonctionner correctement les lumi`eres.
-// Mes objectifs ´etaient : avoir un soleil qui ´eclaire la sc`ene mais pas l’int´erieur du labyrinthe, utiliser les normal maps
-// des textures, coloriser les murs du labyrinthe suivant leur position dans le model space (utiliser tint sur le PShape
-// n’´etant pas transmis au shader) et avoir une lampe torche, .
-// - Soleil : pour r´ealiser un soleil, il m’a fallu passer les coordonn´ees en model space de la source de lumi`ere au
-// fragmentShader, en d´eduire la direction du soleil relative `a la position actuelle et enfin calculer la couleur du
-// fragment.
-// Pour cela j’ai d’abord d´etermin´e la normale de chaque fragment suivant sa texture en utilisant leur normalMap ;
-// puis en ajoutant les contributions des composantes ambiantes, diffuse et sp´eculaires de cette lumi`ere, en prenant
-// en compte l’att´enuation de la lumi`ere.
-// - Couleur des murs : pour coloriser les murs du labyrinthe comme sur la mini-map pour aider le joueur a se rep´erer,
-// il me fallait trouver la position de chaque mur dans le labyrinthe (pour refaire le tint(25*i,25*i,255-10*i+10*j)).
-// Cela s’est av´er´e tr`es compliqu´e, la solution que j’ai trouv´ee a ´et´e de prendre la position en model space et la
-// normaliser de sorte `a ce que celle-ci corresponde aux i et j. Ensuite il m’a suffit de normaliser la couleur d’une
-// ´echelle [0-255] `a [0.0-1.0] et la passer au fragmentShader et teindre la couleur du fragment de la mˆeme mani`ere
-// que celle de la pyramide.
-// - Lampe torche : Celle-ci fut particuli`erement difficile et demandeuse niveau compr´ehension. En effet, il fallait :
-// nullifier l’effet du soleil dans le labyrinthe, avoir une source de lumi`ere qui suit la position ET rotation du joueur
-// et ait une att´enuation tr`es forte `a distance.
-// J’ai d’abord tent´e de cr´eer un raycaster pour empˆecher le soleil d’´eclairer tout le labyrinthe seulement pour
-// r´ealiser que je ne pouvais pas passer au shader un String[] contenant les murs (ce qui est n´ecessaire) de par
-// une limitation de Processing. J’ai donc abandonn´ee cette id´ee par manque de temps et aie pr´ef´er´e la solution
-// plus simple ”d’´eteindre” le soleil dans le labyrinthe uniquement.
-// Pour l’att´enuation, cela n’a ´et´e qu’une question de tester ce qu’il fonctionne bien.
-// Faire avancer la lumi`ere avec la position du joueur fut compliqu´e mais simple : transf´erer la position en view
-// space au fragmentShader et calculer la position de la lampe relativement `a ¸ca et la position du joueur (pass´ee
-// par Processing). En revanche pour la rotation, utiliser celle de Processing n’a pas fonctionn´e malgr´e de tr`es
-// nombreuses tentatives. De fait, j’ai tent´e beaucoup d’autres solutions (une matrice de rotation etc) mais sans
-// succ`es. Mais, par hasard, j’ai indiqu´e un vecteur particulier qui s’est av´er´e fonctionner du fait que la position de
-// la lampe change avec la rotation du joueur.
+        "Procedural generation of a desert, a pyramid and a maze and texturing them (texture with normal and bump maps).",
+        "Gameplay mechanic where the player must escape a mummy by navigating the maze.",
+        "Implementation of lighting effects using GLSL shaders. The sun features ambient, diffuse, and specular lighting with falloff, while a flashlight provides additional illumination inside the pyramid.",
       ],
-      stack: ["Processing", "GLSL", "Shader", "3D Game"],
+      stack: ["Processing", "GLSL", "Shader", "3D Game", "Procedural Generation", "Maze Game", "Lighting Effects"],
       links: [
         { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
@@ -994,11 +951,11 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("escape-the-mummy"),
       imageAlt: "Aperçu de Escape the mummy",
       highlights: [
-        "Développement d’un jeu de labyrinthe 3D avec Processing et des shader GLSL.",
-        "Génération procédurale d’un désert et d’une pyramide.",
-        "Mécanique de jeu où le joueur doit échapper à une momie.",
+        "Génération procédurale d'un paysage désertique et d'un labyrinthe pyramidal.",
+        "Mécanique de jeu où le joueur doit échapper à une momie en naviguant dans le labyrinthe.",
+        "Implémentation d'effets de lumière à l'aide de shaders GLSL. Le soleil présente un éclairage ambiant, diffus et spéculaire avec atténuation, tandis qu'une lampe de poche fournit un éclairage supplémentaire à l'intérieur de la pyramide.",
       ],
-      stack: ["Processing", "GLSL", "Shader", "Jeu 3D"],
+      stack: ["Processing", "GLSL", "Shader", "Jeu 3D", "Génération procédurale", "Jeu de labyrinthe", "Effets de lumière"],
       links: [
         { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
@@ -1465,11 +1422,11 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       image: cover("escape-the-mummy"),
       imageAlt: "معاينة الهروب من المومياء",
       highlights: [
-        "تطوير لعبة متاهة ثلاثية الأبعاد باستخدام Processing ومظللات GLSL.",
-        "توليد إجرائي للصحراء والهرم.",
-        "آلية لعب تتطلب من اللاعب الهروب من مومياء ملاحِقة.",
+        "توليد إجرائي لمشهد صحراوي ومتاهة داخل الهرم.",
+        "آلية لعب يتعين على اللاعب من خلالها الهروب من المومياء عن طريق التنقل في المتاهة.",
+        "تطبيق تأثيرات الإضاءة باستخدام مظللات GLSL، حيث تتميز الشمس بإضاءة محيطة (ambient)، ومنتشرة (diffuse)، وانعكاسية (specular) مع تلاشي الضوء (falloff)، بينما يوفر المصباح اليدوي إضاءة إضافية داخل الهرم.",
       ],
-      stack: ["Processing", "GLSL", "Shader", "3D Game"],
+      stack: ["Processing", "GLSL", "Shader", "3D Game", "Procedural Generation", "Maze Game", "Lighting Effects"],
       links: [
         { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
