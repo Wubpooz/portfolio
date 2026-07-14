@@ -30,18 +30,53 @@ export interface ProjectItem {
 
 const cover = (seed: string) => `/assets/projects/${seed}.webp`;
 
+// Watchlist Service
+const watchlistUrl = "https://watchlist-service.vercel.app/landing?redirect=/";
+const watchlistRepo = "https://github.com/Wubpooz/Watchlist-Service";
 
-const watchlistUrl = "https://watchlist-service.vercel.app/landing?redirect=/"; // Watchlist web
+// Vireli
+const vireliUrl = "https://vireli.kerboul.me/";
 
-const escampeUrl = "https://escampe.vercel.app/"; // Escampe web
+// Minimax ResNet
+const escampeUrl = "https://escampe.vercel.app/";
+const escampePaper = "https://github.com/Wubpooz/app5-ai-game-project/blob/main/BandDPER.pdf";
+const escampeRepo = "https://github.com/Wubpooz/app5-ai-game-project";
 
-const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/"; // XTTS demo
-const streamlitSearch = "https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/"; // Paper Relevance Dashboard
-const maltaRepo = "https://github.com/Wubpooz/Malta-TTS";
-
+// How Europe Spends Its Time
 const visualisationApp5Url = "https://wubpooz.github.io/visualisation-app5/";
 const datasetUrl = "https://huggingface.co/datasets/Bluefir/hetus-time-use";
 const visualisationApp5Repo = "https://github.com/Wubpooz/visualisation-app5";
+
+// VibeHealth
+const vibehealthRepo = "https://github.com/Wubpooz/VibeHealth/";
+
+// XTTS Finetuning
+const streamlitSearch = "https://malta-tts-sdgohifzyhuguzwrwfaj2e.streamlit.app/";
+const streamlitDemo = "https://malta-tts-deegsodm2ehla4cupq6bxb.streamlit.app/";
+const maltaRepo = "https://github.com/Wubpooz/Malta-TTS";
+
+// Quizine
+const quizineUrl = "https://quizine-front.vercel.app/landing";
+const quizineRepo = "https://github.com/Wubpooz/quizine_front";
+
+// C Compiler
+const compilerRepo = "https://github.com/Wubpooz/app4-compilation";
+
+// Magnus Carlos
+const magnusCarlosRepo = "https://github.com/Wubpooz/MagnusCarlos";
+
+// Nyxen
+const nyxenRepo = "https://github.com/Wubpooz/APP3_Projet_Web";
+
+// Escape the Mummy
+const escapeTheMummyRepo = "https://github.com/Wubpooz/IGSD-projet";
+
+// CLI Messaging
+const cliMessagingRepo = "https://github.com/Wubpooz/Rezo";
+
+// Logihub
+const logihubUrl = "http://mwaharte.free.fr/test/feuille_html_principale.html";
+const logihubRepo = "https://github.com/Wubpooz/Site-ISN-2019";
 
 
 const addDetails = (slug: string) => `/projects/${slug}`;
@@ -72,7 +107,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Vercel", "Supabase", "MCP", "Docker", "GitHub Actions"],
       links: [
         { labelKey: "live", href: watchlistUrl },
-        { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
+        { labelKey: "source", href: watchlistRepo },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
       featured: true,
@@ -97,7 +132,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Angular", "Ionic", "PWA", "Capacitor", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Redis", "Docker", "Coolify", "Zod", "OpenAPI", "Postman", "Monorepo"],
       links: [
-        { labelKey: "live", href: "https://vireli.kerboul.me/" },
+        { labelKey: "live", href: vireliUrl },
         // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
         { labelKey: "details", href: addDetails("vireli") },
       ],
@@ -124,8 +159,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       stack: ["PyTorch", "Java", "Minimax", "ResNet", "Python"],
       links: [
         { labelKey: "live", href: escampeUrl },
-        { labelKey: "paper", href: "https://github.com/Wubpooz/app5-ai-game-project/blob/main/BandDPER.pdf", label: { en: "Research Paper", fr: "Rapport de recherche", ar: "ورقة البحث العلمية" } },
-        { labelKey: "source", href: "https://github.com/Wubpooz/app5-ai-game-project" },
+        { labelKey: "paper", href: escampePaper, label: { en: "Research Paper", fr: "Rapport de recherche", ar: "ورقة البحث العلمية" } },
+        { labelKey: "source", href: escampeRepo },
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
       logos: ["polytech"],
@@ -178,7 +213,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Angular", "Bun", "Hono", "PostgreSQL", "Prisma", "BetterAuth", "PWA", "Zod", "i18n", "Health Tech", "Antigravity", "Github Copilot", "Agentic Coding"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/VibeHealth/" },
+        { labelKey: "source", href: vibehealthRepo },
         { labelKey: "details", href: addDetails("vibehealth") },
       ],
       logos: ["polytech"],
@@ -252,8 +287,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
       links: [
-        { labelKey: "live", href: "https://quizine-front.vercel.app/landing" },
-        { labelKey: "source", href: "https://github.com/Wubpooz/quizine_front" },
+        { labelKey: "live", href: quizineUrl },
+        { labelKey: "source", href: quizineRepo },
         { labelKey: "details", href: addDetails("quizine") },
       ],
       logos: ["polytech"],
@@ -278,7 +313,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Java", "Compiler", "Error Handling"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/app4-compilation" },
+        { labelKey: "source", href: compilerRepo },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
       ],
       logos: ["polytech"],
@@ -326,7 +361,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["C++", "SDL2", "3D Simulation", "Agile", "Visualization", "Physics Modeling", "Project Management"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/MagnusCarlos" },
+        { labelKey: "source", href: magnusCarlosRepo },
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
       logos: ["polytech"],
@@ -350,7 +385,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Angular", "Three.js", "TypeScript", "JavaScript", "HTML", "CSS", "SPA Routing", "3D", "Animation", "Git", "Agile", "Frontend"],
       links: [
-        { labelKey: "live", href: "https://github.com/Wubpooz/APP3_Projet_Web" },
+        { labelKey: "live", href: nyxenRepo },
         { labelKey: "details", href: addDetails("nyxen") },
       ],
       logos: ["polytech"],
@@ -440,7 +475,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Processing", "GLSL", "Shader", "3D Game"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/IGSD-projet" },
+        { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
       ],
       logos: ["ups"],
@@ -464,7 +499,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["C", "UDP", "TCP-IP", "CLI"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/Rezo" },
+        { labelKey: "source", href: cliMessagingRepo },
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
       logos: ["ups"],
@@ -487,8 +522,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
       links: [
-        { labelKey: "live", href: "http://mwaharte.free.fr/test/feuille_html_principale.html" },
-        { labelKey: "source", href: "https://github.com/Wubpooz/Site-ISN-2019" },
+        { labelKey: "live", href: logihubUrl },
+        { labelKey: "source", href: logihubRepo },
         { labelKey: "details", href: addDetails("logihub") },
       ],
       logos: ["essouriau"],
@@ -515,7 +550,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Vercel", "Supabase", "MCP", "Docker", "GitHub Actions"],
       links: [
         { labelKey: "live", href: watchlistUrl },
-        { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
+        { labelKey: "source", href: watchlistRepo },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
       featured: true,
@@ -540,7 +575,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Angular", "Ionic", "PWA", "Capacitor", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Redis", "Docker", "Coolify", "Zod", "OpenAPI", "Postman", "Monorepo"],
       links: [
-        { labelKey: "live", href: "https://vireli.kerboul.me/" },
+        { labelKey: "live", href: vireliUrl },
         // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
         { labelKey: "details", href: addDetails("vireli") },
       ],
@@ -567,8 +602,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       stack: ["PyTorch", "Java", "Minimax", "ResNet", "Python"],
       links: [
         { labelKey: "live", href: escampeUrl },
-        { labelKey: "paper", href: "https://github.com/Wubpooz/app5-ai-game-project/blob/main/BandDPER.pdf", label: { en: "Research Paper", fr: "Rapport de recherche", ar: "ورقة البحث العلمية" } },
-        { labelKey: "source", href: "https://github.com/Wubpooz/app5-ai-game-project" },
+        { labelKey: "paper", href: escampePaper, label: { en: "Research Paper", fr: "Rapport de recherche", ar: "ورقة البحث العلمية" } },
+        { labelKey: "source", href: escampeRepo },
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
       logos: ["polytech"],
@@ -621,7 +656,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Angular", "Bun", "Hono", "PostgreSQL", "Prisma", "BetterAuth", "PWA", "Zod", "i18n", "Health Tech", "Antigravity", "Github Copilot", "Agentic Coding"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/VibeHealth/" },
+        { labelKey: "source", href: vibehealthRepo },
         { labelKey: "details", href: addDetails("vibehealth") },
       ],
       logos: ["polytech"],
@@ -695,8 +730,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
       links: [
-        { labelKey: "live", href: "https://quizine-front.vercel.app/landing" },
-        { labelKey: "source", href: "https://github.com/Wubpooz/quizine_front" },
+        { labelKey: "live", href: quizineUrl },
+        { labelKey: "source", href: quizineRepo },
         { labelKey: "details", href: addDetails("quizine") },
       ],
       logos: ["polytech"],
@@ -721,7 +756,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Java", "Compilateur", "Gestion d'erreurs"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/app4-compilation" },
+        { labelKey: "source", href: compilerRepo },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
       ],
       logos: ["polytech"],
@@ -769,7 +804,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["C++", "SDL2", "Simulation 3D", "Agile", "Visualisation", "Physique Modélisation", "Gestion de projet"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/MagnusCarlos" },
+        { labelKey: "source", href: magnusCarlosRepo },
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
       logos: ["polytech"],
@@ -793,7 +828,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Angular", "Three.js", "TypeScript", "JavaScript", "HTML", "CSS", "SPA Routing", "3D", "Animation", "Git", "Agile", "Frontend"],
       links: [
-        { labelKey: "live", href: "https://github.com/Wubpooz/APP3_Projet_Web" },
+        { labelKey: "live", href: nyxenRepo },
         { labelKey: "details", href: addDetails("nyxen") },
       ],
       logos: ["polytech"],
@@ -839,7 +874,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Processing", "GLSL", "Shader", "Jeu 3D"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/IGSD-projet" },
+        { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
       ],
       logos: ["ups"],
@@ -863,7 +898,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["C", "UDP", "TCP-IP", "CLI"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/Rezo" },
+        { labelKey: "source", href: cliMessagingRepo },
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
       logos: ["ups"],
@@ -886,8 +921,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
       links: [
-        { labelKey: "live", href: "http://mwaharte.free.fr/test/feuille_html_principale.html" },
-        { labelKey: "source", href: "https://github.com/Wubpooz/Site-ISN-2019" },
+        { labelKey: "live", href: logihubUrl },
+        { labelKey: "source", href: logihubRepo },
         { labelKey: "details", href: addDetails("logihub") },
       ],
       logos: ["essouriau"],
@@ -914,7 +949,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Vercel", "Supabase", "MCP", "Docker", "GitHub Actions"],
       links: [
         { labelKey: "live", href: watchlistUrl },
-        { labelKey: "source", href: "https://github.com/Wubpooz/Watchlist-Service" },
+        { labelKey: "source", href: watchlistRepo },
         { labelKey: "details", href: addDetails("watchlist-service") },
       ],
       featured: true,
@@ -939,7 +974,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Angular", "Ionic", "PWA", "Capacitor", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Redis", "Docker", "Coolify", "Zod", "OpenAPI", "Postman", "Monorepo"],
       links: [
-        { labelKey: "live", href: "https://vireli.kerboul.me/" },
+        { labelKey: "live", href: vireliUrl },
         // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
         { labelKey: "details", href: addDetails("vireli") },
       ],
@@ -966,8 +1001,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       stack: ["PyTorch", "Java", "Minimax", "ResNet", "Python"],
       links: [
         { labelKey: "live", href: escampeUrl },
-        { labelKey: "paper", href: "https://github.com/Wubpooz/app5-ai-game-project/blob/main/BandDPER.pdf", label: { en: "Research Paper", fr: "Research Paper", ar: "ورقة البحث العلمية" } },
-        { labelKey: "source", href: "https://github.com/Wubpooz/app5-ai-game-project" },
+        { labelKey: "paper", href: escampePaper, label: { en: "Research Paper", fr: "Research Paper", ar: "ورقة البحث العلمية" } },
+        { labelKey: "source", href: escampeRepo },
         { labelKey: "details", href: addDetails("minimax-resnet") },
       ],
       logos: ["polytech"],
@@ -1020,7 +1055,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Angular", "Bun", "Hono", "PostgreSQL", "Prisma", "BetterAuth", "PWA", "Zod", "i18n", "Health Tech", "Antigravity", "Github Copilot", "Agentic Coding"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/VibeHealth/" },
+        { labelKey: "source", href: vibehealthRepo },
         { labelKey: "details", href: addDetails("vibehealth") },
       ],
       logos: ["polytech"],
@@ -1094,8 +1129,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
       links: [
-        { labelKey: "live", href: "https://quizine-front.vercel.app/landing" },
-        { labelKey: "source", href: "https://github.com/Wubpooz/quizine_front" },
+        { labelKey: "live", href: quizineUrl },
+        { labelKey: "source", href: quizineRepo },
         { labelKey: "details", href: addDetails("quizine") },
       ],
       logos: ["polytech"],
@@ -1120,7 +1155,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Java", "مترجم", "إدارة الأخطاء"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/app4-compilation" },
+        { labelKey: "source", href: compilerRepo },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
       ],
       logos: ["polytech"],
@@ -1168,7 +1203,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["C++", "SDL2", "Simulation 3D", "Agile", "Visualization", "Physics Modeling", "Project Management"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/MagnusCarlos" },
+        { labelKey: "source", href: magnusCarlosRepo },
         { labelKey: "details", href: addDetails("magnus-carlos") },
       ],
       logos: ["polytech"],
@@ -1192,7 +1227,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Angular", "Three.js", "TypeScript", "JavaScript", "HTML", "CSS", "SPA Routing", "3D", "Animation", "Git", "Agile", "Frontend"],
       links: [
-        { labelKey: "live", href: "https://github.com/Wubpooz/APP3_Projet_Web" },
+        { labelKey: "live", href: nyxenRepo },
         { labelKey: "details", href: addDetails("nyxen") },
       ],
       logos: ["polytech"],
@@ -1238,7 +1273,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["Processing", "GLSL", "Shader", "3D Game"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/IGSD-projet" },
+        { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
       ],
       logos: ["ups"],
@@ -1262,7 +1297,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["C", "UDP", "TCP-IP", "CLI"],
       links: [
-        { labelKey: "source", href: "https://github.com/Wubpooz/Rezo" },
+        { labelKey: "source", href: cliMessagingRepo },
         { labelKey: "details", href: addDetails("cli-messaging") },
       ],
       logos: ["ups"],
@@ -1285,8 +1320,8 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
       ],
       stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
       links: [
-        { labelKey: "live", href: "http://mwaharte.free.fr/test/feuille_html_principale.html" },
-        { labelKey: "source", href: "https://github.com/Wubpooz/Site-ISN-2019" },
+        { labelKey: "live", href: logihubUrl },
+        { labelKey: "source", href: logihubRepo },
         { labelKey: "details", href: addDetails("logihub") },
       ],
       logos: ["essouriau"],
