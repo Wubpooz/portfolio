@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Advanced React Cheatsheet & Interview Guide</title>
+  <meta name="description" content="Master React for senior developer interviews. Complete coverage of Fiber architecture, reconciliation, hooks internals, lifecycle, React 18/19 concurrent features, design patterns, performance optimizations, and tricky pitfalls.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: rgba(17, 24, 39, 0.85);
+      --bg-card-hover: rgba(30, 41, 59, 0.9);
+      --bg-sidebar: rgba(15, 23, 42, 0.95);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(97, 218, 251, 0.3);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      
+      --cyan: #61dafb;
+      --cyan-glow: rgba(97, 218, 251, 0.25);
+      --purple: #c084fc;
+      --purple-glow: rgba(192, 132, 252, 0.25);
+      --emerald: #34d399;
+      --emerald-glow: rgba(52, 211, 153, 0.25);
+      --amber: #fbbf24;
+      --amber-glow: rgba(251, 191, 36, 0.25);
+      --rose: #f87171;
+      --rose-glow: rgba(248, 113, 113, 0.25);
+
+      --code-bg: #090d16;
+      --code-color: #e2e8f0;
+      --kw: #c084fc;
+      --fn: #61dafb;
+      --str: #34d399;
+      --cm: #64748b;
+      --num: #f59e0b;
+      --tag: #f87171;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Layout */
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 310px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      overflow-y: auto;
+      padding: 1.5rem 1rem;
+      backdrop-filter: blur(16px);
+      transition: transform 0.3s ease;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      color: var(--cyan);
+      animation: spin 20s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .nav-item a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item a:hover, .nav-item a.active {
+      background: rgba(97, 218, 251, 0.1);
+      color: var(--cyan);
+      border-left: 3px solid var(--cyan);
+    }
+
+    .nav-badge {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-dim);
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 310px;
+      flex: 1;
+      padding: 2rem 3rem;
+      max-width: 1400px;
+    }
+
+    /* Header Bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(12px);
+      margin: -2rem -3rem 2rem -3rem;
+      padding: 1.25rem 3rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 480px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.65rem 1rem 0.65rem 2.6rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan-glow);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--text-dim);
+    }
+
+    .filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag-btn {
+      padding: 0.4rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.775rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tag-btn:hover, .tag-btn.active {
+      background: var(--cyan);
+      color: #0b0f19;
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, rgba(97, 218, 251, 0.1) 0%, rgba(192, 132, 252, 0.1) 100%);
+      border: 1px solid rgba(97, 218, 251, 0.2);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, var(--cyan-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 800px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--cyan);
+      background: rgba(11, 15, 25, 0.6);
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Sections & Cards */
+    .section-group {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 6rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .section-badge {
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-core { background: rgba(97, 218, 251, 0.15); color: var(--cyan); border: 1px solid var(--cyan-glow); }
+    .badge-hooks { background: rgba(192, 132, 252, 0.15); color: var(--purple); border: 1px solid var(--purple-glow); }
+    .badge-patterns { background: rgba(52, 211, 153, 0.15); color: var(--emerald); border: 1px solid var(--emerald-glow); }
+    .badge-perf { background: rgba(251, 191, 36, 0.15); color: var(--amber); border: 1px solid var(--amber-glow); }
+    .badge-pitfalls { background: rgba(248, 113, 113, 0.15); color: var(--rose); border: 1px solid var(--rose-glow); }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card-grid.full-width {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(97, 218, 251, 0.3);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.925rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+    }
+
+    /* Callout Boxes */
+    .callout {
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem 0;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .callout-interview {
+      background: rgba(97, 218, 251, 0.08);
+      border-left: 4px solid var(--cyan);
+      color: #e0f2fe;
+    }
+
+    .callout-interview strong {
+      color: var(--cyan);
+    }
+
+    .callout-warning {
+      background: rgba(248, 113, 113, 0.08);
+      border-left: 4px solid var(--rose);
+      color: #fee2e2;
+    }
+
+    .callout-warning strong {
+      color: var(--rose);
+    }
+
+    .callout-tip {
+      background: rgba(52, 211, 153, 0.08);
+      border-left: 4px solid var(--emerald);
+      color: #d1fae5;
+    }
+
+    .callout-tip strong {
+      color: var(--emerald);
+    }
+
+    /* Code Blocks */
+    .code-container {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 1rem 0;
+      position: relative;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.4rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--cyan);
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--code-color);
+    }
+
+    code {
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* Syntax Highlighting Classes */
+    .kw { color: var(--kw); font-weight: 600; }
+    .fn { color: var(--fn); }
+    .str { color: var(--str); }
+    .cm { color: var(--cm); font-style: italic; }
+    .num { color: var(--num); }
+    .tag { color: var(--tag); }
+
+    /* Takeaways bullet list */
+    .takeaways {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .takeaways li {
+      position: relative;
+      padding-left: 1.25rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .takeaways li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--emerald);
+      font-weight: bold;
+    }
+
+    /* Print Optimizations for PDF Export */
+    @media print {
+      body {
+        background-color: #0b0f19 !important;
+        color: #f3f4f6 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .sidebar, .top-bar, .copy-btn, .search-box, .filter-tags {
+        display: none !important;
+      }
+      .main-content {
+        margin-left: 0 !important;
+        padding: 1cm !important;
+        max-width: 100% !important;
+      }
+      .section-group {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin-bottom: 2rem;
+      }
+      .card {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        background: #111827 !important;
+      }
+      .code-container {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        background: #090d16 !important;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main-content { margin-left: 0; padding: 1.5rem; }
+      .top-bar { margin: -1.5rem -1.5rem 1.5rem -1.5rem; padding: 1rem 1.5rem; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <svg class="brand-icon" viewBox="-11.5 -10.23174 23 20.46348" fill="none" stroke="currentColor">
+        <circle cx="0" cy="0" r="2.05" fill="currentColor"/>
+        <g stroke-width="1">
+          <ellipse rx="11" ry="4.2"/>
+          <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+          <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+        </g>
+      </svg>
+      <div>
+        <div class="brand-title">React Interview Pro</div>
+        <div class="brand-sub">Advanced Cheatsheet 2026</div>
+      </div>
+    </div>
+
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#core-architecture" class="active">Core & Fiber Architecture <span class="nav-badge">10</span></a></li>
+      <li class="nav-item"><a href="#lifecycle">Lifecycles & Errors <span class="nav-badge">08</span></a></li>
+      <li class="nav-item"><a href="#hooks-deep-dive">Hooks Internals & Mechanics <span class="nav-badge">12</span></a></li>
+      <li class="nav-item"><a href="#react-18-19">React 18 & 19 Modern Features <span class="nav-badge">09</span></a></li>
+      <li class="nav-item"><a href="#design-patterns">Advanced Design Patterns <span class="nav-badge">08</span></a></li>
+      <li class="nav-item"><a href="#performance">Performance Optimization <span class="nav-badge">07</span></a></li>
+      <li class="nav-item"><a href="#state-management">State & External Stores <span class="nav-badge">06</span></a></li>
+      <li class="nav-item"><a href="#gotchas-pitfalls">Gotchas, Pitfalls & Beware List <span class="nav-badge">11</span></a></li>
+      <li class="nav-item"><a href="#fiber-internals">Fiber Node & Reconciler <span class="nav-badge">05</span></a></li>
+      <li class="nav-item"><a href="#coding-challenges">Tricky Code Snippets <span class="nav-badge">07</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+
+    <!-- Top Sticky Bar -->
+    <header class="top-bar">
+      <div class="search-box">
+        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search concepts (e.g. Fiber, stale closure, useTransition, memo)...">
+      </div>
+
+      <div class="filter-tags">
+        <button class="tag-btn active" data-filter="all">All</button>
+        <button class="tag-btn" data-filter="core">Core & Fiber</button>
+        <button class="tag-btn" data-filter="hooks">Hooks</button>
+        <button class="tag-btn" data-filter="patterns">Patterns</button>
+        <button class="tag-btn" data-filter="react19">React 18/19</button>
+        <button class="tag-btn" data-filter="perf">Performance</button>
+        <button class="tag-btn" data-filter="pitfall">Pitfalls</button>
+      </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+      <h1 class="hero-title">The Complete & Advanced <span>React Interview Cheatsheet</span></h1>
+      <p class="hero-desc">
+        Engineered for Senior React Engineers & Technical Interviews. Master low-level Fiber internals, reconciliation rules, hook memory structures, concurrent mode features, advanced design patterns, and high-frequency interview edge cases.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-pill"><span>⚡</span> 10 Deep Modules</div>
+        <div class="stat-pill"><span>🚀</span> React 18 & 19 Ready</div>
+        <div class="stat-pill"><span>🎯</span> 50+ Senior Interview Insights</div>
+        <div class="stat-pill"><span>💡</span> Practical Production Snippets</div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: CORE ARCHITECTURE & VIRTUAL DOM -->
+    <section id="core-architecture" class="section-group" data-category="core">
+      <div class="section-header">
+        <h2 class="section-title">1. Core Architecture & Virtual DOM</h2>
+        <span class="section-badge badge-core">Core</span>
+      </div>
+
+      <div class="card-grid">
+        <!-- Card 1.1 -->
+        <article class="card" data-tags="core fiber virtualdom">
+          <div class="card-head">
+            <h3 class="card-title">Virtual DOM & Reconciliation Heuristics</h3>
+          </div>
+          <p class="card-desc">
+            React creates a lightweight in-memory tree of JS objects representing the UI. Reconciliation is the algorithm React uses to diff the current tree with a new virtual tree to compute minimal real DOM operations.
+          </p>
+
+          <div class="callout callout-interview">
+            <strong>Senior Interview Answer:</strong> React's diffing runs in <strong>O(n)</strong> time based on two key heuristics:
+            <br>1. <i>Different element types</i> produce different trees (React tears down the old tree and builds a new one from scratch).
+            <br>2. <i>Keys</i> hint to React which child elements remain stable across re-renders.
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>reconciliation.js</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="cm">// React Element representation (JS Object)</span>
+<span class="kw">const</span> element = {
+  <span class="fn">$$typeof</span>: Symbol.<span class="fn">for</span>(<span class="str">'react.element'</span>), <span class="cm">// Security protection against XSS via JSON</span>
+  type: <span class="str">'button'</span>,
+  props: { className: <span class="str">'btn'</span>, children: <span class="str">'Click Me'</span> },
+  key: <span class="kw">null</span>,
+  ref: <span class="kw">null</span>
+};</code></pre>
+          </div>
+
+          <ul class="takeaways">
+            <li>Elements are immutable blue-print objects; Fibers are mutable units of work.</li>
+            <li>`$$typeof: Symbol.for('react.element')` prevents raw JSON injected from APIs from being rendered as React DOM nodes.</li>
+          </ul>
+        </article>
+
+        <!-- Card 1.2 -->
+        <article class="card" data-tags="core reconciliation keys">
+          <div class="card-head">
+            <h3 class="card-title">Keying Strategies & Re-mounting Pitfalls</h3>
+          </div>
+          <p class="card-desc">
+            Keys must be stable, unique, and predictable. Using indexes as keys when order can change breaks component internal state and degrades performance.
+          </p>
+
+          <div class="callout callout-warning">
+            <strong>Beware:</strong> Using `key={Math.random()}` forces React to unmount and remount the node on <i>every single render</i>, destroying state and firing full DOM layout recalcs!
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>keys-comparison.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="cm">// ❌ BAD: Index key breaks state when items are reordered/prepended</span>
+{items.<span class="fn">map</span>((item, index) => &lt;<span class="tag">ItemCard</span> key={index} data={item} /&gt;)}
+
+<span class="cm">// ❌ WORST: Random key destroys subtree on every render</span>
+&lt;<span class="tag">ItemCard</span> key={Math.<span class="fn">random</span>()} /&gt;
+
+<span class="cm">// ✅ GOOD: Stable entity ID</span>
+{items.<span class="fn">map</span>(item => &lt;<span class="tag">ItemCard</span> key={item.id} data={item} /&gt;)}</code></pre>
+          </div>
+
+          <ul class="takeaways">
+            <li>Changing `key` on an element intentionally resets component state (useful technique for resetting forms).</li>
+            <li>Keys are evaluated strictly among sibling nodes, not globally.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 2: LIFECYCLES & ERROR BOUNDARIES -->
+    <section id="lifecycle" class="section-group" data-category="hooks">
+      <div class="section-header">
+        <h2 class="section-title">2. Component Lifecycles & Error Boundaries</h2>
+        <span class="section-badge badge-hooks">Lifecycles</span>
+      </div>
+
+      <div class="card-grid">
+        <!-- Card 2.1 -->
+        <article class="card" data-tags="lifecycle hooks class">
+          <div class="card-head">
+            <h3 class="card-title">Class Lifecycles vs Hooks Mapping</h3>
+          </div>
+          <p class="card-desc">
+            Functional components do not have lifecycles per se; they synchronize side effects with state and props via `useEffect` / `useLayoutEffect`.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>lifecycle-mapping.js</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="cm">/* 
+  Class Method              --> Hook Equivalent
+  =========================    ===========================================
+  componentDidMount         --> useEffect(() => {}, [])
+  componentDidUpdate        --> useEffect(() => {}, [deps])
+  componentWillUnmount      --> useEffect(() => { return () => cleanup }, [])
+  shouldComponentUpdate     --> React.memo(Comp, prevProps === nextProps)
+  getDerivedStateFromProps  --> Update state during render (if required)
+  getSnapshotBeforeUpdate   --> useLayoutEffect (before paint read DOM)
+*/</span></code></pre>
+          </div>
+
+          <div class="callout callout-interview">
+            <strong>Interview Question:</strong> When does `useEffect` cleanup run?
+            <br>Answer: The cleanup function runs <strong>before</strong> the component unmounts AND <strong>before re-running the effect</strong> on dependency changes (to clean up the previous render's side effect).
+          </div>
+        </article>
+
+        <!-- Card 2.2 -->
+        <article class="card" data-tags="lifecycle error-boundary">
+          <div class="card-head">
+            <h3 class="card-title">Error Boundaries (Class Only)</h3>
+          </div>
+          <p class="card-desc">
+            Error boundaries catch JavaScript errors anywhere in child component trees, log those errors, and display a fallback UI instead of crashing the whole component tree.
+          </p>
+
+          <div class="callout callout-warning">
+            <strong>Crucial Interview Catch:</strong> Error Boundaries do <strong>NOT</strong> catch errors inside:
+            <br>1. Event Handlers (use try/catch inside handler instead)
+            <br>2. Asynchronous code (`setTimeout`, `fetch`, Promises)
+            <br>3. Server-side rendering (SSR)
+            <br>4. Errors thrown in the boundary itself.
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>ErrorBoundary.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="kw">class</span> <span class="tag">ErrorBoundary</span> <span class="kw">extends</span> React.<span class="tag">Component</span> {
+  state = { hasError: <span class="kw">false</span>, error: <span class="kw">null</span> };
+
+  <span class="kw">static</span> <span class="fn">getDerivedStateFromError</span>(error) {
+    <span class="cm">// Update state so the next render shows fallback UI</span>
+    <span class="kw">return</span> { hasError: <span class="kw">true</span>, error };
+  }
+
+  <span class="fn">componentDidCatch</span>(error, errorInfo) {
+    <span class="cm">// Log error to reporting services (Sentry, PostHog, Datadog)</span>
+    <span class="fn">logErrorToService</span>(error, errorInfo);
+  }
+
+  <span class="fn">render</span>() {
+    <span class="kw">if</span> (<span class="kw">this</span>.state.hasError) {
+      <span class="kw">return</span> <span class="kw">this</span>.props.fallback || &lt;<span class="tag">h1</span>&gt;Something went wrong.&lt;/<span class="tag">h1</span>&gt;;
+    }
+    <span class="kw">return</span> <span class="kw">this</span>.props.children;
+  }
+}</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 3: HOOKS DEEP DIVE & MECHANICS -->
+    <section id="hooks-deep-dive" class="section-group" data-category="hooks">
+      <div class="section-header">
+        <h2 class="section-title">3. Hooks Deep Dive & Fiber Linked List</h2>
+        <span class="section-badge badge-hooks">Hooks Mechanics</span>
+      </div>
+
+      <div class="card-grid">
+        <!-- Card 3.1 -->
+        <article class="card" data-tags="hooks fiber internal">
+          <div class="card-head">
+            <h3 class="card-title">How Hooks Work Internally (Linked List)</h3>
+          </div>
+          <p class="card-desc">
+            Hooks do NOT rely on magic; they rely on array/linked-list indexes attached to the Fiber node (`fiber.memoizedState`).
+          </p>
+
+          <div class="callout callout-interview">
+            <strong>Why Rules of Hooks exist:</strong> React maintains a global `currentlyRenderingFiber` pointer and a `workInProgressHook` index. If you call hooks inside `if` statements or loops, the order of calls shifts between renders, pointing to the wrong hook node in the linked list!
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>simplified-hooks-engine.js</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="cm">// Conceptual mental model of React Hooks linked list</span>
+<span class="kw">let</span> workInProgressHook = <span class="kw">null</span>;
+
+<span class="kw">function</span> <span class="fn">useWorkInProgressHook</span>() {
+  <span class="kw">if</span> (!workInProgressHook) {
+    <span class="cm">// Mount phase: create new hook node</span>
+    workInProgressHook = { memoizedState: <span class="kw">null</span>, next: <span class="kw">null</span> };
+  } <span class="kw">else</span> {
+    <span class="cm">// Update phase: advance pointer in linked list</span>
+    workInProgressHook = workInProgressHook.next;
+  }
+  <span class="kw">return</span> workInProgressHook;
+}</code></pre>
+          </div>
+        </article>
+
+        <!-- Card 3.2 -->
+        <article class="card" data-tags="hooks useeffect uselayouteffect">
+          <div class="card-head">
+            <h3 class="card-title">useEffect vs useLayoutEffect vs useInsertionEffect</h3>
+          </div>
+          <p class="card-desc">
+            Understanding execution timing relative to DOM mutations, layout calculation, and browser painting.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>effect-execution-order.js</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="cm">/*
+  1. React Renders Virtual DOM
+  2. useInsertionEffect fires (DOM mutates, styles inserted; before layout calc)
+  3. React Mutates DOM Nodes synchronously
+  4. useLayoutEffect fires SYNCHRONOUSLY before browser paints (good for scroll measurement)
+  5. Browser Paints the pixels on screen
+  6. useEffect fires ASYNCHRONOUSLY (non-blocking for performance)
+*/</span></code></pre>
+          </div>
+
+          <div class="callout callout-tip">
+            <strong>Rule of Thumb:</strong> Use `useEffect` 99% of the time. Use `useLayoutEffect` only when reading/measuring DOM dimensions or preventing visual flicker during immediate state transitions.
+          </div>
+        </article>
+
+        <!-- Card 3.3 -->
+        <article class="card" data-tags="hooks usestate memo">
+          <div class="card-head">
+            <h3 class="card-title">useState: Functional Updates & Lazy Init</h3>
+          </div>
+          <p class="card-desc">
+            State updates are batched. Passing a function to state setters guarantees evaluation against the freshest pending state.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>state-best-practices.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="cm">// ✅ Lazy Initial State: fn runs ONLY ONCE during mount, NOT on re-renders</span>
+<span class="kw">const</span> [config, setConfig] = <span class="fn">useState</span>(() => <span class="fn">heavyExpensiveComputation</span>());
+
+<span class="cm">// ✅ Functional Update: Prevents stale closure issues when queuing updates</span>
+<span class="kw">const</span> <span class="fn">increment</span> = () => {
+  <span class="fn">setCount</span>(prev => prev + <span class="num">1</span>);
+  <span class="fn">setCount</span>(prev => prev + <span class="num">1</span>); <span class="cm">// Correctly increments by +2</span>
+};</code></pre>
+          </div>
+        </article>
+
+        <!-- Card 3.4 -->
+        <article class="card" data-tags="hooks context usesyncexternalstore">
+          <div class="card-head">
+            <h3 class="card-title">useSyncExternalStore (React 18+)</h3>
+          </div>
+          <p class="card-desc">
+            Recommended hook for subscribing to external state stores (Zustand, Redux, browser APIs) without concurrent tearing issues.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>useWindowWidth.js</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="kw">function</span> <span class="fn">subscribe</span>(callback) {
+  window.<span class="fn">addEventListener</span>(<span class="str">'resize'</span>, callback);
+  <span class="kw">return</span> () => window.<span class="fn">removeEventListener</span>(<span class="str">'resize'</span>, callback);
+}
+
+<span class="kw">function</span> <span class="fn">useWindowWidth</span>() {
+  <span class="kw">return</span> <span class="fn">useSyncExternalStore</span>(
+    subscribe,
+    () => window.innerWidth,    <span class="cm">// Client snapshot</span>
+    () => <span class="num">1024</span>                  <span class="cm">// SSR initial snapshot</span>
+  );
+}</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 4: REACT 18 & 19 MODERN FEATURES -->
+    <section id="react-18-19" class="section-group" data-category="react19">
+      <div class="section-header">
+        <h2 class="section-title">4. React 18 & React 19 Modern Features</h2>
+        <span class="section-badge badge-core">React 18/19</span>
+      </div>
+
+      <div class="card-grid">
+        <!-- Card 4.1 -->
+        <article class="card" data-tags="react19 hooks use">
+          <div class="card-head">
+            <h3 class="card-title">React 19: The `use()` Hook</h3>
+          </div>
+          <p class="card-desc">
+            The `use()` API allows reading promises or context conditionally inside render. Unlike standard hooks, `use()` CAN be called inside conditionals and loops!
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>React19UseHook.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="kw">import</span> { use, Suspense } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">function</span> <span class="tag">UserProfile</span>({ userPromise, showDetails }) {
+  <span class="cm">// ✅ Conditional call allowed for use()</span>
+  <span class="kw">if</span> (!showDetails) <span class="kw">return</span> &lt;<span class="tag">p</span>&gt;Hidden&lt;/<span class="tag">p</span>&gt;;
+  
+  <span class="cm">// Unwraps promise; suspends component until resolved</span>
+  <span class="kw">const</span> user = <span class="fn">use</span>(userPromise);
+  <span class="kw">return</span> &lt;<span class="tag">div</span>&gt;{user.name}&lt;/<span class="tag">div</span>&gt;;
+}</code></pre>
+          </div>
+        </article>
+
+        <!-- Card 4.2 -->
+        <article class="card" data-tags="react18 concurrent transition">
+          <div class="card-head">
+            <h3 class="card-title">Concurrent React: useTransition & useDeferredValue</h3>
+          </div>
+          <p class="card-desc">
+            Allows marking state updates as low-priority transitions. Keystrokes/clicks remain instant while expensive non-urgent renders yield to user input.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>useTransitionExample.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="kw">const</span> [isPending, startTransition] = <span class="fn">useTransition</span>();
+<span class="kw">const</span> [filter, setFilter] = <span class="fn">useState</span>(<span class="str">''</span>);
+
+<span class="kw">const</span> <span class="fn">handleChange</span> = (e) => {
+  <span class="cm">// High priority: Input text updates immediately</span>
+  <span class="kw">const</span> val = e.target.value;
+  
+  <span class="cm">// Low priority: Filtering 10,000 items is interruptible</span>
+  <span class="fn">startTransition</span>(() => {
+    <span class="fn">setFilter</span>(val);
+  });
+};</code></pre>
+          </div>
+        </article>
+
+        <!-- Card 4.3 -->
+        <article class="card" data-tags="react19 actions forms">
+          <div class="card-head">
+            <h3 class="card-title">React 19: Actions, useActionState & useFormStatus</h3>
+          </div>
+          <p class="card-desc">
+            First-class support for async form actions, optimistic state resets, pending indicators, and server actions.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>FormActionExample.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="cm">// React 19 Form Action state management</span>
+<span class="kw">const</span> [state, formAction, isPending] = <span class="fn">useActionState</span>(
+  <span class="kw">async</span> (prevState, formData) => {
+    <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">updateUser</span>(formData.<span class="fn">get</span>(<span class="str">'name'</span>));
+    <span class="kw">return</span> res.success ? { error: <span class="kw">null</span> } : { error: res.msg };
+  },
+  { error: <span class="kw">null</span> }
+);
+
+<span class="kw">return</span> (
+  &lt;<span class="tag">form</span> action={formAction}&gt;
+    &lt;<span class="tag">input</span> name="name" /&gt;
+    &lt;<span class="tag">button</span> disabled={isPending}&gt;Submit&lt;/<span class="tag">button</span>&gt;
+  &lt;/<span class="tag">form</span>&gt;
+);</code></pre>
+          </div>
+        </article>
+
+        <!-- Card 4.4 -->
+        <article class="card" data-tags="react19 rsc server-components">
+          <div class="card-head">
+            <h3 class="card-title">React Server Components (RSC) vs Client Components</h3>
+          </div>
+          <p class="card-desc">
+            Server Components run strictly on the server during render, stream zero JS bundle to the client, and can access databases directly.
+          </p>
+
+          <div class="callout callout-interview">
+            <strong>Key Difference:</strong> Client components (`"use client"`) render on the server initially (SSR) AND re-render on the client. Server components NEVER execute on the client browser runtime.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 5: ADVANCED DESIGN PATTERNS -->
+    <section id="design-patterns" class="section-group" data-category="patterns">
+      <div class="section-header">
+        <h2 class="section-title">5. Advanced React Design Patterns</h2>
+        <span class="section-badge badge-patterns">Patterns</span>
+      </div>
+
+      <div class="card-grid">
+        <!-- Card 5.1 -->
+        <article class="card" data-tags="patterns compound-components">
+          <div class="card-head">
+            <h3 class="card-title">Compound Components Pattern</h3>
+          </div>
+          <p class="card-desc">
+            Allows components to share implicit state while giving consumers complete UI rendering freedom (e.g. Radix UI, Headless UI, Select, Accordion).
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>CompoundSelect.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="kw">const</span> SelectContext = <span class="fn">createContext</span>();
+
+<span class="kw">function</span> <span class="tag">Select</span>({ children, value, onChange }) {
+  <span class="kw">return</span> (
+    &lt;<span class="tag">SelectContext.Provider</span> value={{ value, onChange }}&gt;
+      &lt;<span class="tag">div</span> className="select-box"&gt;{children}&lt;/<span class="tag">div</span>&gt;
+    &lt;/<span class="tag">SelectContext.Provider</span>&gt;
+  );
+}
+
+<span class="tag">Select</span>.<span class="tag">Option</span> = <span class="kw">function</span> <span class="tag">Option</span>({ value, children }) {
+  <span class="kw">const</span> { value: selectedValue, onChange } = <span class="fn">useContext</span>(SelectContext);
+  <span class="kw">const</span> isSelected = selectedValue === value;
+  <span class="kw">return</span> (
+    &lt;<span class="tag">div</span> onClick={() => <span class="fn">onChange</span>(value)} className={isSelected ? <span class="str">'active'</span> : <span class="str">''</span>}&gt;
+      {children}
+    &lt;/<span class="tag">div</span>&gt;
+  );
+};
+
+<span class="cm">// Consumer Usage:</span>
+&lt;<span class="tag">Select</span> value={val} onChange={setVal}&gt;
+  &lt;<span class="tag">Select.Option</span> value="react"&gt;React&lt;/<span class="tag">Select.Option</span>&gt;
+  &lt;<span class="tag">Select.Option</span> value="vue"&gt;Vue&lt;/<span class="tag">Select.Option</span>&gt;
+&lt;/<span class="tag">Select</span>&gt;</code></pre>
+          </div>
+        </article>
+
+        <!-- Card 5.2 -->
+        <article class="card" data-tags="patterns hoc">
+          <div class="card-head">
+            <h3 class="card-title">Higher-Order Components (HOC) & Static Hoisting</h3>
+          </div>
+          <p class="card-desc">
+            A function that takes a component and returns an enhanced component. Remember to forward refs and hoist static methods.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>withAuth.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="kw">function</span> <span class="fn">withAuth</span>(WrappedComponent) {
+  <span class="kw">const</span> <span class="tag">WithAuthComponent</span> = <span class="fn">forwardRef</span>((props, ref) => {
+    <span class="kw">const</span> { isAuthenticated } = <span class="fn">useAuth</span>();
+    <span class="kw">if</span> (!isAuthenticated) <span class="kw">return</span> &lt;<span class="tag">Redirect</span> to="/login" /&gt;;
+    <span class="kw">return</span> &lt;<span class="tag">WrappedComponent</span> {...props} ref={ref} /&gt;;
+  });
+  
+  <span class="tag">WithAuthComponent</span>.displayName = `withAuth(${WrappedComponent.displayName || WrappedComponent.name})`;
+  <span class="kw">return</span> <span class="tag">WithAuthComponent</span>;
+}</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 6: PERFORMANCE OPTIMIZATION BLUEPRINT -->
+    <section id="performance" class="section-group" data-category="perf">
+      <div class="section-header">
+        <h2 class="section-title">6. Performance Optimization Blueprint</h2>
+        <span class="section-badge badge-perf">Performance</span>
+      </div>
+
+      <div class="card-grid">
+        <!-- Card 6.1 -->
+        <article class="card" data-tags="perf memo composition">
+          <div class="card-head">
+            <h3 class="card-title">Composition over Memoization (Moving State Down)</h3>
+          </div>
+          <p class="card-desc">
+            Before reaching for `useMemo` or `React.memo`, restructure your component tree. Passing expensive subtrees via `children` avoids unnecessary re-renders naturally.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>composition-perf.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="cm">// ✅ Extremely Performant: HeavyComponent DOES NOT re-render on scroll!</span>
+<span class="kw">function</span> <span class="tag">ScrollContainer</span>({ children }) {
+  <span class="kw">const</span> [scrollPos, setScrollPos] = <span class="fn">useState</span>(<span class="num">0</span>);
+  <span class="kw">return</span> (
+    &lt;<span class="tag">div</span> onScroll={e => <span class="fn">setScrollPos</span>(e.target.scrollTop)}&gt;
+      &lt;<span class="tag">p</span>&gt;Pos: {scrollPos}&lt;/<span class="tag">p</span>&gt;
+      {children} <span class="cm">/* HeavyComponent passed as prop remains unchanged object */</span>
+    &lt;/<span class="tag">div</span>&gt;
+  );
+}</code></pre>
+          </div>
+        </article>
+
+        <!-- Card 6.2 -->
+        <article class="card" data-tags="perf react-memo usememo">
+          <div class="card-head">
+            <h3 class="card-title">React.memo & Custom Comparator</h3>
+          </div>
+          <p class="card-desc">
+            `React.memo` performs shallow comparison of props by default (`Object.is`).
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>MemoCustomCompare.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="kw">const</span> <span class="tag">ExpensiveCard</span> = React.<span class="fn">memo</span>(
+  <span class="kw">function</span> <span class="tag">Card</span>({ item }) {
+    <span class="kw">return</span> &lt;<span class="tag">div</span>&gt;{item.title}&lt;/<span class="tag">div</span>&gt;;
+  },
+  (prevProps, nextProps) => {
+    <span class="cm">// Return TRUE if props are equal (DO NOT re-render)</span>
+    <span class="kw">return</span> prevProps.item.id === nextProps.item.id;
+  }
+);</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 7: STATE MANAGEMENT & EXTERNAL STORES -->
+    <section id="state-management" class="section-group" data-category="core">
+      <div class="section-header">
+        <h2 class="section-title">7. State Management Matrix</h2>
+        <span class="section-badge badge-core">State Architecture</span>
+      </div>
+
+      <div class="card-grid">
+        <article class="card" data-tags="state context zustand query">
+          <div class="card-head">
+            <h3 class="card-title">State Classification Matrix</h3>
+          </div>
+          <p class="card-desc">
+            Choosing the right tool for the state domain is critical for maintainability and avoiding context re-render waterfalls.
+          </p>
+
+          <div class="callout callout-tip">
+            <br>• <strong>Local UI State:</strong> `useState`, `useReducer`
+            <br>• <strong>Global UI Theme/Auth:</strong> React Context API
+            <br>• <strong>Global Complex App State:</strong> Zustand, Redux Toolkit, Jotai
+            <br>• <strong>Server/API State:</strong> TanStack Query (React Query), SWR (handles caching, deduping, revalidation)
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 8: GOTCHAS, PITFALLS & BEWARE LIST -->
+    <section id="gotchas-pitfalls" class="section-group" data-category="pitfall">
+      <div class="section-header">
+        <h2 class="section-title">8. Gotchas, Pitfalls & Beware List (Interview Critical)</h2>
+        <span class="section-badge badge-pitfalls">Pitfalls</span>
+      </div>
+
+      <div class="card-grid">
+        <!-- Card 8.1 -->
+        <article class="card" data-tags="pitfall closure stale-closure">
+          <div class="card-head">
+            <h3 class="card-title">Stale Closures in useEffect & Handlers</h3>
+          </div>
+          <p class="card-desc">
+            A function closed over variables from an old render snapshot retains those outdated references unless re-created or accessed via ref.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>stale-closure-fix.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="cm">// ❌ BUGGY: count is captured at mount time (= 0); interval logs 1 forever!</span>
+<span class="fn">useEffect</span>(() => {
+  <span class="kw">const</span> id = <span class="fn">setInterval</span>(() => {
+    <span class="fn">setCount</span>(count + <span class="num">1</span>);
+  }, <span class="num">1000</span>);
+  <span class="kw">return</span> () => <span class="fn">clearInterval</span>(id);
+}, []);
+
+<span class="cm">// ✅ FIX 1: Functional state update (doesn't depend on count variable)</span>
+<span class="fn">setCount</span>(c => c + <span class="num">1</span>);
+
+<span class="cm">// ✅ FIX 2: useRef for latest callback pattern (useLatest)</span>
+<span class="kw">const</span> countRef = <span class="fn">useRef</span>(count);
+countRef.current = count;</code></pre>
+          </div>
+        </article>
+
+        <!-- Card 8.2 -->
+        <article class="card" data-tags="pitfall infinite-loop state">
+          <div class="card-head">
+            <h3 class="card-title">Infinite Re-render Loops</h3>
+          </div>
+          <p class="card-desc">
+            Occurs when setting state directly in the component body, or passing un-memoized object/array literals into effect dependency arrays.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>infinite-loop-traps.jsx</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="cm">// ❌ CAUSES INFINITE LOOP: New object reference created every render!</span>
+<span class="kw">const</span> options = { page: <span class="num">1</span> }; 
+<span class="fn">useEffect</span>(() => {
+  <span class="fn">fetchData</span>(options);
+}, [options]); <span class="cm">// Options fails shallow equality check every time</span>
+
+<span class="cm">// ✅ FIX: Primitive dependencies or useMemo</span>
+<span class="fn">useEffect</span>(() => {
+  <span class="fn">fetchData</span>({ page });
+}, [page]);</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 9: FIBER ARCHITECTURE & RECONCILER INTERNALS -->
+    <section id="fiber-internals" class="section-group" data-category="core">
+      <div class="section-header">
+        <h2 class="section-title">9. Fiber Architecture & Reconciler Internals</h2>
+        <span class="section-badge badge-core">Fiber Internals</span>
+      </div>
+
+      <div class="card-grid full-width">
+        <article class="card" data-tags="fiber core architecture">
+          <div class="card-head">
+            <h3 class="card-title">The Fiber Node Data Structure</h3>
+          </div>
+          <p class="card-desc">
+            A Fiber is a JavaScript object representing a unit of work. Prior to Fiber (React 16), reconciliation was recursive and un-interruptible (Stack Reconciler). Fiber turned the call stack into a linked list structure operating on a virtual stack frame.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>FiberNode.ts</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="kw">interface</span> <span class="tag">FiberNode</span> {
+  tag: <span class="tag">WorkTag</span>;           <span class="cm">// FunctionComponent, ClassComponent, HostComponent (DOM node)</span>
+  key: <span class="kw">null</span> | <span class="kw">string</span>;
+  elementType: <span class="kw">any</span>;
+  type: <span class="kw">any</span>;
+
+  <span class="cm">// Tree Structure Links</span>
+  return: <span class="tag">FiberNode</span> | <span class="kw">null</span>;   <span class="cm">// Parent fiber</span>
+  child: <span class="tag">FiberNode</span> | <span class="kw">null</span>;    <span class="cm">// First child fiber</span>
+  sibling: <span class="tag">FiberNode</span> | <span class="kw">null</span>;  <span class="cm">// Next sibling fiber</span>
+
+  <span class="cm">// Hooks & State</span>
+  memoizedState: <span class="kw">any</span>;        <span class="cm">// Linked list of hooks for functional components</span>
+  memoizedProps: <span class="kw">any</span>;
+
+  <span class="cm">// Double Buffering Mechanism</span>
+  alternate: <span class="tag">FiberNode</span> | <span class="kw">null</span>;<span class="cm">// Points to work-in-progress fiber or current fiber</span>
+
+  <span class="cm">// Effects & Commit Flags</span>
+  flags: <span class="tag">Flags</span>;               <span class="cm">// Insertion, Update, Deletion DOM effect tags</span>
+}</code></pre>
+          </div>
+
+          <div class="callout callout-interview">
+            <strong>Double Buffering Strategy:</strong> React maintains two Fiber trees at all times:
+            <br>1. <strong>Current Tree:</strong> Represents what is currently painted on screen.
+            <br>2. <strong>Work-In-Progress (WIP) Tree:</strong> Constructed asynchronously in memory during the render phase. Once rendered cleanly, React flips the single root pointer `root.current = workInProgress`, making the WIP tree current instantaneously!
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 10: TRICKY INTERVIEW CODE SNIPPETS -->
+    <section id="coding-challenges" class="section-group" data-category="hooks">
+      <div class="section-header">
+        <h2 class="section-title">10. Tricky Interview Code Snippets & Custom Hooks</h2>
+        <span class="section-badge badge-patterns">Coding Challenges</span>
+      </div>
+
+      <div class="card-grid">
+        <!-- Challenge 1 -->
+        <article class="card" data-tags="coding custom-hook debounce">
+          <div class="card-head">
+            <h3 class="card-title">Custom Hook: useDebounce</h3>
+          </div>
+          <p class="card-desc">
+            Implement a hook that delays updating a value until a specified timeout has elapsed since the last change.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>useDebounce.js</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="kw">function</span> <span class="fn">useDebounce</span>(value, delay = <span class="num">300</span>) {
+  <span class="kw">const</span> [debouncedValue, setDebouncedValue] = <span class="fn">useState</span>(value);
+
+  <span class="fn">useEffect</span>(() => {
+    <span class="kw">const</span> timer = <span class="fn">setTimeout</span>(() => {
+      <span class="fn">setDebouncedValue</span>(value);
+    }, delay);
+
+    <span class="kw">return</span> () => <span class="fn">clearTimeout</span>(timer);
+  }, [value, delay]);
+
+  <span class="kw">return</span> debouncedValue;
+}</code></pre>
+          </div>
+        </article>
+
+        <!-- Challenge 2 -->
+        <article class="card" data-tags="coding custom-hook previous">
+          <div class="card-head">
+            <h3 class="card-title">Custom Hook: usePrevious</h3>
+          </div>
+          <p class="card-desc">
+            Tracks the value of a prop or state from the immediately preceding render cycle using `useRef` and `useEffect`.
+          </p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>usePrevious.js</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre><code><span class="kw">function</span> <span class="fn">usePrevious</span>(value) {
+  <span class="kw">const</span> ref = <span class="fn">useRef</span>();
+
+  <span class="fn">useEffect</span>(() => {
+    ref.current = value; <span class="cm">// Updates AFTER render phase completes</span>
+  }, [value]);
+
+  <span class="kw">return</span> ref.current; <span class="cm">// Returns value held DURING render phase</span>
+}</code></pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Copy to Clipboard Functionality
+  function copyCode(button) {
+    const pre = button.parentElement.nextElementSibling;
+    const codeText = pre.innerText;
+    navigator.clipboard.writeText(codeText).then(() => {
+      const originalText = button.innerText;
+      button.innerText = 'Copied!';
+      button.style.color = '#34d399';
+      setTimeout(() => {
+        button.innerText = originalText;
+        button.style.color = '';
+      }, 2000);
+    });
+  }
+
+  // Real-time Search Filter
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.card');
+
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+
+    cards.forEach(card => {
+      const title = card.querySelector('.card-title')?.innerText.toLowerCase() || '';
+      const desc = card.querySelector('.card-desc')?.innerText.toLowerCase() || '';
+      const code = card.querySelector('pre')?.innerText.toLowerCase() || '';
+      const tags = card.getAttribute('data-tags') || '';
+
+      if (title.includes(query) || desc.includes(query) || code.includes(query) || tags.includes(query)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+
+  // Filter Tag Buttons
+  const tagBtns = document.querySelectorAll('.tag-btn');
+  const sectionGroups = document.querySelectorAll('.section-group');
+
+  tagBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tagBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      sectionGroups.forEach(section => {
+        const cat = section.getAttribute('data-category');
+        if (filter === 'all' || cat === filter || section.id.includes(filter)) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Sidebar Nav Active Highlight on Scroll
+  const navLinks = document.querySelectorAll('.nav-item a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sectionGroups.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (pageYOffset >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
