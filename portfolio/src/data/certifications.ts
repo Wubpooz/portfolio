@@ -35,7 +35,7 @@ export const certifications: CertificationItem[] = [
     date: "2026",
     href: "https://www.codingame.com/certification/4isuVQxdBt0f6EeZSGGX7g",
     credentialId: "4isuVQxdBt0f6EeZSGGX7g",
-    icon: "codingame",
+    icon: "/icons/codingame.png",
     relevance: 80,
   },
   {
@@ -44,7 +44,7 @@ export const certifications: CertificationItem[] = [
     date: "2026",
     href: "https://www.codingame.com/certification/FnAMCXuWq6tzj9GdI8ZCXg",
     credentialId: "FnAMCXuWq6tzj9GdI8ZCXg",
-    icon: "codingame",
+    icon: "/icons/codingame.png",
     relevance: 10,
   },
   {
@@ -53,7 +53,7 @@ export const certifications: CertificationItem[] = [
     date: "2026",
     href: "https://www.codingame.com/certification/J8fLMAvLu6vkfCC1mnq8ig",
     credentialId: "J8fLMAvLu6vkfCC1mnq8ig",
-    icon: "codingame",
+    icon: "/icons/codingame.png",
     relevance: 40,
   },
   {
@@ -62,7 +62,7 @@ export const certifications: CertificationItem[] = [
     date: "2026",
     href: "https://www.codingame.com/certification/EYJHy-VFr9Gp7pLGDgOFzA",
     credentialId: "EYJHy-VFr9Gp7pLGDgOFzA",
-    icon: "codingame",
+    icon: "/icons/codingame.png",
     relevance: 68,
   },
   {
@@ -71,7 +71,7 @@ export const certifications: CertificationItem[] = [
     date: "2026",
     href: "https://www.codingame.com/certification/WzftG4Du4dwFm5bQvLTpcw",
     credentialId: "WzftG4Du4dwFm5bQvLTpcw",
-    icon: "codingame",
+    icon: "/icons/codingame.png",
     relevance: 70,
   },
   {
