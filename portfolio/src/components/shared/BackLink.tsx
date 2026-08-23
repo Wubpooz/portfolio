@@ -19,15 +19,16 @@ export default function BackLink({ to, children }: Readonly<BackLinkProps>) {
       !e.altKey &&
       !e.shiftKey
     ) {
+      const historyState = window.history.state as { idx?: number } | null;
       if (
-        window.history.state &&
-        typeof window.history.state.idx === "number" &&
-        window.history.state.idx > 0
+        historyState &&
+        typeof historyState.idx === "number" &&
+        historyState.idx > 0
       ) {
-        let previousPath = null;
+        let previousPath: string | null = null;
         try {
           previousPath = sessionStorage.getItem(
-            `history-path-${window.history.state.idx - 1}`
+            `history-path-${(historyState.idx - 1).toString()}`
           );
         } catch (err) {
           console.warn("Failed to read from sessionStorage", err);

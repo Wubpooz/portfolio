@@ -226,7 +226,6 @@ export function findSkillIcon(techName: string): string | undefined {
   for (const loc of locales) {
     try {
       const categories = getSkillCategories(loc);
-      if (!categories) continue;
       for (const cat of categories) {
         for (const item of cat.items) {
           if (item.name.toLowerCase() === techName.toLowerCase()) {
@@ -245,7 +244,6 @@ export function findSkillIcon(techName: string): string | undefined {
   for (const loc of locales) {
     try {
       const categories = getSkillCategories(loc);
-      if (!categories) continue;
       for (const cat of categories) {
         for (const item of cat.items) {
           const itemName = item.name.toLowerCase();

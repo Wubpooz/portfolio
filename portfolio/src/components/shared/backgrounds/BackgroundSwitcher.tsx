@@ -3,7 +3,7 @@ import { useBackground, type BackgroundType } from "./index";
 import { Sparkles, Grid, Wind, Dot, EyeOff, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const backgrounds: { type: BackgroundType; label: string; icon: any }[] = [
+const backgrounds: { type: BackgroundType; label: string; icon: React.ElementType }[] = [
   { type: "none", label: "None", icon: EyeOff },
   { type: "grid", label: "Warped Grid", icon: Grid },
   { type: "flow", label: "Flow Field", icon: Wind },
@@ -32,6 +32,7 @@ export default function BackgroundSwitcher() {
             return (
               <button
                 key={bg.type}
+                type="button"
                 onClick={() => {
                   setActiveBackground(bg.type);
                   // Optional: close on select for better mobile experience
@@ -64,6 +65,7 @@ export default function BackgroundSwitcher() {
 
       {/* Floating Toggle Button */}
       <button
+        type="button"
         onClick={() => { setIsOpen(!isOpen); }}
         className={cn(
           "flex size-11 items-center justify-center rounded-full border border-border bg-background/80 backdrop-blur-md shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer text-foreground",

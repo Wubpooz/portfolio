@@ -1,90 +1,11 @@
-import {
-  Binary,
-  Brain,
-  Braces,
-  Cpu,
-  Database,
-  FileStack,
-  GitBranch,
-  Network,
-  SearchCode,
-  SlidersHorizontal,
-  TestTube2,
-  Shield,
-  Workflow,
-  Blocks,
-  Shapes,
-  Bot,
-  BrainCircuit,
-  AudioLines,
-  Shrink,
-  NotebookPen,
-  Presentation,
-  ChartScatter,
-  Milestone,
-  DatabaseSearch,
-  ChevronsLeftRightEllipsis,
-  BetweenVerticalStart,
-  KeyRound,
-  Regex,
-  SquareFunction,
-  Sigma,
-} from "lucide-react";
+import { Database } from "lucide-react";
 import { shouldInvertIcon, getIconUrl } from "@/lib/utils";
+import { fallbackIcons } from "./fallbackIcons";
 
 interface SkillIconProps {
   name: string;
   icon?: string;
 }
-
-export const fallbackIcons: Record<
-  string,
-  React.ComponentType<{ size?: number; className?: string }>
-> = {
-  llm: Brain,
-  nlp: Brain,
-  rag: SearchCode,
-  lora: SlidersHorizontal,
-  rest: Braces,
-  "functional-programming": Braces,
-  logic: Workflow,
-  computability: Binary,
-  "page-objects": FileStack,
-  tdd: TestTube2,
-  cicd: Workflow,
-  math: Binary,
-  hpc: Cpu,
-  mpi: Network,
-  openmp: Cpu,
-  sql: Database,
-  rdf: Database,
-  sparql: SearchCode,
-  pact: GitBranch,
-  security: Shield,
-  cybersecurity: Shield,
-  "distributed-algorithms": Network,
-  "supervised-learning": ChartScatter,
-  oop: Blocks,
-  "distributed-systems": Network,
-  "design-patterns": Shapes,
-  "ai-agents": Bot,
-  "neural-network": BrainCircuit,
-  "model-training": SlidersHorizontal,
-  TTS: AudioLines,
-  "big-data": Database,
-  pca: Shrink,
-  research: NotebookPen,
-  communication: Presentation,
-  "data-analysis": DatabaseSearch,
-  pm: Milestone,
-  "networking": ChevronsLeftRightEllipsis,
-  "distributed-consensus": Network,
-  "dynamic-programming": BetweenVerticalStart,
-  "cryptography": KeyRound,
-  "regex": Regex,
-  "compiler-design": SquareFunction,
-  "formal-languages": Sigma
-};
 
 export default function SkillIcon({
   name,

@@ -12,9 +12,7 @@ export default function ProjectsSection() {
   const allProjects = useMemo(() => getProjects(locale), [locale]);
   const projects = useMemo(
     () => allProjects.filter((project) => project.featured).sort((a, b) => {
-      if(a.relevance === undefined) return 1;
-      if(b.relevance === undefined) return -1;
-      if(a.relevance === b.relevance) return parseProjectPeriod(b.period) - parseProjectPeriod(a.period);
+      if (a.relevance === b.relevance) return parseProjectPeriod(b.period) - parseProjectPeriod(a.period);
       return b.relevance - a.relevance;
     }),
     [allProjects],

@@ -22,6 +22,7 @@ export interface ProjectItem {
   imageAlt: string;
   highlights: string[];
   stack: string[];
+  skillIds: string[];
   links: ProjectLink[];
   featured?: boolean;
   relevance: number;
@@ -111,6 +112,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Comprehensive CI/CD pipeline with Vitest, backend mock requests, and automated deployment.",
       ],
       stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Vercel", "Supabase", "MCP", "Docker", "GitHub Actions"],
+      skillIds: ["vue","tailwindcss","bun","hono","better-auth","prisma","postgresql","vercel","supabase","mcp","docker","github-actions"],
       links: [
         { labelKey: "live", href: watchlistUrl },
         { labelKey: "source", href: watchlistRepo },
@@ -137,6 +139,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Continuous deployment (CI/CD) pipeline via Coolify orchestrator, multi-service Docker containerization (Nginx, Bun, Redis), and digital accessibility audit validated at 9.95/10.",
       ],
       stack: ["Angular", "Ionic", "PWA", "Capacitor", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Redis", "Docker", "Coolify", "Zod", "OpenAPI", "Postman", "Monorepo"],
+      skillIds: ["angular","capacitor","bun","hono","better-auth","prisma","postgresql","redis","docker","zod","openapi","postman"],
       links: [
         { labelKey: "live", href: vireliUrl },
         // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
@@ -163,6 +166,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Generation of a 3-million-position dataset through self-play and parallel minimax bootstrapping at depth 7, trained with PyTorch and hosted on Hugging Face.",
       ],
       stack: ["PyTorch", "Java", "Minimax", "ResNet", "Python"],
+      skillIds: ["pytorch","java","neural-networks","model-training","supervised-learning","distributed-algorithms","data-analysis","python","hugging-face"],
       links: [
         { labelKey: "live", href: escampeUrl },
         { labelKey: "paper", href: escampePaper, label: { en: "Research Paper", fr: "Rapport de recherche", ar: "ورقة البحث العلمية" } },
@@ -190,6 +194,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Published as a Hugging Face dataset.",
       ],
       stack: ["Python", "pandas", "Hugging Face", "Big Data", "Data Analysis", "Data Visualization", "Accessibility", "Datasets"],
+      skillIds: ["python","pandas","hugging-face","big-data","data-analysis","data-viz"],
       links: [
         { labelKey: "live", href: visualisationApp5Url },
         { labelKey: "dataset", href: datasetUrl },
@@ -218,6 +223,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Mood tracking and journaling (rich text + images), workouts (plans, suggestions), relaxation, and focus assistance.",
       ],
       stack: ["Angular", "Bun", "Hono", "PostgreSQL", "Prisma", "BetterAuth", "PWA", "Zod", "i18n", "Health Tech", "Antigravity", "Github Copilot", "Agentic Coding"],
+      skillIds: ["angular","bun","hono","postgresql","prisma","better-auth","zod","antigravity"],
       links: [
         { labelKey: "source", href: vibehealthRepo },
         { labelKey: "details", href: addDetails("vibehealth") },
@@ -242,6 +248,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Hackathon winner.",
       ],
       stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI", "Google Cloud", "Agent Development Kit (ADK)", "Cloud Computing", "A2A"],
+      skillIds: ["ai-agents","mcp","cloud-computing","google-adk","a2a","gemini"],
       links: [
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
@@ -265,6 +272,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Twinkling stars and shooting stars in the sky, with glowing rainbow text (reflected in the sculptures).",
       ],
       stack: ["GLSL", "Shadertoy", "Computer Graphics", "Raymarching", "Refraction", "Chromatic Dispersion", "Glass Shaders", "Procedural Animation"],
+      skillIds: ["glsl"],
       links: [
         { labelKey: "live", href: shadersLive },
         { labelKey: "details", href: addDetails("shaders") },
@@ -289,6 +297,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Numerous training and optimization strategies to improve the quality of Maltese speech synthesis, but limited time to implement hybrid training (mixing Maltese and original languages).",
       ],
       stack: ["PyTorch", "GPT-2", "XTTS", "Streamlit", "Git", "Hugging Face", "Machine Learning", "Model Training"],
+      skillIds: ["python","pytorch","text-to-speech","model-training","hugging-face","streamlit","google-colab","git"],
       links: [
         { labelKey: "live", href: streamlitSearch, label: { en: "Paper Discovery Tool", fr: "Outil de recherche d'articles", ar: "أداة البحث عن الأوراق" } },
         { labelKey: "demo", href: streamlitDemo, label: { en: "Maltese TTS Demo", fr: "Synthèse vocale maltaise", ar: "عرض توليد الكلام المالطي" } },
@@ -316,6 +325,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Complete project documentation, from Figma mockups to continuous deployment (Vercel, Supabase).",
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
+      skillIds: ["angular","redis","vercel","supabase","figma","typescript","tailwindcss","git","nodejs","express","agile","rest-api"],
       links: [
         { labelKey: "live", href: quizineUrl },
         { labelKey: "source", href: quizineRepo },
@@ -342,6 +352,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Optimization of arithmetic calculations during compilation.",
       ],
       stack: ["Java", "Compiler", "Error Handling"],
+      skillIds: ["java","compiler-design","c"],
       links: [
         { labelKey: "source", href: compilerRepo },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
@@ -366,6 +377,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Authored a detailed report documenting findings and remediation steps.",
       ],
       stack: ["Cybersecurity", "Penetration Testing", "White-box Analysis", "Security Assessment"],
+      skillIds: ["app-security","cryptography"],
       links: [
         { labelKey: "paper", href: ubikPaper },
         { labelKey: "details", href: addDetails("ubik-pizza-challenge") },
@@ -390,6 +402,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Analysis of market trends and competition, and management of risks, pricing, and production quantities.",
       ],
       stack: ["Management", "Strategy", "Finance"],
+      skillIds: ["project-management"],
       links: [
         { labelKey: "details", href: addDetails("jeux-entreprise") },
       ],
@@ -414,6 +427,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Leadership of a team of six students in an Agile environment.",
       ],
       stack: ["C++", "SDL2", "3D Simulation", "Agile", "Visualization", "Physics Modeling", "Project Management"],
+      skillIds: ["cplusplus","sdl2","agile","project-management"],
       links: [
         { labelKey: "source", href: magnusCarlosRepo },
         { labelKey: "details", href: addDetails("magnus-carlos") },
@@ -438,6 +452,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Strong focus on art direction and interaction polish.",
       ],
       stack: ["Angular", "Three.js", "TypeScript", "JavaScript", "HTML", "CSS", "SPA Routing", "3D", "Animation", "Git", "Agile", "Frontend"],
+      skillIds: ["angular","threejs","typescript","javascript","html5","css3","git","agile"],
       links: [
         { labelKey: "live", href: nyxenRepo },
         { labelKey: "details", href: addDetails("nyxen") },
@@ -461,6 +476,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Design of data models to structure housing attributes and connectivity.",
       ],
       stack: ["Java", "Open Data", "Dataset", "CLI"],
+      skillIds: ["java"],
       links: [
         { labelKey: "details", href: addDetails("house-finder") },
       ],
@@ -485,6 +501,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Implementation of lighting effects using GLSL shaders. The sun features ambient, diffuse, and specular lighting with falloff, while a flashlight provides additional illumination inside the pyramid.",
       ],
       stack: ["Processing", "GLSL", "Shader", "3D Game", "Procedural Generation", "Maze Game", "Lighting Effects"],
+      skillIds: ["processing","glsl"],
       links: [
         { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
@@ -509,6 +526,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Implemented win/loss conditions based on item collection, surviving the sandstorm, and managing water levels.",
       ],
       stack: ["Java", "Board Game", "Model-View-Controller", "Graphical Interface"],
+      skillIds: ["java","oop"],
       links: [
         { labelKey: "source", href: poglRepo },
         { labelKey: "details", href: addDetails("pogl") },
@@ -533,6 +551,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Management of connections and messages between clients and server.",
       ],
       stack: ["C", "UDP", "TCP-IP", "CLI"],
+      skillIds: ["c","networking"],
       links: [
         { labelKey: "source", href: cliMessagingRepo },
         { labelKey: "details", href: addDetails("cli-messaging") },
@@ -556,6 +575,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Creation of a static HTML/CSS hosting platform for web-playable games.",
       ],
       stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
+      skillIds: ["html5","css3","javascript","p5js"],
       links: [
         { labelKey: "live", href: logihubUrl },
         { labelKey: "source", href: logihubRepo },
@@ -583,6 +603,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Pipeline CI/CD complet avec Vitest, requêtes mockées pour le back-end et déploiement automatisé.",
       ],
       stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Vercel", "Supabase", "MCP", "Docker", "GitHub Actions"],
+      skillIds: ["vue","tailwindcss","bun","hono","better-auth","prisma","postgresql","vercel","supabase","mcp","docker","github-actions"],
       links: [
         { labelKey: "live", href: watchlistUrl },
         { labelKey: "source", href: watchlistRepo },
@@ -609,6 +630,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Pipeline de déploiement continu (CI/CD) via l'orchestrateur Coolify, conteneurisation Docker multi-services (Nginx, Bun, Redis) et audit d'accessibilité numérique validé à 9.95/10.",
       ],
       stack: ["Angular", "Ionic", "PWA", "Capacitor", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Redis", "Docker", "Coolify", "Zod", "OpenAPI", "Postman", "Monorepo"],
+      skillIds: ["angular","capacitor","bun","hono","better-auth","prisma","postgresql","redis","docker","zod","openapi","postman"],
       links: [
         { labelKey: "live", href: vireliUrl },
         // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
@@ -635,6 +657,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Génération d'un dataset de 3 millions de positions par self-play et bootstrapping minimax parallèle à profondeur 7, entraîné sous PyTorch et hébergé sur Hugging Face.",
       ],
       stack: ["PyTorch", "Java", "Minimax", "ResNet", "Python"],
+      skillIds: ["pytorch","java","neural-networks","model-training","supervised-learning","distributed-algorithms","data-analysis","python","hugging-face"],
       links: [
         { labelKey: "live", href: escampeUrl },
         { labelKey: "paper", href: escampePaper, label: { en: "Research Paper", fr: "Rapport de recherche", ar: "ورقة البحث العلمية" } },
@@ -662,6 +685,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Rédaction d'un rapport détaillé sur les résultats et les mesures correctives.",
       ],
       stack: ["Cybersecurity", "Penetration Testing", "White-box Analysis", "Security Assessment"],
+      skillIds: ["app-security","cryptography"],
       links: [
         { labelKey: "paper", href: ubikPaper },
         { labelKey: "details", href: addDetails("ubik-pizza-challenge") },
@@ -686,6 +710,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Publié sous forme de dataset Hugging Face.",
       ],
       stack: ["Python", "pandas", "Hugging Face", "Big Data", "Data Analysis", "Visualisation", "Accessibilité", "Datasets"],
+      skillIds: ["python","pandas","hugging-face","big-data","data-analysis","data-viz"],
       links: [
         { labelKey: "live", href: visualisationApp5Url },
         { labelKey: "dataset", href: datasetUrl },
@@ -714,6 +739,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "suivi de l'humeur et journalisation (texte enrichi + images), entraînements (plans, suggestions), relaxation, aide à la concentration.",
       ],
       stack: ["Angular", "Bun", "Hono", "PostgreSQL", "Prisma", "BetterAuth", "PWA", "Zod", "i18n", "Health Tech", "Antigravity", "Github Copilot", "Agentic Coding"],
+      skillIds: ["angular","bun","hono","postgresql","prisma","better-auth","zod","antigravity"],
       links: [
         { labelKey: "source", href: vibehealthRepo },
         { labelKey: "details", href: addDetails("vibehealth") },
@@ -738,6 +764,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Lauréat du hackathon.",
       ],
       stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI", "Google Cloud", "Agent Development Kit (ADK)", "Cloud Computing", "A2A"],
+      skillIds: ["ai-agents","mcp","cloud-computing","google-adk","a2a","gemini"],
       links: [
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
@@ -761,6 +788,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Étoiles scintillantes et étoiles filantes dans le ciel, avec un texte arc-en-ciel scintillant (réfléchis dans les sculptures).",
       ],
       stack: ["GLSL", "Shadertoy", "Computer Graphics", "Raymarching", "Refraction", "Chromatic Dispersion", "Glass Shaders", "Procedural Animation"],
+      skillIds: ["glsl"],
       links: [
         { labelKey: "live", href: shadersLive },
         { labelKey: "details", href: addDetails("shaders") },
@@ -785,6 +813,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Nombreuses stratégies d'entraînement et d'optimisation pour améliorer la qualité de la synthèse vocale maltaise, mais manque de temps pour implémenter un entraînement hybride (mixe de maltais et des langues originales).",
       ],
       stack: ["PyTorch", "GPT-2", "XTTS", "Streamlit", "Git", "Hugging Face", "Apprentissage automatique", "Model Training"],
+      skillIds: ["python","pytorch","text-to-speech","model-training","hugging-face","streamlit","google-colab","git"],
       links: [
         { labelKey: "live", href: streamlitSearch, label: { en: "Paper Discovery Tool", fr: "Outil de recherche d'articles", ar: "أداة البحث عن الأوراق" } },
         { labelKey: "demo", href: streamlitDemo, label: { en: "Maltese TTS Demo", fr: "Synthèse vocale maltaise", ar: "عرض توليد الكلام المالطي" } },
@@ -812,6 +841,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Documentation complète du projet, des maquettes Figma au déploiement continu (Vercel, Supabase).",
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
+      skillIds: ["angular","redis","vercel","supabase","figma","typescript","tailwindcss","git","nodejs","express","agile","rest-api"],
       links: [
         { labelKey: "live", href: quizineUrl },
         { labelKey: "source", href: quizineRepo },
@@ -838,6 +868,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Optimisation des calculs arithmétiques à la compilation.",
       ],
       stack: ["Java", "Compilateur", "Gestion d'erreurs"],
+      skillIds: ["java","compiler-design","c"],
       links: [
         { labelKey: "source", href: compilerRepo },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
@@ -862,6 +893,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Analyse des tendances du marché et de la concurrence et gestion de risques, des prix et des quantités.",
       ],
       stack: ["Gestion", "Stratégie", "Finance"],
+      skillIds: ["project-management"],
       links: [
         { labelKey: "details", href: addDetails("jeux-entreprise") },
       ],
@@ -886,6 +918,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Pilotage d’une équipe de six étudiants dans un environnement Agile.",
       ],
       stack: ["C++", "SDL2", "Simulation 3D", "Agile", "Visualisation", "Physique Modélisation", "Gestion de projet"],
+      skillIds: ["cplusplus","sdl2","agile","project-management"],
       links: [
         { labelKey: "source", href: magnusCarlosRepo },
         { labelKey: "details", href: addDetails("magnus-carlos") },
@@ -910,6 +943,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Fort accent sur la direction artistique et les interactions.",
       ],
       stack: ["Angular", "Three.js", "TypeScript", "JavaScript", "HTML", "CSS", "SPA Routing", "3D", "Animation", "Git", "Agile", "Frontend"],
+      skillIds: ["angular","threejs","typescript","javascript","html5","css3","git","agile"],
       links: [
         { labelKey: "live", href: nyxenRepo },
         { labelKey: "details", href: addDetails("nyxen") },
@@ -933,6 +967,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Conception des modèles de données pour structurer la connectivité et les attributs des logements.",
       ],
       stack: ["Java", "Données OpenSource", "Dataset", "CLI"],
+      skillIds: ["java"],
       links: [
         { labelKey: "details", href: addDetails("house-finder") },
       ],
@@ -956,6 +991,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Implémentation d'effets de lumière à l'aide de shaders GLSL. Le soleil présente un éclairage ambiant, diffus et spéculaire avec atténuation, tandis qu'une lampe de poche fournit un éclairage supplémentaire à l'intérieur de la pyramide.",
       ],
       stack: ["Processing", "GLSL", "Shader", "Jeu 3D", "Génération procédurale", "Jeu de labyrinthe", "Effets de lumière"],
+      skillIds: ["processing","glsl"],
       links: [
         { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
@@ -980,6 +1016,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Gestion des conditions de victoire et de défaite basées sur la collecte des pièces et la survie face à la tempête de sable et au manque d’eau.",
       ],
       stack: ["Java", "Jeu de plateau", "Model-View-Controller", "Interface graphique"],
+      skillIds: ["java","oop"],
       links: [
         { labelKey: "source", href: poglRepo },
         { labelKey: "details", href: addDetails("pogl") },
@@ -1004,6 +1041,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Gestion des connexions et des messages entre clients et serveur.",
       ],
       stack: ["C", "UDP", "TCP-IP", "CLI"],
+      skillIds: ["c","networking"],
       links: [
         { labelKey: "source", href: cliMessagingRepo },
         { labelKey: "details", href: addDetails("cli-messaging") },
@@ -1027,6 +1065,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "Création d'une plateforme d'hébergement statique HTML/CSS pour les jeux jouables en ligne.",
       ],
       stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
+      skillIds: ["html5","css3","javascript","p5js"],
       links: [
         { labelKey: "live", href: logihubUrl },
         { labelKey: "source", href: logihubRepo },
@@ -1054,6 +1093,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "خط أنابيب CI/CD شامل مع Vitest، واختبارات تكامل للخدمات الخلفية، ونشر مؤتمت.",
       ],
       stack: ["Vue 3", "Pinia", "Tailwind CSS", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Vercel", "Supabase", "MCP", "Docker", "GitHub Actions"],
+      skillIds: ["vue","tailwindcss","bun","hono","better-auth","prisma","postgresql","vercel","supabase","mcp","docker","github-actions"],
       links: [
         { labelKey: "live", href: watchlistUrl },
         { labelKey: "source", href: watchlistRepo },
@@ -1080,6 +1120,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "خط أنابيب نشر مستمر (CI/CD) عبر أداة Coolify، وحاويات Docker متعددة الخدمات (Nginx, Bun, Redis)، وتدقيق إمكانية الوصول الرقمي الحائز على تقييم 9.95/10.",
       ],
       stack: ["Angular", "Ionic", "PWA", "Capacitor", "Bun", "Hono", "Better Auth", "Prisma", "PostgreSQL", "Redis", "Docker", "Coolify", "Zod", "OpenAPI", "Postman", "Monorepo"],
+      skillIds: ["angular","capacitor","bun","hono","better-auth","prisma","postgresql","redis","docker","zod","openapi","postman"],
       links: [
         { labelKey: "live", href: vireliUrl },
         // { labelKey: "source", href: "https://git.kerboul.me/genie-logiciel/vireli" }, - currently private
@@ -1106,6 +1147,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "إنشاء مجموعة بيانات من 3 ملايين وضعية من خلال اللعب الذاتي وتمهيد المينيمكس المتوازي بعمق 7، وتم تدريبها باستخدام PyTorch واستضافتها على Hugging Face.",
       ],
       stack: ["PyTorch", "Java", "Minimax", "ResNet", "Python"],
+      skillIds: ["pytorch","java","neural-networks","model-training","supervised-learning","distributed-algorithms","data-analysis","python","hugging-face"],
       links: [
         { labelKey: "live", href: escampeUrl },
         { labelKey: "paper", href: escampePaper, label: { en: "Research Paper", fr: "Research Paper", ar: "ورقة البحث العلمية" } },
@@ -1133,6 +1175,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "نُشر كمجموعة بيانات على Hugging Face.",
       ],
       stack: ["Python", "pandas", "تصور البيانات", "إتاحة الوصول", "Hugging Face", "Big Data", "Data Analysis", "Datasets"],
+      skillIds: ["python","pandas","hugging-face","big-data","data-analysis","data-viz"],
       links: [
         { labelKey: "live", href: visualisationApp5Url },
         { labelKey: "dataset", href: datasetUrl },
@@ -1161,6 +1204,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "تتبع الحالة المزاجية والتدوين (نص منسق + صور) والتمارين الرياضية (خطط ومقترحات) والاسترخاء والمساعدة على التركيز.",
       ],
       stack: ["Angular", "Bun", "Hono", "PostgreSQL", "Prisma", "BetterAuth", "PWA", "Zod", "i18n", "Health Tech", "Antigravity", "Github Copilot", "Agentic Coding"],
+      skillIds: ["angular","bun","hono","postgresql","prisma","better-auth","zod","antigravity"],
       links: [
         { labelKey: "source", href: vibehealthRepo },
         { labelKey: "details", href: addDetails("vibehealth") },
@@ -1185,6 +1229,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "الفائز بالهاكاثون.",
       ],
       stack: ["AI Agents", "Agentic AI", "MCP", "BigQuery", "Cloud Run", "Vertex AI", "Google Cloud", "Agent Development Kit (ADK)", "Cloud Computing", "A2A"],
+      skillIds: ["ai-agents","mcp","cloud-computing","google-adk","a2a","gemini"],
       links: [
         { labelKey: "details", href: addDetails("deloitte-google-cloud-hackathon") },
       ],
@@ -1208,6 +1253,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "نجوم متلألئة وشهب في السماء، مع نص قزحي متوهج (ينعكس على المنحوتات).",
       ],
       stack: ["GLSL", "Shadertoy", "Computer Graphics", "Raymarching", "Refraction", "Chromatic Dispersion", "Glass Shaders", "Procedural Animation"],
+      skillIds: ["glsl"],
       links: [
         { labelKey: "live", href: shadersLive },
         { labelKey: "details", href: addDetails("shaders") },
@@ -1232,6 +1278,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "استراتيجيات تدريب وتحسين متعددة لتحسين جودة توليد الكلام باللغة المالطية، مع ضيق الوقت لتنفيذ تدريب هجين (مزج بين المالطية واللغات الأصلية)."
       ],
       stack: ["PyTorch", "GPT-2", "XTTS", "Streamlit", "Git", "Hugging Face", "Machine Learning", "Model Training"],
+      skillIds: ["python","pytorch","text-to-speech","model-training","hugging-face","streamlit","google-colab","git"],
       links: [
         { labelKey: "live", href: streamlitSearch, label: { en: "Paper Discovery Tool", fr: "Outil de recherche d'articles", ar: "أداة البحث عن الأوراق" } },
         { labelKey: "demo", href: streamlitDemo, label: { en: "Maltese TTS Demo", fr: "Synthèse vocale مالتا", ar: "عرض توليد الكلام المالطي" } },
@@ -1259,6 +1306,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "توثيق كامل للمشروع، بدءاً من تصاميم Figma التوضيحية وحتى النشر المستمر (Vercel, Supabase).",
       ],
       stack: ["WebSockets", "Angular", "Redis", "Vercel", "Supabase", "Figma", "TypeScript", "Tailwind CSS", "Git", "Node.js", "Express.js", "Agile", "REST"],
+      skillIds: ["angular","redis","vercel","supabase","figma","typescript","tailwindcss","git","nodejs","express","agile","rest-api"],
       links: [
         { labelKey: "live", href: quizineUrl },
         { labelKey: "source", href: quizineRepo },
@@ -1285,6 +1333,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "تحسين العمليات الحسابية أثناء عملية الترجمة.",
       ],
       stack: ["Java", "مترجم", "إدارة الأخطاء"],
+      skillIds: ["java","compiler-design","c"],
       links: [
         { labelKey: "source", href: compilerRepo },
         { labelKey: "details", href: addDetails("compilateur-c-java") },
@@ -1309,6 +1358,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "صياغة تقرير مفصل يوثق النتائج والخطوات التصحيحية.",
       ],
       stack: ["Cybersecurity", "Penetration Testing", "White-box Analysis", "Security Assessment"],
+      skillIds: ["app-security","cryptography"],
       links: [
         { labelKey: "paper", href: ubikPaper },
         { labelKey: "details", href: addDetails("ubik-pizza-challenge") },
@@ -1333,6 +1383,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "تحليل اتجاهات السوق والمنافسة، وإدارة المخاطر والأسعار والكميات.",
       ],
       stack: ["الإدارة", "الاستراتيجية", "التمويل"],
+      skillIds: ["project-management"],
       links: [
         { labelKey: "details", href: addDetails("jeux-entreprise") },
       ],
@@ -1357,6 +1408,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "قيادة فريق مكون من ستة طلاب في بيئة عمل Agile.",
       ],
       stack: ["C++", "SDL2", "Simulation 3D", "Agile", "Visualization", "Physics Modeling", "Project Management"],
+      skillIds: ["cplusplus","sdl2","agile","project-management"],
       links: [
         { labelKey: "source", href: magnusCarlosRepo },
         { labelKey: "details", href: addDetails("magnus-carlos") },
@@ -1381,6 +1433,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "تركيز قوي على التوجيه الفني والتفاعل الفني.",
       ],
       stack: ["Angular", "Three.js", "TypeScript", "JavaScript", "HTML", "CSS", "SPA Routing", "3D", "Animation", "Git", "Agile", "Frontend"],
+      skillIds: ["angular","threejs","typescript","javascript","html5","css3","git","agile"],
       links: [
         { labelKey: "live", href: nyxenRepo },
         { labelKey: "details", href: addDetails("nyxen") },
@@ -1404,6 +1457,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "تصميم نماذج البيانات لهيكلة سمات السكن والاتصالية.",
       ],
       stack: ["Java", "Open Data", "Dataset", "CLI"],
+      skillIds: ["java"],
       links: [
         { labelKey: "details", href: addDetails("house-finder") },
       ],
@@ -1427,6 +1481,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "تطبيق تأثيرات الإضاءة باستخدام مظللات GLSL، حيث تتميز الشمس بإضاءة محيطة (ambient)، ومنتشرة (diffuse)، وانعكاسية (specular) مع تلاشي الضوء (falloff)، بينما يوفر المصباح اليدوي إضاءة إضافية داخل الهرم.",
       ],
       stack: ["Processing", "GLSL", "Shader", "3D Game", "Procedural Generation", "Maze Game", "Lighting Effects"],
+      skillIds: ["processing","glsl"],
       links: [
         { labelKey: "source", href: escapeTheMummyRepo },
         { labelKey: "details", href: addDetails("escape-the-mummy") },
@@ -1451,6 +1506,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "إدارة شروط الفوز والخسارة بناءً على جمع القطع، والبقاء على قيد الحياة في مواجهة العاصفة الرملية ونقص المياه.",
       ],
       stack: ["Java", "لعبة لوحية", "Model-View-Controller", "واجهة رسومية"],
+      skillIds: ["java","oop"],
       links: [
         { labelKey: "source", href: poglRepo },
         { labelKey: "details", href: addDetails("pogl") },
@@ -1475,6 +1531,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "إدارة الاتصالات والرسائل بين العملاء والخادم.",
       ],
       stack: ["C", "UDP", "TCP-IP", "CLI"],
+      skillIds: ["c","networking"],
       links: [
         { labelKey: "source", href: cliMessagingRepo },
         { labelKey: "details", href: addDetails("cli-messaging") },
@@ -1498,6 +1555,7 @@ const projectsByLocale: Record<Locale, ProjectItem[]> = {
         "بناء منصة استضافة ثابتة باستخدام HTML/CSS للألعاب القابلة للعب على الويب.",
       ],
       stack: ["HTML", "CSS", "JavaScript", "p5.js", "Web Games"],
+      skillIds: ["html5","css3","javascript","p5js"],
       links: [
         { labelKey: "live", href: logihubUrl },
         { labelKey: "source", href: logihubRepo },

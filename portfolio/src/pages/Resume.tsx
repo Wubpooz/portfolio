@@ -64,7 +64,7 @@ export default function ResumePage() {
       <section className="overflow-hidden border border-border bg-card shadow-none">
         <div
           className="relative w-full"
-          style={{ paddingTop: `${(A4_HEIGHT_PX / A4_WIDTH_PX) * 103}%` }}
+          style={{ paddingTop: `${((A4_HEIGHT_PX / A4_WIDTH_PX) * 103).toString()}%` }}
         >
           <iframe
             src={resumeAsset}

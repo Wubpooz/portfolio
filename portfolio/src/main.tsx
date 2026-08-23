@@ -32,10 +32,13 @@ const initAnalytics = () => {
   });
 };
 
+const scheduleIdle =
+  (window.requestIdleCallback as typeof window.requestIdleCallback | undefined) ?? setTimeout;
+
 if (document.readyState === 'complete') {
-  (window.requestIdleCallback ?? setTimeout)(initAnalytics);
+  scheduleIdle(initAnalytics);
 } else {
   window.addEventListener('load', () => {
-    (window.requestIdleCallback ?? setTimeout)(initAnalytics);
+    scheduleIdle(initAnalytics);
   });
 }

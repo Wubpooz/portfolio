@@ -1,7 +1,7 @@
 import {
   createContext,
+  use,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
@@ -65,8 +65,8 @@ interface LocaleContextValue {
 
 const LocaleContext = createContext<LocaleContextValue | undefined>(undefined);
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
+export function LocaleProvider({ children }: Readonly<{ children: ReactNode }>) {
+  const [locale, setLocale] = useState<Locale>(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const queryLang = params.get("lang");
@@ -80,15 +80,15 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     () => readStoredLocale() !== null,
   );
 
-  const setLocale = useCallback((nextLocale: Locale) => {
+  const updateLocale = useCallback((nextLocale: Locale) => {
     setIsManualOverride(true);
-    setLocaleState(nextLocale);
+    setLocale(nextLocale);
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
       url.searchParams.set("lang", nextLocale);
       window.history.pushState({}, "", url.toString());
     }
-  }, []);
+  }, [setLocale]);
 
   useEffect(() => {
     if (isManualOverride) {
@@ -109,28 +109,30 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
       const params = new URLSearchParams(window.location.search);
       const queryLang = params.get("lang");
       if (queryLang === "en" || queryLang === "fr" || queryLang === "ar") {
-        setLocaleState(queryLang);
+        setLocale(queryLang);
       }
     };
     window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [setLocale]);
 
   const value = useMemo<LocaleContextValue>(
     () => ({
       locale,
-      setLocale,
+      setLocale: updateLocale,
     }),
-    [locale, setLocale],
+    [locale, updateLocale],
   );
 
   return (
-    <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>
+    <LocaleContext value={value}>{children}</LocaleContext>
   );
 }
 
 export function useLocale() {
-  const context = useContext(LocaleContext);
+  const context = use(LocaleContext);
 
   if (!context) {
     throw new Error("useLocale must be used within a LocaleProvider");

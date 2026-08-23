@@ -23,28 +23,28 @@ function getStoredTheme(): Theme | null {
 }
 
 export function useTheme() {
-  const [theme, rawSetTheme] = useState<Theme>(() => getStoredTheme() ?? "system");
+  const [theme, setTheme] = useState<Theme>(() => getStoredTheme() ?? "system");
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() => getSystemTheme());
 
-  const setTheme = useCallback((newTheme: Theme | ((current: Theme) => Theme)) => {
-    const startViewTransition = document.startViewTransition.bind(document);
+  const updateTheme = useCallback((newTheme: Theme | ((current: Theme) => Theme)) => {
+    const hasViewTransition = typeof document !== "undefined" && "startViewTransition" in document;
     
     // Check for prefers-reduced-motion (accessibility/performance setting)
     const prefersReducedMotion = typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (!startViewTransition || prefersReducedMotion) {
-      rawSetTheme(newTheme);
+    if (!hasViewTransition || prefersReducedMotion) {
+      setTheme(newTheme);
       return;
     }
 
-    startViewTransition.call(document, () => {
+    document.startViewTransition(() => {
       // eslint-disable-next-line react-dom/no-flush-sync
       flushSync(() => {
-        rawSetTheme(newTheme);
+        setTheme(newTheme);
       });
     });
-  }, []);
+  }, [setTheme]);
 
   const resolvedTheme = useMemo<ResolvedTheme>(() => {
     return theme === "system" ? systemTheme : theme
@@ -57,14 +57,13 @@ export function useTheme() {
 
     const updateSystemTheme = () => {
       setSystemTheme(media.matches ? "dark" : "light");
-    }
+    };
 
-    updateSystemTheme();
     media.addEventListener("change", updateSystemTheme);
 
     return () => {
       media.removeEventListener("change", updateSystemTheme);
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -90,16 +89,16 @@ export function useTheme() {
   }, [theme]);
 
   const toggle = useCallback(() => {
-    setTheme((current) => {
+    updateTheme((current) => {
       const active = current === "system" ? getSystemTheme() : current;
       return active === "dark" ? "light" : "dark";
-    })
-  }, [setTheme]);
+    });
+  }, [updateTheme]);
 
   return {
     theme,
     resolvedTheme,
-    setTheme,
+    setTheme: updateTheme,
     toggle,
   };
 }

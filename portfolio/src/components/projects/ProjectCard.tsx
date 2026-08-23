@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { getUiContent, useLocale } from "@/i18n";
 import { shouldInvertIcon, getIconUrl, findSkillIcon, renderTextWithLinks } from "@/lib/utils";
 import { usePostHog } from "@posthog/react";
-import { fallbackIcons } from "../skills/SkillIcon";
+import { fallbackIcons } from "../skills/fallbackIcons";
 
 const MAX_VISIBLE_STACK = 6;
 

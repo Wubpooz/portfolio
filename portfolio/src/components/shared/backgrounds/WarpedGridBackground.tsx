@@ -35,7 +35,7 @@ export default function WarpedGridBackground() {
     const mouseZMax = 340; // Deep funnel depth
 
     // Cache absolute document-relative Y centers of each selector to eliminate getBoundingClientRect in RAF loop
-    const elementCenters: Record<string, number> = {};
+    const elementCenters: Record<string, number | undefined> = {};
 
     const updateElementCenters = () => {
       PLANETS.forEach((planet) => {
